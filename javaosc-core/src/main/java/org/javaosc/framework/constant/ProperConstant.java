@@ -3,6 +3,7 @@ package org.javaosc.framework.constant;
 import org.javaosc.framework.constant.Constant.CodeConstant;
 
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09

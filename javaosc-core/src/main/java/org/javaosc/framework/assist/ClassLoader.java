@@ -1,9 +1,9 @@
 package org.javaosc.framework.assist;
 
-import org.javaosc.framework.constant.ErrorMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
@@ -17,7 +17,7 @@ public class ClassLoader {
 		try {
 			return Thread.currentThread().getContextClassLoader().loadClass(name);
 		} catch (ClassNotFoundException e) {
-			log.error(ErrorMessage.CLASS_NOT_FOUND, name , e);
+			log.error("[errorCode:1115] please check this class("+name+") files can not be found and see the following Caused by: !",e);
 		}
 		return null;
 	}

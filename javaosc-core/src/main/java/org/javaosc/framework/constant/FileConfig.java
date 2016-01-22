@@ -1,6 +1,7 @@
 package org.javaosc.framework.constant;
 
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09

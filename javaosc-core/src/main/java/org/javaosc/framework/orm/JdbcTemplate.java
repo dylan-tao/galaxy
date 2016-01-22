@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
@@ -125,17 +126,20 @@ public class JdbcTemplate{
 		if(null == page){
 			page = new Page<T>();
 		}
-		//执行顺序：where->group by->having-order by->limit
-		if(page.isAutoCount()){
-			String countSql = SqlHandler.createCount(sql);
-			long count = getCount(countSql, Long.class, param);
-			page.setTotalCount(count);
+		List<T> list = null;
+		if(page.isAutoPage()){
+			//执行顺序：where->group by->having-order by->limit
+			if(page.isAutoCount()){
+				String countSql = SqlHandler.createCount(sql);
+				long count = getCount(countSql, Long.class, param);
+				page.setTotalCount(count);
+			}
+			int pageNo = page.getPageNo();
+			int pageSize = page.getPageSize();
+			int startIndex =(pageNo-1) * pageSize;
+			sql = SqlHandler.createLimit(sql, startIndex, pageSize); //拼组limit
 		}
-		int pageNo = page.getPageNo();
-		int pageSize = page.getPageSize();
-		int startIndex =(pageNo-1) * pageSize;
-		sql = SqlHandler.createLimit(sql, startIndex, pageSize); //拼组limit	
-		List<T> list = queryForList(sql, cls, param);
+		list = queryForList(sql, cls, param);
 		page.setResult(list);
 		return page;
 	}
@@ -184,6 +188,8 @@ public class JdbcTemplate{
 	public boolean batchDelete(String sql, Object[][] params){
 		return batchHandler(sql, params);
 	}
+	
+	
 	
 	
 	private boolean updateHandler(String sql, Object... param){

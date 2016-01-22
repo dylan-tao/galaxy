@@ -11,16 +11,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.web.util.PathUtil;
+import org.javaosc.framework.web.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.uufast.framework.web.util.PathUtil;
-import org.uufast.framework.web.util.StringUtil;
 
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09

@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09

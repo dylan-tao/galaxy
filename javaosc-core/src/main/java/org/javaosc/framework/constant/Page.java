@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
@@ -13,6 +14,7 @@ import java.util.List;
 public class Page<T> {
 	
 	private static final int defaultPageNo = 1;
+	private static final int defaultPageSize = 12;
 	
 	protected int pageNo;
 	protected int pageSize;
@@ -21,6 +23,7 @@ public class Page<T> {
 	//totalPage会自动计算显示
 	
 	protected boolean autoCount = true; //是否统计总数量
+	protected boolean autoPage = true; //是否分页
 	protected long lastQueryTime;
 	
 	protected List<T> result =  new ArrayList<T>();
@@ -28,16 +31,24 @@ public class Page<T> {
 	public Page() {}
 
 	public Page(int pageSize, int pageNo) {
+		if (pageSize > 1) {
+			this.pageSize = pageSize;
+		}else{
+			this.pageSize = defaultPageSize;
+		}
 		if (pageNo < 1) {
 			this.pageNo = defaultPageNo;
 		} else {
 			this.pageNo = pageNo;
 		}
-		this.pageSize = pageSize;
 	}
 
 	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+		if (pageSize < 1) {
+			this.pageSize = defaultPageSize;
+		}else{
+			this.pageSize = pageSize;
+		}
 	}
 	
 	public int getPageSize() {
@@ -87,6 +98,14 @@ public class Page<T> {
 
 	public void setAutoCount(boolean autoCount) {
 		this.autoCount = autoCount;
+	}
+
+	public boolean isAutoPage() {
+		return autoPage;
+	}
+
+	public void setAutoPage(boolean autoPage) {
+		this.autoPage = autoPage;
 	}
 
 	public void setLastQueryTime(long lastQueryTime) {
