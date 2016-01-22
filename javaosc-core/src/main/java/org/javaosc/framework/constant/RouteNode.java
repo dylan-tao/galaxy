@@ -1,0 +1,81 @@
+package org.javaosc.framework.constant;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+/**
+ * 
+ * @description
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 uufast Team. All Rights Reserved.
+ */
+public class RouteNode {
+	
+	private String paramName;
+	
+	private Map<String,RouteNode> children;
+	
+	private Class<?> cls;
+	
+	private Method method;
+	
+	private List<String> methodPrm;
+	
+	public RouteNode() {}
+	
+	public RouteNode(String paramName) {
+		this.paramName = paramName;
+	}
+	
+	public void addChild(String key,RouteNode child) {
+		if(children != null){
+			if(children.containsKey(key)){
+				return;
+			}else{
+				children.put(key, child);
+			}
+		}else{
+			children = new HashMap<String, RouteNode>();
+			children.put(key, child);
+		}
+	}
+	
+	public RouteNode getChild(String key) {
+		return children == null ? null : children.get(key);
+	}
+
+	public String getParamName() {
+		return paramName;
+	}
+
+	public void setParamName(String paramName) {
+		this.paramName = paramName;
+	}
+
+	public Class<?> getCls() {
+		return cls;
+	}
+
+	public void setCls(Class<?> cls) {
+		this.cls = cls;
+	}
+
+	public Method getMethod() {
+		return method;
+	}
+
+	public void setMethod(Method method) {
+		this.method = method;
+	}
+
+	public List<String> getMethodPrm() {
+		return methodPrm;
+	}
+
+	public void setMethodPrm(List<String> methodPrm) {
+		this.methodPrm = methodPrm;
+	}
+
+}

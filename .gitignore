@@ -1,0 +1,11 @@
+.project
+.settings
+.classpath
+target
+META-INF
+.bak
+logs
+.fuse_hidden*
+*~
+*.class
+bin

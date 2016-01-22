@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true" maxBytesLocalHeap="420M" maxBytesLocalDisk="8G">
+
+	<!-- 缓存存储目录 -->
+    <diskStore path="d:\\ehcache"/>
+
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="0" timeToLiveSeconds="0" overflowToDisk="false"/>
+    
+    <!-- LRU最少使用/LFU最不常用/FIFO先进先出 -->
+    
+    <!-- 缓存基础存储 
+    <cache name="cacheStorage"
+           maxBytesLocalHeap="60M"
+           eternal="false"
+           overflowToDisk="true" 
+           maxBytesLocalDisk="2g"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache> -->
+    
+    <!-- 查询列表缓存时效  
+    <cache name="l2Cache"
+           maxBytesLocalHeap="300M"
+           eternal="true"
+           overflowToDisk="true" 
+           timeToIdleSeconds="320"
+           timeToLiveSeconds="320"
+           maxBytesLocalDisk="5g"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>-->
+    
+    <!-- 全局页面缓存时效 -->
+    <cache name="viewGlobalCacheFilter"
+           maxBytesLocalHeap="54M"
+           eternal="false"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="900"
+           overflowToDisk="true" 
+           maxBytesLocalDisk="664M"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+
+	<!-- 局部页面缓存永久 -->
+    <cache name="viewLocalCacheFilter"
+           maxBytesLocalHeap="6M"
+           eternal="true"
+           overflowToDisk="true" 
+           maxBytesLocalDisk="360M"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+
+</ehcache>

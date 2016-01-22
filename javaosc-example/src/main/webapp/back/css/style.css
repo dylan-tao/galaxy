@@ -1,0 +1,77 @@
+@charset "utf-8";
+/*
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 javaosc.com Team. All Rights Reserved.
+ */
+body{margin:0; padding:0; font-size:12px; font-family:Tahoma,Verdana,Helvetica,Arial,sans-serif; background-color:#E2E9EA;}
+h1,h2,p,ul,li,dl,dt,dd,li,img,table,td,tr,thead,th,input{margin:0; padding:0; border:0; list-style:none;}
+a:visited, a:link{color:#FFF; text-decoration:none;}
+a:hover{text-decoration:underline;}
+/*头部 底部*/
+.header{width:100%; height:95px;}
+.head{width:100%; height:81px; background-color:#3A6EA5;}
+.head h1{width:210px; float:left; padding-top:12px;}
+.head .right{width:100%; height:81px; margin-left:-210px; float:left;} 
+.head .topmenu{padding-left:212px; padding-top:15px; color:#FFF; min-width:860px; clear:both;}
+.head .topmenu .top{font-size:12px; line-height:20px; overflow:hidden;}
+.head .topmenu .top .txt1{width:350px; float:left;}
+.head .topmenu .top .txt2{width:250px; float:right;}
+.head .topmenu .top span{color:#4782B4;}
+.head .topmenu .nav{margin-top:12px; overflow:hidden;}
+.head .topmenu .nav li{padding:0 15px; height:34px; line-height:34px; margin-right:2px; float:left; font-size:14px; font-weight:bold; background:url(../images/but.png) no-repeat top left;}
+.head .topmenu .nav li.content{background-position:0px -43px;}
+.head .topmenu .nav a.content{color:#367ABB;}
+.foot{clear:both;width:100%; background:#E2E9EA; font: normal 11px Verdana,Geneva,Arial,Helvetica,sans-serif;}
+.foot p{height:30px; line-height:30px; text-align:center;}
+/*主体内容*/
+.main{margin:0; padding:0;}
+.leftmain{float:left; background:#E2E9EA; overflow:hidden; z-index:1;}
+.leftmenu{width:200px;height:100%; background:#F7FBFC; float:left;}
+.leftmenu dl{margin-left:12px; margin-top:12px;}
+.leftmenu dt{font-size:14px; font-weight:bold; background:url(../images/admin_left_menu.gif) no-repeat 12px 8px; padding-left:35px; height:29px; line-height:29px; border-bottom:1px solid #d5dfe8;}
+.leftmenu dd{background:url(../images/admin_dot.gif) no-repeat 15px 10px; padding-left:35px; height:29px; line-height:29px; border-bottom:1px solid #d5dfe8;}
+.leftmenu dd.content{background-color:#E2E9EA;}
+.leftmenu dd a{color:#444;}
+.leftmenu dd a:hover{color:bf0000;}
+.but{width:12px; float:left;background:url(../images/close.gif) no-repeat 1px 220px; background-size:11px 60px;-webkit-background-size:11px 60px; -moz-background-size:11px 60px; -ms-background-size:11px 60px;}
+.rightmainbox{width:100%;  float:right; margin-left:-224px; background:#fff;}
+.rightmain{padding-left:212px;}
+.mainbox{margin:5px 10px;}
+/* 欢迎页表单 */
+.mainbox .profile,.mainbox .site,.mainbox .system,.mainbox .soft{width:48%; float:left; margin:5px 15px 0 0; height:200px;}
+.mainbox .profile h2,.mainbox .site h2,.mainbox .system h2,.mainbox .soft h2{height:30px; line-height:30px; margin:9px 0 10px 0; font-size:14px; padding-left:15px; background:#eee; border-bottom:1px solid #ddd; border-right:1px solid #ddd; color:#3865B8;}
+.mainbox .profile h2 span,.mainbox .site h2 span,.mainbox .system h2 span,.mainbox .soft h2 span{font-size:12px; color:#ccc; margin-left:10px;}
+.mainbox .list ul{border:1px solid #ddd; border-bottom:0;}
+.mainbox .list ul li{height:26px; color:#777; padding-left:5px; line-height:26px; border-bottom:1px solid #ddd;}
+.mainbox .list ul li span{width:100px; display:inline-block; color:#777;}
+.mainbox .site div{border:1px solid #ddd; overflow:hidden;}
+.mainbox .site div ul{padding:2px 0 0 2px; width:102%;}
+.mainbox .site div ul li{height:44px; float:left; width:16.3%; border-right:1px solid #fff; text-align:center;}
+.mainbox .site div ul li b{font-weight:normal; height:21px; line-height:21px; display:block; background:#EFEFEF; color:#777;}
+.mainbox .site div ul li span{height:21px; line-height:21px; display:block; background:#F8F8F8; color:#3865B8;}
+.mainbox .soft a{color:#444;}
+.mainbox .soft a:hover{color:#bf0000;}
+/* 表单列表 及表单详情*/
+.mainbox .title{height:40px; line-height:40px; border-bottom:1px solid #eee; color:#ddd;}
+.mainbox .title li{float:left;}
+.mainbox .title li a{color:#004499; margin:0 5px; padding:4px 7px; background:#EFEFEF;}
+.mainbox .title li a.content{color:#fff; background:#498CD0;}
+.mainbox .list_main{width:100%;}
+.mainbox .list_main table{width:100%; display:table; border-collapse:separate; border-color:gray;}
+.mainbox .list_main table tr{display:table-row; vertical-align:inherit; border-color:inherit;}
+.mainbox .list_main table td,.mainbox .list_main table th{padding-left:10px;}
+.mainbox .list_main table th{height:30px; background:#eef3f7; border-bottom:1px solid #d5dfe8; font-weight:normal; line-height:30px; text-align:left;}
+.mainbox .list_main table td{border-bottom:#eee 1px solid; line-height: 30px;}
+.mainbox .list_main table td input,.mainbox .btn .xuan{border:1px solid #dcdcdc; vertical-align:middle; font-size:12px; margin:0;}
+.mainbox .btn {background:#f6f6f6; padding:6px 12px; height:30px; line-height:30px; border-bottom:#eee 1px solid;}
+.mainbox .btn .button{margin-left:15px; padding:4px 6px; cursor:pointer; display:inline-block; text-align:center; line-height:1; letter-spacing:2px; font-family:Tahoma, Arial/9!important; width:auto; overflow:visible; color:#333; border:solid 1px #999; border-radius:5px; background:#DDD; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#DDDDDD'); background:linear-gradient(top, #FFF, #DDD); background:-moz-linear-gradient(top, #FFF, #DDD); background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF), to(#DDD)); text-shadow:0px 1px 1px rgba(255, 255, 255, 1); box-shadow:0 1px 0 rgba(255, 255, 255, .7), 0 -1px 0 rgba(0, 0, 0, .09); -moz-transition:-moz-box-shadow linear .2s; -webkit-transition:-webkit-box-shadow linear .2s; transition:box-shadow linear .2s;}
+.mainbox .btn .text{border:1px solid #A7A6AA; line-height:18px; height:18px; margin:0 5px 0 0; padding:2px 0 2px 5px; border:1px solid #d0d0d0; background:#FFF repeat-x; font-family:Verdana, Geneva, sans-serif,"����"; font-size:12px;}
+.mainbox .input_text{border:1px solid #A7A6AA; line-height:18px; height:18px; margin:0 5px 0 0; padding:2px 0 2px 5px; border:1px solid #d0d0d0; font-family:Verdana, Geneva, sans-serif,"����"; font-size:12px;}
+select {vertical-align:middle; background:none repeat scroll 0 0 #F9F9F9; border-color:#666666 #CCCCCC #CCCCCC #666666; border-style:solid; border-width:1px; color: #333; padding:2px;}
+
+
+
+
+
+
