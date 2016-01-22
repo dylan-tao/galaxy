@@ -8,10 +8,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 /**
- * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public @interface Prototype {}

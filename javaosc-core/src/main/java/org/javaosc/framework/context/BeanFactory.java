@@ -5,7 +5,12 @@ import java.util.Map;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
-
+/**
+ * @description
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
+ */
 public class BeanFactory {
 	
 	private static Map<String, Object> beanMap = new HashMap<String, Object>();

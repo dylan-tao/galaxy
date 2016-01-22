@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
 public class Page<T> {

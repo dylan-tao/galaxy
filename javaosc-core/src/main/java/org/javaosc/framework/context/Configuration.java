@@ -19,11 +19,10 @@ import org.uufast.framework.web.util.PathUtil;
 import org.uufast.framework.web.util.StringUtil;
 
 /**
- * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class Configuration {
 	

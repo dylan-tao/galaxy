@@ -8,11 +8,10 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 /**
- * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
 public class ProxyHandler implements MethodInterceptor {

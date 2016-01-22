@@ -14,11 +14,10 @@ import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 /**
- * 
  * @description
  * @author Dylan Tao
  * @date 2014-09-09
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class ConnectionHandler {
 	

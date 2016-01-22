@@ -7,11 +7,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Constant;
 /**
- * 
  * @description
  * @author Dylan Tao
- * @date 2014-10-26
- * Copyright 2014 uufast Team. All Rights Reserved.
+ * @date 2014-09-09
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class SqlHandler {
 	
