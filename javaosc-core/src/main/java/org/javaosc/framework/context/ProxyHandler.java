@@ -3,10 +3,8 @@ package org.javaosc.framework.context;
 import java.lang.reflect.Method;
 
 import org.javaosc.framework.orm.ConnectionHandler;
-
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @description
  * @author Dylan Tao
@@ -15,6 +13,8 @@ import net.sf.cglib.proxy.MethodProxy;
  */
 
 public class ProxyHandler implements MethodInterceptor {
+	
+	private static final Logger log = LoggerFactory.getLogger(ProxyHandler.class);
 	
 	private Class<?> cls;
 	

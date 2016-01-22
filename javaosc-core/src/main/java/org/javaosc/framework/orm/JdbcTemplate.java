@@ -11,9 +11,9 @@ import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @description
@@ -23,7 +23,7 @@ import org.javaosc.framework.constant.Page;
  */
 public class JdbcTemplate{
 	
-	private static final Log log = LogFactory.getLog(JdbcTemplate.class);
+	private static final Logger log = LoggerFactory.getLogger(JdbcTemplate.class);
 	
 	private static QueryRunner runner;
 	

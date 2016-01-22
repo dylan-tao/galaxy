@@ -3,9 +3,9 @@ package org.javaosc.framework.orm;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Constant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @description
  * @author Dylan Tao
@@ -14,7 +14,7 @@ import org.javaosc.framework.constant.Constant;
  */
 public class SqlHandler {
 	
-	private static final Log log = LogFactory.getLog(SqlHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(SqlHandler.class);
 	
 	private static final String SELECT = "select";
 	private static final String COUNT = "count(*)";

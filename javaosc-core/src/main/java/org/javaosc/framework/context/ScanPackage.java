@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @description
@@ -24,7 +24,7 @@ import org.javaosc.framework.constant.ProperConstant;
  */
 public class ScanPackage {
 	
-	private static final Log log = LogFactory.getLog(ScanPackage.class);
+	private static final Logger log = LoggerFactory.getLogger(ScanPackage.class);
 	
 	private String[] keywords = null;
 	

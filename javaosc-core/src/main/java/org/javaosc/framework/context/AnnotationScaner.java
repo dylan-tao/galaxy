@@ -3,13 +3,12 @@ package org.javaosc.framework.context;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Prototype;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
-import org.uufast.framework.web.RouteNodeRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @description
@@ -19,7 +18,7 @@ import org.uufast.framework.web.RouteNodeRegistry;
  */
 public class AnnotationScaner {
 	
-	private static final Log log = LogFactory.getLog(AnnotationScaner.class);
+	private static final Logger log = LoggerFactory.getLogger(AnnotationScaner.class);
 	
 	public void load(){
 		String packageName = Configuration.getValue(ProperConstant.SCANER_PACKAGE_KEY);

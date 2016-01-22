@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @description
  * @author Dylan Tao
@@ -12,6 +14,8 @@ import org.javaosc.framework.constant.ProperConstant;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class BeanFactory {
+	
+	private static final Logger log = LoggerFactory.getLogger(BeanFactory.class);
 	
 	private static Map<String, Object> beanMap = new HashMap<String, Object>();
 	

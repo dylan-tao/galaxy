@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.assist.ClassLoader;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @description
  * @author Dylan Tao
@@ -21,7 +21,7 @@ import org.javaosc.framework.context.Configuration;
  */
 public class ConnectionHandler {
 	
-	private static final Log log = LogFactory.getLog(ConnectionHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ConnectionHandler.class);
 	
 	private static DataSource ds;
 	

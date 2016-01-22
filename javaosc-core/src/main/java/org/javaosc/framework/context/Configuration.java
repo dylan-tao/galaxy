@@ -15,6 +15,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.uufast.framework.web.util.PathUtil;
 import org.uufast.framework.web.util.StringUtil;
 
@@ -26,7 +28,7 @@ import org.uufast.framework.web.util.StringUtil;
  */
 public class Configuration {
 	
-	private static final Log log = LogFactory.getLog(Configuration.class);
+	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
 	
 	protected static String configFileName = "uufast.properties";
 	
