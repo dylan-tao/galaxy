@@ -1,20 +1,17 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>javaosc</artifactId>
 		<groupId>org.javaosc</groupId>
+		<artifactId>javaosc</artifactId>
 		<version>${javaosc.version}</version>
 	</parent>
 
 	<groupId>org.javaosc.framework</groupId>
-	<artifactId>javaosc-framework</artifactId>
-	<version>${javaosc.framework.version}</version>
-	<name>javaosc framework</name>
-	<packaging>jar</packaging>
-	<url>http://repo.maven.apache.org/maven2</url>
+	<artifactId>javaosc-core</artifactId>
+	<version>${javaosc.core.version}</version>
+	<name>javaosc core</name>
+	<description>javaosc framework</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -76,5 +73,5 @@
 		</dependency>
 
 	</dependencies>
-	<description>web framework for j2ee</description>
+
 </project>

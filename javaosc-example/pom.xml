@@ -1,28 +1,24 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>javaosc</artifactId>
 		<groupId>org.javaosc</groupId>
+		<artifactId>javaosc</artifactId>
 		<version>${javaosc.version}</version>
 	</parent>
-	<groupId>org.javaosc.example</groupId>
+	<groupId>com.javaosc.example</groupId>
 	<artifactId>javaosc-example</artifactId>
 	<version>${javaosc.example.version}</version>
 	<packaging>war</packaging>
-	<name>javaosc example</name>
-	<url>http://maven.apache.org</url>
+	<name>javaosc-example</name>
+	<description>javaosc example</description>
 
 	<dependencies>
 
 		<!-- basic -->
-	<!-- 	<dependency>
-			<groupId>org.javaosc.framework</groupId>
-			<artifactId>javaosc-framework</artifactId>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>org.javaosc.framework</groupId> <artifactId>javaosc-framework</artifactId> 
+			</dependency> -->
+
 		<!-- log -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -44,7 +40,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-			
+
 		<!-- unit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -56,5 +52,4 @@
 	<build>
 		<finalName>javaosc-example</finalName>
 	</build>
-
 </project>

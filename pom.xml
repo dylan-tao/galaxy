@@ -8,15 +8,14 @@
 	<name>javaosc framework</name>
 
 	<modules>
-		<module>javaosc-example</module>
 		<module>javaosc-core</module>
+		<module>javaosc-example</module>
 	</modules>
 
 	<properties>
 
 		<javaosc.version>1.0</javaosc.version>
-		<javaosc.framework.version>1.0.0.RELEASE</javaosc.framework.version>
-		<javaosc.example.version>1.0</javaosc.example.version>
+		<javaosc.core.version>1.0.0.RELEASE</javaosc.core.version>
 
 		<org.javassist.version>3.20.0-GA</org.javassist.version>
 		<apache.beanutils.version>1.8.3</apache.beanutils.version>
@@ -36,6 +35,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+
+			<dependency>
+				<groupId>org.javaosc.framework</groupId>
+				<artifactId>javaosc-core</artifactId>
+				<version>${javaosc.core.version}</version>
+			</dependency>
 
 			<!-- basic ref -->
 			<dependency>
@@ -116,5 +121,5 @@
 
 		</dependencies>
 	</dependencyManagement>
-
+	
 </project>
