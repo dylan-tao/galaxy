@@ -15,6 +15,7 @@ import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.web.util.PathUtil;
 import org.javaosc.framework.web.util.StringUtil;
+import org.javaosc.framework.web.util.StringUtil.PatternValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,39 +30,38 @@ public class Configuration {
 	
 	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
 	
-	protected static String configFileName = "uufast.properties";
+	protected static String configFileName = "configuration.properties";
 	
 	private static Properties properties;
 	
 	public static void setConfigFileName(String configFileName) {
 		if(StringUtil.isNotBlank(configFileName)){
-			Configuration.configFileName = configFileName.trim();
+			configFileName = StringUtil.clearSpace(configFileName, PatternValue.ALL);
 		}else{
-			log.error("propertie[ configFileName ] must be not null, please check setting in web.xml");
+			log.info("configuration file missing,enable default configuration file: {}", configFileName);
 		}
 	}
 	
 	public static void load(){
-			InputStream inputStream = null;
+		InputStream inputStream = null;
+		try {
+			properties = new Properties();
+			inputStream = new FileInputStream(PathUtil.getClassPath() + configFileName);
+			properties.load(inputStream);	
+			log.info("initializing configuration file: {}", configFileName);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
 			try {
-				properties = new Properties();
-				String configPath = PathUtil.getClassPath() + configFileName;
-				inputStream = new FileInputStream(configPath);
-				properties.load(inputStream);	
-				log.info("Initializing " + configFileName);
-			} catch (FileNotFoundException e) {
-				log.error("[errorCode:1114] " + configFileName + " can not be found,please check the file name and the file path cannot contain spaces or see the following Caused by: !",e);
+				if(inputStream != null) {
+					inputStream.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			}finally{
-				try {
-					if(inputStream != null) {
-						inputStream.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}	
 			}	
+		}		
 	}
 	
 	public static void setValue(String key,String value){
@@ -114,13 +114,12 @@ public class Configuration {
 		if(properties != null){
 			OutputStream outputStream = null;
 			try {
-				String configPath = PathUtil.getClassPath() + configFileName;
-				outputStream = new FileOutputStream(configPath);
+				outputStream = new FileOutputStream(PathUtil.getClassPath() + configFileName);
 				properties.store(outputStream, ProperConstant.CONFIG_HEAD_COMMENT);
 				outputStream.flush();
-				log.info("Exporting " + configFileName);
+				log.info("exporting configuration file: {}", configFileName);
 			} catch (FileNotFoundException e) {
-				log.error("[errorCode:1114] " + configFileName + " can not be found,please check the file name and the file path cannot contain spaces or see the following Caused by: !",e);
+				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
@@ -135,9 +134,8 @@ public class Configuration {
 		}
 	}
 	
-	public static void clear(){
+	public static void empty(){
 		properties.clear();
-		properties = null;
 	}
 		
 }

@@ -16,7 +16,7 @@ import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
-import org.javaosc.framework.web.assist.PrmValueAssist;
+import org.javaosc.framework.web.assist.ParamValueAssist;
 import org.javaosc.framework.web.util.PathUtil;
 import org.javaosc.framework.web.util.StringUtil;
 import org.slf4j.Logger;
@@ -127,7 +127,7 @@ public class CoreServlet extends HttpServlet {
 						if(processTime){
 							log.info("execute the method [" + actionCls.getName() + Constant.DOT + method.getName() + "()] ");
 						}
-						returnObj = method.invoke(action, PrmValueAssist.getPrmValue(method,method.getParameterTypes(), methodPrm));
+						returnObj = method.invoke(action, ParamValueAssist.getPrmValue(method,method.getParameterTypes(), methodPrm));
 					} catch (IllegalArgumentException e) {
 						log.error("[errorCode:1109] please check this method ["+method.getName()+"] of parameter is correct and see the following Caused by: !",e);
 					} catch (IllegalAccessException e) {

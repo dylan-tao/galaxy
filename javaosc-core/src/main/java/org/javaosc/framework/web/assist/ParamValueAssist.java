@@ -22,9 +22,9 @@ import org.javaosc.framework.web.util.FileUpload;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class PrmValueAssist {
+public abstract class ParamValueAssist {
 	
-	private static Log log = LogFactory.getLog(PrmValueAssist.class);
+	private static Log log = LogFactory.getLog(ParamValueAssist.class);
 	
 	@SuppressWarnings("unchecked")
 	public static Object[] getPrmValue(Method m, Class<?>[] prmTypes,List<String> paramNames){

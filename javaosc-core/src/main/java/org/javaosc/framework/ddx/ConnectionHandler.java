@@ -1,4 +1,4 @@
-package org.javaosc.framework.orm;
+package org.javaosc.framework.ddx;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.javaosc.framework.assist.ClassLoader;
+import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
@@ -34,20 +35,22 @@ public class ConnectionHandler {
 		Object bean = BeanFactory.getBean(poolObj,false);
 		try {
 			BeanUtils.populate(bean, Configuration.getPoolPrm());
+			log.info("initializing the data source property");
 		} catch (IllegalAccessException e) {
-			log.error(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (InvocationTargetException e) {
-			log.error(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		ds = (DataSource)bean;
 		
-		TestConn();
+		log.info("initializing the data source connection ~");
+		InitialzeConnection();
 	}
 	
 	public static Connection getConnection(){
 		Connection conn = connManger.get();
 		if(conn == null){
-			conn = newConn();
+			conn = getDataSourceConn();
 			connManger.set(conn);
 		}
 		return conn;
@@ -61,7 +64,7 @@ public class ConnectionHandler {
 					conn.setAutoCommit(false);
 				}
 			} catch (SQLException e) {
-				log.error(e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}
 		}
 	}
@@ -74,7 +77,7 @@ public class ConnectionHandler {
 					conn.commit();
 				}
 			} catch (SQLException e) {
-				log.error(e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}
 		}
 	}
@@ -87,7 +90,7 @@ public class ConnectionHandler {
 					conn.rollback();
 				}
 			} catch (SQLException e) {
-				log.error(e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}
 		}
 	}
@@ -98,7 +101,7 @@ public class ConnectionHandler {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				log.error(e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}finally{
 				connManger.remove();
 			}
@@ -110,16 +113,16 @@ public class ConnectionHandler {
 		connManger = null;
 	}
 	
-	private static Connection newConn(){
+	private static Connection getDataSourceConn(){
 		try {
 			return ds.getConnection();
 		} catch (SQLException e) {
-			log.error(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return null;
 	}
 	
-	private static void TestConn(){
+	private static void InitialzeConnection(){
 		getConnection();
 		close();
 	}

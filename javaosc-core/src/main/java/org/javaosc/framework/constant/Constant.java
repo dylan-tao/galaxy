@@ -8,6 +8,8 @@ package org.javaosc.framework.constant;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public interface Constant {
+	
+	String JAVAOSC_EXCEPTION = "javaosc execution exception ";
 
 	String SET_ENCODING_KEY = "encoding";
 	String SET_ENFORC_ENCODING_KEY = "forceEncoding";

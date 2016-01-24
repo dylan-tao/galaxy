@@ -1,4 +1,4 @@
-package org.javaosc.framework.orm;
+package org.javaosc.framework.ddx;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

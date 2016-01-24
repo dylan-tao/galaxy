@@ -35,7 +35,7 @@ public class ScanPackage {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
 			if(url == null){
-				log.error("package[ " + packageName + " ] can not found! please check setting : " + ProperConstant.SCANER_PACKAGE_KEY);
+				log.error("package[ {} ] can not found! please check setting : {}" , packageName, ProperConstant.SCANER_PACKAGE_KEY);
 			}else{
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
@@ -43,17 +43,17 @@ public class ScanPackage {
 					for (File f : files) {
 						scanFile(packageName, f, className);
 					}
-					log.debug("file scan has been completed");
+					log.info("file scan has been completed");
 				} else if ("jar".equals(protocol)) {
 					JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
 					scanJar(jar, packageName, className);
-					log.debug("jar scan has been completed");
+					log.info("jar scan has been completed");
 				}
 			}
 		} catch (URISyntaxException e) {
-			log.error(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (IOException e) {
-			log.error(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}	
 		return className;
 	}

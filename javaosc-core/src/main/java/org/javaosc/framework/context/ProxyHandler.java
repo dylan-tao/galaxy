@@ -2,7 +2,7 @@ package org.javaosc.framework.context;
 
 import java.lang.reflect.Method;
 
-import org.javaosc.framework.orm.ConnectionHandler;
+import org.javaosc.framework.ddx.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
