@@ -2,7 +2,6 @@ package org.javaosc.framework.constant;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 /**
  * 
@@ -21,7 +20,7 @@ public class RouteNode {
 	
 	private Method method;
 	
-	private List<String> methodPrm;
+	private String[] param;
 	
 	public RouteNode() {}
 	
@@ -70,12 +69,12 @@ public class RouteNode {
 		this.method = method;
 	}
 
-	public List<String> getMethodPrm() {
-		return methodPrm;
+	public String[] getParam() {
+		return param;
 	}
 
-	public void setMethodPrm(List<String> methodPrm) {
-		this.methodPrm = methodPrm;
+	public void setParam(String[] param) {
+		this.param = param;
 	}
-
+	
 }

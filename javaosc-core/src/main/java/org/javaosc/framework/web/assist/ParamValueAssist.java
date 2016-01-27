@@ -30,7 +30,7 @@ public abstract class ParamValueAssist {
 	public static Object[] getPrmValue(Method m, Class<?>[] prmTypes,List<String> paramNames){
 		Object[] obj = new Object[prmTypes.length];
 		if(paramNames == null){
-			paramNames = MethodPrmName.getParamNames(m);
+			paramNames = MethodParamName.getParamNames(m);
 		}
 		Map<String, Object> dataMap =ActionContext.getContext().getRequest().getParameterMap();
 		boolean uploadPrmLoad = false;

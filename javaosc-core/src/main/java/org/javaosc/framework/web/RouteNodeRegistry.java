@@ -2,7 +2,6 @@ package org.javaosc.framework.web;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +10,7 @@ import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.constant.RouteNode;
 import org.javaosc.framework.context.Configuration;
-import org.javaosc.framework.web.assist.MethodPrmName;
+import org.javaosc.framework.web.assist.MethodParamName;
 import org.javaosc.framework.web.util.StringUtil;
 import org.javaosc.framework.web.util.StringUtil.PatternValue;
 import org.slf4j.Logger;
@@ -66,8 +65,8 @@ public abstract class RouteNodeRegistry {
 									child.setCls(cls);
 									child.setMethod(method);
 									if(isMethodPrm){
-										List<String> methodPrm = MethodPrmName.getParamNames(method);
-										child.setMethodPrm(methodPrm);
+										String[] methodPrm = MethodParamName.getParamNames(cls, method);
+										child.setParam(methodPrm);
 									}
 								}
 								current.addChild(URI_PARAM, child);
@@ -79,8 +78,8 @@ public abstract class RouteNodeRegistry {
 							child.setCls(cls);
 							child.setMethod(method);
 							if(isMethodPrm){
-								List<String> methodPrm = MethodPrmName.getParamNames(method);
-								child.setMethodPrm(methodPrm);
+								String[] methodPrm = MethodParamName.getParamNames(cls, method);
+								child.setParam(methodPrm);
 							}
 						}
 						current.addChild(urlSplitStr, child);
@@ -116,7 +115,7 @@ public abstract class RouteNodeRegistry {
 			if(uriLength-i == 1){ 
 				params.put(ACTION_CLASS, child.getCls());
 				params.put(METHOD, child.getMethod());
-				params.put(METHOD_PRM, child.getMethodPrm());
+				params.put(METHOD_PRM, child.getParam());
 			}
 			current = child;
 			child = null;
