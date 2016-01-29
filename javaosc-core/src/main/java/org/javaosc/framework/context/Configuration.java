@@ -134,7 +134,7 @@ public class Configuration {
 		}
 	}
 	
-	public static void empty(){
+	public static void clear(){
 		properties.clear();
 	}
 		

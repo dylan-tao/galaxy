@@ -12,8 +12,12 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.javaosc.framework.constant.Constant;
+import org.javaosc.framework.context.ScanPackage;
 import org.javaosc.framework.web.ActionContext;
 import org.javaosc.framework.web.util.FileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -24,15 +28,12 @@ import org.javaosc.framework.web.util.FileUpload;
  */
 public abstract class ParamValueAssist {
 	
-	private static Log log = LogFactory.getLog(ParamValueAssist.class);
+	private static final Logger log = LoggerFactory.getLogger(ParamValueAssist.class);
 	
 	@SuppressWarnings("unchecked")
 	public static Object[] getPrmValue(Method m, Class<?>[] prmTypes,List<String> paramNames){
 		Object[] obj = new Object[prmTypes.length];
-		if(paramNames == null){
-			paramNames = MethodParamName.getParamNames(m);
-		}
-		Map<String, Object> dataMap =ActionContext.getContext().getRequest().getParameterMap();
+		Map<String, Object> dataMap = ActionContext.getContext().getRequest().getParameterMap();
 		boolean uploadPrmLoad = false;
 		
 		for(int i = 0;i < prmTypes.length;i++){
@@ -52,7 +53,7 @@ public abstract class ParamValueAssist {
 				}else if(prmType == HttpServletResponse.class){ 
 					obj[i] = ActionContext.getContext().getResponse();
 				}else{
-					log.error("[errorCode:1113] the data type("+prmType.getName()+") of the parameter is not supported !");
+					log.error("the data type({}) of the parameter is not supported !", prmType.getName());
 				}
 			}else if(prmType == FileUpload.class && paramNames.size()>1){
 				if(!uploadPrmLoad){
