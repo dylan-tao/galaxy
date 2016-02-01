@@ -30,31 +30,30 @@ public class ContextResult {
 	
 	private Object value;
 	
-	private boolean isOne;
+	private HttpServletRequest request;
 	
-	private HttpServletRequest request = ActionContext.getContext().getRequest();
-	
-	private HttpServletResponse response = ActionContext.getContext().getResponse();
-	
+	private HttpServletResponse response;
 	
 	public ContextResult(String path, Map<String, Object> returnData) {
+		this.request = ActionContext.getContext().getRequest();
+		this.response = ActionContext.getContext().getResponse();
 		this.path = path;
 		this.returnData = returnData;
-		this.isOne = false;
 	}
 	
 	public ContextResult(String path, String key, Object value) {
+		this.request = ActionContext.getContext().getRequest();
+		this.response = ActionContext.getContext().getResponse();
 		this.path = path;
 		this.key = key;
 		this.value = value;
-		this.isOne = true;
 	}
 	
 	protected void redirectOrForward(String prefix, String suffix){
 		if(StringUtil.isNotBlank(path)){
 			path = StringUtil.clearSpace(path, PatternValue.ALL);
 			if(path.startsWith(Constant.COLON) || path.startsWith(Constant.COLON_EXTEND)){
-				path = path.substring(1) + ActionHandler.redirectResult(isOne, key, value, returnData);
+				path = path.substring(1) + ActionHandler.redirectResult(key, value, returnData);
 				this.redirect();
 			}else{
 				forwardResult();

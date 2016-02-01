@@ -35,8 +35,6 @@ public class CoreServlet extends HttpServlet {
 	
 	private static final Logger log = LoggerFactory.getLogger(CoreServlet.class);
 	
-	private ServletConfig config;
-	
 	private static String prefix;
 	private static String suffix;
 	private static boolean processTime;
@@ -75,7 +73,7 @@ public class CoreServlet extends HttpServlet {
 	
 	private void doDispatcher(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			ActionContext.setContext(request, response, config.getServletContext());
+			ActionContext.setContext(request, response);
 			if(processTime){
 				long startTime = System.currentTimeMillis();
 				executeMethod(request);

@@ -64,27 +64,25 @@ public class ActionHandler {
 		}
 	}
 	
-	protected static String redirectResult(boolean isOne, String key, Object value, Map<String, Object> returnData){
+	protected static String redirectResult(String key, Object value){
+		return new StringBuffer().append(Constant.QM).append(key).append(Constant.EM).append(value).toString();
+	}
+	
+	protected static String redirectResult(Map<String, Object> returnData){
 		StringBuffer returnStr = new StringBuffer(Constant.EMPTY);
-		if(isOne){
-			if(StringUtil.isNotBlank(key)){
-				returnStr.append(Constant.QM).append(key).append(Constant.EM).append(value);
-			}
-		}else{
-			if(returnData != null){
-				Iterator<Entry<String, Object>> iterator = returnData.entrySet().iterator();
-				boolean firstIndex = true;
-				while(iterator.hasNext()){
-					Entry<String, Object> entry = iterator.next();
-					if(firstIndex){
-						returnStr.append(Constant.QM).append(entry.getKey()).append(Constant.EM).append(entry.getValue());
-						firstIndex = false;
-					}else{
-						returnStr.append(Constant.AM).append(entry.getKey()).append(Constant.EM).append(entry.getValue());
-					}
+		if(returnData != null){
+			Iterator<Entry<String, Object>> iterator = returnData.entrySet().iterator();
+			boolean firstIndex = true;
+			while(iterator.hasNext()){
+				Entry<String, Object> entry = iterator.next();
+				if(firstIndex){
+					returnStr.append(Constant.QM).append(entry.getKey()).append(Constant.EM).append(entry.getValue());
+					firstIndex = false;
+				}else{
+					returnStr.append(Constant.AM).append(entry.getKey()).append(Constant.EM).append(entry.getValue());
 				}
 			}
-		}
+		}	
 		return returnStr.toString();
 	}
 	
