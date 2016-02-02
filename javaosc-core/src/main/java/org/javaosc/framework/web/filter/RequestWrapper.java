@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.CodeConstant;
+import org.javaosc.framework.constant.Constant.HttpType;
 /**
  * 
  * @description
@@ -19,74 +20,68 @@ import org.javaosc.framework.constant.Constant.CodeConstant;
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
 
-	private Map<String, Object> requestData = new HashMap<String, Object>();
-
-	private String encoding;
+	private Map<String, String[]> requestData = new HashMap<String, String[]>();
 	
-	private boolean isHttpGet;
+	private boolean getEnabled;
 
-	public RequestWrapper(HttpServletRequest request, String encoding,boolean isHttpGet) {
+	public RequestWrapper(HttpServletRequest request, boolean getEnabled, String encoding) throws UnsupportedEncodingException {
 		super(request);
-		this.encoding = encoding;
-		this.isHttpGet = isHttpGet;
-		initProperty();
-		initDataMap();
+		super.setCharacterEncoding(encoding);
+		super.setAttribute(Constant.SET_ENCODING_KEY, encoding);
+		this.getEnabled = getEnabled;
+		initRequestParam();
 	}
 
 	@Override
-	public Map<String, Object> getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 		return this.requestData;
 	}
 
 	@Override
 	public String getParameter(String name) {
-		Object obj = this.requestData.get(name);
-		return obj != null?obj.toString():null;
+		return String.valueOf(this.requestData.get(name));
 	}
 
 	@Override
 	public String[] getParameterValues(String name) {
-		Object obj = this.requestData.get(name);
-		return obj!=null?(String[])obj:null;
+		return this.requestData.get(name);
 	}
 	
-	private void initProperty(){
-		try {
-			super.setCharacterEncoding(encoding);
-			super.setAttribute(Constant.SET_ENCODING_KEY, encoding);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	} 
-	
-	private void initDataMap() {
+	private void initRequestParam() {
 		Enumeration<?> e = super.getParameterNames();
-		while (e.hasMoreElements()) {
-			String key = (String) e.nextElement();
-			String[] values = super.getParameterValues(key);
-			if (values == null) {
-				requestData.put(key, Constant.EMPTY);
-			} else if (values.length == 1) {
-				String value = isHttpGet == true ? encodingPrm(values[0]) : values[0];
-				requestData.put(key, value);
-			} else {
-				if(isHttpGet == true){
+		String requestType = super.getMethod();
+		
+		if(getEnabled && (HttpType.GET.toString().equalsIgnoreCase(requestType) || HttpType.DELETE.toString().equalsIgnoreCase(requestType))){ //get\delete 
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String[] values = super.getParameterValues(key);
+				if (values == null) {
+					requestData.put(key, null);
+				} else {
 					String[] newValues = new String[values.length];
-					for (int u = 0; u < values.length; u++) {
-						newValues[u] = encodingPrm(values[u]);
+					for (String newValue:newValues) {
+						newValue = encodingParam(newValue);
 					}
-					requestData.put(key, newValues);
-				}else{
+					requestData.put(key, newValues);	
+				}
+			}
+		}else{ // post\put\get not open encode support
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String[] values = super.getParameterValues(key);
+				if (values == null) {
+					requestData.put(key, null);
+				} else {
 					requestData.put(key, values);
 				}
 			}
 		}
 	}
 	
-	private String encodingPrm(String value) {
+	private String encodingParam(String value) {
 		try {
 			byte[] b = value.getBytes(CodeConstant.ISO88591.getValue());
-			value = new String(b, encoding);
+			value = new String(b, this.getCharacterEncoding());
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

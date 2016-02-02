@@ -10,12 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.context.ScanPackage;
 import org.javaosc.framework.web.ActionContext;
-import org.javaosc.framework.web.util.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,54 +25,37 @@ public abstract class ParamValueAssist {
 	
 	private static final Logger log = LoggerFactory.getLogger(ParamValueAssist.class);
 	
-	@SuppressWarnings("unchecked")
 	public static Object[] getPrmValue(Method m, Class<?>[] prmTypes,List<String> paramNames){
 		Object[] obj = new Object[prmTypes.length];
-		Map<String, Object> dataMap = ActionContext.getContext().getRequest().getParameterMap();
-		boolean uploadPrmLoad = false;
+		Map<String, String[]> dataMap = ActionContext.getContext().getRequest().getParameterMap();
 		
-		for(int i = 0;i < prmTypes.length;i++){
+		for(int j = 0;j < prmTypes.length;j++){
 			
-			Class<?> prmType = prmTypes[i];
+			Class<?> prmType = prmTypes[j];
 			
 			if(isJavaClass(prmType)){
-				Object objValue = dataMap.get(paramNames.get(i));
+				Object objValue = dataMap.get(paramNames.get(j));
 				if(prmType.isPrimitive()){
-					obj[i] = ConvertUtils.convert(objValue, prmType);
+					obj[j] = ConvertUtils.convert(objValue, prmType);
 				}else if(prmType == String.class || isWrapClass(prmType)){
-					obj[i] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
+					obj[j] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
 				}else if(prmType.isArray()){
-					obj[i] = objValue == null ? objValue : ConvertUtils.convert((String[])objValue, prmType);
+					obj[j] = objValue == null ? objValue : ConvertUtils.convert((String[])objValue, prmType);
 				}else if(prmType == HttpServletRequest.class){
-					obj[i] = ActionContext.getContext().getRequest();
+					obj[j] = ActionContext.getContext().getRequest();
 				}else if(prmType == HttpServletResponse.class){ 
-					obj[i] = ActionContext.getContext().getResponse();
+					obj[j] = ActionContext.getContext().getResponse();
 				}else{
 					log.error("the data type({}) of the parameter is not supported !", prmType.getName());
 				}
-			}else if(prmType == FileUpload.class && paramNames.size()>1){
-				if(!uploadPrmLoad){
-					PutPrmAssist prmParse = new PutPrmAssist(ActionContext.getContext().getRequest());
-					Map<String, Object> map = prmParse.getData();
-					if(map!=null && map.size() > 0){
-						dataMap.putAll(map);
-						i=0;
-						uploadPrmLoad = true;
-					}else{
-						obj[i] = null;
-					}
-				}else{
-					obj[i] = null;
-				}
-				
 			}else{
 				try {
 					if(dataMap.size()>0){
 						Object bean = prmType.newInstance();
 						BeanUtils.populate(bean, dataMap);
-						obj[i] = prmType.cast(bean);
+						obj[j] = prmType.cast(bean);
 					}else{
-						obj[i] = null;
+						obj[j] = null;
 					}
 				} catch (InstantiationException e) {
 					e.printStackTrace();

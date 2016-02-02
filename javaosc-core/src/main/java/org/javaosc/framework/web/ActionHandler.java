@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.ContentType;
-import org.javaosc.framework.web.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -44,21 +43,19 @@ public class ActionHandler {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void renewPrmRecord(){
 		HttpServletRequest request = ActionContext.getContext().getRequest();
-		Map<String, Object> map = request.getParameterMap();
-		for(Map.Entry<String, Object> entry : map.entrySet()){
+		Map<String, String[]> map = request.getParameterMap();
+		for(Map.Entry<String, String[]> entry : map.entrySet()){
 			String key = entry.getKey();
 			Object value = entry.getValue();
 			request.setAttribute(key, value);
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void renewPrmRecord(String... parameter){
 		HttpServletRequest request = ActionContext.getContext().getRequest();
-		Map<String, Object> map = request.getParameterMap();
+		Map<String, String[]> map = request.getParameterMap();
 		for(String para : parameter){
 			request.setAttribute(para, map.get(para));
 		}
