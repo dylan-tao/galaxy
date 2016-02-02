@@ -3,7 +3,6 @@ package org.javaosc.framework.web;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -18,7 +17,7 @@ import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
-import org.javaosc.framework.web.assist.ContextResult;
+import org.javaosc.framework.web.assist.ActionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,15 +78,13 @@ public class CoreServlet extends HttpServlet {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void executeMethod(HttpServletRequest request){
 		
 		String requestPath = PathUtil.getContextPath(request);
 		String requestValue = Configuration.getValue(requestPath);
 
 		if (StringUtil.isNotBlank(requestValue)) {
-			ContextResult contextResult = new ContextResult(requestValue, null, null);
-			contextResult.redirectOrForward(prefix, suffix);
+			new ActionHandler(requestValue).redirectOrForward(prefix, suffix);
 		} else { 
 			Map<String, Object> routeMap = RouteNodeRegistry.getRouteNode(requestPath);		
 			Object actionObj = routeMap.get(RouteNodeRegistry.ACTION_CLASS);
@@ -96,7 +93,7 @@ public class CoreServlet extends HttpServlet {
 			
 			Class<?> actionCls = actionObj==null?null:(Class<?>)actionObj;
 			Method method = methodObj==null?null:(Method)methodObj;
-			List<String> methodPrm = methodPrmObj==null?null:(List<String>)methodPrmObj;
+			String[] methodPrm = methodPrmObj==null?null:(String[])methodPrmObj;
 			
 			if(actionCls!=null && methodObj!=null){
 				
@@ -114,15 +111,13 @@ public class CoreServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 					Class<?> returnType = method.getReturnType();
-					if(returnType == ContextResult.class){
-						ContextResult contextResult = (ContextResult)returnObj;
-						contextResult.redirectOrForward(prefix, suffix);
-					}else if(returnType == String.class){
-						String returnPath = returnObj == null ? null : returnObj.toString();
-						ContextResult contextResult = new ContextResult(returnPath, null, null);
-						contextResult.redirectOrForward(prefix, suffix);
+					if(returnType.equals(String.class)){
+						String returnPath = String.valueOf(returnObj);
+						if(StringUtil.isNotBlank(returnPath)){
+							new ActionHandler(returnPath).redirectOrForward(prefix, suffix);
+						}
 						return;
-					}else if(returnType == void.class){
+					}else if(returnType.equals(void.class)){
 						return;
 					}else{ 
 						log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
@@ -142,5 +137,5 @@ public class CoreServlet extends HttpServlet {
 			}
 		}
 	}
-
+	
 }

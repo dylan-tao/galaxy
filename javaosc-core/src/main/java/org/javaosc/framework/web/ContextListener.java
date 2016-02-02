@@ -1,8 +1,6 @@
 package org.javaosc.framework.web;
 
 import java.beans.Introspector;
-import java.io.File;
-import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -13,15 +11,8 @@ import org.javaosc.framework.context.AnnotationScaner;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.ddx.ConnectionHandler;
-import org.javaosc.framework.util.PathUtil;
-import org.javaosc.framework.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-import ch.qos.logback.core.util.StatusPrinter;
 
 /**
  * 
@@ -72,27 +63,27 @@ public class ContextListener implements ServletContextListener {
 		System.gc();
 	}
 
-	private static void load (String logbackFileLocation) throws IOException, JoranException{  
-        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();  
-          
-        File externalConfigFile = new File(logbackFileLocation);  
-        if(!externalConfigFile.exists()){  
-            throw new IOException("Logback External Config File Parameter does not reference a file that exists");  
-        }else{  
-            if(!externalConfigFile.isFile()){  
-                throw new IOException("Logback External Config File Parameter exists, but does not reference a file");  
-            }else{  
-                if(!externalConfigFile.canRead()){  
-                    throw new IOException("Logback External Config File exists and is a file, but cannot be read.");  
-                }else{  
-                    JoranConfigurator configurator = new JoranConfigurator();  
-                    configurator.setContext(lc);  
-                    lc.reset();  
-                    configurator.doConfigure(logbackFileLocation);  
-                    StatusPrinter.printInCaseOfErrorsOrWarnings(lc);  
-                }  
-            }     
-        }  
-    }  
+//	private static void load (String logbackFileLocation) throws IOException, JoranException{  
+//        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();  
+//          
+//        File externalConfigFile = new File(logbackFileLocation);  
+//        if(!externalConfigFile.exists()){  
+//            throw new IOException("Logback External Config File Parameter does not reference a file that exists");  
+//        }else{  
+//            if(!externalConfigFile.isFile()){  
+//                throw new IOException("Logback External Config File Parameter exists, but does not reference a file");  
+//            }else{  
+//                if(!externalConfigFile.canRead()){  
+//                    throw new IOException("Logback External Config File exists and is a file, but cannot be read.");  
+//                }else{  
+//                    JoranConfigurator configurator = new JoranConfigurator();  
+//                    configurator.setContext(lc);  
+//                    lc.reset();  
+//                    configurator.doConfigure(logbackFileLocation);  
+//                    StatusPrinter.printInCaseOfErrorsOrWarnings(lc);  
+//                }  
+//            }     
+//        }  
+//    }  
 
 }

@@ -1,11 +1,14 @@
 package org.javaosc.framework.web.assist;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.javaosc.framework.constant.Constant;
+import org.javaosc.framework.constant.Constant.ContentType;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,19 +28,16 @@ public class ContextHandler {
 	}
 	
 	public static void setSession(String name, Object value){
-		HttpSession session = ActionContext.getContext().getRequest().getSession();
-		session.setAttribute(name, value);
-		log.debug("====== Set Session Over: Key=" + name + ",Value=" + value);
+		ActionContext.getContext().getRequest().getSession().setAttribute(name, value);
 	}
 	
-	public static HttpSession getSession(){
-		return ActionContext.getContext().getRequest().getSession();
+	@SuppressWarnings("unchecked")
+	public static <T> T getSession(String name, Class<T> cls){
+		return (T)ActionContext.getContext().getRequest().getSession().getAttribute(name);
 	}
 	
 	public static void removeSession(String name){
-		HttpSession session = ActionContext.getContext().getRequest().getSession();
-		session.removeAttribute(name);
-		log.debug("====== Remove Session Over: Key=" + name);
+		ActionContext.getContext().getRequest().getSession().removeAttribute(name);
 	}
 	
     public static void setCookie(String name, String value, int maxSecond) {
@@ -50,7 +50,6 @@ public class ContextHandler {
         cookie.setMaxAge(maxSecond);
         cookie.setPath(path);
         response.addCookie(cookie);
-        log.debug("====== Set Cookie Over: Key=" + name + ",Value=" + value + ",MaxAge=" + maxSecond + "seconds");
     }
 	
     public static String getCookie(String name) {
@@ -63,7 +62,6 @@ public class ContextHandler {
         if (cookies!=null) {
             for (Cookie cookie : cookies) {
                 if (name.equals(cookie.getName())) {
-                	log.debug("====== Get Cookie Over: Key=" + name + ",Value=" + cookie.getValue());
                     return cookie.getValue();
                 }
             }
@@ -78,5 +76,24 @@ public class ContextHandler {
     public static void removeCookie(String name, String path) {
         setCookie(name, Constant.EMPTY, 0, path);
     }
+    
+	public static void response(String content) {
+		response(content,ContentType.JSON);
+	}
+	
+	public static void response(String content,ContentType contentType) {
+		HttpServletResponse response = ActionContext.getContext().getResponse();
+		response.setContentType(contentType.getValue());
+		try {
+			PrintWriter out = response.getWriter();
+			out.write(content);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			log.debug(content);
+		}
+	}
     
 }

@@ -2,18 +2,7 @@ package org.javaosc.framework.assist;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.ConvertUtils;
-import org.javaosc.framework.assist.ClassHandler;
-import org.javaosc.framework.web.ActionContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -23,6 +12,15 @@ import javassist.NotFoundException;
 import javassist.bytecode.CodeAttribute;
 import javassist.bytecode.LocalVariableAttribute;
 import javassist.bytecode.MethodInfo;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.javaosc.framework.web.ActionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -60,7 +58,7 @@ public class MethodPrmHandler {
 		return paramNames;
 	}
 	
-	public static Object[] getParamValue(Method m, Class<?>[] prmTypes,List<String> paramNames){
+	public static Object[] getParamValue(Method m, Class<?>[] prmTypes,String[] paramNames){
 		Object[] obj = new Object[prmTypes.length];
 		Map<String, String[]> dataMap = ActionContext.getContext().getRequest().getParameterMap();
 		
@@ -69,7 +67,7 @@ public class MethodPrmHandler {
 			Class<?> prmType = prmTypes[j];
 			
 			if(ClassHandler.isJavaClass(prmType)){
-				Object objValue = dataMap.get(paramNames.get(j));
+				Object objValue = dataMap.get(paramNames[j]);
 				if(prmType.isPrimitive()){
 					obj[j] = ConvertUtils.convert(objValue, prmType);
 				}else if(prmType == String.class || ClassHandler.isWrapClass(prmType)){

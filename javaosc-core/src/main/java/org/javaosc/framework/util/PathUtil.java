@@ -13,11 +13,15 @@ import org.javaosc.framework.constant.Constant;
  */
 public class PathUtil {
 	
-	//http://localhost:8080/uufast/user/detail?id=2(uufast is project's name)
+	/**
+	 * request url
+	 * http://localhost:8080/javaosc-framework/list?pageNo=1(javaosc-framework is project's name)
+	 * 
+	 **/
 	
 	/**
 	 * 获取项目根目录
-	 * @return String /uufast
+	 * @return String /javaosc-framework
 	 */
 	public static String getContextRoot(HttpServletRequest request) {
 		return request.getContextPath();
@@ -25,7 +29,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取请求路径
-	 * @return String /user/detail
+	 * @return String /list
 	 */
 	public static String getContextPath(HttpServletRequest request) {
 		return request.getServletPath();
@@ -33,7 +37,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取项目及请求路径
-	 * @return String /uufast/user/detail
+	 * @return String /javaosc-framework/list
 	 */
 	public static String getContextUri(HttpServletRequest request) {
 		return request.getRequestURI();
@@ -41,7 +45,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取项目及请求路径
-	 * @return String http://localhost:8080/uufast/user/detail
+	 * @return String http://localhost:8080/javaosc-framework/list
 	 */
 	public static String getContextUrl(HttpServletRequest request) {
 		return request.getRequestURL().toString();
@@ -57,7 +61,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取get请求的参数
-	 * @return String id=2
+	 * @return String pageNo=1
 	 */
 	public static String getQueryString(HttpServletRequest request) {
 		return request.getQueryString();
