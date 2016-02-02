@@ -97,7 +97,7 @@ public class Configuration {
 		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<Object, Object> entry = it.next();
-			String key = (String)entry.getKey();
+			String key = String.valueOf(entry.getKey());
 			if(StringUtil.isNotBlank(key)){
 				Object value = entry.getValue();
 				if(key.startsWith(ProperConstant.STARTWITH_DB)){

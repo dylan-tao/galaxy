@@ -124,22 +124,19 @@ public class JdbcTemplate{
 	}
 	
 	public <T> Page<T> queryForPage(String sql, Page<T> page,Class<T> cls, Object... param){
-		if(null == page){
-			page = new Page<T>();
-		}
 		List<T> list = null;
-		if(page.isAutoPage()){
-			//执行顺序：where->group by->having-order by->limit
-			if(page.isAutoCount()){
-				String countSql = SqlHandler.createCount(sql);
-				long count = getCount(countSql, Long.class, param);
-				page.setTotalCount(count);
-			}
-			int pageNo = page.getPageNo();
-			int pageSize = page.getPageSize();
-			int startIndex =(pageNo-1) * pageSize;
-			sql = SqlHandler.createLimit(sql, startIndex, pageSize); //拼组limit
+		
+		//where->group by->having-order by->limit
+		if(page.isAutoCount()){
+			String countSql = SqlHandler.createCount(sql);
+			long count = getCount(countSql, Long.class, param);
+			page.setTotalCount(count);
 		}
+		int pageNo = page.getPageNo();
+		int pageSize = page.getPageSize();
+		int startIndex =(pageNo-1) * pageSize;
+		sql = SqlHandler.createLimit(sql, startIndex, pageSize); //limit
+		
 		list = queryForList(sql, cls, param);
 		page.setResult(list);
 		return page;

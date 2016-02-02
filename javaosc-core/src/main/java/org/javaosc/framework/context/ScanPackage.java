@@ -62,11 +62,10 @@ public class ScanPackage {
 		String fileName = file.getName();
 		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS) && isHasClassKeyword(fileName)) {
 			fileName = fileName.substring(0, fileName.length() - 6);
-			className.add(packageName + Constant.DOT + fileName);
+			className.add(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
 		} else if (file.isDirectory()) {
-			packageName = packageName + Constant.DOT +  fileName;
 			for (File f : file.listFiles()) {
-				scanFile(packageName, f, className);
+				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f, className);
 			}
 		}
 	}

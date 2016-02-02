@@ -20,7 +20,6 @@ public interface ProperConstant {
 	String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
 	String CLASS_KEYWORD_KEY = "javaosc.scaner.classname.keyword";
 	String MAPPING_PRMLOAD_KEY = "javaosc.request.prm.preload"; 
-	String MAPPING_PROCESSING_TIME_KEY = "javaosc.request.processing.time"; 
 	String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
 	
 	String DRIVER_CLASS_NAME = "jdbc.driverClassName";
@@ -36,7 +35,5 @@ public interface ProperConstant {
 	String DEFAULT_SUFFIX_VALUE = ".jsp";
 	String DEFAULT_ENCODING_VALUE = CodeConstant.UTF8.getValue();
 	String CLASS_KEYWORD_VALUE = "action,controller";
-	boolean MAPPING_PRELOAD_VALUE = true;
-	boolean MAPPING_PROCESSING_TIME_VALUE = false;
-
+	
 }

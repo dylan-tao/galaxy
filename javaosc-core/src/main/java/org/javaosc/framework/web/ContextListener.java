@@ -34,6 +34,7 @@ public class ContextListener implements ServletContextListener {
 		ConnectionHandler.destroy();
 		
 		Introspector.flushCaches();
+		System.gc();
 		
 		log.info("====== Javaosc Framework flushing cache ======");
 	}
