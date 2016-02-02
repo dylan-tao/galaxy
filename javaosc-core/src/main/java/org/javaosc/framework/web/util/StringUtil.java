@@ -34,39 +34,6 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 根据字符串获取boolean类型的值
-	 * @param str
-	 * @return
-	 */
-	public static boolean getBooleanValue(String str){
-		if (StringUtil.isNotBlank(str) && str.trim().equalsIgnoreCase("true")) {
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	/**
-	 * 根据字符串获取String类型的值
-	 * @param str
-	 * @param value
-	 * @return
-	 */
-	public static String getStringValue(String str,String value){
-		return isNotBlank(str) ? str : value;
-	}
-	
-	/**
-	 * 根据字符串获取long类型的值
-	 * @param str
-	 * @param value
-	 * @return
-	 */
-	public static long getLongValue(String str,long value){
-		return isNotBlank(str) ? Long.parseLong(str) : value;
-	}
-
-	/**
 	 * 清除空格
 	 * @param str 要处理的字符串
 	 * @param index ALL所有/LANDR左右/LEFT左边/RIGHT右边

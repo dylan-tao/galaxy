@@ -35,7 +35,6 @@ public interface ProperConstant {
 	String DEFAULT_PREFIX_VALUE = "/";
 	String DEFAULT_SUFFIX_VALUE = ".jsp";
 	String DEFAULT_ENCODING_VALUE = CodeConstant.UTF8.getValue();
-	boolean STATIC_CACHE_VALUE = true;
 	String CLASS_KEYWORD_VALUE = "action,controller";
 	boolean MAPPING_PRELOAD_VALUE = true;
 	boolean MAPPING_PROCESSING_TIME_VALUE = false;

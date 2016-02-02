@@ -13,8 +13,6 @@ import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.web.assist.MethodParamName;
 import org.javaosc.framework.web.util.StringUtil;
 import org.javaosc.framework.web.util.StringUtil.PatternValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * 
  * @description
@@ -25,8 +23,6 @@ import org.slf4j.LoggerFactory;
 
 public abstract class RouteNodeRegistry {
 	
-	private static final Logger log = LoggerFactory.getLogger(RouteNodeRegistry.class);
-
 	private static RouteNode root = new RouteNode();
 	
 	private static final Pattern paramPattern = Pattern.compile("\\{([a-zA-Z_]+[0-9]*)\\}");

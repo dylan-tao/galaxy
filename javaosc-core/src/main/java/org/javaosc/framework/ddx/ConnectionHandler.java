@@ -37,9 +37,9 @@ public class ConnectionHandler {
 			BeanUtils.populate(bean, Configuration.getPoolPrm());
 			log.info("initializing the data source property");
 		} catch (IllegalAccessException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			throw new RuntimeException(e);
 		} catch (InvocationTargetException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			throw new RuntimeException(e);
 		}
 		ds = (DataSource)bean;
 		

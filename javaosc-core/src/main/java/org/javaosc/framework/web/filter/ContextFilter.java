@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.web.util.StringUtil;
 /**
  * 
  * @description
@@ -26,10 +25,10 @@ public class ContextFilter implements Filter {
 	private static boolean forceEnabled;
 	private static boolean getEnabled;
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		encoding = StringUtil.getStringValue(filterConfig.getInitParameter(Constant.SET_ENCODING_KEY), null);
-		forceEnabled = StringUtil.getBooleanValue(filterConfig.getInitParameter(Constant.SET_ENFORC_ENCODING_KEY));
-		getEnabled = StringUtil.getBooleanValue(filterConfig.getInitParameter(Constant.SET_HTTPGET_ENCODING_KEY));
+	public void init(FilterConfig config) throws ServletException {
+		encoding = String.valueOf(config.getInitParameter(Constant.SET_ENCODING_KEY));
+		forceEnabled = Boolean.valueOf(config.getInitParameter(Constant.SET_ENFORC_ENCODING_KEY));
+		getEnabled = Boolean.valueOf(config.getInitParameter(Constant.SET_HTTPGET_ENCODING_KEY));
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {

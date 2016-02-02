@@ -28,7 +28,7 @@ public class SqlHandler {
 		sql = sql.toLowerCase();
 		int fromIndex = sql.indexOf(FROM);
 		if(fromIndex!=-1){
-			log.error("sql:" + sql + "must has a keyword 'from'");
+			log.error("sql:{} must has a keyword 'from'", sql);
 		}
 		StringBuffer sb = new StringBuffer();
 		sql = SqlHandler.removeOrderBy(sql); //移除order by
@@ -58,6 +58,18 @@ public class SqlHandler {
 		sb.append(Constant.COMMA);
 		sb.append(selectLength);
 		return sb.toString();
+	}
+	
+	public static String createIn(String sql,int count, Object... objects){
+		StringBuffer buffer = new StringBuffer(sql);
+		for(int i=0;i<count;i++){
+			if(i==0){
+				buffer.append(" in(").append(objects[i]);
+			}else{
+				buffer.append(Constant.COMMA).append(objects[i]);
+			}
+		}
+		return buffer.append(")").toString();
 	}
 	
 }

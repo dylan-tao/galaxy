@@ -14,7 +14,6 @@ public interface Constant {
 	String SET_ENCODING_KEY = "encoding";
 	String SET_ENFORC_ENCODING_KEY = "forceEncoding";
 	String SET_HTTPGET_ENCODING_KEY = "httpGetEncoding";
-	String SET_STATIC_CACHE_KEY = "staticCache";
 
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";

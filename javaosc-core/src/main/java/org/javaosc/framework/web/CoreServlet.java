@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
@@ -37,18 +36,15 @@ public class CoreServlet extends HttpServlet {
 	
 	private static String prefix;
 	private static String suffix;
-	private static boolean processTime;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		this.config = config;
 		this.init();
 	}
 	
 	public void init(){
 		prefix = Configuration.getValue(ProperConstant.PREFIX_KEY, ProperConstant.DEFAULT_PREFIX_VALUE);
 		suffix = Configuration.getValue(ProperConstant.SUFFIX_KEY, ProperConstant.DEFAULT_SUFFIX_VALUE);
-		processTime = Configuration.getValue(ProperConstant.MAPPING_PROCESSING_TIME_KEY, ProperConstant.MAPPING_PROCESSING_TIME_VALUE);
 	}
 	
 	@Override
@@ -74,14 +70,7 @@ public class CoreServlet extends HttpServlet {
 	private void doDispatcher(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			ActionContext.setContext(request, response);
-			if(processTime){
-				long startTime = System.currentTimeMillis();
-				executeMethod(request);
-				startTime = System.currentTimeMillis() - startTime;
-				log.info("this request path [" + PathUtil.getContextPath(request) + "] in " + startTime + " ms");
-			}else{
-				executeMethod(request);
-			}
+			executeMethod(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{ 
@@ -110,24 +99,14 @@ public class CoreServlet extends HttpServlet {
 			
 			if(actionCls!=null && methodObj!=null){
 				
-				if(routeMap.size() > 0){
-					routeMap.remove(RouteNodeRegistry.ACTION_CLASS);
-					routeMap.remove(RouteNodeRegistry.METHOD);
-					routeMap.remove(RouteNodeRegistry.METHOD_PRM);
-					ActionContext.getContext().getRequest().getParameterMap().putAll(routeMap);
-				}
-				
 				Object action = BeanFactory.getBean(actionCls, false);
 				
 				if (method!=null) {
 					Object returnObj = null;
 					try {
-						if(processTime){
-							log.info("execute the method [" + actionCls.getName() + Constant.DOT + method.getName() + "()] ");
-						}
 						returnObj = method.invoke(action, ParamValueAssist.getPrmValue(method,method.getParameterTypes(), methodPrm));
 					} catch (IllegalArgumentException e) {
-						log.error("[errorCode:1109] please check this method ["+method.getName()+"] of parameter is correct and see the following Caused by: !",e);
+						e.printStackTrace();
 					} catch (IllegalAccessException e) {
 						e.printStackTrace();
 					} catch (InvocationTargetException e) {
@@ -145,14 +124,14 @@ public class CoreServlet extends HttpServlet {
 					}else if(returnType == void.class){
 						return;
 					}else{ 
-						log.error("[errorCode:1110] the return type ["+returnType.getName()+"] of the method [" + method.getName() + "] is not supported !");
+						log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
 					}
 				}else{ 
-					log.error("[errorCode:1111] this request path ["+requestPath+"] can't find pointing to the method, maybe not bind !");
+					log.error("this request path [{}] can't find pointing to the method, maybe not bind !", requestPath);
 				}	
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){
-					log.debug("[errorCode:1112] this request path ["+requestPath+"] can not find !");
+					log.debug("this request path [{}] can not find !",requestPath);
 					try {
 						ActionContext.getContext().getResponse().sendError(404);
 					} catch (IOException e) {
