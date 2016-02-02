@@ -1,3 +1,4 @@
+package org.javaosc.framework.util;
 //package org.javaosc.framework.web.util;
 //
 //import java.io.File;

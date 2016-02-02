@@ -13,8 +13,8 @@ import org.javaosc.framework.context.AnnotationScaner;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.ddx.ConnectionHandler;
-import org.javaosc.framework.web.util.PathUtil;
-import org.javaosc.framework.web.util.StringUtil;
+import org.javaosc.framework.util.PathUtil;
+import org.javaosc.framework.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,7 +77,6 @@ public class ContextListener implements ServletContextListener {
           
         File externalConfigFile = new File(logbackFileLocation);  
         if(!externalConfigFile.exists()){  
-        	log.error(arg0);
             throw new IOException("Logback External Config File Parameter does not reference a file that exists");  
         }else{  
             if(!externalConfigFile.isFile()){  

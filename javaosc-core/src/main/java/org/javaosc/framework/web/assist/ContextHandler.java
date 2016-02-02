@@ -1,4 +1,4 @@
-package org.javaosc.framework.web;
+package org.javaosc.framework.web.assist;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.javaosc.framework.constant.Constant;
+import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

@@ -1,4 +1,4 @@
-package org.javaosc.framework.web;
+package org.javaosc.framework.web.assist;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.web.util.StringUtil;
-import org.javaosc.framework.web.util.StringUtil.PatternValue;
+import org.javaosc.framework.util.StringUtil;
+import org.javaosc.framework.util.StringUtil.PatternValue;
+import org.javaosc.framework.web.ActionContext;
 /**
  * 
  * @description
@@ -49,7 +50,7 @@ public class ContextResult {
 		this.value = value;
 	}
 	
-	protected void redirectOrForward(String prefix, String suffix){
+	public void redirectOrForward(String prefix, String suffix){
 		if(StringUtil.isNotBlank(path)){
 			path = StringUtil.clearSpace(path, PatternValue.ALL);
 			if(path.startsWith(Constant.COLON) || path.startsWith(Constant.COLON_EXTEND)){

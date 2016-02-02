@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.javaosc.framework.assist.MethodPrmHandler;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
-import org.javaosc.framework.web.assist.ParamValueAssist;
-import org.javaosc.framework.web.util.PathUtil;
-import org.javaosc.framework.web.util.StringUtil;
+import org.javaosc.framework.util.PathUtil;
+import org.javaosc.framework.util.StringUtil;
+import org.javaosc.framework.web.assist.ContextResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,7 +105,7 @@ public class CoreServlet extends HttpServlet {
 				if (method!=null) {
 					Object returnObj = null;
 					try {
-						returnObj = method.invoke(action, ParamValueAssist.getPrmValue(method,method.getParameterTypes(), methodPrm));
+						returnObj = method.invoke(action, MethodPrmHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
 					} catch (IllegalArgumentException e) {
 						e.printStackTrace();
 					} catch (IllegalAccessException e) {

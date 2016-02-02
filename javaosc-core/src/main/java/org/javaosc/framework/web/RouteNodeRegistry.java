@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.javaosc.framework.assist.MethodPrmHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.constant.RouteNode;
 import org.javaosc.framework.context.Configuration;
-import org.javaosc.framework.web.assist.MethodParamName;
-import org.javaosc.framework.web.util.StringUtil;
-import org.javaosc.framework.web.util.StringUtil.PatternValue;
+import org.javaosc.framework.util.StringUtil;
+import org.javaosc.framework.util.StringUtil.PatternValue;
 /**
  * 
  * @description
@@ -61,7 +61,7 @@ public abstract class RouteNodeRegistry {
 									child.setCls(cls);
 									child.setMethod(method);
 									if(isMethodPrm){
-										String[] methodPrm = MethodParamName.getParamNames(cls, method);
+										String[] methodPrm = MethodPrmHandler.getParamName(cls, method);
 										child.setParam(methodPrm);
 									}
 								}
@@ -74,7 +74,7 @@ public abstract class RouteNodeRegistry {
 							child.setCls(cls);
 							child.setMethod(method);
 							if(isMethodPrm){
-								String[] methodPrm = MethodParamName.getParamNames(cls, method);
+								String[] methodPrm = MethodPrmHandler.getParamName(cls, method);
 								child.setParam(methodPrm);
 							}
 						}

@@ -32,7 +32,7 @@ public class AnnotationScaner {
 	
 	private void scanerClassFile(List<String> className) {
 		for(String cn : className){
-			Class<?> loadClass = org.javaosc.framework.assist.ClassLoader.load(cn);
+			Class<?> loadClass = org.javaosc.framework.assist.ClassHandler.load(cn);
 			Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
 		    String parentPath = parentMapping!=null?parentMapping.value():Constant.EMPTY;
 		    boolean isCache = false;

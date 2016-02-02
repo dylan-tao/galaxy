@@ -13,9 +13,9 @@ import java.util.Properties;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
-import org.javaosc.framework.web.util.PathUtil;
-import org.javaosc.framework.web.util.StringUtil;
-import org.javaosc.framework.web.util.StringUtil.PatternValue;
+import org.javaosc.framework.util.PathUtil;
+import org.javaosc.framework.util.StringUtil;
+import org.javaosc.framework.util.StringUtil.PatternValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

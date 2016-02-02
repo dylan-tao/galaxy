@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.javaosc.framework.assist.ClassLoader;
+import org.javaosc.framework.assist.ClassHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
@@ -31,7 +31,7 @@ public class ConnectionHandler {
 	
 	public static void init(){
 		String poolName = Configuration.getValue(ProperConstant.POOL_DATASOURCE);
-		Class<?> poolObj = ClassLoader.load(poolName);
+		Class<?> poolObj = ClassHandler.load(poolName);
 		Object bean = BeanFactory.getBean(poolObj,false);
 		try {
 			BeanUtils.populate(bean, Configuration.getPoolPrm());

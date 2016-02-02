@@ -1,4 +1,4 @@
-package org.javaosc.framework.web;
+package org.javaosc.framework.web.assist;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.ContentType;
+import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

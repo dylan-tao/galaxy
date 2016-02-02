@@ -1,4 +1,4 @@
-package org.javaosc.framework.web.util;
+package org.javaosc.framework.util;
 
 import javax.servlet.http.HttpServletRequest;
 
