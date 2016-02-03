@@ -1,6 +1,6 @@
 package org.javaosc.framework.constant;
 
-import org.javaosc.framework.constant.Constant.CodeConstant;
+import org.javaosc.framework.constant.Constant.CodeType;
 
 /**
  * 
@@ -33,7 +33,7 @@ public interface ProperConstant {
 
 	String DEFAULT_PREFIX_VALUE = "/";
 	String DEFAULT_SUFFIX_VALUE = ".jsp";
-	String DEFAULT_ENCODING_VALUE = CodeConstant.UTF8.getValue();
+	String DEFAULT_ENCODING_VALUE = CodeType.UTF8.getValue();
 	String CLASS_KEYWORD_VALUE = "action,controller";
 	
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.Constant.CodeConstant;
+import org.javaosc.framework.constant.Constant.CodeType;
 import org.javaosc.framework.constant.Constant.HttpType;
 /**
  * 
@@ -80,7 +80,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 	
 	private String encodingParam(String value) {
 		try {
-			byte[] b = value.getBytes(CodeConstant.ISO88591.getValue());
+			byte[] b = value.getBytes(CodeType.ISO88591.getValue());
 			value = new String(b, this.getCharacterEncoding());
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

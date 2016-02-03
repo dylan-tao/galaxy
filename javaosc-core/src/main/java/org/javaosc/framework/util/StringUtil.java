@@ -43,6 +43,25 @@ public class StringUtil {
 		return str.replaceAll(index.getValue(), Constant.EMPTY);
 	}
 	
+	public static String join(String[] stringArray) {
+		StringBuilder sb = new StringBuilder();
+		for (String s : stringArray){
+			sb.append(s);
+		}
+		return sb.toString();
+	}
+	
+	public static String join(String[] stringArray, String separator) {
+		StringBuilder sb = new StringBuilder();
+		for (int i=0; i<stringArray.length; i++) {
+			if(i>0){
+				sb.append(separator);
+			}
+			sb.append(stringArray[i]);
+		}
+		return sb.toString();
+	}
+	
 	//位置枚举
 	public enum PatternValue {
 

@@ -51,13 +51,13 @@ public interface Constant {
 	}
 	
 	// 编码
-	public enum CodeConstant {
+	public enum CodeType {
 
 		UTF8("UTF-8"),GBK("GBK"),GB2312("GB2312"),ISO88591("ISO-8859-1"),GB18030("GB18030"), UTF16("UTF16");
 
 		private final String value;
 
-		CodeConstant(String value) {
+		CodeType(String value) {
 			this.value = value;
 		}
 
