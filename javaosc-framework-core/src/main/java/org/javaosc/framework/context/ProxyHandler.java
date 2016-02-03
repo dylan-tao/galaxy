@@ -23,13 +23,10 @@ public class ProxyHandler implements MethodInterceptor {
 	
 	private Class<?> cls;
 	
-	private String[] keyword;
-	
 	private boolean isTransaction;
 
-	protected ProxyHandler(Class<?> cls, String[] keyword, boolean isTransaction) {
+	protected ProxyHandler(Class<?> cls, boolean isTransaction) {
 		this.cls = cls;
-		this.keyword = keyword;
 		this.isTransaction = isTransaction;
 	}
 
@@ -43,9 +40,9 @@ public class ProxyHandler implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 		boolean isHasTx = false;
 		Object returnObj = null;
-		if(isTransaction && keyword != null){
-			for(int u = 0; u < keyword.length; u++){
-				if(method.getName().startsWith(keyword[u])){
+		if(isTransaction && BeanFactory.keywords != null){
+			for(String keyword:BeanFactory.keywords){
+				if(method.getName().startsWith(keyword)){
 					isHasTx = true;
 					break;
 				}

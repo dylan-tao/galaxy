@@ -20,7 +20,7 @@ public class BeanFactory {
 	
 	private static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	private static String[] keywords;
+	static String[] keywords;
 	
 	public static <T> T getService(Class<T> cls){
 		return get(cls, true, true);
@@ -39,14 +39,14 @@ public class BeanFactory {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static synchronized <T> T get(Class<T> cls , boolean isTransaction, boolean isCache){
+	private static <T> T get(Class<T> cls , boolean isTransaction, boolean isCache){
 		 Object serviceBean = null;
 		 if (beanMap.containsKey(cls.getName())) { 
 			 serviceBean = beanMap.get(cls.getName());
 			 return (T) serviceBean;
 	     }
 		 try {    
-			 ProxyHandler proxyHandler = new ProxyHandler(cls, keywords, isTransaction);    
+			 ProxyHandler proxyHandler = new ProxyHandler(cls, isTransaction);    
              serviceBean = proxyHandler.proxyInstance();    
              if(isCache){
             	beanMap.put(cls.getName(), serviceBean);    

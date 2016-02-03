@@ -45,13 +45,10 @@ public class MethodPrmHandler {
 				Object objValue = dataMap.get(paramNames[j]);
 				if (prmType.isPrimitive()) {
 					obj[j] = ConvertUtils.convert(objValue, prmType);
-				} else if (prmType == String.class
-						|| ClassHandler.isWrapClass(prmType)) {
-					obj[j] = objValue == null ? objValue : ConvertUtils
-							.convert(objValue, prmType);
+				} else if (prmType == String.class || ClassHandler.isWrapClass(prmType)) {
+					obj[j] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
 				} else if (prmType.isArray()) {
-					obj[j] = objValue == null ? objValue : ConvertUtils
-							.convert((String[]) objValue, prmType);
+					obj[j] = objValue == null ? objValue : ConvertUtils.convert((String[]) objValue, prmType);
 				} else if (prmType == HttpServletRequest.class) {
 					obj[j] = ActionContext.getContext().getRequest();
 				} else if (prmType == HttpServletResponse.class) {
