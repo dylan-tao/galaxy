@@ -30,7 +30,7 @@ public class ActionHandler {
 		}	
 	}
 	
-	private void forward(String viewPath) {
+	protected void forward(String viewPath) {
 		RequestDispatcher dispatcher = ActionContext.getContext().getRequest().getRequestDispatcher(viewPath);
 		try {
 			dispatcher.forward(ActionContext.getContext().getRequest(), ActionContext.getContext().getResponse());
@@ -41,7 +41,7 @@ public class ActionHandler {
 		}
 	}
 
-	private void redirect(String servicePath) {
+	protected void redirect(String servicePath) {
 		 try {
 			 ActionContext.getContext().getResponse().sendRedirect(servicePath);
 		} catch (IOException e) {

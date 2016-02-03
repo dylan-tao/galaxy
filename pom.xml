@@ -40,16 +40,28 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>org.javaosc.framework</groupId>
-				<artifactId>javaosc-core</artifactId>
+				<groupId>org.javaosc.framework.core</groupId>
+				<artifactId>javaosc-framework-core</artifactId>
 				<version>${javaosc.framework.core.version}</version>
 			</dependency>
-
+			
+			<dependency>
+				<groupId>com.javaosc.framework.example</groupId>
+				<artifactId>javaosc-framework-example</artifactId>
+				<version>${javaosc.framework.example.version}</version>	
+			</dependency>
+			
 			<!-- basic ref -->
 			<dependency>
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils-core</artifactId>
 				<version>${apache.beanutils.version}</version>
+				<exclusions>
+			        <exclusion>
+				          <groupId>commons-logging</groupId>
+				          <artifactId>commons-logging</artifactId>
+			        </exclusion>
+			     </exclusions>
 			</dependency>
 			
 			<dependency>

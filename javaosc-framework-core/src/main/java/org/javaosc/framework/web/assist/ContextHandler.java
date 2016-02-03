@@ -27,6 +27,24 @@ public class ContextHandler {
 		 ActionContext.getContext().getRequest().setAttribute(key, value);
 	}
 	
+	public static void setJsonAttribute(String content) {
+		setTextAttribute(content,ContentType.JSON);
+	}
+	
+	public static void setTextAttribute(String content,ContentType contentType) {
+		ActionContext.getContext().getResponse().setContentType(contentType.getValue());
+		try {
+			PrintWriter out = ActionContext.getContext().getResponse().getWriter();
+			out.write(content);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			log.debug(content);
+		}
+	}
+	
 	public static void setSession(String name, Object value){
 		ActionContext.getContext().getRequest().getSession().setAttribute(name, value);
 	}
@@ -76,24 +94,5 @@ public class ContextHandler {
     public static void removeCookie(String name, String path) {
         setCookie(name, Constant.EMPTY, 0, path);
     }
-    
-	public static void response(String content) {
-		response(content,ContentType.JSON);
-	}
-	
-	public static void response(String content,ContentType contentType) {
-		HttpServletResponse response = ActionContext.getContext().getResponse();
-		response.setContentType(contentType.getValue());
-		try {
-			PrintWriter out = response.getWriter();
-			out.write(content);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			log.debug(content);
-		}
-	}
     
 }

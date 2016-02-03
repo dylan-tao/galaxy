@@ -15,9 +15,10 @@
 
 	<dependencies>
 
-		<!-- basic -->
-		<!-- <dependency> <groupId>org.javaosc.framework</groupId> <artifactId>javaosc-framework</artifactId> 
-			</dependency> -->
+		<dependency>
+			<groupId>org.javaosc.framework.core</groupId>
+			<artifactId>javaosc-framework-core</artifactId>
+		</dependency>
 
 		<!-- log -->
 		<dependency>

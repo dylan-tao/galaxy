@@ -8,9 +8,7 @@ import java.util.regex.Pattern;
 
 import org.javaosc.framework.assist.MethodPrmHandler;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.constant.RouteNode;
-import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.util.StringUtil;
 import org.javaosc.framework.util.StringUtil.PatternValue;
 /**
@@ -51,7 +49,6 @@ public abstract class RouteNodeRegistry {
 				if (Constant.EMPTY.equals(urlSplitStr)) continue;
 				child = current.getChild(urlSplitStr);
 				if (child == null){
-					boolean isMethodPrm = Configuration.getValue(ProperConstant.MAPPING_PRMLOAD_KEY, false);
 					if(urlSplitStr.startsWith("{")){
 						Matcher matcher = paramPattern.matcher(urlSplitStr);
 						if (matcher.matches()){
@@ -60,10 +57,8 @@ public abstract class RouteNodeRegistry {
 								if(uriLength-i == 1){ 
 									child.setCls(cls);
 									child.setMethod(method);
-									if(isMethodPrm){
-										String[] methodPrm = MethodPrmHandler.getParamName(method);
-										child.setParam(methodPrm);
-									}
+									String[] methodPrm = MethodPrmHandler.getParamName(method);
+									child.setParam(methodPrm);	
 								}
 								current.addChild(URI_PARAM, child);
 							}
@@ -73,10 +68,8 @@ public abstract class RouteNodeRegistry {
 						if(uriLength-i == 1){ 
 							child.setCls(cls);
 							child.setMethod(method);
-							if(isMethodPrm){
-								String[] methodPrm = MethodPrmHandler.getParamName(method);
-								child.setParam(methodPrm);
-							}
+							String[] methodPrm = MethodPrmHandler.getParamName(method);
+							child.setParam(methodPrm);	
 						}
 						current.addChild(urlSplitStr, child);
 					}
