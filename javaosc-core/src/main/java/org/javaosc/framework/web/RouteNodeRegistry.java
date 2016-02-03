@@ -61,7 +61,7 @@ public abstract class RouteNodeRegistry {
 									child.setCls(cls);
 									child.setMethod(method);
 									if(isMethodPrm){
-										String[] methodPrm = MethodPrmHandler.getParamName(cls, method);
+										String[] methodPrm = MethodPrmHandler.getParamName(method);
 										child.setParam(methodPrm);
 									}
 								}
@@ -74,7 +74,7 @@ public abstract class RouteNodeRegistry {
 							child.setCls(cls);
 							child.setMethod(method);
 							if(isMethodPrm){
-								String[] methodPrm = MethodPrmHandler.getParamName(cls, method);
+								String[] methodPrm = MethodPrmHandler.getParamName(method);
 								child.setParam(methodPrm);
 							}
 						}

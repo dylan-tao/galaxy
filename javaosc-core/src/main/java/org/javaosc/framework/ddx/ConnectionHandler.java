@@ -4,6 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -31,18 +34,26 @@ public class ConnectionHandler {
 	
 	public static void init(){
 		String poolName = Configuration.getValue(ProperConstant.POOL_DATASOURCE);
-		Class<?> poolObj = ClassHandler.load(poolName);
-		Object bean = BeanFactory.getBean(poolObj,false);
-		try {
-			BeanUtils.populate(bean, Configuration.getPoolPrm());
-			log.info("initializing the data source property");
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (InvocationTargetException e) {
-			throw new RuntimeException(e);
+		if(poolName.indexOf("java:")==0){ //tomcat jdbc
+			try {
+				Context c = new InitialContext();
+				ds = (DataSource)c.lookup(poolName);
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		}else{ //jdbc pool
+			Class<?> poolObj = ClassHandler.load(poolName);
+			Object bean = BeanFactory.getBean(poolObj,false);
+			try {
+				BeanUtils.populate(bean, Configuration.getPoolPrm());
+				log.info("initializing the data source property");
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			ds = (DataSource)bean;
 		}
-		ds = (DataSource)bean;
-		
 		log.info("initializing the data source connection ~");
 		InitialzeConnection();
 	}

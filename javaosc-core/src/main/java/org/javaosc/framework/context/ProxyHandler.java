@@ -2,6 +2,10 @@ package org.javaosc.framework.context;
 
 import java.lang.reflect.Method;
 
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
 import org.javaosc.framework.ddx.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
