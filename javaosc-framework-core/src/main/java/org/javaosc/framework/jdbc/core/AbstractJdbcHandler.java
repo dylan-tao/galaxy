@@ -15,8 +15,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Arrays;
 
-import javax.sql.DataSource;
-
 /**
  * 
  * @description
@@ -28,43 +26,16 @@ import javax.sql.DataSource;
 public abstract class AbstractJdbcHandler {
     
     private volatile boolean pmdKnownBroken = false;
-
     
-    @Deprecated
-    protected final DataSource ds;
-
-    
-    public AbstractJdbcHandler() {
-        ds = null;
-    }
-
+    public AbstractJdbcHandler() { }
     
     public AbstractJdbcHandler(boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
-        ds = null;
     }
 
-    
-    public AbstractJdbcHandler(DataSource ds) {
-        this.ds = ds;
-    }
-
-    
-    public AbstractJdbcHandler(DataSource ds, boolean pmdKnownBroken) {
-        this.pmdKnownBroken = pmdKnownBroken;
-        this.ds = ds;
-    }
-
-    
-    public DataSource getDataSource() {
-        return this.ds;
-    }
-
-    
     public boolean isPmdKnownBroken() {
         return pmdKnownBroken;
     }
-
     
     protected PreparedStatement prepareStatement(Connection conn, String sql)
             throws SQLException {
@@ -79,17 +50,6 @@ public abstract class AbstractJdbcHandler {
         return conn.prepareStatement(sql, returnedKeys);
     }
 
-    
-    protected Connection prepareConnection() throws SQLException {
-        if (this.getDataSource() == null) {
-            throw new SQLException(
-                    "jdbcHandler requires a DataSource to be "
-                            + "invoked in this way, or a Connection should be passed in");
-        }
-        return this.getDataSource().getConnection();
-    }
-
-    
     public void fillStatement(PreparedStatement stmt, Object... params)
             throws SQLException {
 

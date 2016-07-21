@@ -119,23 +119,9 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
         return rs.getAsciiStream(columnLabel);
     }
 
-    
-    @Deprecated
-    protected final BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException {
-        return rs.getBigDecimal(columnIndex, scale);
-    }
-
-    
     protected final BigDecimal getBigDecimal(int columnIndex) throws SQLException {
         return rs.getBigDecimal(columnIndex);
     }
-
-    
-    @Deprecated
-    protected final BigDecimal getBigDecimal(String columnLabel, int scale) throws SQLException {
-        return rs.getBigDecimal(columnLabel, scale);
-    }
-
     
     protected final BigDecimal getBigDecimal(String columnLabel) throws SQLException {
         return rs.getBigDecimal(columnLabel);
@@ -465,19 +451,6 @@ public abstract class BaseResultSetHandler<T> implements ResultSetHandler<T> {
     protected final URL getURL(String columnLabel) throws SQLException {
         return rs.getURL(columnLabel);
     }
-
-    
-    @Deprecated
-    protected final InputStream getUnicodeStream(int columnIndex) throws SQLException {
-        return rs.getUnicodeStream(columnIndex);
-    }
-
-    
-    @Deprecated
-    protected final InputStream getUnicodeStream(String columnLabel) throws SQLException {
-        return rs.getUnicodeStream(columnLabel);
-    }
-
     
     protected final SQLWarning getWarnings() throws SQLException {
         return rs.getWarnings();

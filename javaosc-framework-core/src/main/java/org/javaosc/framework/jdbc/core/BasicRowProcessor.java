@@ -22,16 +22,6 @@ public class BasicRowProcessor implements RowProcessor {
     
     private static final BeanProcessor defaultConvert = new BeanProcessor();
 
-    
-    private static final BasicRowProcessor instance = new BasicRowProcessor();
-
-    
-    @Deprecated
-    public static BasicRowProcessor instance() {
-        return instance;
-    }
-
-    
     private final BeanProcessor convert;
 
     
