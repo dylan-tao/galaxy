@@ -1,4 +1,4 @@
-package org.javaosc.framework.ddx;
+package org.javaosc.framework.jdbc;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;

@@ -6,7 +6,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-import org.javaosc.framework.ddx.ConnectionHandler;
+import org.javaosc.framework.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

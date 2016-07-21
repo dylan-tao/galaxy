@@ -1,18 +1,18 @@
-package org.javaosc.framework.ddx;
+package org.javaosc.framework.jdbc;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ColumnListHandler;
-import org.apache.commons.dbutils.handlers.MapHandler;
-import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Page;
+import org.javaosc.framework.jdbc.core.JdbcHandler;
+import org.javaosc.framework.jdbc.handler.BeanHandler;
+import org.javaosc.framework.jdbc.handler.BeanListHandler;
+import org.javaosc.framework.jdbc.handler.ColumnListHandler;
+import org.javaosc.framework.jdbc.handler.MapHandler;
+import org.javaosc.framework.jdbc.handler.MapListHandler;
+import org.javaosc.framework.jdbc.handler.ScalarHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +27,10 @@ public class JdbcTemplate{
 	
 	private static final Logger log = LoggerFactory.getLogger(JdbcTemplate.class);
 	
-	private static QueryRunner runner;
+	private static JdbcHandler jdbcHandler;
 	
 	static{
-		runner = new QueryRunner();
+		jdbcHandler = new JdbcHandler();
 	}
 	
 	/*=================== 查询单列操作 =====================*/
@@ -39,9 +39,9 @@ public class JdbcTemplate{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = runner.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName), param);
 			}else{
-				obj = runner.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -53,9 +53,9 @@ public class JdbcTemplate{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = runner.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName), param);
 			}else{
-				list = runner.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -69,9 +69,9 @@ public class JdbcTemplate{
 		 Map<String, Object> map = null;
 		 try {
 			if(param != null && param.length > 0){
-				map = runner.query(ConnectionHandler.getConnection(), sql, new MapHandler(), param);
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler(), param);
 			}else{
-				map = runner.query(ConnectionHandler.getConnection(), sql, new MapHandler());
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -83,9 +83,9 @@ public class JdbcTemplate{
 		 List<Map<String, Object>> list = null;
 		 try {
 			if(param != null && param.length > 0){
-				list = runner.query(ConnectionHandler.getConnection(), sql, new MapListHandler(), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler(), param);
 			}else{
-				list = runner.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -99,9 +99,9 @@ public class JdbcTemplate{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = runner.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls), param);
 			}else{
-				obj = runner.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -113,9 +113,9 @@ public class JdbcTemplate{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = runner.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls), param);
 			}else{
-				list = runner.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -149,9 +149,9 @@ public class JdbcTemplate{
 		T count = cls.cast(0);
 		try {
 			if(param != null && param.length > 0){
-				count = runner.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1), param);
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1), param);
 			}else{
-				count = runner.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -192,9 +192,9 @@ public class JdbcTemplate{
 		int index = 0;
 		try {
 			if(param != null && param.length > 0){
-				index = runner.update(ConnectionHandler.getConnection(), sql, param);
+				index = jdbcHandler.update(ConnectionHandler.getConnection(), sql, param);
 			}else{
-				index = runner.update(ConnectionHandler.getConnection(), sql);
+				index = jdbcHandler.update(ConnectionHandler.getConnection(), sql);
 			}
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -204,7 +204,7 @@ public class JdbcTemplate{
 	
 	private boolean batchHandler(String sql, Object[][] params){
 		try {
-			int[] index = runner.batch(ConnectionHandler.getConnection(), sql, params);
+			int[] index = jdbcHandler.batch(ConnectionHandler.getConnection(), sql, params);
 			return index.length == params.length;	
 		} catch (SQLException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);

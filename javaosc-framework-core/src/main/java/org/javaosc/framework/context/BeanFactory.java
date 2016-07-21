@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * 
  * @description
@@ -16,9 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BeanFactory {
 	
-	private static final Logger log = LoggerFactory.getLogger(BeanFactory.class);
-	
-	private static Map<String, Object> beanMap = new HashMap<String, Object>();
+	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
 	static String[] keywords;
 	

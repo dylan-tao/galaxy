@@ -10,7 +10,7 @@ import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.AnnotationScaner;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
-import org.javaosc.framework.ddx.ConnectionHandler;
+import org.javaosc.framework.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +57,8 @@ public class ContextListener implements ServletContextListener {
 		ConnectionHandler.init();
 		
 		BeanFactory.initKeywords();
+		
+		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		
 		initTime = System.currentTimeMillis() - initTime;
 		
