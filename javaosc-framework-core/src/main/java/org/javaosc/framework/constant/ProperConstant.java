@@ -20,6 +20,7 @@ public interface ProperConstant {
 	String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
 	String CLASS_KEYWORD_KEY = "javaosc.scaner.classname.keyword";
 	String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
+	String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy";
 	
 	String DRIVER_CLASS_NAME = "jdbc.driverClassName";
 	String JDBC_URL = "jdbc.url";
