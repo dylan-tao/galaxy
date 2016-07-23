@@ -11,7 +11,7 @@ import org.javaosc.framework.constant.Constant.CodeType;
  */
 public interface ProperConstant {
 	
-	String CONFIG_FILE_NAME = "configFileName";
+	String CONFIG_FILE_NAME = "javaoscFileName";
 	String CONFIG_HEAD_COMMENT = "javaosc configuration setting";
 
 	String PREFIX_KEY = "javaosc.view.prefix";

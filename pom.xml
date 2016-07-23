@@ -22,7 +22,7 @@
 		<slf4j.version>1.7.21</slf4j.version>
 		<apache.beanutils.version>1.8.3</apache.beanutils.version>
 		
-		<!-- ref -->
+		<!-- choose ref -->
 		<cglib.nodep.version>3.2.4</cglib.nodep.version>
 		
 		<!-- support -->
@@ -75,12 +75,13 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 			
-			<!-- ref -->
+			<!-- choose ref -->
 			
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>${cglib.nodep.version}</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<!-- support -->

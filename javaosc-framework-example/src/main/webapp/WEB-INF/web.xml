@@ -3,18 +3,18 @@
 	<display-name>javaosc framework example</display-name>
 	
 	<listener>
-		<listener-class>org.uufast.framework.web.ContextListener</listener-class>
+		<listener-class>org.javaosc.framework.web.ContextListener</listener-class>
 	</listener>
 	
 	<context-param>
-		<param-name>configFileName</param-name>
+		<param-name>javaoscFileName</param-name>
 		<param-value>configuration.properties</param-value>
 	</context-param>
 	
-<!-- 	<context-param>
+	<!-- <context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>log4j.properties</param-value>
-	</context-param> -->
+	</context-param>  -->
 	
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
