@@ -15,6 +15,7 @@
 
 	<dependencies>
 
+		<!-- core -->
 		<dependency>
 			<groupId>org.javaosc.framework.core</groupId>
 			<artifactId>javaosc-framework-core</artifactId>
@@ -22,15 +23,24 @@
 
 		<!-- log -->
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 
 		<!-- expend -->
-
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
 		</dependency>
 
 
@@ -51,5 +61,22 @@
 
 	<build>
 		<finalName>javaosc-example</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+					<fork>true</fork>
+					<compilerVersion>1.7</compilerVersion>
+					<compilerArguments>
+						<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

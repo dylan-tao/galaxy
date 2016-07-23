@@ -21,15 +21,16 @@
 		<!-- core -->
 		<slf4j.version>1.7.21</slf4j.version>
 		<apache.beanutils.version>1.8.3</apache.beanutils.version>
-		
-		<!-- choose ref -->
 		<cglib.nodep.version>3.2.4</cglib.nodep.version>
 		
 		<!-- support -->
 		<slf4j.logback.version>1.1.7</slf4j.logback.version>
 		<google.gson.version>2.7</google.gson.version>
 		<ormilly.cos.version>05Nov2002</ormilly.cos.version>
+		
+		<!-- db pool choose -->
 		<hikaricp.pool.version>2.4.7</hikaricp.pool.version>
+		<com.mchange.c3p0.version>0.9.1.2</com.mchange.c3p0.version>
 
 		<javax.servlet.version>3.0.1</javax.servlet.version>
 		<junit.version>4.12</junit.version>
@@ -81,7 +82,6 @@
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>${cglib.nodep.version}</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!-- support -->
@@ -103,11 +103,19 @@
 				<artifactId>cos</artifactId>
 				<version>${ormilly.cos.version}</version>
 			</dependency>
+			
+			<!-- db pool choose -->
 
 			<dependency>
 				<groupId>com.zaxxer</groupId>
 				<artifactId>HikariCP</artifactId>
 				<version>${hikaricp.pool.version}</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>c3p0</groupId>
+			    <artifactId>c3p0</artifactId>
+			    <version>${com.mchange.c3p0.version}</version>
 			</dependency>
 
 			<!-- servlet -->
