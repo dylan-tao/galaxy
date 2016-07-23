@@ -30,15 +30,15 @@ public class Configuration {
 	
 	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
 	
-	protected static String configFileName = "configuration.properties";
+	protected static String javaoscConfig = "configuration.properties";
 	
 	private static Properties properties;
 	
-	public static void setConfigFileName(String configFileName) {
-		if(StringUtil.isNotBlank(configFileName)){
-			configFileName = StringUtil.clearSpace(configFileName, PatternValue.ALL);
+	public static void setJavaoscConfig(String javaoscCustConfig) {
+		if(StringUtil.isNotBlank(javaoscCustConfig)){
+			javaoscConfig = StringUtil.clearSpace(javaoscCustConfig, PatternValue.ALL);
 		}else{
-			log.info("configuration file missing,enable default configuration file: {}", configFileName);
+			log.warn("context-param: javaoscConfig is missing in the web.xml. Enable default javaoscConfig: {}", javaoscConfig);
 		}
 	}
 	
@@ -46,9 +46,9 @@ public class Configuration {
 		InputStream inputStream = null;
 		try {
 			properties = new Properties();
-			inputStream = new FileInputStream(PathUtil.getClassPath() + configFileName);
+			inputStream = new FileInputStream(PathUtil.getClassPath() + javaoscConfig);
 			properties.load(inputStream);	
-			log.info("initializing configuration file: {}", configFileName);
+			log.info("javaosc configuration file is initialized. fileName: {}", javaoscConfig);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -114,10 +114,10 @@ public class Configuration {
 		if(properties != null){
 			OutputStream outputStream = null;
 			try {
-				outputStream = new FileOutputStream(PathUtil.getClassPath() + configFileName);
+				outputStream = new FileOutputStream(PathUtil.getClassPath() + javaoscConfig);
 				properties.store(outputStream, ProperConstant.CONFIG_HEAD_COMMENT);
 				outputStream.flush();
-				log.info("exporting configuration file: {}", configFileName);
+				log.info("exporting configuration file: {}", javaoscConfig);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

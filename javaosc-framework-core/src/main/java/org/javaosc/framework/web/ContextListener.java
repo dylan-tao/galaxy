@@ -49,7 +49,7 @@ public class ContextListener implements ServletContextListener {
 //			Logba.load(PathUtil.getClassPath() + logbackFile);
 //		}
 		
-		Configuration.setConfigFileName(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
+		Configuration.setJavaoscConfig(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
 		Configuration.load();
 		
 		new AnnotationScaner().load();

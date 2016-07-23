@@ -7,7 +7,7 @@
 	</listener>
 	
 	<context-param>
-		<param-name>javaoscFileName</param-name>
+		<param-name>javaoscConfig</param-name>
 		<param-value>configuration.properties</param-value>
 	</context-param>
 	
