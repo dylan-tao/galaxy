@@ -40,6 +40,7 @@ public class ContextListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
+		
 		long initTime = System.currentTimeMillis();
 		
 		ServletContext sc = event.getServletContext();
@@ -49,10 +50,11 @@ public class ContextListener implements ServletContextListener {
 //			Logba.load(PathUtil.getClassPath() + logbackFile);
 //		}
 		
-		Configuration.setJavaoscConfig(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
-		Configuration.load();
+		Configuration.load(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
 		
-		new AnnotationScaner().load();
+		AnnotationScaner annotationObject = new AnnotationScaner();
+		annotationObject.load();
+		annotationObject = null;
 		
 		ConnectionHandler.init();
 		
@@ -63,6 +65,7 @@ public class ContextListener implements ServletContextListener {
 		initTime = System.currentTimeMillis() - initTime;
 		
 		log.info("====== Javaosc Framework startup in {} ms ======", initTime);
+		
 		System.gc();
 	}
 

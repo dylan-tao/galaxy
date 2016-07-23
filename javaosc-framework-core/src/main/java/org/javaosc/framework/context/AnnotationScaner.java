@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AnnotationScaner {
 	
-	private static final Logger log = LoggerFactory.getLogger(AnnotationScaner.class);
+	Logger log = LoggerFactory.getLogger(AnnotationScaner.class);
 	
 	public void load(){
 		String packageName = Configuration.getValue(ProperConstant.SCANER_PACKAGE_KEY);
@@ -28,6 +28,7 @@ public class AnnotationScaner {
 		if(classNameList.size()>0){
 			scanerClassFile(classNameList);
 		}
+		packageName = null;
 		classNameList = null;
 	}
 	

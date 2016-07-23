@@ -1,5 +1,9 @@
 package org.javaosc.framework.assist;
 
+import org.javaosc.framework.constant.Constant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * @description
@@ -9,11 +13,14 @@ package org.javaosc.framework.assist;
  */
 public class ClassHandler {
 	
+	private static final Logger log = LoggerFactory.getLogger(ClassHandler.class);
+	
 	public static Class<?> load(final String name) {
 		try {
 			return Thread.currentThread().getContextClassLoader().loadClass(name);
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			return null;
 		}
 	}
 	

@@ -34,15 +34,14 @@ public class Configuration {
 	
 	private static Properties properties;
 	
-	public static void setJavaoscConfig(String javaoscCustConfig) {
+	public static void load(String javaoscCustConfig){
+		
 		if(StringUtil.isNotBlank(javaoscCustConfig)){
 			javaoscConfig = StringUtil.clearSpace(javaoscCustConfig, PatternValue.ALL);
 		}else{
 			log.warn("context-param: javaoscConfig is missing in the web.xml. Enable default javaoscConfig: {}.", javaoscConfig);
 		}
-	}
-	
-	public static void load(){
+		
 		InputStream inputStream = null;
 		try {
 			properties = new Properties();
@@ -59,7 +58,7 @@ public class Configuration {
 					inputStream.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}	
 		}		
 	}
