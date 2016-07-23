@@ -30,53 +30,52 @@ public class ScanPackage {
 	private String[] keywords = null;
 	
 	public List<String> getClassName(String packageName) {
-		List<String> className = new ArrayList<String>();
+		List<String> classNameList = new ArrayList<String>();
 		try {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
 			if(url == null){
-				log.error("package[ {} ] can not found! please check setting : {}" , packageName, ProperConstant.SCANER_PACKAGE_KEY);
+				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, ProperConstant.SCANER_PACKAGE_KEY, Configuration.javaoscConfig);
 			}else{
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
 					File[] files = new File(url.toURI()).listFiles();
 					for (File f : files) {
-						scanFile(packageName, f, className);
+						scanFile(packageName, f, classNameList);
 					}
-					log.info("file scan has been completed");
 				} else if ("jar".equals(protocol)) {
 					JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
-					scanJar(jar, packageName, className);
-					log.info("jar scan has been completed");
+					scanJar(jar, packageName, classNameList);
 				}
+				log.info("class package scan is completed.");
 			}
 		} catch (URISyntaxException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (IOException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}	
-		return className;
+		return classNameList;
 	}
 
-	private void scanFile(String packageName, File file, List<String> className) {
+	private void scanFile(String packageName, File file, List<String> classNameList) {
 		String fileName = file.getName();
 		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS) && isHasClassKeyword(fileName)) {
 			fileName = fileName.substring(0, fileName.length() - 6);
-			className.add(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
+			classNameList.add(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
 		} else if (file.isDirectory()) {
 			for (File f : file.listFiles()) {
-				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f, className);
+				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f, classNameList);
 			}
 		}
 	}
 
-	private void scanJar(JarFile jarFile, String packageName, List<String> className) {
+	private void scanJar(JarFile jarFile, String packageName, List<String> classNameList) {
 		Enumeration<JarEntry> entries = jarFile.entries();
 		while (entries.hasMoreElements()) {
 			JarEntry entry = entries.nextElement();
 			String fileName = entry.getName().replace(Constant.LINE, Constant.DOT);
 			if (fileName.startsWith(packageName) && fileName.endsWith(Constant.SUFFIX_CLASS) && isHasClassKeyword(fileName)) {
-				className.add(fileName.substring(0, fileName.length() - 6));
+				classNameList.add(fileName.substring(0, fileName.length() - 6));
 			}
 		}
 	}

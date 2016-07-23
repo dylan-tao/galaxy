@@ -24,10 +24,11 @@ public class AnnotationScaner {
 	
 	public void load(){
 		String packageName = Configuration.getValue(ProperConstant.SCANER_PACKAGE_KEY);
-		List<String> className = new ScanPackage().getClassName(packageName);
-		scanerClassFile(className);
-		log.info("Initializing class Annotation");
-		className = null;
+		List<String> classNameList = new ScanPackage().getClassName(packageName);
+		if(classNameList.size()>0){
+			scanerClassFile(classNameList);
+		}
+		classNameList = null;
 	}
 	
 	private void scanerClassFile(List<String> className) {
@@ -52,6 +53,7 @@ public class AnnotationScaner {
 				}
 			}	
 		}
+		log.info("class annotation scan is completed.");
 	}
 	
 }

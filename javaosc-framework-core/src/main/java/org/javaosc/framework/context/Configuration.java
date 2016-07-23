@@ -38,7 +38,7 @@ public class Configuration {
 		if(StringUtil.isNotBlank(javaoscCustConfig)){
 			javaoscConfig = StringUtil.clearSpace(javaoscCustConfig, PatternValue.ALL);
 		}else{
-			log.warn("context-param: javaoscConfig is missing in the web.xml. Enable default javaoscConfig: {}", javaoscConfig);
+			log.warn("context-param: javaoscConfig is missing in the web.xml. Enable default javaoscConfig: {}.", javaoscConfig);
 		}
 	}
 	
@@ -48,11 +48,11 @@ public class Configuration {
 			properties = new Properties();
 			inputStream = new FileInputStream(PathUtil.getClassPath() + javaoscConfig);
 			properties.load(inputStream);	
-			log.info("javaosc configuration file is initialized. fileName: {}", javaoscConfig);
+			log.info("javaosc configuration is initialized. filename: {}.", javaoscConfig);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}finally{
 			try {
 				if(inputStream != null) {
@@ -119,9 +119,9 @@ public class Configuration {
 				outputStream.flush();
 				log.info("exporting configuration file: {}", javaoscConfig);
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} finally {
 				try {
 					if (outputStream != null) {
