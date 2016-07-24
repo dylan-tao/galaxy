@@ -1,8 +1,10 @@
 package org.javaosc.framework.context;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
+
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.jdbc.ConnectionHandler;
@@ -16,28 +18,27 @@ import org.slf4j.LoggerFactory;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public class ProxyHandler implements InvocationHandler {
+public class CglibProxyHandler implements MethodInterceptor {
 	
-	private static final Logger log = LoggerFactory.getLogger(ProxyHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(CglibProxyHandler.class);
 	
 	private Class<?> cls;
 	
 	private boolean isTransaction;
 
-	protected ProxyHandler(Class<?> cls, boolean isTransaction) {
+	protected CglibProxyHandler(Class<?> cls, boolean isTransaction) {
 		this.cls = cls;
 		this.isTransaction = isTransaction;
 	}
 
 	protected Object proxyInstance() {
-	    return  Proxy.newProxyInstance(ProxyHandler.class.getClassLoader(),
-	                        new Class<?>[] { this.cls },
-	                        new ProxyHandler(this.cls,this.isTransaction));
+		Enhancer enhancer = new Enhancer();  
+        enhancer.setSuperclass(this.cls);  
+        enhancer.setCallback(this);  
+        return enhancer.create();  
 	}
 
-
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 		boolean isHasTx = false;
 		Object returnObj = null;
 		if(isTransaction && BeanFactory.keywords != null){
@@ -51,18 +52,18 @@ public class ProxyHandler implements InvocationHandler {
 			if(isHasTx){
 				try {
 					ConnectionHandler.beginTransaction();
-					returnObj = method.invoke(this.cls, args);
+					returnObj = proxy.invokeSuper(obj, args);
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					log.error(Constant.JAVAOSC_EXCEPTION, e);;
+					log.error(Constant.JAVAOSC_EXCEPTION, e);
 				}
 			}else{
-				returnObj = method.invoke(this.cls, args);
+				returnObj = proxy.invokeSuper(obj, args);
 			}
 			ConnectionHandler.close();
 		}else{
-			returnObj = method.invoke(this.cls, args);
+			returnObj = proxy.invokeSuper(obj, args);
 		}	
 		return returnObj;
 	}

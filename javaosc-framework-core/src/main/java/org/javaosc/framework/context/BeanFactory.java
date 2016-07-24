@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -21,6 +22,8 @@ public class BeanFactory {
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
 	static String[] keywords;
+	
+	static String proxyMode;
 	
 	public static <T> T getService(Class<T> cls){
 		return get(cls, true, true);
@@ -45,9 +48,14 @@ public class BeanFactory {
 			 serviceBean = beanMap.get(cls.getName());
 			 return (T) serviceBean;
 	     }
-		 try {    
-			 ProxyHandler proxyHandler = new ProxyHandler(cls, isTransaction);    
-             serviceBean = proxyHandler.proxyInstance();    
+		 try {
+			 if(proxyMode.equals(ProxyMode.CGLIB.getValue())){
+				 CglibProxyHandler proxyHandler = new CglibProxyHandler(cls, isTransaction);    
+	             serviceBean = proxyHandler.proxyInstance();    
+			 }else{
+				 ProxyHandler proxyHandler = new ProxyHandler(cls, isTransaction);    
+	             serviceBean = proxyHandler.proxyInstance();   
+			 }
              if(isCache){
             	beanMap.put(cls.getName(), serviceBean);    
              }  	  
@@ -73,5 +81,6 @@ public class BeanFactory {
 		}else{
 			keywords = null;
 		}
+		proxyMode =  Configuration.getValue(ProperConstant.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
 	}
 }

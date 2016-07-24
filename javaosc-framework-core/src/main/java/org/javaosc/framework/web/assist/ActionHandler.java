@@ -6,7 +6,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
 import org.javaosc.framework.constant.Constant;
+import org.javaosc.framework.context.ProxyHandler;
 import org.javaosc.framework.web.ActionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 
  * @description
@@ -15,6 +18,8 @@ import org.javaosc.framework.web.ActionContext;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class ActionHandler {
+	
+	private static final Logger log = LoggerFactory.getLogger(ActionHandler.class);
 	
 	private String path;
 	
@@ -35,9 +40,9 @@ public class ActionHandler {
 		try {
 			dispatcher.forward(ActionContext.getContext().getRequest(), ActionContext.getContext().getResponse());
 		} catch (ServletException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 	}
 
@@ -45,7 +50,7 @@ public class ActionHandler {
 		 try {
 			 ActionContext.getContext().getResponse().sendRedirect(servicePath);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 	}
 	

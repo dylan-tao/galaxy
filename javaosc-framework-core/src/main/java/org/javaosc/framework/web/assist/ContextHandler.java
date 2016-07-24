@@ -39,7 +39,7 @@ public class ContextHandler {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);;
 		}finally{
 			log.debug(content);
 		}

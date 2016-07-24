@@ -67,7 +67,21 @@ public interface Constant {
 		public String getValue() {
 			return value;
 		}
+	}
+	
+	public enum ProxyMode {
 
+		DEFAULT("default"),CGLIB("cglib"),JAVASSIST("javassist");
+
+		private final String value;
+
+		ProxyMode(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
 	}
 	
 	// 存储方式

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.assist.MethodPrmHandler;
+import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
@@ -72,7 +73,7 @@ public class CoreServlet extends HttpServlet {
 			ActionContext.setContext(request, response);
 			executeMethod(request);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}finally{ 
 			ActionContext.clear();
 		}
@@ -104,11 +105,11 @@ public class CoreServlet extends HttpServlet {
 					try {
 						returnObj = method.invoke(action, MethodPrmHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
 					} catch (IllegalArgumentException e) {
-						e.printStackTrace();
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					} catch (IllegalAccessException e) {
-						e.printStackTrace();
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					} catch (InvocationTargetException e) {
-						e.printStackTrace();
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					}
 					Class<?> returnType = method.getReturnType();
 					if(returnType.equals(String.class)){
@@ -131,7 +132,7 @@ public class CoreServlet extends HttpServlet {
 					try {
 						ActionContext.getContext().getResponse().sendError(404);
 					} catch (IOException e) {
-						e.printStackTrace();
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					}
 				}
 			}

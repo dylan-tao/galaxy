@@ -65,13 +65,9 @@ public class MethodPrmHandler {
 					} else {
 						obj[j] = null;
 					}
-				} catch (InstantiationException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
+				} catch (Exception e) {
+					log.error(Constant.JAVAOSC_EXCEPTION, e);
+				} 
 			}
 		}
 		return obj;

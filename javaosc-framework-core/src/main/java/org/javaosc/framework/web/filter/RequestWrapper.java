@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.CodeType;
 import org.javaosc.framework.constant.Constant.HttpType;
+import org.javaosc.framework.web.assist.ActionHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * 
  * @description
@@ -19,6 +22,8 @@ import org.javaosc.framework.constant.Constant.HttpType;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class RequestWrapper extends HttpServletRequestWrapper {
+	
+	private static final Logger log = LoggerFactory.getLogger(RequestWrapper.class);
 
 	private Map<String, String[]> requestData = new HashMap<String, String[]>();
 	
@@ -83,7 +88,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 			byte[] b = value.getBytes(CodeType.ISO88591.getValue());
 			value = new String(b, this.getCharacterEncoding());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return value;
 	}

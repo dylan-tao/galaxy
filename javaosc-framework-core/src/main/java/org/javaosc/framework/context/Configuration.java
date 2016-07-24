@@ -91,7 +91,7 @@ public class Configuration {
 		return value != null ? Integer.parseInt(value) : defaultValue;
 	}
 	
-	public static Map<String, Object> getPoolPrm(){
+	public static Map<String, Object> getPoolParam(){
 		Map<String, Object> prm = new HashMap<String, Object>();
 		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
 		while(it.hasNext()){
