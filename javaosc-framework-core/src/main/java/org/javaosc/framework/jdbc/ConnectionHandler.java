@@ -51,10 +51,10 @@ public class ConnectionHandler {
 				} 
 			}
 		}
-		if(ds!=null){
-			log.info("initializing the data source connection ~");
-			initialzeConnection();
-		}
+//		if(ds!=null){
+//			log.info("initializing the data source connection ~");
+//			initialzeConnection();
+//		}
 	}
 	
 	public static Connection getConnection(){
