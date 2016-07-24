@@ -29,7 +29,8 @@
 		<ormilly.cos.version>05Nov2002</ormilly.cos.version>
 		
 		<!-- db pool choose -->
-		<mariadb.connector.version>1.4.6</mariadb.connector.version>
+		<!-- <mariadb.connector.version>1.4.6</mariadb.connector.version> -->
+		<mysql.connector.version>5.1.38</mysql.connector.version>
 		
 		<!-- <hikaricp.pool.version>2.4.7</hikaricp.pool.version> -->
 		<com.mchange.c3p0.version>0.9.5.2</com.mchange.c3p0.version>
@@ -64,7 +65,7 @@
 				          <artifactId>commons-logging</artifactId>
 			        </exclusion>
 			     </exclusions>
-			</dependency>
+			</dependency> 
 			
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -108,7 +109,7 @@
 			
 			<!-- db pool choose -->
 			
-			<dependency>
+		<!-- 	<dependency>
 				<groupId>org.mariadb.jdbc</groupId>
 				<artifactId>mariadb-java-client</artifactId>
 				<version>${mariadb.connector.version}</version>
@@ -122,6 +123,12 @@
   						  <artifactId>commons-dbcp</artifactId>
 			        </exclusion>
 			    </exclusions>
+			</dependency> -->
+			
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>${mysql.connector.version}</version>
 			</dependency>
 
 		<!-- 	<dependency>
