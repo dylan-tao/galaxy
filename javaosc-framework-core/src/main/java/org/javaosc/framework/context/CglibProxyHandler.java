@@ -22,18 +22,24 @@ public class CglibProxyHandler implements MethodInterceptor {
 	
 	private static final Logger log = LoggerFactory.getLogger(CglibProxyHandler.class);
 	
+	private Enhancer enhancer = new Enhancer();
+	
 	private Class<?> cls;
 	
 	private boolean isTransaction;
-
+	
 	protected CglibProxyHandler(Class<?> cls, boolean isTransaction) {
 		this.cls = cls;
 		this.isTransaction = isTransaction;
 	}
 
 	protected Object proxyInstance() {
-		Enhancer enhancer = new Enhancer();  
-        enhancer.setSuperclass(this.cls);  
+		Class<?>[] interfaceArray = this.cls.getInterfaces();
+		if(interfaceArray != null){
+			enhancer.setInterfaces(interfaceArray);
+		}else{
+			enhancer.setSuperclass(this.cls);
+		}
         enhancer.setCallback(this);  
         return enhancer.create();  
 	}
