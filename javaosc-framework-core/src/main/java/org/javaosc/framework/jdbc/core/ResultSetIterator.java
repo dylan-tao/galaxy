@@ -18,15 +18,15 @@ public class ResultSetIterator implements Iterator<Object[]> {
     private final ResultSet rs;
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public ResultSetIterator(ResultSet rs) {
-        this(rs, new BasicRowProcessor());
+        this(rs, new RowAssistImpl());
     }
 
     
-    public ResultSetIterator(ResultSet rs, RowProcessor convert) {
+    public ResultSetIterator(ResultSet rs, RowAssist convert) {
         this.rs = rs;
         this.convert = convert;
     }

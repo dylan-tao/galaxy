@@ -4,7 +4,7 @@ package org.javaosc.framework.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -16,7 +16,7 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
 public class ArrayListHandler extends AbstractListHandler<Object[]> {
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public ArrayListHandler() {
@@ -24,7 +24,7 @@ public class ArrayListHandler extends AbstractListHandler<Object[]> {
     }
 
     
-    public ArrayListHandler(RowProcessor convert) {
+    public ArrayListHandler(RowAssist convert) {
         super();
         this.convert = convert;
     }

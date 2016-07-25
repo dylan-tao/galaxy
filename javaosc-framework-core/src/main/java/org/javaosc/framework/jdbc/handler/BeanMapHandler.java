@@ -4,7 +4,7 @@ package org.javaosc.framework.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -19,7 +19,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     private final Class<V> type;
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     private final int columnIndex;
@@ -33,7 +33,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     
-    public BeanMapHandler(Class<V> type, RowProcessor convert) {
+    public BeanMapHandler(Class<V> type, RowAssist convert) {
         this(type, convert, 1, null);
     }
 
@@ -48,7 +48,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     
-    private BeanMapHandler(Class<V> type, RowProcessor convert,
+    private BeanMapHandler(Class<V> type, RowAssist convert,
             int columnIndex, String columnName) {
         super();
         this.type = type;

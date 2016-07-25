@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -15,13 +15,13 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
+public class BeanListHandler<T> implements ResultSetAssist<List<T>> {
 
     
     private final Class<T> type;
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public BeanListHandler(Class<T> type) {
@@ -29,7 +29,7 @@ public class BeanListHandler<T> implements ResultSetHandler<List<T>> {
     }
 
     
-    public BeanListHandler(Class<T> type, RowProcessor convert) {
+    public BeanListHandler(Class<T> type, RowAssist convert) {
         this.type = type;
         this.convert = convert;
     }

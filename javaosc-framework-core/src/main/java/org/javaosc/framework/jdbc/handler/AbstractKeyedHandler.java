@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
 
 /**
  * 
@@ -15,7 +15,7 @@ import org.javaosc.framework.jdbc.core.ResultSetHandler;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class AbstractKeyedHandler<K, V> implements ResultSetHandler<Map<K, V>> {
+public abstract class AbstractKeyedHandler<K, V> implements ResultSetAssist<Map<K, V>> {
 
 
     

@@ -4,7 +4,7 @@ package org.javaosc.framework.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
 
 /**
  * 
@@ -13,7 +13,7 @@ import org.javaosc.framework.jdbc.core.ResultSetHandler;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ScalarHandler<T> implements ResultSetHandler<T> {
+public class ScalarHandler<T> implements ResultSetAssist<T> {
 
     
     private final int columnIndex;

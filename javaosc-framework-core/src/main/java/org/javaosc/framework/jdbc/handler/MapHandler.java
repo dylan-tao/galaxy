@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -15,10 +15,10 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class MapHandler implements ResultSetHandler<Map<String, Object>> {
+public class MapHandler implements ResultSetAssist<Map<String, Object>> {
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public MapHandler() {
@@ -26,7 +26,7 @@ public class MapHandler implements ResultSetHandler<Map<String, Object>> {
     }
 
     
-    public MapHandler(RowProcessor convert) {
+    public MapHandler(RowAssist convert) {
         super();
         this.convert = convert;
     }

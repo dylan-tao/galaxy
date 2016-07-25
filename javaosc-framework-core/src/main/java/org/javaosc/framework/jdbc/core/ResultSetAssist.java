@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public interface ResultSetHandler<T> {
+public interface ResultSetAssist<T> {
 
     
     T handle(ResultSet rs) throws SQLException;

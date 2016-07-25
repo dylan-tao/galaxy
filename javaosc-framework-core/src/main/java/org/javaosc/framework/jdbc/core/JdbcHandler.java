@@ -69,17 +69,17 @@ public class JdbcHandler extends AbstractJdbcHandler {
     }
 
     
-    public <T> T query(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    public <T> T query(Connection conn, String sql, ResultSetAssist<T> rsh, Object... params) throws SQLException {
         return this.<T>query(conn, false, sql, rsh, params);
     }
 
     
-    public <T> T query(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
+    public <T> T query(Connection conn, String sql, ResultSetAssist<T> rsh) throws SQLException {
         return this.<T>query(conn, false, sql, rsh, (Object[]) null);
     }
 
     
-    private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params)
+    private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object... params)
             throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
@@ -174,17 +174,17 @@ public class JdbcHandler extends AbstractJdbcHandler {
         return rows;
     }
 
-    public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh) throws SQLException {
+    public <T> T insert(Connection conn, String sql, ResultSetAssist<T> rsh) throws SQLException {
         return insert(conn, false, sql, rsh, (Object[]) null);
     }
 
     
-    public <T> T insert(Connection conn, String sql, ResultSetHandler<T> rsh, Object... params) throws SQLException {
+    public <T> T insert(Connection conn, String sql, ResultSetAssist<T> rsh, Object... params) throws SQLException {
         return insert(conn, false, sql, rsh, params);
     }
 
     
-    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object... params)
+    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object... params)
             throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");
@@ -225,11 +225,11 @@ public class JdbcHandler extends AbstractJdbcHandler {
         return generatedKeys;
     }
 
-    public <T> T insertBatch(Connection conn, String sql, ResultSetHandler<T> rsh, Object[][] params) throws SQLException {
+    public <T> T insertBatch(Connection conn, String sql, ResultSetAssist<T> rsh, Object[][] params) throws SQLException {
         return insertBatch(conn, false, sql, rsh, params);
     }
     
-    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetHandler<T> rsh, Object[][] params)
+    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object[][] params)
             throws SQLException {
         if (conn == null) {
             throw new SQLException("Null connection");

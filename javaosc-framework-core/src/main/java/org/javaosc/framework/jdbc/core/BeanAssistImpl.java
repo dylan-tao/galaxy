@@ -14,10 +14,10 @@ import java.util.Arrays;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class GenerousBeanProcessor extends BeanProcessor {
+public class BeanAssistImpl extends BeanAssist {
 
     
-    public GenerousBeanProcessor() {
+    public BeanAssistImpl() {
         super();
     }
 

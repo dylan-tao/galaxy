@@ -4,8 +4,8 @@ package org.javaosc.framework.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -14,13 +14,13 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanHandler<T> implements ResultSetHandler<T> {
+public class BeanHandler<T> implements ResultSetAssist<T> {
 
     
     private final Class<T> type;
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public BeanHandler(Class<T> type) {
@@ -28,7 +28,7 @@ public class BeanHandler<T> implements ResultSetHandler<T> {
     }
 
     
-    public BeanHandler(Class<T> type, RowProcessor convert) {
+    public BeanHandler(Class<T> type, RowAssist convert) {
         this.type = type;
         this.convert = convert;
     }

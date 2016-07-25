@@ -4,9 +4,9 @@ package org.javaosc.framework.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.framework.jdbc.core.BasicRowProcessor;
-import org.javaosc.framework.jdbc.core.ResultSetHandler;
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.RowAssistImpl;
+import org.javaosc.framework.jdbc.core.ResultSetAssist;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -15,16 +15,16 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ArrayHandler implements ResultSetHandler<Object[]> {
+public class ArrayHandler implements ResultSetAssist<Object[]> {
 
     
-    static final RowProcessor ROW_PROCESSOR = new BasicRowProcessor();
+    static final RowAssist ROW_PROCESSOR = new RowAssistImpl();
 
     
     private static final Object[] EMPTY_ARRAY = new Object[0];
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public ArrayHandler() {
@@ -32,7 +32,7 @@ public class ArrayHandler implements ResultSetHandler<Object[]> {
     }
 
     
-    public ArrayHandler(RowProcessor convert) {
+    public ArrayHandler(RowAssist convert) {
         super();
         this.convert = convert;
     }

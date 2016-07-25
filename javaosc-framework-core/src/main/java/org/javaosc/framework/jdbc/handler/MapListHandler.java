@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.javaosc.framework.jdbc.core.RowProcessor;
+import org.javaosc.framework.jdbc.core.RowAssist;
 
 /**
  * 
@@ -17,7 +17,7 @@ import org.javaosc.framework.jdbc.core.RowProcessor;
 public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
 
     
-    private final RowProcessor convert;
+    private final RowAssist convert;
 
     
     public MapListHandler() {
@@ -25,7 +25,7 @@ public class MapListHandler extends AbstractListHandler<Map<String, Object>> {
     }
 
     
-    public MapListHandler(RowProcessor convert) {
+    public MapListHandler(RowAssist convert) {
         super();
         this.convert = convert;
     }

@@ -13,7 +13,7 @@ import java.util.Map;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public interface RowProcessor {
+public interface RowAssist {
 
     
     Object[] toArray(ResultSet rs) throws SQLException;
