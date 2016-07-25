@@ -14,11 +14,11 @@ import java.sql.Statement;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class JdbcHandler extends AbstractJdbcHandler {
+public class JdbcTemplate extends AbstractJdbcTemplate {
 	
-	 public JdbcHandler() { }
+	 public JdbcTemplate() { }
     
-    public JdbcHandler(boolean pmdKnownBroken) {
+    public JdbcTemplate(boolean pmdKnownBroken) {
         super(pmdKnownBroken);
     }
 

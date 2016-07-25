@@ -23,13 +23,13 @@ import java.util.Arrays;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public abstract class AbstractJdbcHandler {
+public abstract class AbstractJdbcTemplate {
     
     private volatile boolean pmdKnownBroken = false;
     
-    public AbstractJdbcHandler() { }
+    public AbstractJdbcTemplate() { }
     
-    public AbstractJdbcHandler(boolean pmdKnownBroken) {
+    public AbstractJdbcTemplate(boolean pmdKnownBroken) {
         this.pmdKnownBroken = pmdKnownBroken;
     }
 
