@@ -42,9 +42,6 @@ public class ScalarHandler<T> implements ResultSetHandler<T> {
         this.columnName = columnName;
     }
 
-    
-    // We assume that the user has picked the correct type to match the column
-    // so getObject will return the appropriate type and the cast will succeed.
     @SuppressWarnings("unchecked")
     @Override
     public T handle(ResultSet rs) throws SQLException {

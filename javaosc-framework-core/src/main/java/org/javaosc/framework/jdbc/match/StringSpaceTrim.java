@@ -1,5 +1,5 @@
 
-package org.javaosc.framework.jdbc.wrapper;
+package org.javaosc.framework.jdbc.match;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -14,21 +14,21 @@ import org.javaosc.framework.jdbc.core.ProxyFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class StringTrimmedResultSet implements InvocationHandler {
+public class StringSpaceTrim implements InvocationHandler {
 
     
     private static final ProxyFactory factory = ProxyFactory.instance();
 
     
     public static ResultSet wrap(ResultSet rs) {
-        return factory.createResultSet(new StringTrimmedResultSet(rs));
+        return factory.createResultSet(new StringSpaceTrim(rs));
     }
 
     
     private final ResultSet rs;
 
     
-    public StringTrimmedResultSet(ResultSet rs) {
+    public StringSpaceTrim(ResultSet rs) {
         super();
         this.rs = rs;
     }

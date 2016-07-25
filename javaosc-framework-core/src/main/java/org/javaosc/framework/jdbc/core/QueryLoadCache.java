@@ -15,16 +15,16 @@ import java.util.regex.Pattern;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class JdbcLoader {
+public class QueryLoadCache {
 
     
-    private static final JdbcLoader instance = new JdbcLoader();
+    private static final QueryLoadCache instance = new QueryLoadCache();
 
     
     private static final Pattern dotXml = Pattern.compile(".+\\.[xX][mM][lL]");
 
     
-    public static JdbcLoader instance() {
+    public static QueryLoadCache instance() {
         return instance;
     }
 
@@ -32,7 +32,7 @@ public class JdbcLoader {
     private final Map<String, Map<String, String>> queries = new HashMap<String, Map<String, String>>();
 
     
-    protected JdbcLoader() {
+    protected QueryLoadCache() {
         super();
     }
 

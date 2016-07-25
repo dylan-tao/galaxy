@@ -24,10 +24,10 @@ import java.util.Properties;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public final class JdbcObject {
+public final class DataSourceManage {
 
     
-    public JdbcObject() {
+    public DataSourceManage() {
         // do nothing
     }
 
@@ -117,7 +117,7 @@ public final class JdbcObject {
 
     
     public static boolean loadDriver(String driverClassName) {
-        return loadDriver(JdbcObject.class.getClassLoader(), driverClassName);
+        return loadDriver(DataSourceManage.class.getClassLoader(), driverClassName);
     }
 
     

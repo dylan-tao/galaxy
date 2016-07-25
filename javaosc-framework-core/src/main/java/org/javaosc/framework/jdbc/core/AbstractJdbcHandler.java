@@ -190,17 +190,17 @@ public abstract class AbstractJdbcHandler {
 
     
     protected void close(Connection conn) throws SQLException {
-        JdbcObject.close(conn);
+        DataSourceManage.close(conn);
     }
 
     
     protected void close(Statement stmt) throws SQLException {
-        JdbcObject.close(stmt);
+        DataSourceManage.close(stmt);
     }
 
     
     protected void close(ResultSet rs) throws SQLException {
-        JdbcObject.close(rs);
+        DataSourceManage.close(rs);
     }
 
 }

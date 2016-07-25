@@ -1,5 +1,5 @@
 
-package org.javaosc.framework.jdbc.wrapper;
+package org.javaosc.framework.jdbc.match;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -26,7 +26,7 @@ import org.javaosc.framework.jdbc.core.ProxyFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class SqlNullCheckedResultSet implements InvocationHandler {
+public class SqlNullChecked implements InvocationHandler {
 
     
     private static final Map<String, Method> nullMethods = new HashMap<String, Method>();
@@ -35,7 +35,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private static final String GET_NULL_PREFIX = "getNull";
 
     static {
-        Method[] methods = SqlNullCheckedResultSet.class.getMethods();
+        Method[] methods = SqlNullChecked.class.getMethods();
         for (int i = 0; i < methods.length; i++) {
             String methodName = methods[i].getName();
 
@@ -51,7 +51,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
 
     
     public static ResultSet wrap(ResultSet rs) {
-        return factory.createResultSet(new SqlNullCheckedResultSet(rs));
+        return factory.createResultSet(new SqlNullChecked(rs));
     }
 
     private InputStream nullAsciiStream = null;
@@ -80,7 +80,7 @@ public class SqlNullCheckedResultSet implements InvocationHandler {
     private final ResultSet rs;
 
     
-    public SqlNullCheckedResultSet(ResultSet rs) {
+    public SqlNullChecked(ResultSet rs) {
         super();
         this.rs = rs;
     }
