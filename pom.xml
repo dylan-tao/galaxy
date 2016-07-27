@@ -1,21 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.javaosc.framework</groupId>
-	<artifactId>javaosc-framework</artifactId>
-	<version>${javaosc.framework.version}</version>
+	<groupId>org.javaosc</groupId>
+	<artifactId>javaosc</artifactId>
+	<version>${javaosc.version}</version>
 	<packaging>pom</packaging>
 	<name>javaosc framework</name>
 
 	<modules>
-		<module>javaosc-framework-core</module>
+		<module>javaosc-framework</module>
 		<module>javaosc-framework-example</module>
 	</modules>
 
 	<properties>
 
-		<javaosc.framework.version>1.0</javaosc.framework.version>
-		<javaosc.framework.core.version>1.0.0.RELEASE</javaosc.framework.core.version>
+		<javaosc.version>1.0</javaosc.version>
+		<javaosc.framework.version>1.0.0.RELEASE</javaosc.framework.version>
 		<javaosc.framework.example.version>1.0</javaosc.framework.example.version>
 		
 		<!-- core -->
@@ -43,9 +43,9 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>org.javaosc.framework.core</groupId>
-				<artifactId>javaosc-framework-core</artifactId>
-				<version>${javaosc.framework.core.version}</version>
+				<groupId>org.javaosc.framework</groupId>
+				<artifactId>javaosc-framework</artifactId>
+				<version>${javaosc.framework.version}</version>
 			</dependency>
 			
 			<dependency>
