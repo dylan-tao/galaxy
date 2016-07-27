@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.javaosc.framework.assist.MethodPrmHandler;
+import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.RouteNode;
 import org.javaosc.framework.util.StringUtil;
@@ -57,7 +57,7 @@ public abstract class RouteNodeRegistry {
 								if(uriLength-i == 1){ 
 									child.setCls(cls);
 									child.setMethod(method);
-									String[] methodPrm = MethodPrmHandler.getParamName(method);
+									String[] methodPrm = MethodParamHandler.getParamName(method);
 									child.setParam(methodPrm);	
 								}
 								current.addChild(URI_PARAM, child);
@@ -68,7 +68,7 @@ public abstract class RouteNodeRegistry {
 						if(uriLength-i == 1){ 
 							child.setCls(cls);
 							child.setMethod(method);
-							String[] methodPrm = MethodPrmHandler.getParamName(method);
+							String[] methodPrm = MethodParamHandler.getParamName(method);
 							child.setParam(methodPrm);	
 						}
 						current.addChild(urlSplitStr, child);

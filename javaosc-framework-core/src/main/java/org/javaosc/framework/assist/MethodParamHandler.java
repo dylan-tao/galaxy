@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
  * @author Dylan Tao
  * @date 2014-09-09 Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class MethodPrmHandler {
+public class MethodParamHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(MethodPrmHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(MethodParamHandler.class);
 
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {
 		Object[] obj = new Object[prmTypes.length];

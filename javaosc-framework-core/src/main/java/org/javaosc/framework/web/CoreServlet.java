@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.javaosc.framework.assist.MethodPrmHandler;
+import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
@@ -103,7 +103,7 @@ public class CoreServlet extends HttpServlet {
 				if (method!=null) {
 					Object returnObj = null;
 					try {
-						returnObj = method.invoke(action, MethodPrmHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
+						returnObj = method.invoke(action, MethodParamHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
 					} catch (IllegalArgumentException e) {
 						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					} catch (IllegalAccessException e) {
