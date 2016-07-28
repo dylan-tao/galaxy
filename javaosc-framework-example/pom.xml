@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.javaosc</groupId>
-		<artifactId>javaosc</artifactId>
-		<version>${javaosc.version}</version>
+		<groupId>org.javaosc.framework</groupId>
+		<artifactId>javaosc-framework</artifactId>
+		<version>${javaosc.framework.version}</version>
 	</parent>
 	<groupId>com.javaosc.framework.example</groupId>
 	<artifactId>javaosc-framework-example</artifactId>
@@ -17,10 +17,10 @@
 
 		<!-- core -->
 		<dependency>
-			<groupId>org.javaosc.framework</groupId>
-			<artifactId>javaosc-framework</artifactId>
+			<groupId>org.javaosc.framework.core</groupId>
+			<artifactId>javaosc-framework-core</artifactId>	
 		</dependency>
-
+		
 		<!-- log -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
