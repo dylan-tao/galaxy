@@ -20,7 +20,7 @@ public class ShortConvert implements Convert<Object, Short> {
 		try {
 			return Short.parseShort(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("ShortConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("ShortConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

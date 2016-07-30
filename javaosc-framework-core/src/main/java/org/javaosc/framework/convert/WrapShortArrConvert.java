@@ -21,7 +21,7 @@ public class WrapShortArrConvert implements Convert<Object[],Short[]>{
             try {  
                 res[i] = Short.parseShort(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

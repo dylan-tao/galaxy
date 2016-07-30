@@ -21,7 +21,7 @@ public class FloatArrConvert implements Convert<Object[],float[]>{
             try {  
                 res[i] = Float.parseFloat(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("FloatArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("FloatArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

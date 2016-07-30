@@ -21,7 +21,7 @@ public class ByteArrConvert implements Convert<Object[],byte[]>{
             try {  
                 res[i] = Byte.parseByte(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("ByteArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("ByteArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

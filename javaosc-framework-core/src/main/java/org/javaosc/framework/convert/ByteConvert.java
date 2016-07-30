@@ -20,7 +20,7 @@ public class ByteConvert implements Convert<Object, Byte> {
 		try {
 			return Byte.parseByte(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("ByteConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("ByteConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

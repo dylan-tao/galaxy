@@ -21,7 +21,7 @@ public class StringArrConvert implements Convert<Object[],String[]>{
             try {  
                 res[i] = String.valueOf(source[i]);  
             } catch (NumberFormatException e) {  
-            	log.info("StringArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("StringArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

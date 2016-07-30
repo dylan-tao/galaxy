@@ -20,7 +20,7 @@ public class DoubleConvert implements Convert<Object, Double> {
 		try {
 			return Double.parseDouble(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("DoubleConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("DoubleConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

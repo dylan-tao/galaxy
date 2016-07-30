@@ -21,7 +21,7 @@ public class LongArrConvert implements Convert<Object[],long[]>{
             try {  
                 res[i] = Long.parseLong(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("LongArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("LongArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

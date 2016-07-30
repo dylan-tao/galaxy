@@ -21,7 +21,7 @@ public class DoubleArrConvert implements Convert<Object[],double[]>{
             try {  
                 res[i] = Double.parseDouble(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("DoubleArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("DoubleArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

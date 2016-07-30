@@ -20,7 +20,7 @@ public class LongConvert implements Convert<Object, Long> {
 		try {
 			return Long.parseLong(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("LongConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("LongConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

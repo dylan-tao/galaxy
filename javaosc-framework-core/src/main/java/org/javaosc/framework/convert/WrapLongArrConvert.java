@@ -21,7 +21,7 @@ public class WrapLongArrConvert implements Convert<Object[],Long[]>{
             try {  
                 res[i] = Long.parseLong(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapLongArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapLongArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

@@ -21,7 +21,7 @@ public class WrapIntegerArrConvert implements Convert<Object[],Integer[]>{
             try {  
                 res[i] = Integer.parseInt(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapIntegerArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapIntegerArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

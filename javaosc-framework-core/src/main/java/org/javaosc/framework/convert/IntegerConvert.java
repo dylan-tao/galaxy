@@ -20,7 +20,7 @@ public class IntegerConvert implements Convert<Object, Integer> {
 		try {
 			return Integer.parseInt(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("IntegerConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("IntegerConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

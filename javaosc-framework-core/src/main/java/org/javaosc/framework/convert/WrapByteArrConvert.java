@@ -21,7 +21,7 @@ public class WrapByteArrConvert implements Convert<Object[],Byte[]>{
             try {  
                 res[i] = Byte.parseByte(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapByteArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapByteArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

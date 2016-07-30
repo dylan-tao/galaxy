@@ -20,7 +20,7 @@ public class FloatConvert implements Convert<Object, Float> {
 		try {
 			return Float.parseFloat(String.valueOf(source));
 		} catch (NumberFormatException e) {
-			log.info("FloatConvert failed, value: {} exception: {}", String.valueOf(source), e);
+			log.warn("FloatConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
 		}
 	}

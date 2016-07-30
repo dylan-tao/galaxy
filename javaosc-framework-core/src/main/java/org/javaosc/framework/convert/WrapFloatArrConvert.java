@@ -21,7 +21,7 @@ public class WrapFloatArrConvert implements Convert<Object[],Float[]>{
             try {  
                 res[i] = Float.parseFloat(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapFloatArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapFloatArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

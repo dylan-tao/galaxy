@@ -21,7 +21,7 @@ public class ShortArrConvert implements Convert<Object[],short[]>{
             try {  
                 res[i] = Short.parseShort(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("ShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("ShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  

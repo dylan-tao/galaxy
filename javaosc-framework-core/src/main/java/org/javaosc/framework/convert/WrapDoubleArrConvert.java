@@ -21,7 +21,7 @@ public class WrapDoubleArrConvert implements Convert<Object[],Double[]>{
             try {  
                 res[i] = Double.parseDouble(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.info("WrapDoubleArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("WrapDoubleArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
                 return null;  
             }  
         }  
