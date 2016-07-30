@@ -2,7 +2,13 @@ package org.javaosc.framework.convert;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * 
+ * @description
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
+ */
 public class WrapShortArrConvert implements Convert<Object[],Short[]>{
 	
 	private static final Logger log = LoggerFactory.getLogger(WrapShortArrConvert.class);
