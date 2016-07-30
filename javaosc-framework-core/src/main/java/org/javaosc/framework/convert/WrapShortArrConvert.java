@@ -1,0 +1,25 @@
+package org.javaosc.framework.convert;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class WrapShortArrConvert implements Convert<Object[],Short[]>{
+	
+	private static final Logger log = LoggerFactory.getLogger(WrapShortArrConvert.class);
+
+	@Override
+	public Short[] convert(Object[] source) {
+		if(source == null) return null;  
+		Short[] res = new Short[source.length];  
+        for(int i=0;i<source.length;i++){  
+            try {  
+                res[i] = Short.parseShort(String.valueOf(source[i]));  
+            } catch (NumberFormatException e) {  
+            	log.info("WrapShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+                return null;  
+            }  
+        }  
+        return res;  
+	}
+
+}
