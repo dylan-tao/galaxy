@@ -20,7 +20,7 @@
 	<dependencies>
 
 		<!-- core -->
-		 <dependency>
+	   <dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils-core</artifactId>
 		</dependency>
