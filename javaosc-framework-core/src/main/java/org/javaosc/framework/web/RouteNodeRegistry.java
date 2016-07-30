@@ -25,15 +25,15 @@ public abstract class RouteNodeRegistry {
 	
 	private static final Pattern paramPattern = Pattern.compile("\\{([a-zA-Z_]+[0-9]*)\\}");
 	
-	private static final String URI_PARAM = "_$_URI_PARAM_$___";
+	private static final String URI_PARAM = "_$URI_PARAM_";
 	
-	protected static final String ACTION_CLASS = "_$_ACTION_CLASS_$___";
+	protected static final String ACTION_CLASS = "_$ACTION_CLASS_";
 	
-	protected static final String METHOD = "_$_METHOD_$___";
+	protected static final String METHOD = "_$METHOD_";
 	
-	protected static final String METHOD_PRM = "_$_METHOD_PRM_$___";
+	protected static final String METHOD_PRM = "_$METHOD_PRM_";
 	
-	protected static final String ERROR_CODE = "_$_ERROR_CODE_$___";
+	protected static final String ERROR_CODE = "_ERROR_CODE_";
 	
 	
 	public static void registerRouteNode(String uriPattern, Class<?> cls, Method method){
