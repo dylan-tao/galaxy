@@ -14,10 +14,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.convert.ConvertFactory;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,11 +42,14 @@ public class MethodParamHandler {
 			if (ClassHandler.isJavaClass(prmType)) {
 				Object objValue = dataMap.get(paramNames[j]);
 				if (prmType.isPrimitive()) {
-					obj[j] = ConvertUtils.convert(objValue, prmType);
+//					obj[j] = ConvertUtils.convert(objValue, prmType);
+					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType == String.class || ClassHandler.isWrapClass(prmType)) {
-					obj[j] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
+//					obj[j] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
+					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType.isArray()) {
-					obj[j] = objValue == null ? objValue : ConvertUtils.convert((String[]) objValue, prmType);
+//					obj[j] = objValue == null ? objValue : ConvertUtils.convert((String[]) objValue, prmType);
+					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType == HttpServletRequest.class) {
 					obj[j] = ActionContext.getContext().getRequest();
 				} else if (prmType == HttpServletResponse.class) {
@@ -58,9 +60,10 @@ public class MethodParamHandler {
 			} else {
 				try {
 					if (dataMap.size() > 0) {
-						Object bean = prmType.newInstance();
-						BeanUtils.populate(bean, dataMap);
-						obj[j] = prmType.cast(bean);
+//						Object bean = prmType.newInstance();
+//						BeanUtils.populate(bean, dataMap);
+//						obj[j] = prmType.cast(bean);
+						obj[j] = PropertyConvert.convert(dataMap, prmType, null);
 					} else {
 						obj[j] = null;
 					}

@@ -8,8 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.javaosc.framework.assist.ClassHandler;
+import org.javaosc.framework.assist.PropertyConvert;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.Configuration;
@@ -43,9 +43,10 @@ public class ConnectionHandler {
 			Class<?> poolObj = ClassHandler.load(poolName);
 			if(poolObj!=null){
 				try {
-					Object bean = poolObj.newInstance();
-					BeanUtils.populate(bean, Configuration.getPoolParam());
-					ds = (DataSource)bean;
+//					Object bean = poolObj.newInstance();
+//					BeanUtils.populate(bean, Configuration.getPoolParam());
+//					ds = (DataSource)bean;
+					ds = (DataSource) PropertyConvert.convert(Configuration.getPoolParam(), poolObj, null);
 				} catch (Exception e) {
 					log.error(Constant.JAVAOSC_EXCEPTION, e);
 				} 

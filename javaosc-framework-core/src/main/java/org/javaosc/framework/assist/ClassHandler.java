@@ -32,7 +32,7 @@ public class ClassHandler {
         try {     
            return ((Class<?>)clz.getField("TYPE").get(null)).isPrimitive();    
         } catch (Exception e) {     
-           return false;     
+           return false;
         }     
     }   
 	

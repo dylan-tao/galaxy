@@ -34,7 +34,8 @@ public class PropertyConvert {
      * @return 
      */  
     @SuppressWarnings("rawtypes")  
-    public static <T> T convert(Map valueMap,Class<T> entityClass,String prefix){  
+    public static <T> T convert(Map valueMap,Class<T> entityClass,String prefix){ 
+    	
         ConvertItem convertItem = convertItemCache.get(entityClass.getName());  
         if(convertItem == null){  
             convertItem = ConvertItem.createConvertItem(entityClass);  
