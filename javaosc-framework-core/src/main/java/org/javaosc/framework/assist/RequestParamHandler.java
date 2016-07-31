@@ -56,6 +56,9 @@ public class RequestParamHandler {
 	}
 	
 	public static void put(String key, String value){
+		if(Configuration.getRequestEncode()){
+			value = encodingParam(value);
+		}
 		ActionContext.getContext().put(key, value);
 	}
 
