@@ -52,13 +52,13 @@ public class ContextListener implements ServletContextListener {
 		
 		Configuration.load(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
 		
+		BeanFactory.initKeywords();
+		
 		AnnotationScaner annotationObject = new AnnotationScaner();
 		annotationObject.load();
 		annotationObject = null;
 		
 		ConnectionHandler.init();
-		
-		BeanFactory.initKeywords();
 		
 		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		
