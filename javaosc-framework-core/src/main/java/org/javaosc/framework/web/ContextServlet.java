@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.util.PathUtil;
@@ -29,11 +28,11 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class CoreServlet extends HttpServlet {
+public class ContextServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger log = LoggerFactory.getLogger(CoreServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(ContextServlet.class);
 	
 	private static String prefix;
 	private static String suffix;
@@ -44,8 +43,8 @@ public class CoreServlet extends HttpServlet {
 	}
 	
 	public void init(){
-		prefix = Configuration.getValue(ProperConstant.PREFIX_KEY, ProperConstant.DEFAULT_PREFIX_VALUE);
-		suffix = Configuration.getValue(ProperConstant.SUFFIX_KEY, ProperConstant.DEFAULT_SUFFIX_VALUE);
+		prefix = Configuration.getViewPrefix();
+		suffix = Configuration.getViewSuffix();
 	}
 	
 	@Override

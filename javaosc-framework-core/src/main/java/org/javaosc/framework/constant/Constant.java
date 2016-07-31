@@ -11,10 +11,6 @@ public interface Constant {
 	
 	String JAVAOSC_EXCEPTION = "javaosc execution exception ";
 
-	String SET_ENCODING_KEY = "encoding";
-	String SET_ENFORC_ENCODING_KEY = "forceEncoding";
-	String SET_HTTPGET_ENCODING_KEY = "httpGetEncoding";
-
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
 	String LINE = "/";

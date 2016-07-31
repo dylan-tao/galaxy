@@ -58,7 +58,7 @@ public class ContextListener implements ServletContextListener {
 		annotationObject.load();
 		annotationObject = null;
 		
-		ConnectionHandler.init();
+//		ConnectionHandler.init();
 		
 		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		

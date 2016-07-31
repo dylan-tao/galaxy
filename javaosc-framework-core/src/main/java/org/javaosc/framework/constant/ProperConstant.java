@@ -11,29 +11,34 @@ import org.javaosc.framework.constant.Constant.CodeType;
  */
 public interface ProperConstant {
 	
-	String CONFIG_FILE_NAME = "javaoscConfig";
-	String CONFIG_HEAD_COMMENT = "javaosc configuration setting";
+	static final String CONFIG_FILE_NAME = "javaoscConfig";
+	static final String CONFIG_HEAD_COMMENT = "javaosc configuration setting";
 
-	String PREFIX_KEY = "javaosc.view.prefix";
-	String SUFFIX_KEY = "javaosc.view.suffix";
-	String DEFAULT_ENCODE_KEY = "javaosc.default.encode";
-	String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
-	String CLASS_KEYWORD_KEY = "javaosc.scaner.classname.keyword";
-	String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
-	String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy.mode";
+	static final String PREFIX_KEY = "javaosc.view.prefix";
+	static final String SUFFIX_KEY = "javaosc.view.suffix";
 	
-	String DRIVER_CLASS_NAME = "jdbc.driverClassName";
-	String JDBC_URL = "jdbc.url";
-	String JDBC_USER_NAME = "jdbc.username";
-	String JDBC_PASSWORD = "jdbc.password";
+	static final String CONTEXT_ENCODE_KEY = "javaosc.context.encode";
+	static final String REQUEST_ENCODE_KEY = "javaosc.request.character.encode";
+	static final String RESPONSE_ENCODE_KEY = "javaosc.response.character.encode";
 	
-	String STARTWITH_DB = "db.";
-	String STARTWITH_POOL = "pool.";
-	String POOL_DATASOURCE = "pool.dataSource";
+	static final String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
+	static final String CLASS_KEYWORD_KEY = "javaosc.scaner.classname.keyword";
+	static final String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
+	static final String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy.mode";
+	
+	static final String DRIVER_CLASS_NAME = "jdbc.driverClassName";
+	static final String JDBC_URL = "jdbc.url";
+	static final String JDBC_USER_NAME = "jdbc.username";
+	static final String JDBC_PASSWORD = "jdbc.password";
+	
+	static final String STARTWITH_DB = "db.";
+	static final String STARTWITH_POOL = "pool.";
+	static final String POOL_DATASOURCE = "pool.dataSource";
 
-	String DEFAULT_PREFIX_VALUE = "/";
-	String DEFAULT_SUFFIX_VALUE = ".jsp";
-	String DEFAULT_ENCODING_VALUE = CodeType.UTF8.getValue();
-	String CLASS_KEYWORD_VALUE = "action,controller";
+	static final String DEFAULT_PREFIX_VALUE = "/";
+	static final String DEFAULT_SUFFIX_VALUE = ".jsp";
+	static final String DEFAULT_ENCODING_VALUE = CodeType.UTF8.getValue();
+	static final String DEFAULT_ENCODING_FLAG = "true";
+	static final String CLASS_KEYWORD_VALUE = "action,controller";
 	
 }

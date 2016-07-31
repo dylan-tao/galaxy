@@ -34,6 +34,16 @@ public class Configuration {
 	
 	private static Properties properties;
 	
+	private static String prefix;
+	
+	private static String suffix;
+	
+	private static String encoding;
+	
+	private static Boolean requestEncoding;
+	
+	private static Boolean responseEncoding;
+	
 	public static void load(String javaoscCustConfig){
 		
 		if(StringUtil.isNotBlank(javaoscCustConfig)){
@@ -67,13 +77,49 @@ public class Configuration {
 		properties.setProperty(key, value);
 	}
 	
+	public static String getViewPrefix(){
+		if(StringUtil.isBlank(prefix)){
+			prefix = getValue(ProperConstant.PREFIX_KEY,ProperConstant.DEFAULT_PREFIX_VALUE);
+		}
+		return prefix;
+	}
+	
+	public static String getViewSuffix(){
+		if(StringUtil.isBlank(suffix)){
+			suffix = getValue(ProperConstant.SUFFIX_KEY,ProperConstant.DEFAULT_SUFFIX_VALUE);
+		}
+		return suffix;
+	}
+	
+	public static String getContextEncode(){
+		if(StringUtil.isBlank(encoding)){
+			encoding = getValue(ProperConstant.CONTEXT_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_VALUE);
+		}
+		return encoding;
+	}
+	
+	public static boolean getRequestEncode(){
+		if(requestEncoding == null){
+			requestEncoding = Boolean.valueOf(getValue(ProperConstant.REQUEST_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_FLAG));
+		}
+		return requestEncoding;
+	}
+	
+	public static boolean getResponseEncode(){
+		if(responseEncoding == null){
+			responseEncoding = Boolean.valueOf(getValue(ProperConstant.RESPONSE_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_FLAG));
+		}
+		return responseEncoding;
+	}
+	
+	
 	public static String getValue(String key){
 		return properties.getProperty(key);
 	}
 	
 	public static String getValue(String key,String defaultValue){
 		String value = properties.getProperty(key);
-		return StringUtil.isNotBlank(value)?value:defaultValue;
+		return StringUtil.isNotBlank(value)?StringUtil.clearSpace(value, PatternValue.ALL):defaultValue;
 	}
 	
 	public static boolean getValue(String key, boolean defaultValue) {
