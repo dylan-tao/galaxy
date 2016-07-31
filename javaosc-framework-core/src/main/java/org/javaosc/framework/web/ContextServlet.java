@@ -1,7 +1,6 @@
 package org.javaosc.framework.web;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.Configuration;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
@@ -97,19 +95,15 @@ public class ContextServlet extends HttpServlet {
 			
 			if(actionCls!=null && methodObj!=null){
 				
-				Object action = BeanFactory.getBean(actionCls, false);
+//				Object action = BeanFactory.getBean(actionCls, false);
 				
 				if (method!=null) {
 					Object returnObj = null;
 					try {
-						returnObj = method.invoke(action, MethodParamHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
-					} catch (IllegalArgumentException e) {
+						returnObj = method.invoke(actionCls.newInstance(), MethodParamHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
+					} catch (Exception e) {
 						log.error(Constant.JAVAOSC_EXCEPTION, e);
-					} catch (IllegalAccessException e) {
-						log.error(Constant.JAVAOSC_EXCEPTION, e);
-					} catch (InvocationTargetException e) {
-						log.error(Constant.JAVAOSC_EXCEPTION, e);
-					}
+					} 
 					Class<?> returnType = method.getReturnType();
 					if(returnType.equals(String.class)){
 						String returnPath = String.valueOf(returnObj);

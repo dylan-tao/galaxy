@@ -80,6 +80,10 @@ public final class ActionContext {
 	public Map<String, String[]> getDataMap() {
 		return dataMap;
 	}
+	
+	public void put(String key, String... value) {
+		dataMap.put(key, value);
+	}
 
 	public void setDataMap(HttpServletRequest request,HttpServletResponse response) {
 		this.dataMap = RequestParamHandler.getFormatData(request, response);

@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ShortConvert implements Convert<Object, Short> {
+public class ShortConvert implements Convert<Object[], Short> {
 
 	private static final Logger log = LoggerFactory.getLogger(ShortConvert.class);
 
 	@Override
-	public Short convert(Object source) {
+	public Short convert(Object[] source) {
 		if (source == null)
 			return null;
 		try {
-			return Short.parseShort(String.valueOf(source));
+			return Short.parseShort(String.valueOf(source[0]));
 		} catch (NumberFormatException e) {
 			log.warn("ShortConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;

@@ -11,6 +11,7 @@ import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.CodeType;
 import org.javaosc.framework.constant.Constant.HttpType;
 import org.javaosc.framework.context.Configuration;
+import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +53,10 @@ public class RequestParamHandler {
 		}
 
 		return dataMap;
+	}
+	
+	public static void put(String key, String value){
+		ActionContext.getContext().put(key, value);
 	}
 
 	private static String encodingParam(String value) {

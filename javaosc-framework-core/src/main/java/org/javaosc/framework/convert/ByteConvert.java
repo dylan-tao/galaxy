@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ByteConvert implements Convert<Object, Byte> {
+public class ByteConvert implements Convert<Object[], Byte> {
 
 	private static final Logger log = LoggerFactory.getLogger(ByteConvert.class);
 
 	@Override
-	public Byte convert(Object source) {
+	public Byte convert(Object[] source) {
 		if (source == null)
 			return null;
 		try {
-			return Byte.parseByte(String.valueOf(source));
+			return Byte.parseByte(String.valueOf(source[0]));
 		} catch (NumberFormatException e) {
 			log.warn("ByteConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;

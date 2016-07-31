@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.javaosc.framework.assist.MethodParamHandler;
+import org.javaosc.framework.assist.RequestParamHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.RouteNode;
 import org.javaosc.framework.util.StringUtil;
@@ -94,7 +95,8 @@ public abstract class RouteNodeRegistry {
 			if (child == null){
 				child = current.getChild(URI_PARAM);
 				if (child != null){
-					params.put(child.getParamName(), urlSplitStr);
+//					params.put(child.getParamName(), urlSplitStr);
+					RequestParamHandler.put(child.getParamName(), urlSplitStr);
 				}else{
 					params.put(ERROR_CODE, 0);
 					break;
