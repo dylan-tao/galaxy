@@ -78,15 +78,15 @@ public class MethodParamHandler {
 	public static String[] getParamName(Method method) {
 		try {
 			int size = method.getParameterTypes().length;
-			if (size == 0)
-				return new String[0];
+			if (size == 0) return new String[0];
 			List<String> list = getParamNames(method.getDeclaringClass()).get(getKey(method));
 			if (list != null && list.size() != size){
-				return (String[]) list.subList(0, size).toArray();
+				return list.subList(0, size).toArray(new String[size]);
 			}
-			return (String[]) list.toArray();
+			return list.toArray(new String[size]);
 		} catch (Throwable e) {
-			throw new RuntimeException(e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			return null;
 		}
 	}
 
