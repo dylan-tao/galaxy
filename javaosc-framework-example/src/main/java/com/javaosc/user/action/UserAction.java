@@ -6,8 +6,8 @@ import org.javaosc.framework.annotation.Mapping;
 public class UserAction {
 	
 	@Mapping("/{userId}")
-	public void getUserList(String userId){
-		System.out.println(userId);
+	public void getUserList(User user){
+		System.out.println(user.getUserId());
 	}
 
 }
