@@ -49,10 +49,10 @@ public class BeanFactory {
 	     }
 		 try {
 			 if(proxyMode.equals(ProxyMode.CGLIB.getValue())){
-				 CglibProxyHandler proxyHandler = new CglibProxyHandler(cls, isTransaction);    
+				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
 	             serviceBean = proxyHandler.proxyInstance();    
 			 }else{
-				 ProxyHandler proxyHandler = new ProxyHandler(cls, isTransaction);    
+				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(cls, isTransaction);    
 	             serviceBean = proxyHandler.proxyInstance();   
 			 }
              if(isCache){

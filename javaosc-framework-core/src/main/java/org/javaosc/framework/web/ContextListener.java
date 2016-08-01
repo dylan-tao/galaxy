@@ -7,7 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.javaosc.framework.constant.Configuration;
-import org.javaosc.framework.context.AnnotationScaner;
+import org.javaosc.framework.context.ScanAnnotation;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.ConfigurationHandler;
 import org.javaosc.framework.jdbc.ConnectionHandler;
@@ -54,7 +54,7 @@ public class ContextListener implements ServletContextListener {
 		
 		BeanFactory.initProperty();
 		
-		AnnotationScaner annotationObject = new AnnotationScaner();
+		ScanAnnotation annotationObject = new ScanAnnotation();
 		annotationObject.load();
 		annotationObject = null;
 		

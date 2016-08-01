@@ -16,15 +16,15 @@ import org.slf4j.LoggerFactory;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public class ProxyHandler implements InvocationHandler {
+public class ProxyJdkHandler implements InvocationHandler {
 	
-	private static final Logger log = LoggerFactory.getLogger(ProxyHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ProxyJdkHandler.class);
 	
 	private Class<?> cls;
 	
 	private boolean isTransaction;
 
-	protected ProxyHandler(Class<?> cls, boolean isTransaction) {
+	protected ProxyJdkHandler(Class<?> cls, boolean isTransaction) {
 		this.cls = cls;
 		this.isTransaction = isTransaction;
 	}

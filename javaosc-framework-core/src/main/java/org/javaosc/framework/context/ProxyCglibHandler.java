@@ -18,9 +18,9 @@ import org.slf4j.LoggerFactory;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public class CglibProxyHandler implements MethodInterceptor {
+public class ProxyCglibHandler implements MethodInterceptor {
 	
-	private static final Logger log = LoggerFactory.getLogger(CglibProxyHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ProxyCglibHandler.class);
 	
 	private Enhancer enhancer = new Enhancer();
 	
@@ -28,7 +28,7 @@ public class CglibProxyHandler implements MethodInterceptor {
 	
 	private boolean isTransaction;
 	
-	protected CglibProxyHandler(Class<?> cls, boolean isTransaction) {
+	protected ProxyCglibHandler(Class<?> cls, boolean isTransaction) {
 		this.cls = cls;
 		this.isTransaction = isTransaction;
 	}

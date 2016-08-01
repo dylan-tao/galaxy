@@ -17,13 +17,13 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class AnnotationScaner {
+public class ScanAnnotation {
 	
-	Logger log = LoggerFactory.getLogger(AnnotationScaner.class);
+	Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
 	
 	public void load(){
 		String packageName = ConfigurationHandler.getScanPackage();
-		List<String> classNameList = new PackageScaner().getClassName(packageName);
+		List<String> classNameList = new ScanPackage().getClassName(packageName);
 		if(classNameList.size()>0){
 			scanerClassFile(classNameList);
 		}
