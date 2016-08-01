@@ -6,7 +6,6 @@ import java.util.List;
 import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Prototype;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.web.RouteNodeRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +22,8 @@ public class AnnotationScaner {
 	Logger log = LoggerFactory.getLogger(AnnotationScaner.class);
 	
 	public void load(){
-		String packageName = Configuration.getValue(ProperConstant.SCANER_PACKAGE_KEY);
-		List<String> classNameList = new ScanPackage().getClassName(packageName);
+		String packageName = ConfigurationHandler.getScanPackage();
+		List<String> classNameList = new PackageScaner().getClassName(packageName);
 		if(classNameList.size()>0){
 			scanerClassFile(classNameList);
 		}

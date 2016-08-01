@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
 import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,17 +69,8 @@ public class BeanFactory {
 		beanMap = null;
 	}
 	
-	public static void initKeywords(){
-		String keyword = Configuration.getValue(ProperConstant.METHOD_KEYWORD_KEY, null);
-		if(keyword != null){
-			if(keyword.indexOf(Constant.COMMA)!=-1){
-				keywords = keyword.split(Constant.COMMA);
-			}else{
-				keywords = new String[]{keyword};
-			}
-		}else{
-			keywords = null;
-		}
-		proxyMode =  Configuration.getValue(ProperConstant.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
+	public static void initProperty(){
+		keywords = ConfigurationHandler.getKeywords();
+		proxyMode =  ConfigurationHandler.getProxyMode();
 	}
 }

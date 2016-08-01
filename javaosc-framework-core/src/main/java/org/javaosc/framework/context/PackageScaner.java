@@ -12,7 +12,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.constant.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ScanPackage {
+public class PackageScaner {
 	
-	private static final Logger log = LoggerFactory.getLogger(ScanPackage.class);
+	private static final Logger log = LoggerFactory.getLogger(PackageScaner.class);
 	
 	private String[] keywords = null;
 	
@@ -35,7 +35,7 @@ public class ScanPackage {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
 			if(url == null){
-				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, ProperConstant.SCANER_PACKAGE_KEY, Configuration.javaoscConfig);
+				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigurationHandler.javaoscConfig);
 			}else{
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
@@ -83,7 +83,7 @@ public class ScanPackage {
 	private boolean isHasClassKeyword(String fileName){
 		boolean flag = false;
 		if(keywords == null){
-			String keyword = Configuration.getValue(ProperConstant.CLASS_KEYWORD_KEY, ProperConstant.CLASS_KEYWORD_VALUE);
+			String keyword = ConfigurationHandler.getValue(Configuration.CLASS_KEYWORD_KEY, Configuration.CLASS_KEYWORD_VALUE);
 			if(keyword.indexOf(Constant.COMMA)!=-1){
 				keywords = keyword.split(Constant.COMMA);
 			}else{

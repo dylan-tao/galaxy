@@ -6,10 +6,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.context.AnnotationScaner;
 import org.javaosc.framework.context.BeanFactory;
-import org.javaosc.framework.context.Configuration;
+import org.javaosc.framework.context.ConfigurationHandler;
 import org.javaosc.framework.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class ContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		
 		ActionContext.destroy();
-		Configuration.clear();
+		ConfigurationHandler.clear();
 		BeanFactory.clear();
 		RouteNodeRegistry.clear();
 		ConnectionHandler.destroy();
@@ -50,9 +50,9 @@ public class ContextListener implements ServletContextListener {
 //			Logba.load(PathUtil.getClassPath() + logbackFile);
 //		}
 		
-		Configuration.load(sc.getInitParameter(ProperConstant.CONFIG_FILE_NAME));
+		ConfigurationHandler.load(sc.getInitParameter(Configuration.CONFIG_FILE_NAME));
 		
-		BeanFactory.initKeywords();
+		BeanFactory.initProperty();
 		
 		AnnotationScaner annotationObject = new AnnotationScaner();
 		annotationObject.load();

@@ -11,8 +11,7 @@ import javax.sql.DataSource;
 import org.javaosc.framework.assist.ClassHandler;
 import org.javaosc.framework.assist.PropertyConvert;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
-import org.javaosc.framework.context.Configuration;
+import org.javaosc.framework.context.ConfigurationHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -31,7 +30,7 @@ public class ConnectionHandler {
 	private static ThreadLocal<Connection> connManger = new ThreadLocal<Connection>();
 	
 	public static void init(){
-		String poolName = Configuration.getValue(ProperConstant.POOL_DATASOURCE);
+		String poolName = ConfigurationHandler.getPollName();
 		if(poolName.indexOf("java:")==0){ //tomcat jdbc
 			try {
 				Context c = new InitialContext();
@@ -46,7 +45,7 @@ public class ConnectionHandler {
 //					Object bean = poolObj.newInstance();
 //					BeanUtils.populate(bean, Configuration.getPoolParam());
 //					ds = (DataSource)bean;
-					ds = (DataSource) PropertyConvert.convert(Configuration.getPoolParam(), poolObj, null);
+					ds = (DataSource) PropertyConvert.convert(ConfigurationHandler.getPoolParam(), poolObj, null);
 				} catch (Exception e) {
 					log.error(Constant.JAVAOSC_EXCEPTION, e);
 				} 

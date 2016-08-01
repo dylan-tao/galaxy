@@ -9,7 +9,7 @@ import org.javaosc.framework.constant.Constant.CodeType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public interface ProperConstant {
+public interface Configuration {
 	
 	static final String CONFIG_FILE_NAME = "javaoscConfig";
 	static final String CONFIG_HEAD_COMMENT = "javaosc configuration setting";

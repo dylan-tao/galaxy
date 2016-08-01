@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.convert.ConvertFactory;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
@@ -156,7 +156,7 @@ public class MethodParamHandler {
 				byte[] data = new byte[len];
 				dis.read(data);
 				strs.put(i + 1, new String(data,
-						ProperConstant.DEFAULT_ENCODING_VALUE));
+						Configuration.DEFAULT_ENCODING_VALUE));
 				break;
 			case 15:
 				dis.skipBytes(1);

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.assist.RequestParamHandler;
-import org.javaosc.framework.context.Configuration;
+import org.javaosc.framework.context.ConfigurationHandler;
 
 /**
  * 
@@ -37,11 +37,11 @@ public final class ActionContext {
 		
 		ActionContext actionContext = ActionContext.getContext();
 		
-		if(Configuration.getRequestEncode()){
-			request.setCharacterEncoding(Configuration.getContextEncode());
+		if(ConfigurationHandler.getRequestEncode()){
+			request.setCharacterEncoding(ConfigurationHandler.getContextEncode());
 		}
-		if(Configuration.getResponseEncode()){
-			response.setCharacterEncoding(Configuration.getContextEncode());
+		if(ConfigurationHandler.getResponseEncode()){
+			response.setCharacterEncoding(ConfigurationHandler.getContextEncode());
 		}
 		
 		actionContext.setRequest(request);

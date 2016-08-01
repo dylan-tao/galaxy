@@ -12,7 +12,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.ProperConstant;
+import org.javaosc.framework.constant.Configuration;
+import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
 import org.javaosc.framework.util.StringUtil.PatternValue;
@@ -26,9 +27,9 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class Configuration {
+public class ConfigurationHandler {
 	
-	private static final Logger log = LoggerFactory.getLogger(Configuration.class);
+	private static final Logger log = LoggerFactory.getLogger(ConfigurationHandler.class);
 	
 	protected static String javaoscConfig = "configuration.properties";
 	
@@ -79,37 +80,64 @@ public class Configuration {
 	
 	public static String getViewPrefix(){
 		if(StringUtil.isBlank(prefix)){
-			prefix = getValue(ProperConstant.PREFIX_KEY,ProperConstant.DEFAULT_PREFIX_VALUE);
+			prefix = getValue(Configuration.PREFIX_KEY,Configuration.DEFAULT_PREFIX_VALUE);
 		}
 		return prefix;
 	}
 	
 	public static String getViewSuffix(){
 		if(StringUtil.isBlank(suffix)){
-			suffix = getValue(ProperConstant.SUFFIX_KEY,ProperConstant.DEFAULT_SUFFIX_VALUE);
+			suffix = getValue(Configuration.SUFFIX_KEY,Configuration.DEFAULT_SUFFIX_VALUE);
 		}
 		return suffix;
 	}
 	
 	public static String getContextEncode(){
 		if(StringUtil.isBlank(encoding)){
-			encoding = getValue(ProperConstant.CONTEXT_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_VALUE);
+			encoding = getValue(Configuration.CONTEXT_ENCODE_KEY,Configuration.DEFAULT_ENCODING_VALUE);
 		}
 		return encoding;
 	}
 	
 	public static boolean getRequestEncode(){
 		if(requestEncoding == null){
-			requestEncoding = Boolean.valueOf(getValue(ProperConstant.REQUEST_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_FLAG));
+			requestEncoding = Boolean.valueOf(getValue(Configuration.REQUEST_ENCODE_KEY,Configuration.DEFAULT_ENCODING_FLAG));
 		}
 		return requestEncoding;
 	}
 	
 	public static boolean getResponseEncode(){
 		if(responseEncoding == null){
-			responseEncoding = Boolean.valueOf(getValue(ProperConstant.RESPONSE_ENCODE_KEY,ProperConstant.DEFAULT_ENCODING_FLAG));
+			responseEncoding = Boolean.valueOf(getValue(Configuration.RESPONSE_ENCODE_KEY,Configuration.DEFAULT_ENCODING_FLAG));
 		}
 		return responseEncoding;
+	}
+	
+	public static String getScanPackage(){
+		return getValue(Configuration.SCANER_PACKAGE_KEY, null);
+	}
+	
+	public static String getPollName(){
+		return getValue(Configuration.POOL_DATASOURCE, null);
+	}
+	
+	public static String[] getKeywords(){
+		String[] keywords = null;
+		String keyword = ConfigurationHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
+		if(keyword != null){
+			if(keyword.indexOf(Constant.COMMA)!=-1){
+				keywords = keyword.split(Constant.COMMA);
+			}else{
+				keywords = new String[]{keyword};
+			}
+		}else{
+			keywords = null;
+		}
+		return keywords;
+	}
+	
+	public static String getProxyMode(){
+		return ConfigurationHandler.getValue(Configuration.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
 	}
 	
 	
@@ -121,38 +149,38 @@ public class Configuration {
 		String value = properties.getProperty(key);
 		return StringUtil.isNotBlank(value)?StringUtil.clearSpace(value, PatternValue.ALL):defaultValue;
 	}
-	
-	public static boolean getValue(String key, boolean defaultValue) {
-		String value = getValue(key);
-		return value != null ? Boolean.parseBoolean(value) : defaultValue;
-	}
-	
-	public static long getValue(String key, long defaultValue) {
-		String value = getValue(key);
-		return value != null ? Long.parseLong(value) : defaultValue;
-	}
-	
-	public static int getValue(String key, int defaultValue) {
-		String value = getValue(key);
-		return value != null ? Integer.parseInt(value) : defaultValue;
-	}
-	
+//	
+//	public static boolean getValue(String key, boolean defaultValue) {
+//		String value = getValue(key);
+//		return value != null ? Boolean.parseBoolean(value) : defaultValue;
+//	}
+//	
+//	public static long getValue(String key, long defaultValue) {
+//		String value = getValue(key);
+//		return value != null ? Long.parseLong(value) : defaultValue;
+//	}
+//	
+//	public static int getValue(String key, int defaultValue) {
+//		String value = getValue(key);
+//		return value != null ? Integer.parseInt(value) : defaultValue;
+//	}
+//	
 	public static Map<String, Object> getPoolParam(){
-		Map<String, Object> prm = new HashMap<String, Object>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<Object, Object> entry = it.next();
 			String key = String.valueOf(entry.getKey());
 			if(StringUtil.isNotBlank(key)){
 				Object value = entry.getValue();
-				if(key.startsWith(ProperConstant.STARTWITH_DB)){
-					prm.put(key.replace(ProperConstant.STARTWITH_DB, Constant.EMPTY), value);
-				}else if(key.startsWith(ProperConstant.STARTWITH_POOL)){
-					prm.put(key.replace(ProperConstant.STARTWITH_POOL, Constant.EMPTY), value);
+				if(key.startsWith(Configuration.STARTWITH_DB)){
+					paramMap.put(key.replace(Configuration.STARTWITH_DB, Constant.EMPTY), value);
+				}else if(key.startsWith(Configuration.STARTWITH_POOL)){
+					paramMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
 				}
 			}
 		}
-		return prm;
+		return paramMap;
 	}
 	
 	public static void exprot(){
@@ -160,7 +188,7 @@ public class Configuration {
 			OutputStream outputStream = null;
 			try {
 				outputStream = new FileOutputStream(PathUtil.getClassPath() + javaoscConfig);
-				properties.store(outputStream, ProperConstant.CONFIG_HEAD_COMMENT);
+				properties.store(outputStream, Configuration.CONFIG_HEAD_COMMENT);
 				outputStream.flush();
 				log.info("exporting configuration file: {}", javaoscConfig);
 			} catch (FileNotFoundException e) {
