@@ -2,6 +2,7 @@ package org.javaosc.framework.web.assist;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.ContentType;
+import org.javaosc.framework.util.JsonUtil;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,27 +25,54 @@ public class ContextHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(ContextHandler.class);
 	
-	public static void setAttribute(String key, Object value){
-		 ActionContext.getContext().getRequest().setAttribute(key, value);
+	/* ========== attribute ========== */
+	
+	public static void putAttr(Object... param){
+		int length = param!=null?param.length : 0;
+		if(length==2){
+			ActionContext.getContext().getRequest().setAttribute(String.valueOf(param[0]), param[1]);
+		}else if(length>2 && length%2==0){
+			length = length/2;
+			for(int i=0;i<length;i++){
+			   ActionContext.getContext().getRequest().setAttribute(String.valueOf(param[2*i]), param[2*i+1]);
+			}
+		}else{
+			log.error(Constant.JAVAOSC_EXCEPTION, "the number of param must be an even number!");
+		}
 	}
 	
-	public static void setJsonAttribute(String content) {
-		setTextAttribute(content,ContentType.JSON);
-	}
+	/* ========== json ========== */
 	
-	public static void setTextAttribute(String content,ContentType contentType) {
-		ActionContext.getContext().getResponse().setContentType(contentType.getValue());
+	public static void putJson(Object... param) {
+		String content = null;
+		ActionContext.getContext().getResponse().setContentType(ContentType.JSON.getValue());
 		try {
 			PrintWriter out = ActionContext.getContext().getResponse().getWriter();
+			int length = param!=null?param.length : 0;
+			if(length==1){
+				content = JsonUtil.toJSON(param[0]);
+			}else if(length>1 && length%2==0){
+				length = length/2;
+				HashMap<String, Object> buildResult = new HashMap<String, Object>();
+				for(int i=0;i<length;i++){
+					buildResult.put(String.valueOf(param[2*i]), param[2*i+1]);
+				}
+				content = JsonUtil.toJSON(buildResult);
+			}else{
+				log.error(Constant.JAVAOSC_EXCEPTION, "the number of param must be an even number!");
+			}
 			out.write(content);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);;
 		}finally{
+			content = null;
 			log.debug(content);
 		}
 	}
+	
+	/* ========== session ========== */
 	
 	public static void setSession(String name, Object value){
 		ActionContext.getContext().getRequest().getSession().setAttribute(name, value);
@@ -57,6 +86,8 @@ public class ContextHandler {
 	public static void removeSession(String name){
 		ActionContext.getContext().getRequest().getSession().removeAttribute(name);
 	}
+	
+	/* ========== cookie ========== */
 	
     public static void setCookie(String name, String value, int maxSecond) {
         setCookie(name, value, maxSecond, Constant.LINE);
