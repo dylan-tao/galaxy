@@ -20,24 +20,12 @@
 	<dependencies>
 
 		<!-- core -->
-	   <!-- <dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils-core</artifactId>
-		</dependency> -->
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
-		<!-- support -->
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
+		<!-- weak ref -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
@@ -55,15 +43,21 @@
 			<artifactId>cos</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- realize -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-		<!-- servlet -->
+		<!-- compile or test ref -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- unit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

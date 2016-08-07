@@ -21,7 +21,13 @@
 			<artifactId>javaosc-framework-core</artifactId>	
 		</dependency>
 		
-		<!-- log -->
+		<!-- weak ref -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		
+		<!-- realize -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -32,12 +38,7 @@
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 
-		<!-- expend -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-		</dependency>
-
+		<!-- db pool choose -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -55,19 +56,19 @@
 		</dependency>
 
 
-		<!-- servlet -->
+		<!-- compile or test ref -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- unit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<build>

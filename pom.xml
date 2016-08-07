@@ -20,13 +20,14 @@
 		
 		<!-- core -->
 		<slf4j.version>1.7.21</slf4j.version>
-		<apache.beanutils.version>1.8.3</apache.beanutils.version>
-		<cglib.nodep.version>3.2.4</cglib.nodep.version>
 		
-		<!-- support -->
-		<slf4j.logback.version>1.1.7</slf4j.logback.version>
+		<!-- weak ref -->
 		<google.gson.version>2.7</google.gson.version>
+		<cglib.nodep.version>3.2.4</cglib.nodep.version>
 		<ormilly.cos.version>05Nov2002</ormilly.cos.version>
+		
+		<!-- realize -->
+		<slf4j.logback.version>1.1.7</slf4j.logback.version>
 		
 		<!-- db pool choose -->
 		<!-- <mariadb.connector.version>1.4.6</mariadb.connector.version> -->
@@ -35,13 +36,16 @@
 		<!-- <hikaricp.pool.version>2.4.7</hikaricp.pool.version> -->
 		<com.mchange.c3p0.version>0.9.5.2</com.mchange.c3p0.version>
 		
+		<!-- compile or test ref -->
 		<javax.servlet.version>3.0.1</javax.servlet.version>
 		<junit.version>4.12</junit.version>
+		
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-
+			
+			<!-- mode -->
 			<dependency>
 				<groupId>org.javaosc.framework.core</groupId>
 				<artifactId>javaosc-framework-core</artifactId>
@@ -54,41 +58,21 @@
 				<version>${javaosc.framework.example.version}</version>	
 			</dependency>
 			
-			<!-- basic ref -->
-			<dependency>
-				<groupId>commons-beanutils</groupId>
-				<artifactId>commons-beanutils-core</artifactId>
-				<version>${apache.beanutils.version}</version>
-				<exclusions>
-			        <exclusion>
-				          <groupId>commons-logging</groupId>
-				          <artifactId>commons-logging</artifactId>
-			        </exclusion>
-			     </exclusions>
-			</dependency> 
-			
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-
+			<!-- core -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
 			
-			<!-- choose ref -->
-			
+			<!-- weak ref -->
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>${cglib.nodep.version}</version>
 			</dependency>
 
-			<!-- support -->
-			
+			<!-- realize -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
@@ -105,6 +89,12 @@
 				<groupId>servlets.com</groupId>
 				<artifactId>cos</artifactId>
 				<version>${ormilly.cos.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 			
 			<!-- db pool choose -->
@@ -143,7 +133,7 @@
 			    <version>${com.mchange.c3p0.version}</version>
 			</dependency>
 
-			<!-- servlet -->
+			<!-- compile or test ref -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -151,7 +141,6 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- unit -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
