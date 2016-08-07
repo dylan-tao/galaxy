@@ -15,7 +15,7 @@
 	<properties>
 
 		<javaosc.framework.version>1.0</javaosc.framework.version>
-		<javaosc.framework.core.version>1.0.0.RELEASE</javaosc.framework.core.version>
+		<javaosc.framework.core.version>ratel-0.9.2.RELEASE</javaosc.framework.core.version>
 		<javaosc.framework.example.version>1.0</javaosc.framework.example.version>
 		
 		<!-- core -->
