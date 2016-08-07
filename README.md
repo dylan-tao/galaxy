@@ -15,7 +15,7 @@ Download (下载)
 
 
 
- or clone project repository:
+or clone project repository:
 
 ```bash
 git clone https://github.com/javaosc-projects/javaosc-framework.git
