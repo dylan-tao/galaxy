@@ -1,10 +1,8 @@
 package org.javaosc.framework.util;
 
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import org.javaosc.framework.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -34,80 +33,77 @@ public class JsonUtil {
 		}
 	}
 
-	/**
-	 * 将对象转为JSON
-	 * @param obj 要转的对象
-	 * @return String json字符串
-	 */
-	public static String toJSON(Object obj) {
+	public static String toJson(Object obj) {
 		String json = null;
-		if (obj == null) {
-			json = "{}";
-		}else{
+		if(obj!=null){
 			try {
 				json = gson.toJson(obj);
 			} catch (Exception e) {
-				if (obj instanceof Collection<?> || obj.getClass().isArray() || obj instanceof Iterator<?> || obj instanceof Enumeration<?>) {
-					json = "[]";
-				} else{
-					json = "{}";
-				}	
+				log.error("to json error ~ {}", obj.getClass().getName());
 			}
 		}
-		log.debug("====== JSON Content: {}", json);
+		log.debug("=== JSON Content: {}", json);
 		return json;
 	}
 	
-	/**
-	 * 将字符串转换为对象
-	 * @param json 字符串
-	 * @param cls 对象类型
-	 * @return T 返回对象
-	 */
-	public static <T> T fromJson(String json, Class<T> cls) {
-		if (StringUtil.isBlank(json)) {
-			return null;
+	public static <T> T fromBean(String json, Class<T> cls) {
+		T t = null;
+		if(StringUtil.isNotBlank(json)){
+			try {
+				t = gson.fromJson(json, cls);
+			} catch (Exception e) {
+				log.error("{} can not format {} !",json, cls.getName());
+			}
 		}
-		try {
-			return gson.fromJson(json, cls);
-		} catch (Exception ex) {
-			log.error("{} 无法转换为{} 对象!",json, cls.getName());
-			return null;
-		}
+		return t;
 	}
 	
-	/**
-	 * 将字符串转换为对象
-	 * @param json 字符串
-	 * @param token 
-	 * 转换成List<User>则为new TypeToken<List<User>>(){}
-	 * 转换成PageModel<User>则为new TypeToken<Page<User>>(){}
-	 * 转换成HashMap<String,List>则为new TypeToken<Map<String,List>>(){}
-	 * @return T
-	 */
-	public static <T> T fromJson(String jsonStr) {
-		if (StringUtil.isBlank(jsonStr)) {
-			return null;
+	public static <T> List<T> fromArray(String json, Class<T> cls) {
+		List<T> list = null;
+		if(StringUtil.isNotBlank(json)){
+			try {
+				list = gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
+			} catch (Exception ex) {
+				log.error("{} can not format {} !", json, new TypeToken<T>(){}.getRawType().getName());
+			}
 		}
-		try {
-			return gson.fromJson(jsonStr, new TypeToken<T>(){}.getType());
-		} catch (Exception ex) {
-			log.error("{} 无法转换为{}对象!",jsonStr, new TypeToken<T>(){}.getRawType().getName());
-			return null;
-		}
+		return list;
 	}
-
-	public static boolean isJson(String jsonStr) {
-		 if(StringUtil.isBlank(jsonStr)) {    
-		    return false;    
+	
+	public static <T> Map<String, T> fromMap(String json) {
+		Map<String, T> map = null;
+		if (StringUtil.isNotBlank(json)) {
+			try {
+				map = gson.fromJson(json, new TypeToken<Map<String, T>>(){}.getType());
+			} catch (JsonSyntaxException e) {
+				log.error("{} can not format {} !", json, new TypeToken<Map<String, T>>(){}.getRawType().getName());
+			}
+		}
+		return map;
+	}
+	
+	public static <T> List<Map<String, T>> fromMapArray(String json) {
+		List<Map<String, T>> list = null;
+		if (StringUtil.isNotBlank(json)) {
+			try {
+				list = gson.fromJson(json, new TypeToken<List<Map<String, T>>>(){}.getType());
+			} catch (JsonSyntaxException e) {
+				log.error("{} can not format {} !", json, new TypeToken<List<Map<String, T>>>(){}.getRawType().getName());
+			}
+		}
+		return list;
+	}
+	
+	public static boolean check(String json) {
+		 if(StringUtil.isNotBlank(json)) {    
+			 try {    
+			     new JsonParser().parse(json);  
+			     return true;    
+			 } catch (JsonParseException e) {    
+				 log.error("json format error ：{}", json);
+			}       
 		 }    
-		 try {    
-		     new JsonParser().parse(jsonStr);  
-		     return true;    
-		 } catch (JsonParseException e) {    
-			 log.error("json格式错误：{}", jsonStr);
-		     return false;    
-		}      
+		 return false; 
 	}
 	
 }
