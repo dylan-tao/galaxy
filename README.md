@@ -5,3 +5,14 @@ Documentation
 ---------------------
 
 - Homepage:  [查看文档](http://javaosc-projects.github.io/javaosc-framework/)
+
+Download
+-------------------
+
+https://github.com/javaosc-projects/javaosc-framework/tags
+
+Or clone project repository:
+
+```bash
+git clone https://github.com/javaosc-projects/javaosc-framework.git
+```
