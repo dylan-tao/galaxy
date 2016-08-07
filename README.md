@@ -11,7 +11,7 @@ Download (下载)
 -------------------
 
 - 标签列表 :  [查看列表](https://github.com/javaosc-projects/javaosc-framework/tags/)
-- TagList :  [view list](https://github.com/javaosc-projects/javaosc-framework/tags/)
+- Tag List :  [view list](https://github.com/javaosc-projects/javaosc-framework/tags/)
 
 
 
