@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Configuration;
+import org.javaosc.framework.constant.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +40,7 @@ public class ScanPackage {
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
 					File[] files = new File(url.toURI()).listFiles();
+					files = files ==null? new File[0]:files;
 					for (File f : files) {
 						scanFile(packageName, f, classNameList);
 					}
@@ -63,7 +64,9 @@ public class ScanPackage {
 			fileName = fileName.substring(0, fileName.length() - 6);
 			classNameList.add(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
 		} else if (file.isDirectory()) {
-			for (File f : file.listFiles()) {
+			File[] files = file.listFiles();
+			files = files ==null? new File[0]:files;
+			for (File f : files) {
 				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f, classNameList);
 			}
 		}

@@ -44,7 +44,7 @@ public class ContextHandler {
 	/* ========== json ========== */
 	
 	public static void putJson(Object... param) {
-		String content = null;
+		String content = "";
 		ActionContext.getContext().getResponse().setContentType(ContentType.JSON.getValue());
 		try {
 			PrintWriter out = ActionContext.getContext().getResponse().getWriter();

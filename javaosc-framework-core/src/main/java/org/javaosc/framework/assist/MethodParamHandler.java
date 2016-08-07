@@ -42,13 +42,10 @@ public class MethodParamHandler {
 			if (ClassHandler.isJavaClass(prmType)) {
 				Object objValue = dataMap.get(paramNames[j]);
 				if (prmType.isPrimitive()) {
-//					obj[j] = ConvertUtils.convert(objValue, prmType);
 					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType == String.class || ClassHandler.isWrapClass(prmType)) {
-//					obj[j] = objValue == null ? objValue : ConvertUtils.convert(objValue, prmType);
 					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType.isArray()) {
-//					obj[j] = objValue == null ? objValue : ConvertUtils.convert((String[]) objValue, prmType);
 					obj[j] = ConvertFactory.convert(prmType, objValue);
 				} else if (prmType == HttpServletRequest.class) {
 					obj[j] = ActionContext.getContext().getRequest();
@@ -60,9 +57,6 @@ public class MethodParamHandler {
 			} else {
 				try {
 					if (dataMap.size() > 0) {
-//						Object bean = prmType.newInstance();
-//						BeanUtils.populate(bean, dataMap);
-//						obj[j] = prmType.cast(bean);
 						obj[j] = PropertyConvert.convert(dataMap, prmType, null);
 					} else {
 						obj[j] = null;
@@ -78,12 +72,20 @@ public class MethodParamHandler {
 	public static String[] getParamName(Method method) {
 		try {
 			int size = method.getParameterTypes().length;
-			if (size == 0) return new String[0];
-			List<String> list = getParamNames(method.getDeclaringClass()).get(getKey(method));
-			if (list != null && list.size() != size){
-				return list.subList(0, size).toArray(new String[size]);
+			if (size == 0) {
+				return new String[0];
+			}else{
+				List<String> list = getParamNames(method.getDeclaringClass()).get(getKey(method));
+				if (list != null){
+					if(list.size() == size){
+						return list.toArray(new String[size]);
+					}else{
+						return list.subList(0, size).toArray(new String[size]);
+					}
+				}else{
+					return new String[0];
+				}
 			}
-			return list.toArray(new String[size]);
 		} catch (Throwable e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 			return null;
@@ -93,28 +95,30 @@ public class MethodParamHandler {
 	protected static List<String> getParamNames(Constructor<?> constructor) {
 		try {
 			int size = constructor.getParameterTypes().length;
-			if (size == 0)
+			if (size == 0){
 				return new ArrayList<String>(0);
-			List<String> list = getParamNames(constructor.getDeclaringClass())
-					.get(getKey(constructor));
-			if (list != null && list.size() != size)
-				return list.subList(0, size);
-			return list;
+			}
+			List<String> list = getParamNames(constructor.getDeclaringClass()).get(getKey(constructor));
+			if (list != null){
+				if(list.size() == size){
+					return list;
+				}else{
+					return list.subList(0, size);
+				}
+			}else{
+				return new ArrayList<String>(0);
+			}
 		} catch (Throwable e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static Map<String, List<String>> getParamNames(Class<?> klass)
-			throws IOException {
-		InputStream in = klass.getResourceAsStream(Constant.LINE
-				+ klass.getName().replace(Constant.DOT, Constant.LINE)
-				+ Constant.SUFFIX_CLASS);
+	private static Map<String, List<String>> getParamNames(Class<?> klass) throws IOException {
+		InputStream in = klass.getResourceAsStream(Constant.LINE + klass.getName().replace(Constant.DOT, Constant.LINE) + Constant.SUFFIX_CLASS);
 		return getParamNames(in);
 	}
 
-	private static Map<String, List<String>> getParamNames(InputStream in)
-			throws IOException {
+	private static Map<String, List<String>> getParamNames(InputStream in) throws IOException {
 		DataInputStream dis = new DataInputStream(new BufferedInputStream(in));
 		Map<String, List<String>> names = new HashMap<String, List<String>>();
 		Map<Integer, String> strs = new HashMap<Integer, String>();
