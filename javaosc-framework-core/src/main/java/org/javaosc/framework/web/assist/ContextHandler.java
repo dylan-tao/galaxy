@@ -50,14 +50,14 @@ public class ContextHandler {
 			PrintWriter out = ActionContext.getContext().getResponse().getWriter();
 			int length = param!=null?param.length : 0;
 			if(length==1){
-				content = JsonUtil.toJSON(param[0]);
+				content = JsonUtil.toJson(param[0]);
 			}else if(length>1 && length%2==0){
 				length = length/2;
 				HashMap<String, Object> buildResult = new HashMap<String, Object>();
 				for(int i=0;i<length;i++){
 					buildResult.put(String.valueOf(param[2*i]), param[2*i+1]);
 				}
-				content = JsonUtil.toJSON(buildResult);
+				content = JsonUtil.toJson(buildResult);
 			}else{
 				log.error(Constant.JAVAOSC_EXCEPTION, "the number of param must be an even number!");
 			}
