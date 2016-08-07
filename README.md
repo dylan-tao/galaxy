@@ -4,4 +4,4 @@ Javaosc Framework (ratel)
 Documentation
 ---------------------
 
-- Homepage: [中文](http://javaosc-projects.github.io/javaosc-framework/)
+- Homepage:  [中文](http://javaosc-projects.github.io/javaosc-framework/)
