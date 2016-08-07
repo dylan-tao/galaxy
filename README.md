@@ -1,5 +1,7 @@
-Javaosc Framework (ratel)   [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+Javaosc Framework [![Release](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](ratel-0.9.2.RELEASE)  
 ================================================
+
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 Documentation
 ---------------------
