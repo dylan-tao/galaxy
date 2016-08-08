@@ -16,7 +16,7 @@ import java.sql.Statement;
  */
 public class JdbcTemplate extends AbstractJdbcTemplate {
 	
-	 public JdbcTemplate() { }
+	public JdbcTemplate() { }
     
     public JdbcTemplate(boolean pmdKnownBroken) {
         super(pmdKnownBroken);

@@ -117,7 +117,7 @@ public class ConfigurationHandler {
 		return getValue(Configuration.SCANER_PACKAGE_KEY, null);
 	}
 	
-	public static String getPollName(){
+	public static String getDataSourceName(){
 		return getValue(Configuration.POOL_DATASOURCE, null);
 	}
 	

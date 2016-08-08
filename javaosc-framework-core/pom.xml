@@ -44,6 +44,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- realize -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

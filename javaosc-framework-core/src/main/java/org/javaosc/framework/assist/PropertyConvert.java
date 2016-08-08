@@ -7,23 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.cglib.beans.BeanMap;
-
 import org.javaosc.framework.convert.ConvertFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * 
+ * @description
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
+ */
 public class PropertyConvert {
 	
 	private static final Logger log = LoggerFactory.getLogger(PropertyConvert.class);
 	
 	private static Map<String,ConvertItem> convertItemCache = new HashMap<String,ConvertItem>(); 
-	
-	public static <T> T mapToBean(Map<String, Object> map, T bean) {  
-	    BeanMap beanMap = BeanMap.create(bean);  
-	    beanMap.putAll(map);  
-	    return bean;  
-	}  
 	
     /** 
      * Map转换为Entry 

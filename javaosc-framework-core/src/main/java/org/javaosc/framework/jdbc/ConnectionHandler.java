@@ -30,7 +30,7 @@ public class ConnectionHandler {
 	private static ThreadLocal<Connection> connManger = new ThreadLocal<Connection>();
 	
 	public static void init(){
-		String poolName = ConfigurationHandler.getPollName();
+		String poolName = ConfigurationHandler.getDataSourceName();
 		if(poolName.indexOf("java:")==0){ //tomcat jdbc
 			try {
 				Context c = new InitialContext();
@@ -121,6 +121,7 @@ public class ConnectionHandler {
 	public static void destroy(){
 		close();
 		connManger = null;
+		ds = null;
 	}
 	
 	private static Connection getDataSourceConn(){
