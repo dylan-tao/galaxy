@@ -21,6 +21,11 @@
 			<artifactId>javaosc-framework-core</artifactId>	
 		</dependency>
 		
+		<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+		</dependency>
+		
 		<!-- weak ref -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

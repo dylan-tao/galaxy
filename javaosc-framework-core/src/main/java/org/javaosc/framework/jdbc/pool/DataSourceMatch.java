@@ -33,7 +33,9 @@ public class DataSourceMatch {
 		}else if(dataSourceName.indexOf(".c3p0.")>0){ //c3p0 pool
 			C3p0Handler c3p0Handler = null;
 			try {
-				c3p0Handler = PropertyConvert.convert(ConfigurationHandler.getPoolParam(), C3p0Handler.class, null);
+//				c3p0Handler = PropertyConvert.convert(ConfigurationHandler.getPoolParam(), C3p0Handler.class, null);
+//				c3p0Handler = PropertyConvert.mapToBean(ConfigurationHandler.getPoolParam(), new C3p0Handler());
+				c3p0Handler = PropertyConvert.convertMap(ConfigurationHandler.getPoolParam(), C3p0Handler.class);
 				ds = c3p0Handler.getDataSource();
 			} catch (Exception e) {
 				log.error(Constant.JAVAOSC_EXCEPTION, e);
