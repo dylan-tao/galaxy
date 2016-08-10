@@ -35,7 +35,7 @@ public class C3p0Handler implements PoolHandler{
 		if(StringUtil.isBlank(driverClass) || StringUtil.isBlank(jdbcUrl) || StringUtil.isBlank(user)){
 			throw new Exception("db.driverClass,db.jdbcUrl,db.user can not be null! ");
 		}
-		ComboPooledDataSource ds = new ComboPooledDataSource(false);
+		ComboPooledDataSource ds = new ComboPooledDataSource(true);
 		ds.setDriverClass(driverClass);
 		ds.setJdbcUrl(jdbcUrl);
 		ds.setUser(user);
