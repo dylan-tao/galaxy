@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class IntegerConvert implements Convert<Object[], Integer> {
+public class IntegerConvert implements Convert<Object, Integer> {
 
 	private static final Logger log = LoggerFactory.getLogger(IntegerConvert.class);
 
 	@Override
-	public Integer convert(Object[] source) {
+	public Integer convert(Object source) {
 		if (source == null)
 			return null;
 		try {
-			return Integer.parseInt(String.valueOf(source[0]));	
+			return Integer.parseInt(String.valueOf(source));	
 		} catch (NumberFormatException e) {
 			log.warn("IntegerConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;

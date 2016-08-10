@@ -74,13 +74,14 @@ public class PropertyConvert {
         for (int i = 0; i < propertyDescriptors.length; i++) {  
             PropertyDescriptor property = propertyDescriptors[i];
             Method m = property.getWriteMethod();
-            
-            Class<?>[] paramTypes = m.getParameterTypes();  
-            if(paramTypes.length != 1) continue;
-            
-            String name = property.getName();  
-            Class<?> type = property.getPropertyType();
-            propertyMap.put(name, type);
+            if(m!=null){
+            	Class<?>[] paramTypes = m.getParameterTypes();  
+                if(paramTypes.length != 1) continue;
+                
+                String name = property.getName();  
+                Class<?> type = property.getPropertyType();
+                propertyMap.put(name, type);  
+            }
         }
         if(propertyMap.size()>0){
         	fieldSetPropertyMap.put(clsType.getName(), propertyMap);

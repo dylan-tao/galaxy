@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class LongConvert implements Convert<Object[], Long> {
+public class LongConvert implements Convert<Object, Long> {
 
 	private static final Logger log = LoggerFactory.getLogger(LongConvert.class);
 
 	@Override
-	public Long convert(Object[] source) {
+	public Long convert(Object source) {
 		if (source == null)
 			return null;
 		try {
-			return Long.parseLong(String.valueOf(source[0]));
+			return Long.parseLong(String.valueOf(source));
 		} catch (NumberFormatException e) {
 			log.warn("LongConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;

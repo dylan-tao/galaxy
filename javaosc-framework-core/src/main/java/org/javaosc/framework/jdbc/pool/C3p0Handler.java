@@ -30,25 +30,28 @@ public class C3p0Handler implements PoolHandler{
 	private Boolean breakAfterAcquireFailure;
 	private Boolean testConnectionOnCheckout;
 	
-	private ComboPooledDataSource dataSource;
-
 	@Override
 	public DataSource getDataSource() throws Exception {
-		if(StringUtil.isBlank(driverClass) || StringUtil.isBlank(jdbcUrl) || StringUtil.isBlank(user) || StringUtil.isBlank(password)){
-			throw new Exception("db.driverClass,db.jdbcUrl,db.user,db.password can not be null! ");
+		if(StringUtil.isBlank(driverClass) || StringUtil.isBlank(jdbcUrl) || StringUtil.isBlank(user)){
+			throw new Exception("db.driverClass,db.jdbcUrl,db.user can not be null! ");
 		}
-		dataSource = new ComboPooledDataSource();
-		dataSource.setMinPoolSize(minPoolSize==null?5:minPoolSize);
-		dataSource.setMaxPoolSize(maxPoolSize==null?30:maxPoolSize);
-		dataSource.setInitialPoolSize(initialPoolSize==null?10:initialPoolSize);
-		dataSource.setMaxIdleTime(maxIdleTime==null?60:maxIdleTime);
-		dataSource.setAcquireIncrement(acquireIncrement==null?5:acquireIncrement);
-		dataSource.setMaxStatements(maxStatements==null?0:maxStatements);
-		dataSource.setIdleConnectionTestPeriod(idleConnectionTestPeriod==null?60:idleConnectionTestPeriod);
-		dataSource.setAcquireRetryAttempts(acquireRetryAttempts==null?30:acquireRetryAttempts);
-		dataSource.setBreakAfterAcquireFailure(breakAfterAcquireFailure==null?false:breakAfterAcquireFailure);
-		dataSource.setTestConnectionOnCheckout(testConnectionOnCheckout==null?false:testConnectionOnCheckout);
-		return dataSource;
+		ComboPooledDataSource ds = new ComboPooledDataSource(false);
+		ds.setDriverClass(driverClass);
+		ds.setJdbcUrl(jdbcUrl);
+		ds.setUser(user);
+		ds.setPassword(password);
+		
+		ds.setMinPoolSize(minPoolSize==null?5:minPoolSize);
+		ds.setMaxPoolSize(maxPoolSize==null?30:maxPoolSize);
+		ds.setInitialPoolSize(initialPoolSize==null?10:initialPoolSize);
+		ds.setMaxIdleTime(maxIdleTime==null?60:maxIdleTime);
+		ds.setAcquireIncrement(acquireIncrement==null?5:acquireIncrement);
+		ds.setMaxStatements(maxStatements==null?0:maxStatements);
+		ds.setIdleConnectionTestPeriod(idleConnectionTestPeriod==null?60:idleConnectionTestPeriod);
+		ds.setAcquireRetryAttempts(acquireRetryAttempts==null?30:acquireRetryAttempts);
+		ds.setBreakAfterAcquireFailure(breakAfterAcquireFailure==null?false:breakAfterAcquireFailure);
+		ds.setTestConnectionOnCheckout(testConnectionOnCheckout==null?false:testConnectionOnCheckout);
+		return ds;
 	}
 	
 	public String getDriverClass() {
