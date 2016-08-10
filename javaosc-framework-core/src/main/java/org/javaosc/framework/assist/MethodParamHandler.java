@@ -57,7 +57,7 @@ public class MethodParamHandler {
 			} else {
 				try {
 					if (dataMap.size() > 0) {
-						obj[j] = PropertyConvert.convert(dataMap, prmType, null);
+						obj[j] = PropertyConvert.convertMapToEntity(dataMap, prmType);
 					} else {
 						obj[j] = null;
 					}
