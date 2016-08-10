@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.sf.cglib.beans.BeanMap;
-
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.convert.ConvertFactory;
 import org.slf4j.Logger;
@@ -25,44 +23,47 @@ public class PropertyConvert {
 	
 	private static final Logger log = LoggerFactory.getLogger(PropertyConvert.class);
 	
-	private static Map<String, Map<String,Class<?>>> fieldSetPropertyMap = new HashMap<String, Map<String,Class<?>>>();
+	private static Map<String, Map<String,Method>> fieldSetPropertyMap = new HashMap<String, Map<String,Method>>();
 	
 	public static <T> T convertMapToEntity(Map map, Class<T> entityClass) {  
 		
 		T entity = null;
-		Map<String, Class<?>> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
+		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
     	
         if(propertyMap == null){  
         	propertyMap = parseEntry(entityClass);  
         }  
-        BeanMap beanMap = null;
         if(propertyMap.size()>0){
         	try {
 				entity = entityClass.newInstance();
-				beanMap = BeanMap.create(entity);  
 			} catch (Exception e) {
 				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} 
-            for(Entry<String, Class<?>> entry:propertyMap.entrySet()){
+            for(Entry<String, Method> entry:propertyMap.entrySet()){
             	String name = entry.getKey();
             	if (map.containsKey(name)) {
             		Object targetValue;
-            		Class<?> targetType = entry.getValue();
+            		Method m = entry.getValue();
+            		Class<?> targetType = m.getParameterTypes()[0];
             		Object value = map.get(name);
             		if(targetType.isAssignableFrom(value.getClass())){
             			targetValue = value;
             		}else{
             			targetValue = ConvertFactory.convert(targetType,value);
             		}
-            		if(entity==null || beanMap==null){ return null; }
-            		beanMap.put(entity, name, targetValue);
+            		if(entity==null || targetValue==null){ continue; }
+            		try {
+						m.invoke(entity, targetValue);
+					} catch (Exception e) {
+						e.printStackTrace();
+					} 
             	}
             }  
         }
         return entity;
 	}
   
-    private static Map<String, Class<?>> parseEntry(Class<?> clsType){  
+    private static Map<String, Method> parseEntry(Class<?> clsType){  
 		BeanInfo beanInfo = null;
 		try {
 			beanInfo = Introspector.getBeanInfo(clsType);
@@ -70,7 +71,7 @@ public class PropertyConvert {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} 
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); 
-        Map<String, Class<?>> propertyMap = new HashMap<String, Class<?>>();
+        Map<String, Method> propertyMap = new HashMap<String, Method>();
         for (int i = 0; i < propertyDescriptors.length; i++) {  
             PropertyDescriptor property = propertyDescriptors[i];
             Method m = property.getWriteMethod();
@@ -79,8 +80,7 @@ public class PropertyConvert {
                 if(paramTypes.length != 1) continue;
                 
                 String name = property.getName();  
-                Class<?> type = property.getPropertyType();
-                propertyMap.put(name, type);  
+                propertyMap.put(name, m);  
             }
         }
         if(propertyMap.size()>0){

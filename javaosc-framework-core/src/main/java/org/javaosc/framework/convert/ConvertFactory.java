@@ -58,7 +58,7 @@ public class ConvertFactory {
 	public static <T> T convert(Class<T> cls,Object val){  
 		 Convert cv = typeConvert.get(PREFIX + cls.getName());  
 	     if(cv == null){  
-	        log.info("{} convert failed: unsupport type", val.getClass().getName());  
+	        log.info("{} convert failed: unsupport type, value: {}", cls.getName(), val);  
 	        return null;  
 	     }  
 	     return (T)cv.convert(val);
