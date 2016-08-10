@@ -9,20 +9,20 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class StringArrConvert implements Convert<Object[],String[]>{
+public class LongArrConvert implements Convert<Object[],Long[]>{
 	
-	private static final Logger log = LoggerFactory.getLogger(StringArrConvert.class);
+	private static final Logger log = LoggerFactory.getLogger(LongArrConvert.class);
 
 	@Override
-	public String[] convert(Object[] source) {
+	public Long[] convert(Object[] source) {
 		if(source == null) return null;  
-        String[] res = new String[source.length];  
+		Long[] res = new Long[source.length];  
         for(int i=0;i<source.length;i++){  
             try {  
-                res[i] = String.valueOf(source[i]);  
+                res[i] = Long.parseLong(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.warn("StringArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
-            	continue;  
+            	log.warn("WrapLongArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	continue; 
             }  
         }  
         return res;  

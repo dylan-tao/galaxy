@@ -53,9 +53,9 @@ public class PropertyConvert {
             		}
             		if(entity==null || targetValue==null){ continue; }
             		try {
-						m.invoke(entity, targetValue);
+						m.invoke(entity, new Object[]{targetValue});
 					} catch (Exception e) {
-						e.printStackTrace();
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					} 
             	}
             }  
