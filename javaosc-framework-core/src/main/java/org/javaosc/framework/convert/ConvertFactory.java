@@ -30,13 +30,13 @@ public class ConvertFactory {
 		typeConvert.put(PREFIX + Short.class.getName(), new ShortConvert());
 		typeConvert.put(PREFIX + Float.class.getName(), new FloatConvert());
 		
-		typeConvert.put(PREFIX + Integer[].class.getName(), new IntegerArrConvert());
+		typeConvert.put(PREFIX + Integer[].class.getName(), new IntegerWrapArrConvert());
 		typeConvert.put(PREFIX + String[].class.getName(), new StringArrConvert());
-		typeConvert.put(PREFIX + Long[].class.getName(), new LongArrConvert());
-		typeConvert.put(PREFIX + Byte[].class.getName(), new ByteArrConvert());
-		typeConvert.put(PREFIX + Double[].class.getName(), new DoubleArrConvert());
-		typeConvert.put(PREFIX + Short[].class.getName(), new ShortArrConvert());
-		typeConvert.put(PREFIX + Float[].class.getName(), new FloatArrConvert());
+		typeConvert.put(PREFIX + Long[].class.getName(), new LongWrapArrConvert());
+		typeConvert.put(PREFIX + Byte[].class.getName(), new ByteWrapArrConvert());
+		typeConvert.put(PREFIX + Double[].class.getName(), new DoubleWrapArrConvert());
+		typeConvert.put(PREFIX + Short[].class.getName(), new ShortWrapArrConvert());
+		typeConvert.put(PREFIX + Float[].class.getName(), new FloatWrapArrConvert());
 		
 		typeConvert.put(PREFIX + int.class.getName(), new IntegerConvert());
 		typeConvert.put(PREFIX + long.class.getName(), new LongConvert());

@@ -9,19 +9,19 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class FloatArrConvert implements Convert<Object[],float[]>{
+public class FloatWrapArrConvert implements Convert<Object[],Float[]>{
 	
-	private static final Logger log = LoggerFactory.getLogger(FloatArrConvert.class);
+	private static final Logger log = LoggerFactory.getLogger(FloatWrapArrConvert.class);
 
 	@Override
-	public float[] convert(Object[] source) {
+	public Float[] convert(Object[] source) {
 		if(source == null) return null;  
-		float[] res = new float[source.length];  
+		Float[] res = new Float[source.length];  
         for(int i=0;i<source.length;i++){  
             try {  
                 res[i] = Float.parseFloat(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.warn("FloatArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("FloatWrapArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
             	continue;  
             }  
         }  

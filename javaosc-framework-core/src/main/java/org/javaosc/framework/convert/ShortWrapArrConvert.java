@@ -9,19 +9,19 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ShortArrConvert implements Convert<Object[],short[]>{
+public class ShortWrapArrConvert implements Convert<Object[],Short[]>{
 	
-	private static final Logger log = LoggerFactory.getLogger(ShortArrConvert.class);
+	private static final Logger log = LoggerFactory.getLogger(ShortWrapArrConvert.class);
 
 	@Override
-	public short[] convert(Object[] source) {
+	public Short[] convert(Object[] source) {
 		if(source == null) return null;  
-		short[] res = new short[source.length];  
+		Short[] res = new Short[source.length];  
         for(int i=0;i<source.length;i++){  
             try {  
                 res[i] = Short.parseShort(String.valueOf(source[i]));  
             } catch (NumberFormatException e) {  
-            	log.warn("ShortArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
+            	log.warn("ShortWrapArrConvert failed, value: {} exception: {}", String.valueOf(source[i]), e);  
             	continue;
             }  
         }  
