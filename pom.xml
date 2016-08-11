@@ -36,8 +36,9 @@
 		<!-- <hikaricp.pool.version>2.4.7</hikaricp.pool.version> -->
 		<com.mchange.c3p0.version>0.9.5.2</com.mchange.c3p0.version>
 		
-		<!-- compile or test ref -->
+		<!-- provided or test ref -->
 		<javax.servlet.version>3.0.1</javax.servlet.version>
+		<common.beanutils.version>1.9.2</common.beanutils.version>
 		<junit.version>4.12</junit.version>
 		
 	</properties>
@@ -133,12 +134,19 @@
 			    <version>${com.mchange.c3p0.version}</version>
 			</dependency>
 
-			<!-- compile or test ref -->
+			<!-- provided or test ref -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${javax.servlet.version}</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+			    <groupId>commons-beanutils</groupId>
+			    <artifactId>commons-beanutils</artifactId>
+			    <version>${common.beanutils.version}</version>
+			    <scope>test</scope>
 			</dependency>
 
 			<dependency>

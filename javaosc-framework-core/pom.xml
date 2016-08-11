@@ -25,13 +25,13 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		
+		<!-- weak ref -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- weak ref -->
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -44,24 +44,30 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
 		<!-- realize -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-		<!-- compile or test ref -->
+		<!-- provided or test ref -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			 <groupId>commons-beanutils</groupId>
+			 <artifactId>commons-beanutils</artifactId>
+			 <scope>test</scope>
 		</dependency>
 		
 		<dependency>

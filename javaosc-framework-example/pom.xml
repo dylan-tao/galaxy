@@ -21,12 +21,12 @@
 			<artifactId>javaosc-framework-core</artifactId>	
 		</dependency>
 		
+		<!-- weak ref -->
 		<dependency>
-				<groupId>cglib</groupId>
-				<artifactId>cglib-nodep</artifactId>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
 		</dependency>
 		
-		<!-- weak ref -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -61,7 +61,7 @@
 		</dependency>
 
 
-		<!-- compile or test ref -->
+		<!-- provided or test ref -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

@@ -1,4 +1,4 @@
-package test;
+package org.javaosc.framework.convert;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class User {
 	
 	private int[] gaga;
 	
-	private List<Long> ga;
+//	private List<Long> ga;
 	
 	private Integer age;
 	
@@ -41,13 +41,13 @@ public class User {
 		this.ha = ha;
 	}
 
-	public List<Long> getGa() {
-		return ga;
-	}
-
-	public void setGa(List<Long> ga) {
-		this.ga = ga;
-	}
+//	public List<Long> getGa() {
+//		return ga;
+//	}
+//
+//	public void setGa(List<Long> ga) {
+//		this.ga = ga;
+//	}
 
 	public int[] getGaga() {
 		return gaga;
