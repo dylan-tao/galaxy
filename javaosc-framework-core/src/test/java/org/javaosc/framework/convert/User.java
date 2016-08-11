@@ -1,6 +1,5 @@
 package org.javaosc.framework.convert;
 
-import java.util.List;
 
 public class User {
 	private String name;

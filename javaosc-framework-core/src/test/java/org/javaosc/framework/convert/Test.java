@@ -19,28 +19,57 @@ public class Test {
 		map.put("age", 12);
 		map.put("ages", 1444);
 		
-//		long totalTime = 0;
-//		for(int i=0;i<10000;i++){
-//			long time = System.currentTimeMillis();
-//			PropertyConvert.convertMapToEntity(map, User.class);
-//			long charTime = System.currentTimeMillis() - time;
-//			System.out.println(charTime);
-//			totalTime = totalTime + charTime;
-//		}
-//		System.out.println(totalTime);
+		for(int p=0;p<1;p++){
+			
+			
+			/* cglib */
+			long totalTime2 = 0;
+			User u2 = null;
+			for(int i=0;i<10000;i++){
+				long time = System.currentTimeMillis();
+				u2 = CglibConvert.convertMapToEntity(map, User.class);
+				long charTime = System.currentTimeMillis() - time;
+				totalTime2 = totalTime2 + charTime;
+			}
+			System.out.println(JsonUtil.toJson(u2));
+			System.out.println("cglib convert: " + totalTime2);
+			
+			/* javaosc */
+			long totalTime = 0;
+			User u3 = null;
+			for(int i=0;i<10000;i++){
+				long time = System.currentTimeMillis();
+				u3 = PropertyConvert.convertMapToEntity(map, User.class);
+				long charTime = System.currentTimeMillis() - time;
+				totalTime = totalTime + charTime;
+			}
+			System.out.println(JsonUtil.toJson(u3));
+			System.out.println("javaosc convert: " + totalTime);
+			
+			/* beanUtil */
+			long totalTime3 = 0;
+			User u = new User();
+			for(int i=0;i<10000;i++){
+				long time = System.currentTimeMillis();
+				BeanUtils.populate(u, map);
+				long charTime = System.currentTimeMillis() - time;
+				totalTime3 = totalTime3 + charTime;
+			}
+			System.out.println(JsonUtil.toJson(u));
+			System.out.println("beanUtil convert: " + totalTime3);
+			
+			System.out.println("-----------------------------------");
+			
+		}
+		
 		
 //		System.out.println(JsonUtil.toJson(user));
 		
 		
-		long totalTime = 0;
-		for(int i=0;i<10000;i++){
-			long time = System.currentTimeMillis();
-			BeanUtils.populate(new User(), map);
-			long charTime = System.currentTimeMillis() - time;
-			System.out.println(charTime);
-			totalTime = totalTime + charTime;
-		}
-		System.out.println(totalTime);
+	
+		
+	
+		
 	}
 
 }
