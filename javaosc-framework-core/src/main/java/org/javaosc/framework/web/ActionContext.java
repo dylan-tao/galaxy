@@ -52,11 +52,11 @@ public final class ActionContext {
 		localContext.set(actionContext);
 	}
 	
-	public static void clear(){
+	protected static void clear(){
 		localContext.remove();
 	}
 	
-	public static void destroy(){
+	protected static void destroy(){
 		clear();
 		localContext = null;
 	}

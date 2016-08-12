@@ -3,6 +3,7 @@ package org.javaosc.framework.convert;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.javaosc.framework.assist.ClassHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -18,7 +19,7 @@ public class ConvertFactory {
 	
 	static final String PREFIX = "_$PARAM_TYPE_";
 	
-	public static Map<String,Convert<?,?>> typeConvert = new HashMap<String, Convert<?,?>>();
+	private static Map<String,Convert<?,?>> typeConvert = new HashMap<String, Convert<?,?>>();
 	
 	static{
 		
@@ -67,5 +68,17 @@ public class ConvertFactory {
 	     }  
 	     return (T)cv.convert(val);
 	}  
+	
+	@SuppressWarnings("rawtypes")
+	public static void putConvert(Class<?> implCls){
+		String key = PREFIX + implCls.getName();
+		if(ClassHandler.isImplClass(implCls, Convert.class) && !typeConvert.containsKey(key)){
+			try {
+				typeConvert.put(key, (Convert)implCls.newInstance());
+			} catch (Exception e) {
+				log.warn("{} convert put failed: {}", implCls.getName(), e); 
+			}
+		}
+	}
 	
 }

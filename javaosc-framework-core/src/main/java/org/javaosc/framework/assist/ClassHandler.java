@@ -34,6 +34,14 @@ public class ClassHandler {
         } catch (Exception e) {     
            return false;
         }     
-    }   
+    }
+	
+	public static boolean isImplClass(Class<?> implCls, Class<?> faceCls){
+		if (faceCls.isAssignableFrom(implCls) && !faceCls.equals(implCls)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }

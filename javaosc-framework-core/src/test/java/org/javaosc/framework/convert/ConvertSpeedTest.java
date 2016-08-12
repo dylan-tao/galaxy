@@ -7,7 +7,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.javaosc.framework.assist.PropertyConvert;
 import org.javaosc.framework.util.JsonUtil;
 
-public class Test {
+public class ConvertSpeedTest {
 
 	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -19,7 +19,7 @@ public class Test {
 		map.put("age", 12);
 		map.put("ages", 1444);
 		
-		for(int p=0;p<100;p++){
+		for(int p=0;p<10;p++){
 			
 			
 			/* cglib */
