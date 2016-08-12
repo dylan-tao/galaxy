@@ -19,7 +19,7 @@ public class Test {
 		map.put("age", 12);
 		map.put("ages", 1444);
 		
-		for(int p=0;p<1;p++){
+		for(int p=0;p<100;p++){
 			
 			
 			/* cglib */
@@ -31,7 +31,7 @@ public class Test {
 				long charTime = System.currentTimeMillis() - time;
 				totalTime2 = totalTime2 + charTime;
 			}
-			System.out.println(JsonUtil.toJson(u2));
+//			System.out.println(JsonUtil.toJson(u2));
 			System.out.println("cglib convert: " + totalTime2);
 			
 			/* javaosc */
@@ -43,7 +43,7 @@ public class Test {
 				long charTime = System.currentTimeMillis() - time;
 				totalTime = totalTime + charTime;
 			}
-			System.out.println(JsonUtil.toJson(u3));
+//			System.out.println(JsonUtil.toJson(u3));
 			System.out.println("javaosc convert: " + totalTime);
 			
 			/* beanUtil */
@@ -55,7 +55,7 @@ public class Test {
 				long charTime = System.currentTimeMillis() - time;
 				totalTime3 = totalTime3 + charTime;
 			}
-			System.out.println(JsonUtil.toJson(u));
+//			System.out.println(JsonUtil.toJson(u));
 			System.out.println("beanUtil convert: " + totalTime3);
 			
 			System.out.println("-----------------------------------");
