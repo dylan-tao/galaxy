@@ -70,7 +70,7 @@ public class ConvertFactory {
 	}  
 	
 	@SuppressWarnings("rawtypes")
-	public static void putConvert(Class<?> implCls){
+	public static void put(Class<?> implCls){
 		String key = PREFIX + implCls.getName();
 		if(ClassHandler.isImplClass(implCls, Convert.class) && !typeConvert.containsKey(key)){
 			try {
