@@ -12,6 +12,9 @@ import org.javaosc.framework.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 public class DataSourceMatch {
 	
 	private static final Logger log = LoggerFactory.getLogger(DataSourceMatch.class);
@@ -22,8 +25,10 @@ public class DataSourceMatch {
 		if(StringUtil.isBlank(dataSourceName)){
 			log.error("pool.dataSource must be not null!");
 		}
-		
-		if(dataSourceName.indexOf("java:")==0){ //tomcat jdbc
+		if(dataSourceName.indexOf(".hikari.")>0){
+			 HikariConfig config = PropertyConvert.convertMapToEntity(ConfigurationHandler.getPoolParam(), HikariConfig.class);
+			 ds = new HikariDataSource(config);
+		}else if(dataSourceName.indexOf("java:")==0){ //tomcat jdbc
 			try {
 				Context c = new InitialContext();
 				ds = (DataSource)c.lookup(dataSourceName);

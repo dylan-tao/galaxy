@@ -36,7 +36,7 @@ public class ContextListener implements ServletContextListener {
 		Introspector.flushCaches();
 		System.gc();
 		
-		log.info("====== Javaosc Framework flushing cache ======");
+		log.info("====== Javaosc Framework startup failed ======");
 	}
 
 	public void contextInitialized(ServletContextEvent event) {

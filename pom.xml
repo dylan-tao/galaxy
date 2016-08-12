@@ -33,7 +33,7 @@
 		<!-- <mariadb.connector.version>1.4.6</mariadb.connector.version> -->
 		<mysql.connector.version>5.1.38</mysql.connector.version>
 		
-		<!-- <hikaricp.pool.version>2.4.7</hikaricp.pool.version> -->
+		<hikaricp.pool.version>2.4.7</hikaricp.pool.version>
 		<com.mchange.c3p0.version>0.9.5.2</com.mchange.c3p0.version>
 		
 		<!-- provided or test ref -->
@@ -122,11 +122,11 @@
 			    <version>${mysql.connector.version}</version>
 			</dependency>
 
-		<!-- 	<dependency>
+			<dependency>
 				<groupId>com.zaxxer</groupId>
 				<artifactId>HikariCP</artifactId>
 				<version>${hikaricp.pool.version}</version>
-			</dependency> -->
+			</dependency>
 			
 			<dependency>
 			    <groupId>com.mchange</groupId>
