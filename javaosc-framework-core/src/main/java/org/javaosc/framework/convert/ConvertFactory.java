@@ -29,6 +29,7 @@ public class ConvertFactory {
 		typeConvert.put(PREFIX + Double.class.getName(), new DoubleConvert());
 		typeConvert.put(PREFIX + Short.class.getName(), new ShortConvert());
 		typeConvert.put(PREFIX + Float.class.getName(), new FloatConvert());
+		typeConvert.put(PREFIX + Boolean.class.getName(), new BooleanConvert());
 		
 		typeConvert.put(PREFIX + Integer[].class.getName(), new IntegerWrapArrConvert());
 		typeConvert.put(PREFIX + String[].class.getName(), new StringArrConvert());
@@ -37,6 +38,7 @@ public class ConvertFactory {
 		typeConvert.put(PREFIX + Double[].class.getName(), new DoubleWrapArrConvert());
 		typeConvert.put(PREFIX + Short[].class.getName(), new ShortWrapArrConvert());
 		typeConvert.put(PREFIX + Float[].class.getName(), new FloatWrapArrConvert());
+		typeConvert.put(PREFIX + Boolean[].class.getName(), new BooleanWrapArrConvert());
 		
 		typeConvert.put(PREFIX + int.class.getName(), new IntegerConvert());
 		typeConvert.put(PREFIX + long.class.getName(), new LongConvert());
@@ -44,6 +46,7 @@ public class ConvertFactory {
 		typeConvert.put(PREFIX + double.class.getName(), new DoubleConvert());
 		typeConvert.put(PREFIX + short.class.getName(), new ShortConvert());
 		typeConvert.put(PREFIX + float.class.getName(), new FloatConvert());
+		typeConvert.put(PREFIX + boolean.class.getName(), new BooleanConvert());
 		
 		typeConvert.put(PREFIX + int[].class.getName(), new IntegerArrConvert());
 		typeConvert.put(PREFIX + long[].class.getName(), new LongArrConvert());
@@ -51,6 +54,7 @@ public class ConvertFactory {
 		typeConvert.put(PREFIX + double[].class.getName(), new DoubleArrConvert());
 		typeConvert.put(PREFIX + short[].class.getName(), new ShortArrConvert());
 		typeConvert.put(PREFIX + float[].class.getName(), new FloatArrConvert());
+		typeConvert.put(PREFIX + boolean[].class.getName(), new BooleanArrConvert());
 		
 	}
 	
@@ -58,7 +62,7 @@ public class ConvertFactory {
 	public static <T> T convert(Class<T> cls,Object val){  
 		 Convert cv = typeConvert.get(PREFIX + cls.getName());  
 	     if(cv == null){  
-	        log.info("{} convert failed: unsupport type, value: {}", cls.getName(), val);  
+	        log.warn("{} convert failed: unsupport type, value: {}", cls.getName(), val);  
 	        return null;  
 	     }  
 	     return (T)cv.convert(val);
