@@ -27,8 +27,6 @@ public class ScanPackage {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScanPackage.class);
 	
-	private String[] keywords = null;
-	
 	public List<String> getClassName(String packageName) {
 		List<String> classNameList = new ArrayList<String>();
 		try {
@@ -85,21 +83,14 @@ public class ScanPackage {
 	
 	private boolean isHasClassKeyword(String fileName){
 		boolean flag = false;
-		if(keywords == null){
-			String keyword = ConfigurationHandler.getValue(Configuration.CLASS_KEYWORD_KEY, Configuration.CLASS_KEYWORD_VALUE);
-			if(keyword.indexOf(Constant.COMMA)!=-1){
-				keywords = keyword.split(Constant.COMMA);
-			}else{
-				keywords = new String[]{keyword};
-			}
-		}
+		String[] keywords = ConfigurationHandler.getScanClassNameKeyword();
 		fileName = fileName.toLowerCase();
 		for(int u = 0; u < keywords.length; u++){
 			if(fileName.indexOf(keywords[u]) > 0){
 				flag = true;
 				break;
 			}
-		}
+		}	
 		return flag;
 	}
 }

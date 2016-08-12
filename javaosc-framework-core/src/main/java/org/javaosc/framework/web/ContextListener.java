@@ -28,10 +28,14 @@ public class ContextListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		
 		ActionContext.destroy();
-		ConfigurationHandler.clear();
-		BeanFactory.clear();
+		
 		RouteNodeRegistry.clear();
+		
 		ConnectionHandler.destroy();
+		
+		ConfigurationHandler.clear();
+		
+		BeanFactory.clear();
 		
 		Introspector.flushCaches();
 		System.gc();
@@ -52,8 +56,6 @@ public class ContextListener implements ServletContextListener {
 		
 		ConfigurationHandler.load(sc.getInitParameter(Configuration.CONFIG_FILE_NAME));
 		
-		BeanFactory.initProperty();
-		
 		ScanAnnotation annotationObject = new ScanAnnotation();
 		annotationObject.load();
 		annotationObject = null;
@@ -65,6 +67,8 @@ public class ContextListener implements ServletContextListener {
 		initTime = System.currentTimeMillis() - initTime;
 		
 		log.info("====== Javaosc Framework startup in {} ms ======", initTime);
+		
+		ConfigurationHandler.clear();
 		
 		System.gc();
 	}

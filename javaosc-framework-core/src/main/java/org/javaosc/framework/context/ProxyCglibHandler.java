@@ -47,8 +47,8 @@ public class ProxyCglibHandler implements MethodInterceptor {
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 		boolean isHasTx = false;
 		Object returnObj = null;
-		if(isTransaction && BeanFactory.keywords != null){
-			for(String keyword:BeanFactory.keywords){
+		if(isTransaction && ConfigurationHandler.getMethodKeyword() != null){
+			for(String keyword:ConfigurationHandler.getMethodKeyword()){
 				if(method.getName().startsWith(keyword)){
 					isHasTx = true;
 					break;

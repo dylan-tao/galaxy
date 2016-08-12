@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Configuration;
+import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
@@ -45,6 +45,16 @@ public class ConfigurationHandler {
 	
 	private static Boolean responseEncoding;
 	
+	private static String[] methodKeyword;
+	
+	private static String[] clsNameKeyword;
+	
+	private static HashMap<String, String> viewMap;
+	
+	private static HashMap<String, String> poolMap;
+	
+	private static String proxyMode;
+	
 	public static void load(String javaoscCustConfig){
 		
 		if(StringUtil.isNotBlank(javaoscCustConfig)){
@@ -57,7 +67,8 @@ public class ConfigurationHandler {
 		try {
 			properties = new Properties();
 			inputStream = new FileInputStream(PathUtil.getClassPath() + javaoscConfig);
-			properties.load(inputStream);	
+			properties.load(inputStream);
+			initConfiguration();
 			log.info("javaosc configuration is initialized. filename: {}.", javaoscConfig);
 		} catch (FileNotFoundException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
@@ -72,10 +83,6 @@ public class ConfigurationHandler {
 				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}	
 		}		
-	}
-	
-	public static void setValue(String key,String value){
-		properties.setProperty(key, value);
 	}
 	
 	public static String getViewPrefix(){
@@ -113,6 +120,55 @@ public class ConfigurationHandler {
 		return responseEncoding;
 	}
 	
+	protected static String getProxyMode(){
+		if(StringUtil.isNotBlank(proxyMode)){
+			proxyMode = getValue(Configuration.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
+		}
+		return proxyMode;
+	}
+	
+	public static String[] getScanClassNameKeyword(){
+		if(clsNameKeyword==null){
+			String keyword = ConfigurationHandler.getValue(Configuration.CLASS_KEYWORD_KEY, Configuration.CLASS_KEYWORD_VALUE);
+			if(StringUtil.isNotBlank(keyword)){
+				keyword = StringUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
+				if(keyword.indexOf(Constant.COMMA)!=-1){
+					clsNameKeyword =  keyword.split(Constant.COMMA);
+				}else{
+					clsNameKeyword = new String[]{keyword};
+				}
+			}else{
+				clsNameKeyword = new String[0];
+			}
+		}
+		return clsNameKeyword;
+	}
+	
+	public static String[] getMethodKeyword(){
+		if(methodKeyword==null){
+			String keyword = ConfigurationHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
+			if(StringUtil.isNotBlank(keyword)){
+				keyword = StringUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
+				if(keyword.indexOf(Constant.COMMA)!=-1){
+					methodKeyword = keyword.split(Constant.COMMA);
+				}else{
+					methodKeyword = new String[]{keyword};
+				}
+			}else{
+				methodKeyword = new String[0];
+			}
+		}
+		return methodKeyword;
+	}
+	
+	public static String getViewMap(String url){
+		String viewUrl = null;
+		if(StringUtil.isNotBlank(url)){
+			viewUrl = viewMap.get(url);
+		}
+		return viewUrl==null?"":viewUrl;
+	}
+	
 	public static String getScanPackage(){
 		return getValue(Configuration.SCANER_PACKAGE_KEY, null);
 	}
@@ -121,66 +177,13 @@ public class ConfigurationHandler {
 		return getValue(Configuration.POOL_DATASOURCE, null);
 	}
 	
-	public static String[] getKeywords(){
-		String[] keywords = null;
-		String keyword = ConfigurationHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
-		if(keyword != null){
-			if(keyword.indexOf(Constant.COMMA)!=-1){
-				keywords = keyword.split(Constant.COMMA);
-			}else{
-				keywords = new String[]{keyword};
-			}
-		}else{
-			keywords = null;
-		}
-		return keywords;
-	}
-	
-	public static String getProxyMode(){
-		return ConfigurationHandler.getValue(Configuration.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
-	}
-	
-	
-	public static String getValue(String key){
-		return properties.getProperty(key);
-	}
-	
-	public static String getValue(String key,String defaultValue){
+	protected static String getValue(String key,String defaultValue){
 		String value = properties.getProperty(key);
 		return StringUtil.isNotBlank(value)?StringUtil.clearSpace(value, PatternValue.ALL):defaultValue;
 	}
-//	
-//	public static boolean getValue(String key, boolean defaultValue) {
-//		String value = getValue(key);
-//		return value != null ? Boolean.parseBoolean(value) : defaultValue;
-//	}
-//	
-//	public static long getValue(String key, long defaultValue) {
-//		String value = getValue(key);
-//		return value != null ? Long.parseLong(value) : defaultValue;
-//	}
-//	
-//	public static int getValue(String key, int defaultValue) {
-//		String value = getValue(key);
-//		return value != null ? Integer.parseInt(value) : defaultValue;
-//	}
-//	
-	public static Map<String, Object> getPoolParam(){
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
-		while(it.hasNext()){
-			Entry<Object, Object> entry = it.next();
-			String key = String.valueOf(entry.getKey());
-			if(StringUtil.isNotBlank(key)){
-				Object value = entry.getValue();
-				if(key.startsWith(Configuration.STARTWITH_DB)){
-					paramMap.put(key.replace(Configuration.STARTWITH_DB, Constant.EMPTY), value);
-				}else if(key.startsWith(Configuration.STARTWITH_POOL)){
-					paramMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
-				}
-			}
-		}
-		return paramMap;
+	
+	public static Map<String, String> getPoolParam(){
+		return poolMap;
 	}
 	
 	public static void exprot(){
@@ -207,8 +210,46 @@ public class ConfigurationHandler {
 		}
 	}
 	
+	private static void initConfiguration(){
+		
+		getViewPrefix();
+		getViewSuffix();
+		getContextEncode();
+		getRequestEncode();
+		getResponseEncode();
+		getProxyMode();
+		
+		getScanClassNameKeyword();
+		
+		getMethodKeyword();
+		
+		poolMap = new HashMap<String, String>();
+		viewMap = new HashMap<String, String>();
+		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
+		while(it.hasNext()){
+			Entry<Object, Object> entry = it.next();
+			String key = String.valueOf(entry.getKey());
+			if(StringUtil.isNotBlank(key)){
+				String value = String.valueOf(entry.getValue());
+				if(StringUtil.isNotBlank(value)){
+					value = StringUtil.clearSpace(value, PatternValue.ALL);
+					if(key.startsWith(Configuration.STARTWITH_DB)){
+						poolMap.put(key.replace(Configuration.STARTWITH_DB, Constant.EMPTY), value);
+					}else if(key.startsWith(Configuration.STARTWITH_POOL)){
+						poolMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
+					}else if(key.startsWith(Configuration.VIEW_KEY)){
+						String[] urlView = value.split("");
+						viewMap.put(urlView[0], urlView[1]);
+					}
+				}
+			}
+		}
+	}
+	
 	public static void clear(){
+		clsNameKeyword = null;
 		properties.clear();
+		properties = null;
 	}
 		
 }

@@ -15,13 +15,15 @@ public class BooleanConvert implements Convert<Object, Boolean> {
 
 	@Override
 	public Boolean convert(Object source) {
-		if (source == null)
-			return null;
-		try {
-			return Boolean.parseBoolean(String.valueOf(source));
-		} catch (NumberFormatException e) {
-			log.warn("BooleanConvert failed, value: {} exception: {}", String.valueOf(source), e);
-			return null;
+		if(source == null){
+			return false;
+		}else{
+			try {
+				return Boolean.parseBoolean(String.valueOf(source));
+			} catch (NumberFormatException e) {
+				log.warn("BooleanConvert failed, value: {} exception: {}", String.valueOf(source), e);
+				return false;
+			}
 		}
 	}
 

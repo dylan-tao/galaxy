@@ -20,10 +20,6 @@ public class BeanFactory {
 	
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	static String[] keywords;
-	
-	static String proxyMode;
-	
 	public static <T> T getService(Class<T> cls){
 		return get(cls, true, true);
 	}
@@ -48,7 +44,7 @@ public class BeanFactory {
 			 return (T) serviceBean;
 	     }
 		 try {
-			 if(proxyMode.equals(ProxyMode.CGLIB.getValue())){
+			 if(ProxyMode.CGLIB.getValue().equals(ConfigurationHandler.getProxyMode())){
 				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
 	             serviceBean = proxyHandler.proxyInstance();    
 			 }else{
@@ -69,8 +65,4 @@ public class BeanFactory {
 		beanMap = null;
 	}
 	
-	public static void initProperty(){
-		keywords = ConfigurationHandler.getKeywords();
-		proxyMode =  ConfigurationHandler.getProxyMode();
-	}
 }

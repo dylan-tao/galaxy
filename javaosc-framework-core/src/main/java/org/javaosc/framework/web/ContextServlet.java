@@ -79,7 +79,7 @@ public class ContextServlet extends HttpServlet {
 	private void executeMethod(HttpServletRequest request){
 		
 		String requestPath = PathUtil.getContextPath(request);
-		String requestValue = ConfigurationHandler.getValue(requestPath);
+		String requestValue = ConfigurationHandler.getViewMap(requestPath);
 
 		if (StringUtil.isNotBlank(requestValue)) {
 			new ActionHandler(requestValue).redirectOrForward(prefix, suffix);

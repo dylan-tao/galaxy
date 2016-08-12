@@ -5,10 +5,10 @@ import java.util.HashMap;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.javaosc.framework.assist.PropertyConvert;
-import org.javaosc.framework.util.JsonUtil;
 
 public class ConvertSpeedTest {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("name", "帝州");

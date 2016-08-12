@@ -26,10 +26,7 @@ public interface Configuration {
 	static final String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
 	static final String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy.mode";
 	
-	static final String DRIVER_CLASS_NAME = "jdbc.driverClassName";
-	static final String JDBC_URL = "jdbc.url";
-	static final String JDBC_USER_NAME = "jdbc.username";
-	static final String JDBC_PASSWORD = "jdbc.password";
+	static final String VIEW_KEY = "javaosc.view.";
 	
 	static final String STARTWITH_DB = "db.";
 	static final String STARTWITH_POOL = "pool.";

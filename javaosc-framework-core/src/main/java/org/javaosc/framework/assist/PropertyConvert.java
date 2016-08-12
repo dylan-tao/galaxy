@@ -70,22 +70,24 @@ public class PropertyConvert {
 		} catch (Exception e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} 
-        PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); 
-        Map<String, Method> propertyMap = new HashMap<String, Method>();
-        for (int i = 0; i < propertyDescriptors.length; i++) {  
-            PropertyDescriptor property = propertyDescriptors[i];
-            Method m = property.getWriteMethod();
-            if(m!=null){
-            	Class<?>[] paramTypes = m.getParameterTypes();  
-                if(paramTypes.length != 1) continue;
-                
-                String name = property.getName();  
-                propertyMap.put(name, m);  
-            }
-        }
-        if(propertyMap.size()>0){
-        	fieldSetPropertyMap.put(clsType.getName(), propertyMap);
-        }
+		Map<String, Method> propertyMap = new HashMap<String, Method>();
+		if(beanInfo!=null){
+			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors(); 
+	        for (int i = 0; i < propertyDescriptors.length; i++) {  
+	            PropertyDescriptor property = propertyDescriptors[i];
+	            Method m = property.getWriteMethod();
+	            if(m!=null){
+	            	Class<?>[] paramTypes = m.getParameterTypes();  
+	                if(paramTypes.length != 1) continue;
+	                
+	                String name = property.getName();  
+	                propertyMap.put(name, m);  
+	            }
+	        }
+	        if(propertyMap.size()>0){
+	        	fieldSetPropertyMap.put(clsType.getName(), propertyMap);
+	        }   
+		}
         return propertyMap;
     }  
     
