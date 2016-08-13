@@ -25,6 +25,7 @@ public class PropertyConvert {
 	
 	private static Map<String, Map<String,Method>> fieldSetPropertyMap = new HashMap<String, Map<String,Method>>();
 	
+	@SuppressWarnings("rawtypes")
 	public static <T> T convertMapToEntity(Map map, Class<T> entityClass) {  
 		
 		T entity = null;

@@ -52,7 +52,7 @@ public class MethodParamHandler {
 				} else if (prmType == HttpServletResponse.class) {
 					obj[j] = ActionContext.getContext().getResponse();
 				} else {
-					log.error("the data type({}) of the parameter is not supported !", prmType.getName());
+					log.error("the data type({}) of the parameter is not supported ! you can impl convert interface(org.javaosc.framework.convert.Convert),custom your convert~", prmType.getName());
 				}
 			} else {
 				try {

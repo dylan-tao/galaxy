@@ -1,8 +1,9 @@
 package org.javaosc.framework.assist;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,35 +24,36 @@ public class RequestParamHandler {
 
 		HashMap<String, String[]> dataMap = new HashMap<String, String[]>();
 
-		Enumeration<?> e = request.getParameterNames();
+		Map<String, String[]> paramMap = request.getParameterMap();
 		String requestType = request.getMethod();
-
-		if (ConfigurationHandler.getRequestEncode() && (HttpType.GET.toString().equalsIgnoreCase(requestType) || HttpType.DELETE.toString().equalsIgnoreCase(requestType))) { // get\delete
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				String[] values = request.getParameterValues(key);
-				if (values == null) {
-					dataMap.put(key, null);
-				} else {
-					String[] newValues = new String[values.length];
-					for (String newValue : newValues) {
-						newValue = encodingParam(newValue);
+		
+		if(paramMap!=null && paramMap.size()>0){
+			if (ConfigurationHandler.getRequestEncode() && (HttpType.GET.toString().equalsIgnoreCase(requestType) || HttpType.DELETE.toString().equalsIgnoreCase(requestType))) { // get\delete
+				for(Entry<String, String[]> entry:paramMap.entrySet()){
+					String key = entry.getKey();
+					String[] values = entry.getValue();
+					if (values == null) {
+						dataMap.put(key, null);
+					} else {
+						String[] encodeValues = new String[values.length];
+						for (String value : values) {
+							value = encodingParam(value);
+						}
+						dataMap.put(key, encodeValues);
 					}
-					dataMap.put(key, newValues);
 				}
-			}
-		} else { // post\put\get not open encode support
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				String[] values = request.getParameterValues(key);
-				if (values == null) {
-					dataMap.put(key, null);
-				} else {
-					dataMap.put(key, values);
+			} else { // post\put\get not open encode support
+				for(Entry<String, String[]> entry:paramMap.entrySet()){
+					String key = entry.getKey();
+					String[] values = entry.getValue();
+					if (values == null) {
+						dataMap.put(key, null);
+					} else {
+						dataMap.put(key, values);
+					}
 				}
 			}
 		}
-
 		return dataMap;
 	}
 	
