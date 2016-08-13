@@ -238,7 +238,7 @@ public class ConfigurationHandler {
 					}else if(key.startsWith(Configuration.STARTWITH_POOL)){
 						poolMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
 					}else if(key.startsWith(Configuration.VIEW_KEY)){
-						String[] urlView = value.split("");
+						String[] urlView = value.split(Constant.JZ);
 						viewMap.put(urlView[0], urlView[1]);
 					}
 				}

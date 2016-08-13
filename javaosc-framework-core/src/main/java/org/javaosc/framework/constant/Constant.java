@@ -24,10 +24,8 @@ public interface Constant {
 	String QM = "?";
 	String EM = "=";
 	String AM = "&";
+	String JZ = "#";
 	
-	String EMPTY_OBJECT = "{}";
-	String EMPTY_ARRAY = "[]";
-
 	// http协议
 	public enum HttpType {
 		GET, POST, PUT, DELETE;

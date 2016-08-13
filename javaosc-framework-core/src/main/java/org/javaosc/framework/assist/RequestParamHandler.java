@@ -15,7 +15,13 @@ import org.javaosc.framework.context.ConfigurationHandler;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+/**
+ * 
+ * @description
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
+ */
 public class RequestParamHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(RequestParamHandler.class);

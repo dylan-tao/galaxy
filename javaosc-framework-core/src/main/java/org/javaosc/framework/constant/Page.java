@@ -27,12 +27,12 @@ public class Page<T> {
 	public Page() {}
 
 	public Page(int pageSize, int pageNo) {
-		this.pageSize = pageSize;
 		if (pageNo > 0) {
 			this.pageNo = pageNo;
 		} else {
 			this.pageNo = defaultPageNo;
 		}
+		this.pageSize = pageSize;
 	}
 
 	public void setPageSize(int pageSize) {
