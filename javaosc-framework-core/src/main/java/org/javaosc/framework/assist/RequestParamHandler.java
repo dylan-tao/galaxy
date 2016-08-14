@@ -26,9 +26,9 @@ public class RequestParamHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(RequestParamHandler.class);
 
-	public static HashMap<String, String[]> getFormatData(HttpServletRequest request,HttpServletResponse response) {
+	public static HashMap<String, Object> getFormatData(HttpServletRequest request,HttpServletResponse response) {
 
-		HashMap<String, String[]> dataMap = new HashMap<String, String[]>();
+		HashMap<String, Object> dataMap = new HashMap<String, Object>();
 
 		Map<String, String[]> paramMap = request.getParameterMap();
 		String requestType = request.getMethod();

@@ -22,7 +22,7 @@ public final class ActionContext {
 	
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	private Map<String, String[]> dataMap;
+	private Map<String, Object> dataMap;
 	
 	public static ActionContext getContext() {
 		ActionContext context = localContext.get();
@@ -77,11 +77,11 @@ public final class ActionContext {
 		this.response = response;
 	}
 
-	public Map<String, String[]> getDataMap() {
+	public Map<String, Object> getDataMap() {
 		return dataMap;
 	}
 	
-	public void put(String key, String... value) {
+	public void put(String key, Object value) {
 		dataMap.put(key, value);
 	}
 

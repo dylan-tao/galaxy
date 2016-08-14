@@ -49,7 +49,7 @@ public class ConfigurationHandler {
 	
 	private static HashMap<String, String> viewMap;
 	
-	private static HashMap<String, String> poolMap;
+	private static HashMap<String, Object> poolMap;
 	
 	private static String proxyMode;
 	
@@ -163,7 +163,7 @@ public class ConfigurationHandler {
 		return StringUtil.isNotBlank(value)?StringUtil.clearSpace(value, PatternValue.ALL):defaultValue;
 	}
 	
-	public static Map<String, String> getPoolParam(){
+	public static Map<String, Object> getPoolParam(){
 		return poolMap;
 	}
 	
@@ -201,7 +201,7 @@ public class ConfigurationHandler {
 		getProxyMode();
 		getMethodKeyword();
 		
-		poolMap = new HashMap<String, String>();
+		poolMap = new HashMap<String, Object>();
 		viewMap = new HashMap<String, String>();
 		Iterator<Entry<Object, Object>> it = properties.entrySet().iterator();
 		while(it.hasNext()){

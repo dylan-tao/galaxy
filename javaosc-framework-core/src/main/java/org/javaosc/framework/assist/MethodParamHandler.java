@@ -33,7 +33,7 @@ public class MethodParamHandler {
 
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {
 		Object[] obj = new Object[prmTypes.length];
-		Map<String, String[]> dataMap = ActionContext.getContext().getDataMap();
+		Map<String, Object> dataMap = ActionContext.getContext().getDataMap();
 
 		for (int j = 0; j < prmTypes.length; j++) {
 
