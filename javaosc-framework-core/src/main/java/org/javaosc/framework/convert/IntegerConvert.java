@@ -18,11 +18,7 @@ public class IntegerConvert implements Convert<Object, Integer> {
 		if (source == null)
 			return null;
 		try {
-//			if(source instanceof String[]){
-//				return Integer.parseInt(String.valueOf(((String[])source)[0]));
-//			}else{
-				return Integer.parseInt(String.valueOf(source));	
-//			}
+			return Integer.parseInt(String.valueOf(source));	
 		} catch (NumberFormatException e) {
 			log.warn("IntegerConvert failed, value: {} exception: {}", String.valueOf(source), e);
 			return null;
