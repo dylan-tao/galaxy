@@ -35,7 +35,7 @@ public class ProxyCglibHandler implements MethodInterceptor {
 
 	protected Object proxyInstance() {
 		Class<?>[] interfaceArray = this.cls.getInterfaces();
-		if(interfaceArray != null){
+		if(interfaceArray != null && interfaceArray.length>0){
 			enhancer.setInterfaces(interfaceArray);
 		}else{
 			enhancer.setSuperclass(this.cls);
