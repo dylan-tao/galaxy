@@ -95,7 +95,6 @@ public abstract class RouteNodeRegistry {
 			if (child == null){
 				child = current.getChild(URI_PARAM);
 				if (child != null){
-//					params.put(child.getParamName(), urlSplitStr);
 					RequestParamHandler.put(child.getParamName(), urlSplitStr);
 				}else{
 					params.put(ERROR_CODE, 0);

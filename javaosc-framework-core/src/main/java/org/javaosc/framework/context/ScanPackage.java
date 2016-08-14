@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -27,8 +25,8 @@ public class ScanPackage {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScanPackage.class);
 	
-	public List<String> getClassName(String packageName) {
-		List<String> classNameList = new ArrayList<String>();
+	public void load() {
+		String packageName = ConfigurationHandler.getScanPackage();
 		try {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
@@ -40,11 +38,11 @@ public class ScanPackage {
 					File[] files = new File(url.toURI()).listFiles();
 					files = files ==null? new File[0]:files;
 					for (File f : files) {
-						scanFile(packageName, f, classNameList);
+						scanFile(packageName, f);
 					}
 				} else if ("jar".equals(protocol)) {
 					JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
-					scanJar(jar, packageName, classNameList);
+					scanJar(jar, packageName);
 				}
 				log.info("class package scan is completed.");
 			}
@@ -53,44 +51,30 @@ public class ScanPackage {
 		} catch (IOException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}	
-		return classNameList;
 	}
 
-	private void scanFile(String packageName, File file, List<String> classNameList) {
+	private void scanFile(String packageName, File file) {
 		String fileName = file.getName();
-		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS) && isHasClassKeyword(fileName)) {
+		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS)) {
 			fileName = fileName.substring(0, fileName.length() - 6);
-			classNameList.add(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
+			ScanAnnotation.check(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
 		} else if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			files = files ==null? new File[0]:files;
 			for (File f : files) {
-				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f, classNameList);
+				scanFile(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString(), f);
 			}
 		}
 	}
 
-	private void scanJar(JarFile jarFile, String packageName, List<String> classNameList) {
+	private void scanJar(JarFile jarFile, String packageName) {
 		Enumeration<JarEntry> entries = jarFile.entries();
 		while (entries.hasMoreElements()) {
 			JarEntry entry = entries.nextElement();
 			String fileName = entry.getName().replace(Constant.LINE, Constant.DOT);
-			if (fileName.startsWith(packageName) && fileName.endsWith(Constant.SUFFIX_CLASS) && isHasClassKeyword(fileName)) {
-				classNameList.add(fileName.substring(0, fileName.length() - 6));
+			if (fileName.startsWith(packageName) && fileName.endsWith(Constant.SUFFIX_CLASS)) {
+				ScanAnnotation.check(fileName.substring(0, fileName.length() - 6));
 			}
 		}
-	}
-	
-	private boolean isHasClassKeyword(String fileName){
-		boolean flag = false;
-		String[] keywords = ConfigurationHandler.getScanClassNameKeyword();
-		fileName = fileName.toLowerCase();
-		for(int u = 0; u < keywords.length; u++){
-			if(fileName.indexOf(keywords[u]) > 0){
-				flag = true;
-				break;
-			}
-		}	
-		return flag;
 	}
 }

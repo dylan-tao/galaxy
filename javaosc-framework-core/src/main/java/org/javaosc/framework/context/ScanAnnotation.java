@@ -1,10 +1,13 @@
 package org.javaosc.framework.context;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
+import org.javaosc.framework.annotation.Bean;
+import org.javaosc.framework.annotation.Dao;
 import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Prototype;
+import org.javaosc.framework.annotation.Service;
+import org.javaosc.framework.assist.ClassHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.web.RouteNodeRegistry;
 import org.slf4j.Logger;
@@ -19,24 +22,24 @@ import org.slf4j.LoggerFactory;
  */
 public class ScanAnnotation {
 	
-	Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
+	private static final Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
 	
-	public void load(){
-		String packageName = ConfigurationHandler.getScanPackage();
-		List<String> classNameList = new ScanPackage().getClassName(packageName);
-		if(classNameList.size()>0){
-			scanerClassFile(classNameList);
-		}
-		packageName = null;
-		classNameList = null;
-	}
-	
-	private void scanerClassFile(List<String> className) {
-		for(String cn : className){
-			Class<?> loadClass = org.javaosc.framework.assist.ClassHandler.load(cn);
+	protected static void check(String className) {
+		Class<?> loadClass = ClassHandler.load(className);
+		
+		Service service = null;
+		Dao dao = null;
+		Bean bean = null;
+		if((bean = loadClass.getAnnotation(Bean.class))!=null){
+			
+		}else if((dao = loadClass.getAnnotation(Dao.class))!=null){
+			
+		}else if((service = loadClass.getAnnotation(Service.class))!=null){
+			
+		}else{
 			Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
-		    String parentPath = parentMapping!=null?parentMapping.value():Constant.EMPTY;
-		    boolean isCache = false;
+			String parentPath = parentMapping!=null?parentMapping.value():Constant.EMPTY;
+			boolean isCache = false;
 			Method[] methods= loadClass.getDeclaredMethods(); 
 			for (Method method : methods) {
 				Mapping mapping = method.getAnnotation(Mapping.class);
@@ -51,7 +54,7 @@ public class ScanAnnotation {
 				if(prototypeMapping == null){
 					BeanFactory.getBean(loadClass);
 				}
-			}	
+			}
 		}
 		log.info("class annotation scan is completed.");
 	}

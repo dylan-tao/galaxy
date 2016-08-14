@@ -22,11 +22,10 @@ public interface Configuration {
 	static final String RESPONSE_ENCODE_KEY = "javaosc.response.character.encode";
 	
 	static final String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
-	static final String CLASS_KEYWORD_KEY = "javaosc.scaner.classname.keyword";
 	static final String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
 	static final String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy.mode";
 	
-	static final String VIEW_KEY = "javaosc.view.";
+	static final String VIEW_KEY = "javaosc.url.";
 	
 	static final String STARTWITH_DB = "db.";
 	static final String STARTWITH_POOL = "pool.";

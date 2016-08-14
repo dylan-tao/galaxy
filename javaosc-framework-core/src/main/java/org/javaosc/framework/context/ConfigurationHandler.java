@@ -47,8 +47,6 @@ public class ConfigurationHandler {
 	
 	private static String[] methodKeyword;
 	
-	private static String[] clsNameKeyword;
-	
 	private static HashMap<String, String> viewMap;
 	
 	private static HashMap<String, String> poolMap;
@@ -127,23 +125,6 @@ public class ConfigurationHandler {
 		return proxyMode;
 	}
 	
-	public static String[] getScanClassNameKeyword(){
-		if(clsNameKeyword==null){
-			String keyword = ConfigurationHandler.getValue(Configuration.CLASS_KEYWORD_KEY, Configuration.CLASS_KEYWORD_VALUE);
-			if(StringUtil.isNotBlank(keyword)){
-				keyword = StringUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
-				if(keyword.indexOf(Constant.COMMA)!=-1){
-					clsNameKeyword =  keyword.split(Constant.COMMA);
-				}else{
-					clsNameKeyword = new String[]{keyword};
-				}
-			}else{
-				clsNameKeyword = new String[0];
-			}
-		}
-		return clsNameKeyword;
-	}
-	
 	public static String[] getMethodKeyword(){
 		if(methodKeyword==null){
 			String keyword = ConfigurationHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
@@ -218,9 +199,6 @@ public class ConfigurationHandler {
 		getRequestEncode();
 		getResponseEncode();
 		getProxyMode();
-		
-		getScanClassNameKeyword();
-		
 		getMethodKeyword();
 		
 		poolMap = new HashMap<String, String>();
@@ -239,7 +217,11 @@ public class ConfigurationHandler {
 						poolMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
 					}else if(key.startsWith(Configuration.VIEW_KEY)){
 						String[] urlView = value.split(Constant.JZ);
-						viewMap.put(urlView[0], urlView[1]);
+						if(urlView.length==2){
+							viewMap.put(urlView[0], urlView[1]);
+						}else{
+							log.error(Constant.JAVAOSC_EXCEPTION, "javaosc.url.* setting must use # mark [ps: javaosc.url.user.detail = /user/detail#/customer/detail]");
+						}
 					}
 				}
 			}
@@ -247,7 +229,6 @@ public class ConfigurationHandler {
 	}
 	
 	public static void clear(){
-		clsNameKeyword = null;
 		properties.clear();
 		properties = null;
 	}
