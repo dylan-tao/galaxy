@@ -20,17 +20,17 @@ public class ProxyJdkHandler implements InvocationHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(ProxyJdkHandler.class);
 	
-	private Class<?> cls;
+	private Object proxy;
 	
 	private boolean isTransaction;
 
-	protected ProxyJdkHandler(Class<?> cls, boolean isTransaction) {
-		this.cls = cls;
+	protected ProxyJdkHandler(Object proxy, boolean isTransaction) {
+		this.proxy = proxy;
 		this.isTransaction = isTransaction;
 	}
 
 	protected Object proxyInstance() {
-	    return Proxy.newProxyInstance(this.cls.getClassLoader(), this.cls.getInterfaces(), this);
+	    return Proxy.newProxyInstance(proxy.getClass().getClassLoader(), proxy.getClass().getInterfaces(), this);
 	}
 
 
@@ -49,18 +49,18 @@ public class ProxyJdkHandler implements InvocationHandler {
 			if(isHasTx){
 				try {
 					ConnectionHandler.beginTransaction();
-					returnObj = method.invoke(this.cls, args);
+					returnObj = method.invoke(this.proxy, args);
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
 					log.error(Constant.JAVAOSC_EXCEPTION, e);;
 				}
 			}else{
-				returnObj = method.invoke(this.cls, args);
+				returnObj = method.invoke(this.proxy, args);
 			}
 			ConnectionHandler.close();
 		}else{
-			returnObj = method.invoke(this.cls, args);
+			returnObj = method.invoke(this.proxy, args);
 		}	
 		return returnObj;
 	}

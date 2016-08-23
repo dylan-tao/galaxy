@@ -3,6 +3,7 @@ package org.javaosc.framework.context;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.javaosc.framework.annotation.Service;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.slf4j.Logger;
@@ -20,31 +21,33 @@ public class BeanFactory {
 	
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	public static <T> T getService(Class<T> cls){
-		return get(cls, true, true);
+	public static <T> T getService(ProxyMode mode, Class<T> cls){
+		Service service = cls.getAnnotation(Service.class);
+		ScanAnnotation.setServiceField(cls);
+		return get(mode, cls, true, true);
 	}
 	
-	public static <T> T getDao(Class<T> cls){
-		return get(cls, false, true);
+	public static <T> T getDao(ProxyMode mode, Class<T> cls){
+		return get(mode, cls, false, true);
 	}
 	
-	public static <T> T getBean(Class<T> cls){
-		return get(cls, false, true);
+	public static <T> T getBean(ProxyMode mode, Class<T> cls){
+		return get(mode, cls, false, true);
 	}
 	
-	public static <T> T getBean(Class<T> cls, boolean isCache){
-		return get(cls, false, isCache);
+	public static <T> T getBean(ProxyMode mode, Class<T> cls, boolean isCache){
+		return get(mode, cls, false, isCache);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <T> T get(Class<T> cls , boolean isTransaction, boolean isCache){
+	private static <T> T get(ProxyMode mode, Class<T> cls , boolean isTransaction, boolean isCache){
 		 Object serviceBean = null;
 		 if (beanMap.containsKey(cls.getName())) { 
 			 serviceBean = beanMap.get(cls.getName());
 			 return (T) serviceBean;
 	     }
 		 try {
-			 if(ProxyMode.CGLIB.getValue().equals(ConfigurationHandler.getProxyMode())){
+			 if(ProxyMode.CGLIB.equals(mode)){
 				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
 	             serviceBean = proxyHandler.proxyInstance();    
 			 }else{

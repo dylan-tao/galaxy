@@ -13,7 +13,6 @@ import java.util.Properties;
 
 import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.constant.Constant.ProxyMode;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
 import org.javaosc.framework.util.StringUtil.PatternValue;
@@ -50,8 +49,6 @@ public class ConfigurationHandler {
 	private static HashMap<String, String> viewMap;
 	
 	private static HashMap<String, Object> poolMap;
-	
-	private static String proxyMode;
 	
 	public static void load(String javaoscCustConfig){
 		
@@ -116,13 +113,6 @@ public class ConfigurationHandler {
 			responseEncoding = Boolean.valueOf(getValue(Configuration.RESPONSE_ENCODE_KEY,Configuration.DEFAULT_ENCODING_FLAG));
 		}
 		return responseEncoding;
-	}
-	
-	protected static String getProxyMode(){
-		if(StringUtil.isNotBlank(proxyMode)){
-			proxyMode = getValue(Configuration.DYNAMIC_PROXY_KEY, ProxyMode.DEFAULT.getValue());
-		}
-		return proxyMode;
 	}
 	
 	public static String[] getMethodKeyword(){
@@ -198,7 +188,6 @@ public class ConfigurationHandler {
 		getContextEncode();
 		getRequestEncode();
 		getResponseEncode();
-		getProxyMode();
 		getMethodKeyword();
 		
 		poolMap = new HashMap<String, Object>();

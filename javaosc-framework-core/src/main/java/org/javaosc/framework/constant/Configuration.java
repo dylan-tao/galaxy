@@ -23,7 +23,6 @@ public interface Configuration {
 	
 	static final String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
 	static final String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
-	static final String DYNAMIC_PROXY_KEY = "javaosc.dynamic.proxy.mode";
 	
 	static final String VIEW_KEY = "javaosc.url.";
 	
