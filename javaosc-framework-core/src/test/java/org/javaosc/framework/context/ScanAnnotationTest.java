@@ -2,7 +2,7 @@ package org.javaosc.framework.context;
 
 import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Service;
-import org.javaosc.framework.constant.Constant.ProxyMode;
+import org.javaosc.framework.util.StringUtil;
 
 public class ScanAnnotationTest {
 	
@@ -13,8 +13,14 @@ public class ScanAnnotationTest {
 		boolean isAction = UserAction.class.isAnnotationPresent(Mapping.class);
 		System.out.println(isAction);
 		
-		UserServiceImpl userService = BeanFactory.getService(ProxyMode.DEFAULT, UserServiceImpl.class);
-		System.out.println(userService.getUserName());
+		System.out.println(StringUtil.formatFirstChar("Dylan",true));
+		
+//		UserService userService = BeanFactory.getService(UserServiceImpl.class);
+//		System.out.println(userService.getUserName());
+		
+		
+	    
+		System.out.println(UserServiceImpl.class.getSimpleName());
 //		Class<?> cls = UserServiceImpl.class;
 //		  ScanAnnotation.setClassGlobalParam(UserServiceImpl.class);
 //		  UserService service = null;
@@ -27,6 +33,6 @@ public class ScanAnnotationTest {
 		     
 //		 	Class<?> cls = UserAction.class;
 //			  ScanAnnotation.setServiceField(UserAction.class);
-		
 	}
+	
 }

@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.javaosc.framework.assist.ClassHandler;
 import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.constant.Constant;
 import org.slf4j.Logger;
@@ -57,7 +58,8 @@ public class ScanPackage {
 		String fileName = file.getName();
 		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS)) {
 			fileName = fileName.substring(0, fileName.length() - 6);
-			ScanAnnotation.check(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
+			Class<?> loadClass = ClassHandler.load(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
+			ScanAnnotation.check(null,loadClass);
 		} else if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			files = files ==null? new File[0]:files;
@@ -73,7 +75,8 @@ public class ScanPackage {
 			JarEntry entry = entries.nextElement();
 			String fileName = entry.getName().replace(Constant.LINE, Constant.DOT);
 			if (fileName.startsWith(packageName) && fileName.endsWith(Constant.SUFFIX_CLASS)) {
-				ScanAnnotation.check(fileName.substring(0, fileName.length() - 6));
+				Class<?> loadClass = ClassHandler.load(fileName.substring(0, fileName.length() - 6));
+				ScanAnnotation.check(null,loadClass);
 			}
 		}
 	}

@@ -62,6 +62,25 @@ public class StringUtil {
 		return sb.toString();
 	}
 	
+	/**
+	 * first char format
+	 * @param value
+	 * @param flag true:lowerCase,false:upperCase
+	 * @return
+	 */
+	 public static String formatFirstChar(String value, boolean flag){
+		 if(StringUtil.isNotBlank(value)){
+			 char[] cs = value.toCharArray();
+			 if(!flag && Character.isLowerCase(cs[0])){
+				 cs[0]-=32;
+			 }else if(flag && Character.isUpperCase(cs[0])){
+				 cs[0]+=32;
+			 }
+			 value = String.valueOf(cs);
+		 }
+		 return value;
+	 }
+	
 	//位置枚举
 	public enum PatternValue {
 
