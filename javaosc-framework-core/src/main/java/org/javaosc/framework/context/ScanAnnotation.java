@@ -28,44 +28,39 @@ public class ScanAnnotation {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
 	
-	private static String getKey(String key,String value, Class<?> defaultValue){
-		if(StringUtil.isBlank(key)){
-			key = StringUtil.isNotBlank(value)?value: StringUtil.formatFirstChar(defaultValue.getSimpleName(), true);
-		}
-		return key;
-	}
-	
 	protected static Object check(String key, Class<?> loadClass) {
 		Object object = null;
 		if(loadClass.isAnnotationPresent(Bean.class)){
 			Bean bean = loadClass.getAnnotation(Bean.class);
-			key = getKey(key, bean.value(), loadClass);
-			object = BeanFactory.get(key, loadClass, false, true);
+			object = BeanFactory.get(bean.value(), loadClass, false, true);
 		}else if(loadClass.isAnnotationPresent(Dao.class)){
 			Dao dao = loadClass.getAnnotation(Dao.class);
-			key = getKey(key, dao.value(), loadClass);
-			object = BeanFactory.get(key, loadClass, false, true);
+			object = BeanFactory.get(dao.value(), loadClass, false, true);
 		}else if(loadClass.isAnnotationPresent(Service.class)){
 			Service service = loadClass.getAnnotation(Service.class);
-			key = getKey(key, service.value(), loadClass);
-			object = BeanFactory.get(key, loadClass, true, true);
+			object = BeanFactory.get(service.value(), loadClass, true, true);
 		}else{
-			boolean isPrototype = loadClass.isAnnotationPresent(Prototype.class);
-			if(!isPrototype){
-				object = BeanFactory.get(StringUtil.formatFirstChar(loadClass.getSimpleName(), true), loadClass, false, true);
-			}	
-			
-			Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
-			
-			String parentPath = parentMapping!=null?parentMapping.value():Constant.EMPTY;
+			boolean isParentMapping = loadClass.isAnnotationPresent(Mapping.class);
+			String parentPath = "";
+			if(isParentMapping){
+				Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
+				parentPath = parentMapping.value();
+			}
 			Method[] methods= loadClass.getDeclaredMethods(); 
+			boolean isSubMapping = false;
 			for (Method method : methods) {
-				Mapping mapping = method.getAnnotation(Mapping.class);
-			    if (mapping != null) {
+				isSubMapping = method.isAnnotationPresent(Mapping.class);
+			    if (isSubMapping) {
+			    	Mapping mapping = method.getAnnotation(Mapping.class);
 			    	String childPath = mapping.value();
 					RouteNodeRegistry.registerRouteNode(parentPath + childPath, loadClass, method);
 			    }
 			}
+			
+			boolean isPrototype = loadClass.isAnnotationPresent(Prototype.class);
+			if(!isPrototype && (isParentMapping || isSubMapping)){
+				object = BeanFactory.get(StringUtil.formatFirstChar(loadClass.getSimpleName(), true), loadClass, false, true);
+			}	
 		}
 //		log.info("class annotation scan is completed.");
 		return object;

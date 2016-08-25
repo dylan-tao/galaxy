@@ -36,30 +36,34 @@ public class BeanFactory {
 //		return get(cls, false, isCache);
 //	}
 	
+	public static String getKey(String custKey, Class<?> implCls){
+		if(StringUtil.isBlank(custKey)){
+			Class<?>[] interCls = implCls.getInterfaces();
+			if(interCls!=null && interCls.length==1){ //jdk proxy key
+				custKey = StringUtil.formatFirstChar(interCls[0].getSimpleName(), true);
+			}else{ //cglib proxy key
+				custKey = StringUtil.formatFirstChar(implCls.getSimpleName(), true);
+			}
+		}
+		return custKey;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static synchronized <T> T get(String key, Class<T> cls , boolean isTransaction, boolean isCache){
 		 Object serviceBean = null;
+		 key = getKey(key, cls);
+		 if (beanMap.containsKey(key)) { 
+			 serviceBean = beanMap.get(key);
+			 return (T) serviceBean;
+	     }
 		 try {
-			 Class<?>[] ifCls = cls.getInterfaces();
-			 if(ifCls!=null && ifCls.length==1){ //jdk
-				 key = StringUtil.isNotBlank(key)?key : StringUtil.formatFirstChar(ifCls[0].getSimpleName(), true);
-				 if (beanMap.containsKey(key)) { 
-					 serviceBean = beanMap.get(key);
-					 return (T) serviceBean;
-			     }
-				 
+			 if(key.equalsIgnoreCase(cls.getSimpleName())){//cglib
+				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
+	             serviceBean = proxyHandler.proxyInstance(); 
+			 }else{  //jdk
 				 Object proxy = ScanAnnotation.setServiceField(cls);
 				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(proxy, isTransaction);    
 	             serviceBean = proxyHandler.proxyInstance();
-	           
-			 }else{ //cglib
-				 key = StringUtil.isNotBlank(key)?key : StringUtil.formatFirstChar(cls.getSimpleName(), true);
-				 if (beanMap.containsKey(cls.getName())) { 
-					 serviceBean = beanMap.get(cls.getName());
-					 return (T) serviceBean;
-			     }
-				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
-	             serviceBean = proxyHandler.proxyInstance(); 
 			 }
              if(isCache && StringUtil.isNotBlank(key)){
             	 beanMap.put(key, serviceBean);

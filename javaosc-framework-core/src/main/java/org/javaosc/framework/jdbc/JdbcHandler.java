@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.javaosc.framework.annotation.Bean;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Page;
 import org.javaosc.framework.jdbc.core.JdbcTemplate;
@@ -23,19 +24,20 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
+@Bean
 public class JdbcHandler{
 	
 	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
 	
-	private JdbcTemplate jdbcTemplate;
+	private static JdbcTemplate jdbcTemplate;
 	
 	/*=================== 查询单列操作 =====================*/
 	
-	public JdbcHandler() {
-		this.jdbcTemplate = new JdbcTemplate();
+	static{
+		jdbcTemplate = new JdbcTemplate();
 	}
 
-	public <T> T queryForColumn(String sql,String columnName, Class<T> cls, Object... param){
+	public <T> T getForColumn(String sql,String columnName, Class<T> cls, Object... param){
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
@@ -49,7 +51,7 @@ public class JdbcHandler{
 		return obj;
 	}
 	
-	public <T> List<T> queryForColumnList(String sql,String columnName,Class<T> cls, Object... param){
+	public <T> List<T> getForColumnList(String sql,String columnName,Class<T> cls, Object... param){
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
@@ -65,7 +67,7 @@ public class JdbcHandler{
 	
 	/*=================== 查询多列操作 =====================*/
 	
-	public Map<String, Object> queryForMap(String sql, Object... param){
+	public Map<String, Object> getForMap(String sql, Object... param){
 		 Map<String, Object> map = null;
 		 try {
 			if(param != null && param.length > 0){
@@ -79,7 +81,7 @@ public class JdbcHandler{
 		 return map;	
 	}
 	
-	public List<Map<String, Object>> queryForMapList(String sql, Object... param){
+	public List<Map<String, Object>> getForMapList(String sql, Object... param){
 		 List<Map<String, Object>> list = null;
 		 try {
 			if(param != null && param.length > 0){
@@ -95,7 +97,7 @@ public class JdbcHandler{
 	
 	/*=================== 查询单表或多表操作 =====================*/
 	
-	public <T> T queryForObject(String sql, Class<T> cls, Object... param){
+	public <T> T getForObject(String sql, Class<T> cls, Object... param){
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
@@ -109,7 +111,7 @@ public class JdbcHandler{
 		return obj;
 	}
 	
-	public <T> List<T> queryForList(String sql, Class<T> cls, Object... param){
+	public <T> List<T> getForList(String sql, Class<T> cls, Object... param){
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
@@ -123,7 +125,7 @@ public class JdbcHandler{
 		return list;
 	}
 	
-	public <T> Page<T> queryForPage(String sql, Page<T> page,Class<T> cls, Object... param){
+	public <T> Page<T> getForPage(String sql, Page<T> page,Class<T> cls, Object... param){
 		List<T> list = null;
 		
 		//where->group by->having-order by->limit
@@ -137,7 +139,7 @@ public class JdbcHandler{
 		int startIndex =(pageNo-1) * pageSize;
 		sql = SqlHandler.createLimit(sql, startIndex, pageSize); //limit
 		
-		list = queryForList(sql, cls, param);
+		list = getForList(sql, cls, param);
 		page.setResult(list);
 		return page;
 	}
