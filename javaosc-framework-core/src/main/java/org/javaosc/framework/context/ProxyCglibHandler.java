@@ -33,7 +33,8 @@ public class ProxyCglibHandler implements MethodInterceptor {
 		this.isTransaction = isTransaction;
 	}
 
-	protected Object proxyInstance() {
+	@SuppressWarnings("unchecked")
+	protected <T> T  proxyInstance() {
 		Class<?>[] interfaceArray = this.cls.getInterfaces();
 		if(interfaceArray != null && interfaceArray.length>0){
 			enhancer.setInterfaces(interfaceArray);
@@ -41,7 +42,7 @@ public class ProxyCglibHandler implements MethodInterceptor {
 			enhancer.setSuperclass(this.cls);
 		}
         enhancer.setCallback(this);  
-        return enhancer.create();  
+        return (T)enhancer.create();  
 	}
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
