@@ -1,6 +1,6 @@
 package com.javaosc.user.service;
 
-import org.javaosc.framework.annotation.Ref;
+import org.javaosc.framework.annotation.Autowired;
 import org.javaosc.framework.annotation.Service;
 import org.javaosc.framework.annotation.Value;
 
@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Value("123")
 	private String password;
-	@Ref
+	@Autowired
 	private UserDao userDao;
 	
 	@Override

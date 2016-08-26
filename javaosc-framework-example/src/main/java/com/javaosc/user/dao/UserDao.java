@@ -1,7 +1,7 @@
 package com.javaosc.user.dao;
 
 import org.javaosc.framework.annotation.Dao;
-import org.javaosc.framework.annotation.Ref;
+import org.javaosc.framework.annotation.Autowired;
 import org.javaosc.framework.jdbc.JdbcHandler;
 
 import com.javaosc.user.action.User;
@@ -9,7 +9,7 @@ import com.javaosc.user.action.User;
 @Dao
 public class UserDao {
 	
-	@Ref
+	@Autowired
 	private JdbcHandler jdbcHandler;
 	
 	public User getUser(User user){

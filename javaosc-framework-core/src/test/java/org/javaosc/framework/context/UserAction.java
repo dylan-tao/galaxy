@@ -1,13 +1,13 @@
 package org.javaosc.framework.context;
 
 import org.javaosc.framework.annotation.Mapping;
-import org.javaosc.framework.annotation.Ref;
+import org.javaosc.framework.annotation.Autowired;
 import org.javaosc.framework.annotation.Value;
 
 @Mapping("")
 public class UserAction {
 	
-	@Ref
+	@Autowired
 	private UserService userService;
 	
 	@Value("dylan")

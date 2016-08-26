@@ -7,7 +7,7 @@ import org.javaosc.framework.annotation.Bean;
 import org.javaosc.framework.annotation.Dao;
 import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Prototype;
-import org.javaosc.framework.annotation.Ref;
+import org.javaosc.framework.annotation.Autowired;
 import org.javaosc.framework.annotation.Service;
 import org.javaosc.framework.annotation.Value;
 import org.javaosc.framework.constant.Constant;
@@ -77,8 +77,8 @@ public class ScanAnnotation {
 	     for(int i=0; i<fields.length;i++){  
 	    	 Field field = fields[i];
 	    	 field.setAccessible(true);
-		     if(field.isAnnotationPresent(Ref.class)){
-		    	 Ref ref = field.getAnnotation(Ref.class);
+		     if(field.isAnnotationPresent(Autowired.class)){
+		    	 Autowired ref = field.getAnnotation(Autowired.class);
 		    	 Class<?> valueType = field.getType();
 		    	 String refValue = ref.value();
 		    	 Object proxyObj = check(refValue, valueType);
