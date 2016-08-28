@@ -59,7 +59,7 @@ public class ScanPackage {
 		if (file.isFile() && fileName.endsWith(Constant.SUFFIX_CLASS)) {
 			fileName = fileName.substring(0, fileName.length() - 6);
 			Class<?> loadClass = ClassHandler.load(new StringBuffer(packageName).append(Constant.DOT).append(fileName).toString());
-			ScanAnnotation.check(null,loadClass);
+			ScanAnnotation.putAnnotation(loadClass);
 		} else if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			files = files ==null? new File[0]:files;
@@ -76,7 +76,7 @@ public class ScanPackage {
 			String fileName = entry.getName().replace(Constant.LINE, Constant.DOT);
 			if (fileName.startsWith(packageName) && fileName.endsWith(Constant.SUFFIX_CLASS)) {
 				Class<?> loadClass = ClassHandler.load(fileName.substring(0, fileName.length() - 6));
-				ScanAnnotation.check(null,loadClass);
+				ScanAnnotation.putAnnotation(loadClass);
 			}
 		}
 	}

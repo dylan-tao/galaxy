@@ -24,24 +24,24 @@ public class ProxyCglibHandler implements MethodInterceptor {
 	
 	private Enhancer enhancer = new Enhancer();
 	
-	private Class<?> cls;
+	private Object target;
 	
 	private boolean isTransaction;
 	
-	protected ProxyCglibHandler(Class<?> cls, boolean isTransaction) {
-		this.cls = cls;
+	protected ProxyCglibHandler(Object target, boolean isTransaction) {
+		this.target = target;
 		this.isTransaction = isTransaction;
 	}
 
 	@SuppressWarnings("unchecked")
 	protected <T> T  proxyInstance() {
-		Class<?>[] interfaceArray = this.cls.getInterfaces();
+		Class<?>[] interfaceArray = this.target.getClass().getInterfaces();
 		if(interfaceArray != null && interfaceArray.length>0){
 			enhancer.setInterfaces(interfaceArray);
 		}else{
-			enhancer.setSuperclass(this.cls);
+			enhancer.setSuperclass(this.target.getClass());
 		}
-        enhancer.setCallback(this);  
+        enhancer.setCallback(this);
         return (T)enhancer.create();  
 	}
 

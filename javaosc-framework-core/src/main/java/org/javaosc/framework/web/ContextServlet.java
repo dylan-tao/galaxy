@@ -117,11 +117,11 @@ public class ContextServlet extends HttpServlet {
 						log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
 					}
 				}else{ 
-					log.error("this request path [{}] can't find pointing to the method, maybe not bind !", requestPath);
+					log.error("the request path [{}] can't find pointing to the method, maybe not bind !", requestPath);
 				}	
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){
-					log.debug("this request path [{}] can not find !",requestPath);
+					log.debug("the request path [{}] can not be found !",requestPath);
 					try {
 						ActionContext.getContext().getResponse().sendError(404);
 					} catch (IOException e) {
