@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.convert.ConvertFactory;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
 import org.javaosc.framework.web.assist.ActionHandler;
@@ -86,21 +87,20 @@ public class ContextServlet extends HttpServlet {
 		} else { 
 			Map<String, Object> routeMap = RouteNodeRegistry.getRouteNode(requestPath);		
 			Object action = routeMap.get(RouteNodeRegistry.ACTION);
-			Object m = routeMap.get(RouteNodeRegistry.METHOD);
+			Object method = routeMap.get(RouteNodeRegistry.METHOD);
 			
-			if(action!=null && m!=null){
+			if(action!=null && method!=null){
 				
-				Method method = (Method)m;
-				Object methodPrm = routeMap.get(RouteNodeRegistry.METHOD_PRM);
-				String[] param = methodPrm==null?null:(String[])methodPrm;
+				Method m = (Method)method;
+				String[] param = ConvertFactory.convert(String[].class, routeMap.get(RouteNodeRegistry.METHOD_PRM));
 				
 				Object result = null;
 				try {
-					result = method.invoke(action, MethodParamHandler.getParamValue(method,method.getParameterTypes(), param));
+					result = m.invoke(action, MethodParamHandler.getParamValue(m,m.getParameterTypes(), param));
 				} catch (Exception e) {
 					log.error(Constant.JAVAOSC_EXCEPTION, e);
 				} 
-				Class<?> returnType = method.getReturnType();
+				Class<?> returnType = m.getReturnType();
 				if(returnType.equals(String.class)){
 					String returnPath = String.valueOf(result);
 					if(StringUtil.isNotBlank(returnPath)){
@@ -110,7 +110,7 @@ public class ContextServlet extends HttpServlet {
 				}else if(returnType.equals(void.class)){
 					return;
 				}else{ 
-					log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
+					log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),m.getName());
 				}	
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){
