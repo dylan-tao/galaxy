@@ -3,15 +3,18 @@ package org.javaosc.framework.context;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.javaosc.framework.annotation.Autowired;
 import org.javaosc.framework.annotation.Bean;
 import org.javaosc.framework.annotation.Dao;
 import org.javaosc.framework.annotation.Mapping;
+import org.javaosc.framework.annotation.Prototype;
 import org.javaosc.framework.annotation.Service;
 import org.javaosc.framework.annotation.Value;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.convert.ConvertFactory;
+import org.javaosc.framework.jdbc.JdbcHandler;
 import org.javaosc.framework.util.StringUtil;
 import org.javaosc.framework.web.RouteNodeRegistry;
 import org.slf4j.Logger;
@@ -28,11 +31,12 @@ public class ScanAnnotation {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
 	
-	private static HashMap<String, Class<?>> annotationClsMap;
+	private static HashMap<String, Class<?>> annotationMap;
 	
 	protected static void putAnnotation(Class<?> loadClass){
-		if(annotationClsMap==null){
-			annotationClsMap = new HashMap<String, Class<?>>();
+		if(annotationMap==null){
+			annotationMap = new HashMap<String, Class<?>>();
+			annotationMap.put("jdbcHandler", JdbcHandler.class);
 		}
 		String custKey = null;
 		boolean flag = false;
@@ -48,66 +52,50 @@ public class ScanAnnotation {
 			Service service = loadClass.getAnnotation(Service.class);
 			custKey = service.value();
 			flag = true;
-		}else{
-			boolean isParentMapping = loadClass.isAnnotationPresent(Mapping.class);
-			String parentPath = "";
-			if(isParentMapping){
-				Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
-				parentPath = parentMapping.value();
-				
-				Method[] methods= loadClass.getDeclaredMethods(); 
-				for (Method method : methods) {
-					boolean isSubMapping = method.isAnnotationPresent(Mapping.class);
-				    if (isSubMapping) {
-				    	Mapping mapping = method.getAnnotation(Mapping.class);
-				    	String childPath = mapping.value();
-						RouteNodeRegistry.registerRouteNode(parentPath + childPath, loadClass, method);
-				    }
-				}
-			}
+		}else if(loadClass.isAnnotationPresent(Mapping.class)){
+			custKey = null;
+			flag = true;
 		}
 		if(flag){
 			custKey = getKey(custKey, loadClass);
-			annotationClsMap.put(custKey, loadClass);
+			annotationMap.put(custKey, loadClass);
 		}
 	}
 	
-	protected static Object check(String key, Class<?> loadClass) {
-		Object object = null;
-		if(loadClass.isAnnotationPresent(Bean.class)){
-			Bean bean = loadClass.getAnnotation(Bean.class);
-			object = BeanFactory.get(bean.value(), loadClass, false);
-		}else if(loadClass.isAnnotationPresent(Dao.class)){
-			Dao dao = loadClass.getAnnotation(Dao.class);
-			object = BeanFactory.get(dao.value(), loadClass, false);
-		}else if(loadClass.isAnnotationPresent(Service.class)){
-			Service service = loadClass.getAnnotation(Service.class);
-			object = BeanFactory.get(service.value(), loadClass, true);
-		}else{
-			boolean isParentMapping = loadClass.isAnnotationPresent(Mapping.class);
-			String parentPath = "";
-			if(isParentMapping){
-//				boolean isPrototype = loadClass.isAnnotationPresent(Prototype.class);
-//				if(!isPrototype && isParentMapping){
-//					object = BeanFactory.get(getKey(null, loadClass), loadClass, false, true);
-//				}	
-				
-				Mapping parentMapping = loadClass.getAnnotation(Mapping.class);
-				parentPath = parentMapping.value();
-				
-				Method[] methods= loadClass.getDeclaredMethods(); 
-				for (Method method : methods) {
-					boolean isSubMapping = method.isAnnotationPresent(Mapping.class);
-				    if (isSubMapping) {
-				    	Mapping mapping = method.getAnnotation(Mapping.class);
-				    	String childPath = mapping.value();
-						RouteNodeRegistry.registerRouteNode(parentPath + childPath, loadClass, method);
-				    }
+	public static void registryAnnotation(){
+		if(annotationMap!=null){
+			for(Entry<String, Class<?>> entry:annotationMap.entrySet()){
+				String key = entry.getKey();
+				Class<?> cls = entry.getValue();
+				if(cls.isAnnotationPresent(Bean.class) || cls.isAnnotationPresent(Dao.class)){
+					BeanFactory.get(key, cls, false);
+				}else if(cls.isAnnotationPresent(Service.class)){
+					BeanFactory.get(key, cls, true);
+				}else if(cls.isAnnotationPresent(Mapping.class)){
+					Object action = null;
+					String parentPath = "";
+					
+					if(cls.isAnnotationPresent(Prototype.class)){
+						action = cls;
+					}else{
+						action = setServiceField(cls);
+					}
+					
+					Mapping parentMapping = cls.getAnnotation(Mapping.class);
+					parentPath = parentMapping.value();
+					
+					Method[] methods= cls.getDeclaredMethods(); 
+					for (Method method : methods) {
+						boolean isSubMapping = method.isAnnotationPresent(Mapping.class);
+					    if (isSubMapping) {
+					    	Mapping mapping = method.getAnnotation(Mapping.class);
+					    	String childPath = mapping.value();
+							RouteNodeRegistry.registerRouteNode(parentPath + childPath, action, method);
+					    }
+					}
 				}
 			}
 		}
-//		log.info("class annotation scan is completed.");
-		return object;
 	}
 	
 	public static Object setServiceField(Class<?> cls){
@@ -123,11 +111,11 @@ public class ScanAnnotation {
 	    	 field.setAccessible(true);
 		     if(field.isAnnotationPresent(Autowired.class)){
 		    	 Autowired ref = field.getAnnotation(Autowired.class);
-		    	 Class<?> valueType = field.getType();
+		    	 Class<?> refType = field.getType();
 		    	 String refValue = ref.value();
-		    	 String key = getKey(refValue, valueType);
+		    	 String key = getKey(refValue, refType);
 		    	 
-		    	 Class<?> target = annotationClsMap.get(key);
+		    	 Class<?> target = annotationMap.get(key);
 		    	 Object cacheObj = BeanFactory.get(key, target, false);
 		    	 
 		         try {
@@ -154,7 +142,7 @@ public class ScanAnnotation {
 	private static String getKey(String custKey, Class<?> cls){
 		if(StringUtil.isBlank(custKey)){
 			if(cls.isInterface()){
-				StringUtil.formatFirstChar(cls.getSimpleName(), true);
+				custKey = StringUtil.formatFirstChar(cls.getSimpleName(), true);
 			}else{
 				Class<?>[] interCls = cls.getInterfaces();
 				if(interCls!=null && interCls.length==1){ //jdk proxy key

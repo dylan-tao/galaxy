@@ -90,6 +90,9 @@ public class ContextServlet extends HttpServlet {
 			Object method = routeMap.get(RouteNodeRegistry.METHOD);
 			
 			if(action!=null && method!=null){
+//				if(action.){
+//					
+//				}
 				
 				Method m = (Method)method;
 				String[] param = ConvertFactory.convert(String[].class, routeMap.get(RouteNodeRegistry.METHOD_PRM));

@@ -20,21 +20,8 @@ public class BeanFactory {
 	
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	protected static String getKey(String custKey, Class<?> implCls){
-		if(StringUtil.isBlank(custKey)){
-			Class<?>[] interCls = implCls.getInterfaces();
-			if(interCls!=null && interCls.length==1){ //jdk proxy key
-				custKey = StringUtil.formatFirstChar(interCls[0].getSimpleName(), true);
-			}else{ //cglib proxy key
-				custKey = StringUtil.formatFirstChar(implCls.getSimpleName(), true);
-			}
-		}
-		return custKey;
-	}
-	
 	public static synchronized Object get(String key, Class<?> cls , boolean isTransaction){
 		 Object instBean = null;
-//		 key = getKey(key, cls);
 		 if (beanMap.containsKey(key)) { 
 			 instBean = beanMap.get(key);
 			 return instBean;

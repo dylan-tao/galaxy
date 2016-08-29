@@ -9,6 +9,7 @@ import javax.servlet.ServletContextListener;
 import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.context.BeanFactory;
 import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.context.ScanAnnotation;
 import org.javaosc.framework.context.ScanPackage;
 import org.javaosc.framework.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
@@ -54,6 +55,8 @@ public class ContextListener implements ServletContextListener {
 		ScanPackage scan = new ScanPackage();
 		scan.load();
 		scan = null;
+		
+		ScanAnnotation.registryAnnotation();
 		
 		ConnectionHandler.init();
 		
