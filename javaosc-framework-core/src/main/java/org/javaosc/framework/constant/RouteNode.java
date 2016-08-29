@@ -16,7 +16,7 @@ public class RouteNode {
 	
 	private Map<String,RouteNode> children;
 	
-	private Class<?> cls;
+	private Object action;
 	
 	private Method method;
 	
@@ -53,12 +53,12 @@ public class RouteNode {
 		this.paramName = paramName;
 	}
 
-	public Class<?> getCls() {
-		return cls;
+	public Object getAction() {
+		return action;
 	}
 
-	public void setCls(Class<?> cls) {
-		this.cls = cls;
+	public void setAction(Object action) {
+		this.action = action;
 	}
 
 	public Method getMethod() {

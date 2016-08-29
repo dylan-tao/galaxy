@@ -79,45 +79,38 @@ public class ContextServlet extends HttpServlet {
 	private void executeMethod(HttpServletRequest request){
 		
 		String requestPath = PathUtil.getContextPath(request);
-		String requestValue = ConfigurationHandler.getViewMap(requestPath);
+		String requestView = ConfigurationHandler.getViewMap(requestPath);
 
-		if (StringUtil.isNotBlank(requestValue)) {
-			new ActionHandler(requestValue).redirectOrForward(prefix, suffix);
+		if (StringUtil.isNotBlank(requestView)) {
+			new ActionHandler(requestView).redirectOrForward(prefix, suffix);
 		} else { 
 			Map<String, Object> routeMap = RouteNodeRegistry.getRouteNode(requestPath);		
-			Object actionObj = routeMap.get(RouteNodeRegistry.ACTION_CLASS);
-			Object methodObj = routeMap.get(RouteNodeRegistry.METHOD);
-			Object methodPrmObj = routeMap.get(RouteNodeRegistry.METHOD_PRM);
+			Object action = routeMap.get(RouteNodeRegistry.ACTION);
+			Object m = routeMap.get(RouteNodeRegistry.METHOD);
 			
-			Class<?> actionCls = actionObj==null?null:(Class<?>)actionObj;
-			Method method = methodObj==null?null:(Method)methodObj;
-			String[] methodPrm = methodPrmObj==null?null:(String[])methodPrmObj;
-			
-			if(actionCls!=null && methodObj!=null){
+			if(action!=null && m!=null){
 				
-//				Object action = BeanFactory.getBean(actionCls, false);
+				Method method = (Method)m;
+				Object methodPrm = routeMap.get(RouteNodeRegistry.METHOD_PRM);
+				String[] param = methodPrm==null?null:(String[])methodPrm;
 				
-				if (method!=null) {
-					Object returnObj = null;
-					try {
-						returnObj = method.invoke(actionCls.newInstance(), MethodParamHandler.getParamValue(method,method.getParameterTypes(), methodPrm));
-					} catch (Exception e) {
-						log.error(Constant.JAVAOSC_EXCEPTION, e);
-					} 
-					Class<?> returnType = method.getReturnType();
-					if(returnType.equals(String.class)){
-						String returnPath = String.valueOf(returnObj);
-						if(StringUtil.isNotBlank(returnPath)){
-							new ActionHandler(returnPath).redirectOrForward(prefix, suffix);
-						}
-						return;
-					}else if(returnType.equals(void.class)){
-						return;
-					}else{ 
-						log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
+				Object result = null;
+				try {
+					result = method.invoke(action, MethodParamHandler.getParamValue(method,method.getParameterTypes(), param));
+				} catch (Exception e) {
+					log.error(Constant.JAVAOSC_EXCEPTION, e);
+				} 
+				Class<?> returnType = method.getReturnType();
+				if(returnType.equals(String.class)){
+					String returnPath = String.valueOf(result);
+					if(StringUtil.isNotBlank(returnPath)){
+						new ActionHandler(returnPath).redirectOrForward(prefix, suffix);
 					}
+					return;
+				}else if(returnType.equals(void.class)){
+					return;
 				}else{ 
-					log.error("the request path [{}] can't find pointing to the method, maybe not bind !", requestPath);
+					log.error("the return type [{}] of the method [{}] is not supported !",returnType.getName(),method.getName());
 				}	
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){

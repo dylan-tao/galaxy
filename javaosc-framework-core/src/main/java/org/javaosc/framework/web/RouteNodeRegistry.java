@@ -28,7 +28,7 @@ public abstract class RouteNodeRegistry {
 	
 	private static final String URI_PARAM = "_$URI_PARAM_";
 	
-	protected static final String ACTION_CLASS = "_$ACTION_CLASS_";
+	protected static final String ACTION = "_$ACTION_";
 	
 	protected static final String METHOD = "_$METHOD_";
 	
@@ -37,7 +37,7 @@ public abstract class RouteNodeRegistry {
 	protected static final String ERROR_CODE = "_ERROR_CODE_";
 	
 	
-	public static void registerRouteNode(String uriPattern, Class<?> cls, Method method){
+	public static void registerRouteNode(String uriPattern, Object action, Method method){
 		if(StringUtil.isNotBlank(uriPattern)){
 			uriPattern = StringUtil.clearSpace(uriPattern, PatternValue.ALL);
 			String[] routePath = uriPattern.split(Constant.LINE);
@@ -56,7 +56,7 @@ public abstract class RouteNodeRegistry {
 							if((child = current.getChild(URI_PARAM)) == null){
 								child = new RouteNode(matcher.group(1));
 								if(uriLength-i == 1){ 
-									child.setCls(cls);
+									child.setAction(action);
 									child.setMethod(method);
 									String[] methodPrm = MethodParamHandler.getParamName(method);
 									child.setParam(methodPrm);	
@@ -67,7 +67,7 @@ public abstract class RouteNodeRegistry {
 					}else{
 						child = new RouteNode();
 						if(uriLength-i == 1){ 
-							child.setCls(cls);
+							child.setAction(action);
 							child.setMethod(method);
 							String[] methodPrm = MethodParamHandler.getParamName(method);
 							child.setParam(methodPrm);	
@@ -103,7 +103,7 @@ public abstract class RouteNodeRegistry {
 			}
 			
 			if(uriLength-i == 1){ 
-				params.put(ACTION_CLASS, child.getCls());
+				params.put(ACTION, child.getAction());
 				params.put(METHOD, child.getMethod());
 				params.put(METHOD_PRM, child.getParam());
 			}
