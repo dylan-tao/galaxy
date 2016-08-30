@@ -66,16 +66,16 @@ public class ConfigurationHandler {
 			initConfiguration();
 			log.info("javaosc configuration is initialized. filename: {}.", javaoscConfig);
 		} catch (FileNotFoundException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}finally{
 			try {
 				if(inputStream != null) {
 					inputStream.close();
 				}
 			} catch (IOException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			}	
 		}		
 	}
@@ -166,9 +166,9 @@ public class ConfigurationHandler {
 				outputStream.flush();
 				log.info("exporting configuration file: {}", javaoscConfig);
 			} catch (FileNotFoundException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} catch (IOException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} finally {
 				try {
 					if (outputStream != null) {

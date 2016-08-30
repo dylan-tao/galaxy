@@ -36,7 +36,7 @@ public class PropertyConvert {
         	try {
 				entity = entityClass.newInstance();
 			} catch (Exception e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+				log.error(Constant.JAVAOSC_EXCEPTION, e);
 			} 
             for(Entry<String, Method> entry:propertyMap.entrySet()){
             	String name = entry.getKey();
@@ -54,7 +54,7 @@ public class PropertyConvert {
             		try {
 						m.invoke(entity, new Object[]{targetValue});
 					} catch (Exception e) {
-						log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+						log.error(Constant.JAVAOSC_EXCEPTION, e);
 					} 
             	}
             }  
@@ -67,7 +67,7 @@ public class PropertyConvert {
 		try {
 			beanInfo = Introspector.getBeanInfo(clsType);
 		} catch (Exception e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		} 
 		Map<String, Method> propertyMap = new HashMap<String, Method>();
 		if(beanInfo!=null){

@@ -46,7 +46,7 @@ public class JdbcHandler{
 				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return obj;
 	}
@@ -60,7 +60,7 @@ public class JdbcHandler{
 				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return list;
 	}
@@ -76,7 +76,7 @@ public class JdbcHandler{
 				map = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapHandler());
 			}
 		 } catch (SQLException e) {
-			 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			 log.error(Constant.JAVAOSC_EXCEPTION, e);
 		 }
 		 return map;	
 	}
@@ -90,7 +90,7 @@ public class JdbcHandler{
 				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
 			}
 		 } catch (SQLException e) {
-			 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			 log.error(Constant.JAVAOSC_EXCEPTION, e);
 		 }
 		 return list;	
 	}
@@ -106,7 +106,7 @@ public class JdbcHandler{
 				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return obj;
 	}
@@ -120,7 +120,7 @@ public class JdbcHandler{
 				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return list;
 	}
@@ -156,7 +156,7 @@ public class JdbcHandler{
 				count = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return count;
 	}
@@ -199,7 +199,7 @@ public class JdbcHandler{
 				index = jdbcTemplate.update(ConnectionHandler.getConnection(), sql);
 			}
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return index > 0 ? true : false;
 	}
@@ -209,7 +209,7 @@ public class JdbcHandler{
 			int[] index = jdbcTemplate.batch(ConnectionHandler.getConnection(), sql, params);
 			return index.length == params.length;	
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}
 		return false;
 	}

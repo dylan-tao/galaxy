@@ -19,7 +19,7 @@ public class ClassHandler {
 		try {
 			return Thread.currentThread().getContextClassLoader().loadClass(name);
 		} catch (ClassNotFoundException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+			log.error(Constant.JAVAOSC_EXCEPTION, e);
 			return null;
 		}
 	}

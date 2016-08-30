@@ -63,7 +63,7 @@ public class ProxyCglibHandler implements MethodInterceptor {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
+					log.error(Constant.JAVAOSC_EXCEPTION, e);
 				}
 			}else{
 				returnObj = proxy.invokeSuper(obj, args);
