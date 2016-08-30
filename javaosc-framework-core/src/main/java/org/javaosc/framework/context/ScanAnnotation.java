@@ -78,14 +78,10 @@ public class ScanAnnotation {
 					if(cls.isAnnotationPresent(Prototype.class)){
 						action = cls;
 					}else{
-						Object obj = null;
 						try {
-							obj = cls.newInstance();
+							action = setServiceField(cls, cls.newInstance());
 						}catch (Exception e) {
 							e.printStackTrace();
-						}
-						if(obj!=null){
-							action = setServiceField(obj);
 						}
 					}
 					
@@ -106,8 +102,7 @@ public class ScanAnnotation {
 		}
 	}
 	
-	public static Object setServiceField(Object bean){
-		 Class<?> cls = bean.getClass();
+	public static Object setServiceField(Class<?> cls,Object proxyInst){
 		 Field[] fields = cls.getDeclaredFields();
 	     for(int i=0; i<fields.length;i++){  
 	    	 Field field = fields[i];
@@ -122,7 +117,7 @@ public class ScanAnnotation {
 		    	 Object cacheObj = BeanFactory.get(key, target, false);
 		    	 
 		         try {
-		        	field.set(bean, cacheObj);
+		        	field.set(proxyInst, cacheObj);
 				 } catch (Exception e) {
 					 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				 }
@@ -132,14 +127,14 @@ public class ScanAnnotation {
 		    	 String refValue = value.value();
 		    	 try {
 		    		 if(StringUtil.isNotBlank(refValue)){
-		    			field.set(bean, ConvertFactory.convert(valueType, refValue));
+		    			field.set(proxyInst, ConvertFactory.convert(valueType, refValue));
 		    		 }
 		    	 } catch (Exception e) {
 		    		 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				 }	
 		     }
 	     }
-	     return bean;
+	     return proxyInst;
 	}
 	
 	private static String getKey(String custKey, Class<?> cls){
