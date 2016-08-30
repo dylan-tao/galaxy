@@ -53,7 +53,7 @@ public class ProxyJdkHandler implements InvocationHandler {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					log.error(Constant.JAVAOSC_EXCEPTION, e);;
+					log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());;
 				}
 			}else{
 				returnObj = method.invoke(target, args);

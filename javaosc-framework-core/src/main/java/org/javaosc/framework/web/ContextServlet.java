@@ -71,7 +71,7 @@ public class ContextServlet extends HttpServlet {
 			ActionContext.setContext(request, response);
 			executeMethod(request);
 		} catch (Exception e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}finally{ 
 			ActionContext.clear();
 		}
@@ -101,7 +101,7 @@ public class ContextServlet extends HttpServlet {
 				try {
 					result = m.invoke(action, MethodParamHandler.getParamValue(m,m.getParameterTypes(), param));
 				} catch (Exception e) {
-					log.error(Constant.JAVAOSC_EXCEPTION, e);
+					log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				} 
 				Class<?> returnType = m.getReturnType();
 				if(returnType.equals(String.class)){
@@ -121,7 +121,7 @@ public class ContextServlet extends HttpServlet {
 					try {
 						ActionContext.getContext().getResponse().sendError(404);
 					} catch (IOException e) {
-						log.error(Constant.JAVAOSC_EXCEPTION, e);
+						log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 					}
 				}
 			}

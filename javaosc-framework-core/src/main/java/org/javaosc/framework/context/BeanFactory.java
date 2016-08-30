@@ -41,7 +41,7 @@ public class BeanFactory {
             	 beanMap.put(key, instBean);
              }  	  
 	     } catch (Exception e) {    
-	    	 log.error(Constant.JAVAOSC_EXCEPTION, e); 
+	    	 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage()); 
 	     } 
 	     return instBean;
 	} 

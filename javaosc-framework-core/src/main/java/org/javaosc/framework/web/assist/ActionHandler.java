@@ -39,9 +39,9 @@ public class ActionHandler {
 		try {
 			dispatcher.forward(ActionContext.getContext().getRequest(), ActionContext.getContext().getResponse());
 		} catch (ServletException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}
 	}
 
@@ -49,7 +49,7 @@ public class ActionHandler {
 		 try {
 			 ActionContext.getContext().getResponse().sendRedirect(servicePath);
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}
 	}
 	

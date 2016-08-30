@@ -65,7 +65,7 @@ public class ContextHandler {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);;
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}finally{
 			content = null;
 			log.debug(content);

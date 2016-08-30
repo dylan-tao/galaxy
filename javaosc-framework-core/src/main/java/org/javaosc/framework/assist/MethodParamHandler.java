@@ -62,7 +62,7 @@ public class MethodParamHandler {
 						obj[j] = null;
 					}
 				} catch (Exception e) {
-					log.error(Constant.JAVAOSC_EXCEPTION, e);
+					log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				} 
 			}
 		}
@@ -87,7 +87,7 @@ public class MethodParamHandler {
 				}
 			}
 		} catch (Throwable e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 			return null;
 		}
 	}

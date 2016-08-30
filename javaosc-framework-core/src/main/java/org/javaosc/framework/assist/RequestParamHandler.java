@@ -75,7 +75,7 @@ public class RequestParamHandler {
 			byte[] b = value.getBytes(CodeType.ISO88591.getValue());
 			value = new String(b, ConfigurationHandler.getContextEncode());
 		} catch (UnsupportedEncodingException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}
 		return value;
 	}

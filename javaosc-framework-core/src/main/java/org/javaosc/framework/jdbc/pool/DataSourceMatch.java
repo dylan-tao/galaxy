@@ -33,7 +33,7 @@ public class DataSourceMatch {
 				Context c = new InitialContext();
 				ds = (DataSource)c.lookup(dataSourceName);
 			} catch (NamingException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 			}
 		}else if(dataSourceName.indexOf(".c3p0.")>0){ //c3p0 pool
 			C3p0Handler c3p0Handler = null;
@@ -41,7 +41,7 @@ public class DataSourceMatch {
 				c3p0Handler = PropertyConvert.convertMapToEntity(ConfigurationHandler.getPoolParam(), C3p0Handler.class);
 				ds = c3p0Handler.getDataSource();
 			} catch (Exception e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 			} 	
 		}
 		return ds;

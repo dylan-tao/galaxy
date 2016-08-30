@@ -65,7 +65,7 @@ public class ContextListener implements ServletContextListener {
 		initTime = System.currentTimeMillis() - initTime;
 		log.info("================== support site ==================");
 		log.info(" ");
-		log.info("     Javaosc Framework startup in {} ms", initTime);
+		log.info("     Javaosc framework startup in {} ms", initTime);
 		log.info(" ");
 		log.info("================= www.javaosc.com ================");
 		

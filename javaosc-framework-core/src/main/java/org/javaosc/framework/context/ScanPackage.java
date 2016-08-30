@@ -48,9 +48,9 @@ public class ScanPackage {
 				log.info("class package scan is completed.");
 			}
 		} catch (URISyntaxException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 		}	
 	}
 
