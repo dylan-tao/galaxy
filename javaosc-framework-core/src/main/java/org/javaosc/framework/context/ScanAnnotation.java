@@ -78,7 +78,15 @@ public class ScanAnnotation {
 					if(cls.isAnnotationPresent(Prototype.class)){
 						action = cls;
 					}else{
-						action = setServiceField(cls);
+						Object obj = null;
+						try {
+							obj = cls.newInstance();
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+						if(obj!=null){
+							action = setServiceField(obj);
+						}
 					}
 					
 					Mapping parentMapping = cls.getAnnotation(Mapping.class);
@@ -98,13 +106,8 @@ public class ScanAnnotation {
 		}
 	}
 	
-	public static Object setServiceField(Class<?> cls){
-		Object object = null;
-		try {
-			object = cls.newInstance();
-		}  catch (Exception e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
-		}
+	public static Object setServiceField(Object bean){
+		 Class<?> cls = bean.getClass();
 		 Field[] fields = cls.getDeclaredFields();
 	     for(int i=0; i<fields.length;i++){  
 	    	 Field field = fields[i];
@@ -119,7 +122,7 @@ public class ScanAnnotation {
 		    	 Object cacheObj = BeanFactory.get(key, target, false);
 		    	 
 		         try {
-		        	field.set(object, cacheObj);
+		        	field.set(bean, cacheObj);
 				 } catch (Exception e) {
 					 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				 }
@@ -129,14 +132,14 @@ public class ScanAnnotation {
 		    	 String refValue = value.value();
 		    	 try {
 		    		 if(StringUtil.isNotBlank(refValue)){
-		    			field.set(object, ConvertFactory.convert(valueType, refValue));
+		    			field.set(bean, ConvertFactory.convert(valueType, refValue));
 		    		 }
 		    	 } catch (Exception e) {
 		    		 log.error(Constant.JAVAOSC_EXCEPTION, e.getMessage());
 				 }	
 		     }
 	     }
-	     return object;
+	     return bean;
 	}
 	
 	private static String getKey(String custKey, Class<?> cls){

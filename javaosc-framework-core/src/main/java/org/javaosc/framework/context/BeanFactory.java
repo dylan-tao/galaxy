@@ -26,15 +26,16 @@ public class BeanFactory {
 			 instBean = beanMap.get(key);
 			 return instBean;
 	     }
-		 Object proxy = ScanAnnotation.setServiceField(cls);
+		 Object proxyInst = null;
 		 try {
 			 if(key.equalsIgnoreCase(cls.getSimpleName())){//cglib
-				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(proxy, isTransaction);    
-				 instBean = proxyHandler.proxyInstance(); 
+				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(cls, isTransaction);    
+				 proxyInst = proxyHandler.proxyInstance(); 
 			 }else{  //jdk
-				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(proxy, isTransaction);    
-				 instBean = proxyHandler.proxyInstance();
+				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(cls, isTransaction);    
+				 proxyInst = proxyHandler.proxyInstance();
 			 }
+			 instBean = ScanAnnotation.setServiceField(proxyInst);
              if(StringUtil.isNotBlank(key) && instBean!=null){
             	 beanMap.put(key, instBean);
              }  	  

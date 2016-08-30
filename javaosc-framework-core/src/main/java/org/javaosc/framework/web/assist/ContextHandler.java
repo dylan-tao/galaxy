@@ -80,11 +80,11 @@ public class ContextHandler {
 	
 	@SuppressWarnings("unchecked")
 	public static <T> T getSession(String name, Class<T> cls){
-		return (T)ActionContext.getContext().getRequest().getSession().getAttribute(name);
+		return (T)ActionContext.getContext().getRequest().getSession(false).getAttribute(name);
 	}
 	
 	public static void removeSession(String name){
-		ActionContext.getContext().getRequest().getSession().removeAttribute(name);
+		ActionContext.getContext().getRequest().getSession(false).removeAttribute(name);
 	}
 	
 	/* ========== cookie ========== */
