@@ -63,8 +63,11 @@ public class ContextListener implements ServletContextListener {
 		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		
 		initTime = System.currentTimeMillis() - initTime;
-		
-		log.info("====== Javaosc Framework startup in {} ms ======", initTime);
+		log.info("================== support site ==================");
+		log.info(" ");
+		log.info("     Javaosc Framework startup in {} ms", initTime);
+		log.info(" ");
+		log.info("================= www.javaosc.com ================");
 		
 		ConfigurationHandler.clear();
 		

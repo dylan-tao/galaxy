@@ -9,7 +9,7 @@ package org.javaosc.framework.constant;
  */
 public interface Constant {
 	
-	String JAVAOSC_EXCEPTION = "javaosc execution exception {}";
+	String JAVAOSC_EXCEPTION = "=== javaosc execution exception ===\nerror message: {}\n";
 
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
