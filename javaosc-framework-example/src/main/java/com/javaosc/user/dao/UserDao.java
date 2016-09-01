@@ -13,7 +13,7 @@ public class UserDao {
 	private JdbcHandler jdbcHandler;
 	
 	public User getUser(User user){
-		String sql = "select * from user where user_id = ?";
+		String sql = "select user_id userId,user_name userName,password from user where user_id = ?";
 		return jdbcHandler.getForObject(sql, User.class, user.getUserId());
 	}
 }

@@ -21,29 +21,31 @@ public class BeanFactory {
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
 	public static synchronized Object get(String key, Class<?> cls , boolean isTransaction){
-		 Object instBean = null;
+		 Object result = null;
 		 if (beanMap.containsKey(key)) { 
-			 instBean = beanMap.get(key);
-			 return instBean;
+			 result = beanMap.get(key);
+			 return result;
 	     }
-		 Object proxyInst = null;
+		 Object format = null;
 		 try {
-			 instBean = cls.newInstance();
+			 format = cls.newInstance();
 			 if(key.equalsIgnoreCase(cls.getSimpleName())){//cglib
-				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(instBean, isTransaction);    
-				 proxyInst = proxyHandler.proxyInstance(); 
+				 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(format, isTransaction);    
+				 result = proxyHandler.proxyInstance(); 
+				 result = ScanAnnotation.setServiceField(cls, result);
 			 }else{  //jdk
-				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(instBean, isTransaction);    
-				 proxyInst = proxyHandler.proxyInstance();
+				 format = ScanAnnotation.setServiceField(cls, format);
+				 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(format, isTransaction);    
+				 result = proxyHandler.proxyInstance();
 			 }
-			 instBean = ScanAnnotation.setServiceField(cls, proxyInst);
-             if(StringUtil.isNotBlank(key) && instBean!=null){
-            	 beanMap.put(key, instBean);
+			
+             if(StringUtil.isNotBlank(key) && result!=null){
+            	 beanMap.put(key, result);
              }  	  
 	     } catch (Exception e) {    
 	    	 log.error(Constant.JAVAOSC_EXCEPTION, e); 
 	     } 
-	     return instBean;
+	     return result;
 	} 
 	
 	public static void clear(){

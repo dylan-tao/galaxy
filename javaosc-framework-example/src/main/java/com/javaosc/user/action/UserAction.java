@@ -1,8 +1,8 @@
 package com.javaosc.user.action;
 
-import org.javaosc.framework.annotation.Mapping;
 import org.javaosc.framework.annotation.Autowired;
-import org.javaosc.framework.util.JsonUtil;
+import org.javaosc.framework.annotation.Mapping;
+import org.javaosc.framework.web.assist.ContextHandler;
 
 import com.javaosc.user.service.UserService;
 
@@ -15,7 +15,7 @@ public class UserAction {
 	@Mapping("/{userId}")
 	public void getUserList(User user){
 		user = userService.getUserList(user);
-		System.out.println(JsonUtil.toJson(user));
+		ContextHandler.putJson(user);
 	}
 
 }

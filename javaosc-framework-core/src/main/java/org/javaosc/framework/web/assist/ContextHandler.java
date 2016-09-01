@@ -68,7 +68,6 @@ public class ContextHandler {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}finally{
 			content = null;
-			log.debug(content);
 		}
 	}
 	
