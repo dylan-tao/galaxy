@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.framework.assist.MethodParamHandler;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.context.ConfigHandler;
 import org.javaosc.framework.convert.ConvertFactory;
 import org.javaosc.framework.util.PathUtil;
 import org.javaosc.framework.util.StringUtil;
@@ -42,8 +42,8 @@ public class ContextServlet extends HttpServlet {
 	}
 	
 	public void init(){
-		prefix = ConfigurationHandler.getViewPrefix();
-		suffix = ConfigurationHandler.getViewSuffix();
+		prefix = ConfigHandler.getViewPrefix();
+		suffix = ConfigHandler.getViewSuffix();
 	}
 	
 	@Override
@@ -80,7 +80,7 @@ public class ContextServlet extends HttpServlet {
 	private void executeMethod(HttpServletRequest request){
 		
 		String requestPath = PathUtil.getContextPath(request);
-		String requestView = ConfigurationHandler.getViewMap(requestPath);
+		String requestView = ConfigHandler.getViewMap(requestPath);
 
 		if (StringUtil.isNotBlank(requestView)) {
 			new ActionHandler(requestView).redirectOrForward(prefix, suffix);

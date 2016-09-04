@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 
 import org.javaosc.framework.assist.PropertyConvert;
 import org.javaosc.framework.constant.Constant;
-import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.context.ConfigHandler;
 import org.javaosc.framework.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,12 @@ public class DataSourceMatch {
 	
 	public static DataSource get(){
 		DataSource ds = null; 
-		String dataSourceName = ConfigurationHandler.getDataSourceName();
+		String dataSourceName = ConfigHandler.getDataSourceName();
 		if(StringUtil.isBlank(dataSourceName)){
 			log.error("pool.dataSource must be not null!");
 		}
 		if(dataSourceName.indexOf(".hikari.")>0){
-			 HikariConfig config = PropertyConvert.convertMapToEntity(ConfigurationHandler.getPoolParam(), HikariConfig.class);
+			 HikariConfig config = PropertyConvert.convertMapToEntity(ConfigHandler.getPoolParam(), HikariConfig.class);
 			 ds = new HikariDataSource(config);
 		}else if(dataSourceName.indexOf("java:")==0){ //tomcat jdbc
 			try {
@@ -38,7 +38,7 @@ public class DataSourceMatch {
 		}else if(dataSourceName.indexOf(".c3p0.")>0){ //c3p0 pool
 			C3p0Handler c3p0Handler = null;
 			try {
-				c3p0Handler = PropertyConvert.convertMapToEntity(ConfigurationHandler.getPoolParam(), C3p0Handler.class);
+				c3p0Handler = PropertyConvert.convertMapToEntity(ConfigHandler.getPoolParam(), C3p0Handler.class);
 				ds = c3p0Handler.getDataSource();
 			} catch (Exception e) {
 				log.error(Constant.JAVAOSC_EXCEPTION, e);

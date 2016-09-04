@@ -27,12 +27,12 @@ public class ScanPackage {
 	private static final Logger log = LoggerFactory.getLogger(ScanPackage.class);
 	
 	public void load() {
-		String packageName = ConfigurationHandler.getScanPackage();
+		String packageName = ConfigHandler.getScanPackage();
 		try {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
 			if(url == null){
-				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigurationHandler.javaoscConfig);
+				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigHandler.javaoscConfig);
 			}else{
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
@@ -45,7 +45,7 @@ public class ScanPackage {
 					JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
 					scanJar(jar, packageName);
 				}
-				log.info("class package scan is completed.");
+				log.info("class package and annotation scan is completed.");
 			}
 		} catch (URISyntaxException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);

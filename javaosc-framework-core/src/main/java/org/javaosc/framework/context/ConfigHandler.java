@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ConfigurationHandler {
+public class ConfigHandler {
 	
-	private static final Logger log = LoggerFactory.getLogger(ConfigurationHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ConfigHandler.class);
 	
 	protected static String javaoscConfig = "configuration.properties";
 	
@@ -117,7 +117,7 @@ public class ConfigurationHandler {
 	
 	public static String[] getMethodKeyword(){
 		if(methodKeyword==null){
-			String keyword = ConfigurationHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
+			String keyword = ConfigHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
 			if(StringUtil.isNotBlank(keyword)){
 				keyword = StringUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
 				if(keyword.indexOf(Constant.COMMA)!=-1){

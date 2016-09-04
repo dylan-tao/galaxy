@@ -11,6 +11,12 @@
 		<param-value>configuration.properties</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>expandConfig</param-name>
+		<param-value>a.properties,b.properties,c.properties</param-value>
+	</context-param>
+	
+	
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.css</url-pattern>

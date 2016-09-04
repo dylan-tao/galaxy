@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.javaosc.framework.constant.Constant;
 import org.javaosc.framework.constant.Constant.CodeType;
 import org.javaosc.framework.constant.Constant.HttpType;
-import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.context.ConfigHandler;
 import org.javaosc.framework.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class RequestParamHandler {
 		String requestType = request.getMethod();
 		
 		if(paramMap!=null && paramMap.size()>0){
-			if (ConfigurationHandler.getRequestEncode() && (HttpType.GET.toString().equalsIgnoreCase(requestType) || HttpType.DELETE.toString().equalsIgnoreCase(requestType))) { // get\delete
+			if (ConfigHandler.getRequestEncode() && (HttpType.GET.toString().equalsIgnoreCase(requestType) || HttpType.DELETE.toString().equalsIgnoreCase(requestType))) { // get\delete
 				for(Entry<String, String[]> entry:paramMap.entrySet()){
 					String key = entry.getKey();
 					String[] values = entry.getValue();
@@ -64,7 +64,7 @@ public class RequestParamHandler {
 	}
 	
 	public static void put(String key, String value){
-		if(ConfigurationHandler.getRequestEncode()){
+		if(ConfigHandler.getRequestEncode()){
 			value = encodingParam(value);
 		}
 		ActionContext.getContext().put(key, value);
@@ -73,7 +73,7 @@ public class RequestParamHandler {
 	private static String encodingParam(String value) {
 		try {
 			byte[] b = value.getBytes(CodeType.ISO88591.getValue());
-			value = new String(b, ConfigurationHandler.getContextEncode());
+			value = new String(b, ConfigHandler.getContextEncode());
 		} catch (UnsupportedEncodingException e) {
 			log.error(Constant.JAVAOSC_EXCEPTION, e);
 		}

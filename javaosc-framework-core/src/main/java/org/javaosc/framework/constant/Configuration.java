@@ -12,6 +12,7 @@ import org.javaosc.framework.constant.Constant.CodeType;
 public interface Configuration {
 	
 	static final String CONFIG_FILE_NAME = "javaoscConfig";
+	static final String EXPEND_FILE_NAME = "expandConfig";
 	static final String CONFIG_HEAD_COMMENT = "javaosc configuration setting";
 
 	static final String PREFIX_KEY = "javaosc.view.prefix";

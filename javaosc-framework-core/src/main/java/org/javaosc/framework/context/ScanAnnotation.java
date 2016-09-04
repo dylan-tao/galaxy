@@ -127,7 +127,10 @@ public class ScanAnnotation {
 		    	 String refValue = value.value();
 		    	 try {
 		    		 if(StringUtil.isNotBlank(refValue)){
-		    			field.set(proxyInst, ConvertFactory.convert(valueType, refValue));
+		    			refValue = ConfigExtHandler.getValue(refValue);
+		    			if(StringUtil.isNotBlank(refValue)){
+		    				field.set(proxyInst, ConvertFactory.convert(valueType, refValue));
+		    			}
 		    		 }
 		    	 } catch (Exception e) {
 		    		 log.error(Constant.JAVAOSC_EXCEPTION, e);

@@ -1,5 +1,6 @@
 package org.javaosc.framework.constant;
 
+
 /**
  * 
  * @description
@@ -9,7 +10,7 @@ package org.javaosc.framework.constant;
  */
 public interface Constant {
 	
-	String JAVAOSC_EXCEPTION = " === javaosc execution error message: \n";
+	String JAVAOSC_EXCEPTION = " === javaosc execution exception, please see the following Caused by: " + System.getProperty("line.separator");
 
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";

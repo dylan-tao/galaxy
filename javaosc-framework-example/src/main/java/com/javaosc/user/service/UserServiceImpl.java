@@ -10,7 +10,7 @@ import com.javaosc.user.dao.UserDao;
 @Service
 public class UserServiceImpl implements UserService{
 	
-	@Value("123")
+	@Value("javaosc.password.value")
 	private String password;
 	@Autowired
 	private UserDao userDao;

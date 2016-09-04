@@ -38,8 +38,8 @@ public class ProxyJdkHandler implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		boolean isHasTx = false;
 		Object returnObj = null;
-		if(isTransaction && ConfigurationHandler.getMethodKeyword() != null){
-			for(String keyword:ConfigurationHandler.getMethodKeyword()){
+		if(isTransaction && ConfigHandler.getMethodKeyword() != null){
+			for(String keyword:ConfigHandler.getMethodKeyword()){
 				if(method.getName().startsWith(keyword)){
 					isHasTx = true;
 					break;

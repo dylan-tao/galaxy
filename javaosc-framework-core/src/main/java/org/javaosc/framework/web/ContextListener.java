@@ -8,7 +8,8 @@ import javax.servlet.ServletContextListener;
 
 import org.javaosc.framework.constant.Configuration;
 import org.javaosc.framework.context.BeanFactory;
-import org.javaosc.framework.context.ConfigurationHandler;
+import org.javaosc.framework.context.ConfigExtHandler;
+import org.javaosc.framework.context.ConfigHandler;
 import org.javaosc.framework.context.ScanAnnotation;
 import org.javaosc.framework.context.ScanPackage;
 import org.javaosc.framework.jdbc.ConnectionHandler;
@@ -34,7 +35,9 @@ public class ContextListener implements ServletContextListener {
 		
 		ConnectionHandler.destroy();
 		
-		ConfigurationHandler.clear();
+		ConfigHandler.clear();
+		
+		ConfigExtHandler.clear();
 		
 		BeanFactory.clear();
 		
@@ -50,7 +53,9 @@ public class ContextListener implements ServletContextListener {
 		
 		ServletContext sc = event.getServletContext();
 		
-		ConfigurationHandler.load(sc.getInitParameter(Configuration.CONFIG_FILE_NAME));
+		ConfigHandler.load(sc.getInitParameter(Configuration.CONFIG_FILE_NAME));
+		
+		ConfigExtHandler.load(sc.getInitParameter(Configuration.EXPEND_FILE_NAME));
 		
 		ScanPackage scan = new ScanPackage();
 		scan.load();
@@ -69,7 +74,7 @@ public class ContextListener implements ServletContextListener {
 		log.info(" ");
 		log.info("================= www.javaosc.com ================");
 		
-		ConfigurationHandler.clear();
+		ConfigHandler.clear();
 		
 		System.gc();
 	}
