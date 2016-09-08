@@ -1,22 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.javaosc.framework</groupId>
-	<artifactId>javaosc-framework</artifactId>
-	<version>${javaosc.framework.version}</version>
+	<groupId>org.javaosc.ratel</groupId>
+	<artifactId>ratel</artifactId>
+	<version>${ratel.version}</version>
 	<packaging>pom</packaging>
-	<name>javaosc framework</name>
+	<name>ratel</name>
 
 	<modules>
-		<module>javaosc-framework-core</module>
-		<module>javaosc-framework-example</module>
+		<module>ratel-framework</module>
+		<module>ratel-framework-example</module>
 	</modules>
 
 	<properties>
 
-		<javaosc.framework.version>1.0</javaosc.framework.version>
-		<javaosc.framework.core.version>ratel-0.9.2.RELEASE</javaosc.framework.core.version>
-		<javaosc.framework.example.version>1.0</javaosc.framework.example.version>
+		<ratel.version>1.0</ratel.version>
+		<ratel.framework.version>0.9.2.RELEASE</ratel.framework.version>
+		<ratel.framework.example.version>1.0</ratel.framework.example.version>
 		
 		<!-- core -->
 		<slf4j.version>1.7.21</slf4j.version>
@@ -48,15 +48,15 @@
 			
 			<!-- mode -->
 			<dependency>
-				<groupId>org.javaosc.framework.core</groupId>
-				<artifactId>javaosc-framework-core</artifactId>
-				<version>${javaosc.framework.core.version}</version>
+				<groupId>org.javaosc.ratel.framework</groupId>
+				<artifactId>ratel-framework</artifactId>
+				<version>${ratel.framework.version}</version>
 			</dependency>
 			
 			<dependency>
-				<groupId>com.javaosc.framework.example</groupId>
-				<artifactId>javaosc-framework-example</artifactId>
-				<version>${javaosc.framework.example.version}</version>	
+				<groupId>org.javaosc.ratel.framework.example</groupId>
+				<artifactId>ratel-framework-example</artifactId>
+				<version>${ratel.framework.example.version}</version>	
 			</dependency>
 			
 			<!-- core -->

@@ -13,7 +13,7 @@
 	
 	<context-param>
 		<param-name>expandConfig</param-name>
-		<param-value>a.properties,b.properties,c.properties</param-value>
+		<param-value>a.properties,b.properties</param-value>
 	</context-param>
 	
 	
