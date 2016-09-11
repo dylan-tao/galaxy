@@ -2,67 +2,68 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.javaosc.ratel</groupId>
-		<artifactId>ratel</artifactId>
-		<version>${ratel.version}</version>
+		<groupId>org.javaosc</groupId>
+		<artifactId>ratel-parent</artifactId>
+		<version>${ratel.parent.version}</version>
 	</parent>
 	
-	<groupId>org.javaosc.ratel.framework.example</groupId>
-	<artifactId>ratel-framework-example</artifactId>
-	<version>${ratel.framework.example.version}</version>	
-	<packaging>war</packaging>
-	<name>ratel-framework-example</name>
-	<description>ratel framework example</description>
+	<groupId>org.javaosc</groupId>
+	<artifactId>ratel</artifactId>
+	<version>${ratel.version}</version>
+	<name>ratel</name>
+	<description>ratel framework</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 
 		<!-- core -->
 		<dependency>
-			<groupId>org.javaosc.ratel.framework</groupId>
-			<artifactId>ratel-framework</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		
 		<!-- weak ref -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- realize -->
-	<!-- 	<dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency> -->
-
+			<scope>provided</scope>
+		</dependency> 
+		
+		<!-- pool choose -->
+		
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<scope>provided</scope>	
 		</dependency>
-
-		<!-- db pool choose -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-
-		<!-- <dependency> <groupId>org.mariadb.jdbc</groupId> <artifactId>mariadb-java-client</artifactId> 
-			</dependency> -->
-
-		<dependency> 
-			<groupId>com.zaxxer</groupId> 
-			<artifactId>HikariCP</artifactId> 
-		</dependency>
-
-		<!-- <dependency>
+		
+	   <dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-		</dependency> -->
-
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- provided or test ref -->
 		<dependency>
@@ -70,19 +71,24 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		
+		<dependency>
+			 <groupId>commons-beanutils</groupId>
+			 <artifactId>commons-beanutils</artifactId>
+			 <scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
-		<finalName>javaosc-example</finalName>
-		<plugins>
-			<plugin>
+	   <plugins>
+		   <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -92,11 +98,9 @@
 					<encoding>UTF-8</encoding>
 					<fork>true</fork>
 					<compilerVersion>1.7</compilerVersion>
-					<compilerArguments>
-						<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
-					</compilerArguments>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
