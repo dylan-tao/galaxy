@@ -7,7 +7,6 @@
 		<version>${ratel.parent.version}</version>
 	</parent>
 	
-	<groupId>org.javaosc</groupId>
 	<artifactId>ratel</artifactId>
 	<version>${ratel.version}</version>
 	<name>ratel</name>
