@@ -1,6 +1,7 @@
 package org.javaosc.framework.convert;
 
-import org.javaosc.framework.assist.ClassHandler;
+import org.javaosc.ratel.assist.ClassHandler;
+import org.javaosc.ratel.convert.Convert;
 
 public class ClsImplTest {
 

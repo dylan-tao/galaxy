@@ -10,8 +10,9 @@ import java.util.Map.Entry;
 
 import net.sf.cglib.beans.BeanMap;
 
-import org.javaosc.framework.assist.PropertyConvert;
-import org.javaosc.framework.constant.Constant;
+import org.javaosc.ratel.assist.PropertyConvert;
+import org.javaosc.ratel.constant.Constant;
+import org.javaosc.ratel.convert.ConvertFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

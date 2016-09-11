@@ -1,8 +1,8 @@
 package org.javaosc.framework.context;
 
-import org.javaosc.framework.annotation.Mapping;
-import org.javaosc.framework.annotation.Service;
-import org.javaosc.framework.util.StringUtil;
+import org.javaosc.ratel.annotation.Mapping;
+import org.javaosc.ratel.annotation.Service;
+import org.javaosc.ratel.util.StringUtil;
 
 public class ScanAnnotationTest {
 	

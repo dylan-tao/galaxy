@@ -1,8 +1,8 @@
 package com.javaosc.user.dao;
 
-import org.javaosc.framework.annotation.Dao;
-import org.javaosc.framework.annotation.Autowired;
-import org.javaosc.framework.jdbc.JdbcHandler;
+import org.javaosc.ratel.annotation.Autowired;
+import org.javaosc.ratel.annotation.Dao;
+import org.javaosc.ratel.jdbc.JdbcHandler;
 
 import com.javaosc.user.action.User;
 

@@ -1,8 +1,8 @@
 package com.javaosc.user.service;
 
-import org.javaosc.framework.annotation.Autowired;
-import org.javaosc.framework.annotation.Service;
-import org.javaosc.framework.annotation.Value;
+import org.javaosc.ratel.annotation.Autowired;
+import org.javaosc.ratel.annotation.Service;
+import org.javaosc.ratel.annotation.Value;
 
 import com.javaosc.user.action.User;
 import com.javaosc.user.dao.UserDao;

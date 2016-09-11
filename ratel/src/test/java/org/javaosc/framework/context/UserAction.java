@@ -1,8 +1,8 @@
 package org.javaosc.framework.context;
 
-import org.javaosc.framework.annotation.Mapping;
-import org.javaosc.framework.annotation.Autowired;
-import org.javaosc.framework.annotation.Value;
+import org.javaosc.ratel.annotation.Autowired;
+import org.javaosc.ratel.annotation.Mapping;
+import org.javaosc.ratel.annotation.Value;
 
 @Mapping("")
 public class UserAction {

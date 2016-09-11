@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.javaosc.framework.assist.PropertyConvert;
+import org.javaosc.ratel.assist.PropertyConvert;
 
 public class ConvertSpeedTest {
 

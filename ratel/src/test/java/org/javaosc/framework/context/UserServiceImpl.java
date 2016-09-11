@@ -1,7 +1,7 @@
 package org.javaosc.framework.context;
 
-import org.javaosc.framework.annotation.Service;
-import org.javaosc.framework.annotation.Value;
+import org.javaosc.ratel.annotation.Service;
+import org.javaosc.ratel.annotation.Value;
 
 @Service
 public class UserServiceImpl implements UserService{
