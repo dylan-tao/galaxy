@@ -37,7 +37,7 @@ public class ContextHandler {
 			   ActionContext.getContext().getRequest().setAttribute(String.valueOf(param[2*i]), param[2*i+1]);
 			}
 		}else{
-			log.error(Constant.JAVAOSC_EXCEPTION, "the number of param must be an even number!");
+			log.error(Constant.RATEL_EXCEPTION, "the number of param must be an even number!");
 		}
 	}
 	
@@ -59,13 +59,13 @@ public class ContextHandler {
 				}
 				content = JsonUtil.toJson(buildResult);
 			}else{
-				log.error(Constant.JAVAOSC_EXCEPTION, "the number of param must be an even number!");
+				log.error(Constant.RATEL_EXCEPTION, "the number of param must be an even number!");
 			}
 			out.write(content);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		}finally{
 			content = null;
 		}

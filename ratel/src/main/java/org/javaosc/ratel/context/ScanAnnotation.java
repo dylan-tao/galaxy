@@ -119,7 +119,7 @@ public class ScanAnnotation {
 		         try {
 		        	field.set(proxyInst, cacheObj);
 				 } catch (Exception e) {
-					 log.error(Constant.JAVAOSC_EXCEPTION, e);
+					 log.error(Constant.RATEL_EXCEPTION, e);
 				 }
 		     }else if(field.isAnnotationPresent(Value.class)){
 		    	 Value value = field.getAnnotation(Value.class);
@@ -133,7 +133,7 @@ public class ScanAnnotation {
 		    			}
 		    		 }
 		    	 } catch (Exception e) {
-		    		 log.error(Constant.JAVAOSC_EXCEPTION, e);
+		    		 log.error(Constant.RATEL_EXCEPTION, e);
 				 }	
 		     }
 	     }

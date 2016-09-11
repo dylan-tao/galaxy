@@ -79,7 +79,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>javaosc-example</finalName>
+		<finalName>ratel-example</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

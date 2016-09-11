@@ -49,7 +49,7 @@ public class ConnectionHandler {
 					conn.setAutoCommit(false);
 				}
 			} catch (SQLException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ public class ConnectionHandler {
 					conn.commit();
 				}
 			} catch (SQLException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}
 		}
 	}
@@ -75,7 +75,7 @@ public class ConnectionHandler {
 					conn.rollback();
 				}
 			} catch (SQLException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}
 		}
 	}
@@ -86,7 +86,7 @@ public class ConnectionHandler {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}finally{
 				connManger.remove();
 			}
@@ -103,7 +103,7 @@ public class ConnectionHandler {
 		try {
 			return ds.getConnection();
 		} catch (SQLException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		}
 		return null;
 	}

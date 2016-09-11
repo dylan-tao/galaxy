@@ -15,13 +15,13 @@ public class PathUtil {
 	
 	/**
 	 * request url
-	 * http://localhost:8080/javaosc-framework/list?pageNo=1(javaosc-framework is project's name)
+	 * http://localhost:8080/ratel/list?pageNo=1(ratel is project's name)
 	 * 
 	 **/
 	
 	/**
 	 * 获取项目根目录
-	 * @return String /javaosc-framework
+	 * @return String /ratel
 	 */
 	public static String getContextRoot(HttpServletRequest request) {
 		return request.getContextPath();
@@ -37,7 +37,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取项目及请求路径
-	 * @return String /javaosc-framework/list
+	 * @return String /ratel/list
 	 */
 	public static String getContextUri(HttpServletRequest request) {
 		return request.getRequestURI();
@@ -45,7 +45,7 @@ public class PathUtil {
 	
 	/**
 	 * 获取项目及请求路径
-	 * @return String http://localhost:8080/javaosc-framework/list
+	 * @return String http://localhost:8080/ratel/list
 	 */
 	public static String getContextUrl(HttpServletRequest request) {
 		return request.getRequestURL().toString();

@@ -30,7 +30,7 @@ public class ConfigHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(ConfigHandler.class);
 	
-	protected static String javaoscConfig = "configuration.properties";
+	protected static String ratelConfig = "configuration.properties";
 	
 	private static Properties properties;
 	
@@ -50,32 +50,32 @@ public class ConfigHandler {
 	
 	private static HashMap<String, Object> poolMap;
 	
-	public static void load(String javaoscCustConfig){
+	public static void load(String ratelCustConfig){
 		
-		if(StringUtil.isNotBlank(javaoscCustConfig)){
-			javaoscConfig = StringUtil.clearSpace(javaoscCustConfig, PatternValue.ALL);
+		if(StringUtil.isNotBlank(ratelCustConfig)){
+			ratelConfig = StringUtil.clearSpace(ratelCustConfig, PatternValue.ALL);
 		}else{
-			log.warn("context-param: javaoscConfig is missing in the web.xml. Enable default javaoscConfig: {}.", javaoscConfig);
+			log.warn("context-param: ratelConfig is missing in the web.xml. Enable default ratelConfig: {}.", ratelConfig);
 		}
 		
 		InputStream inputStream = null;
 		try {
 			properties = new Properties();
-			inputStream = new FileInputStream(PathUtil.getClassPath() + javaoscConfig);
+			inputStream = new FileInputStream(PathUtil.getClassPath() + ratelConfig);
 			properties.load(inputStream);
 			initConfiguration();
-			log.info("javaosc configuration is initialized. filename: {}.", javaoscConfig);
+			log.info("ratel configuration is initialized. filename: {}.", ratelConfig);
 		} catch (FileNotFoundException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		}finally{
 			try {
 				if(inputStream != null) {
 					inputStream.close();
 				}
 			} catch (IOException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}	
 		}		
 	}
@@ -161,14 +161,14 @@ public class ConfigHandler {
 		if(properties != null){
 			OutputStream outputStream = null;
 			try {
-				outputStream = new FileOutputStream(PathUtil.getClassPath() + javaoscConfig);
+				outputStream = new FileOutputStream(PathUtil.getClassPath() + ratelConfig);
 				properties.store(outputStream, Configuration.CONFIG_HEAD_COMMENT);
 				outputStream.flush();
-				log.info("exporting configuration file: {}", javaoscConfig);
+				log.info("exporting configuration file: {}", ratelConfig);
 			} catch (FileNotFoundException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			} catch (IOException e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			} finally {
 				try {
 					if (outputStream != null) {
@@ -209,7 +209,7 @@ public class ConfigHandler {
 						if(urlView.length==2){
 							viewMap.put(urlView[0], urlView[1]);
 						}else{
-							log.error(Constant.JAVAOSC_EXCEPTION, "javaosc.url.* setting must use # mark [ps: javaosc.url.user.detail = /user/detail#/customer/detail]");
+							log.error(Constant.RATEL_EXCEPTION, "ratel.url.* setting must use # mark [ps: ratel.url.user.detail = /user/detail#/customer/detail]");
 						}
 					}
 				}

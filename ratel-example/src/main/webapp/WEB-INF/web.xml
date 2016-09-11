@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	<display-name>javaosc framework example</display-name>
+	<display-name>ratel framework example</display-name>
 	
 	<listener>
-		<listener-class>org.javaosc.framework.web.ContextListener</listener-class>
+		<listener-class>org.javaosc.ratel.web.ContextListener</listener-class>
 	</listener>
 	
 	<context-param>
-		<param-name>javaoscConfig</param-name>
+		<param-name>ratelConfig</param-name>
 		<param-value>configuration.properties</param-value>
 	</context-param>
 	
@@ -50,12 +50,12 @@
 	</jsp-config>
 	
 	<servlet>
-		<servlet-name>javaosc</servlet-name>
-		<servlet-class>org.javaosc.framework.web.ContextServlet</servlet-class>
+		<servlet-name>ratel</servlet-name>
+		<servlet-class>org.javaosc.ratel.web.ContextServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>javaosc</servlet-name>
+		<servlet-name>ratel</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

@@ -11,21 +11,21 @@ import org.javaosc.ratel.constant.Constant.CodeType;
  */
 public interface Configuration {
 	
-	static final String CONFIG_FILE_NAME = "javaoscConfig";
+	static final String CONFIG_FILE_NAME = "ratelConfig";
 	static final String EXPEND_FILE_NAME = "expandConfig";
-	static final String CONFIG_HEAD_COMMENT = "javaosc configuration setting";
+	static final String CONFIG_HEAD_COMMENT = "ratel configuration setting";
 
-	static final String PREFIX_KEY = "javaosc.view.prefix";
-	static final String SUFFIX_KEY = "javaosc.view.suffix";
+	static final String PREFIX_KEY = "ratel.view.prefix";
+	static final String SUFFIX_KEY = "ratel.view.suffix";
 	
-	static final String CONTEXT_ENCODE_KEY = "javaosc.context.encode";
-	static final String REQUEST_ENCODE_KEY = "javaosc.request.character.encode";
-	static final String RESPONSE_ENCODE_KEY = "javaosc.response.character.encode";
+	static final String CONTEXT_ENCODE_KEY = "ratel.context.encode";
+	static final String REQUEST_ENCODE_KEY = "ratel.request.character.encode";
+	static final String RESPONSE_ENCODE_KEY = "ratel.response.character.encode";
 	
-	static final String SCANER_PACKAGE_KEY = "javaosc.scaner.annotation.package";
-	static final String METHOD_KEYWORD_KEY = "javaosc.transaction.method.keyword";
+	static final String SCANER_PACKAGE_KEY = "ratel.scaner.annotation.package";
+	static final String METHOD_KEYWORD_KEY = "ratel.transaction.method.keyword";
 	
-	static final String VIEW_KEY = "javaosc.url.";
+	static final String VIEW_KEY = "ratel.url.";
 	
 	static final String STARTWITH_DB = "db.";
 	static final String STARTWITH_POOL = "pool.";

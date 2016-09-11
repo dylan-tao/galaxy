@@ -32,7 +32,7 @@ public class ScanPackage {
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
 			if(url == null){
-				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigHandler.javaoscConfig);
+				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigHandler.ratelConfig);
 			}else{
 				String protocol = url.getProtocol();
 				if ("file".equals(protocol)) {
@@ -48,9 +48,9 @@ public class ScanPackage {
 				log.info("class package and annotation scan is completed.");
 			}
 		} catch (URISyntaxException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		} catch (IOException e) {
-			log.error(Constant.JAVAOSC_EXCEPTION, e);
+			log.error(Constant.RATEL_EXCEPTION, e);
 		}	
 	}
 

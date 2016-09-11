@@ -50,14 +50,14 @@ public class ConfigExtHandler {
 				}
 				log.info("Initializing " + StringUtil.join(configs, Constant.COMMA));
 			} catch (Exception e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			}finally{
 				try {
 					if(inputStream != null) {
 						inputStream.close();
 					}
 				} catch (IOException e) {
-					log.error(Constant.JAVAOSC_EXCEPTION, e);
+					log.error(Constant.RATEL_EXCEPTION, e);
 				}	
 			}	
 	}

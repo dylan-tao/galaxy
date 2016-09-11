@@ -42,7 +42,7 @@ public class CglibConvert {
 					entity = entityClass.newInstance();
 					beanMap = BeanMap.create(entity);  
 				} catch (Exception e) {
-					log.error(Constant.JAVAOSC_EXCEPTION, e);
+					log.error(Constant.RATEL_EXCEPTION, e);
 				} 
 	            for(Entry<String, Class<?>> entry:propertyMap.entrySet()){
 	            	String name = entry.getKey();
@@ -68,7 +68,7 @@ public class CglibConvert {
 			try {
 				beanInfo = Introspector.getBeanInfo(clsType);
 			} catch (Exception e) {
-				log.error(Constant.JAVAOSC_EXCEPTION, e);
+				log.error(Constant.RATEL_EXCEPTION, e);
 			} 
 			Map<String, Class<?>> propertyMap = new HashMap<String, Class<?>>();
 			if(beanInfo!=null){

@@ -44,7 +44,7 @@ public class ContextListener implements ServletContextListener {
 		Introspector.flushCaches();
 		System.gc();
 		
-		log.info("====== Javaosc Framework startup failed ======");
+		log.info("====== Ratel Framework startup failed ======");
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
@@ -70,7 +70,7 @@ public class ContextListener implements ServletContextListener {
 		initTime = System.currentTimeMillis() - initTime;
 		log.info("================== support site ==================");
 		log.info(" ");
-		log.info("     Javaosc framework startup in {} ms", initTime);
+		log.info("     Ratel framework startup in {} ms", initTime);
 		log.info(" ");
 		log.info("================= www.javaosc.com ================");
 		

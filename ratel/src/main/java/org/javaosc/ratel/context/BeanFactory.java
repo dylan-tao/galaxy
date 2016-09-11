@@ -43,7 +43,7 @@ public class BeanFactory {
             	 beanMap.put(key, result);
              }  	  
 	     } catch (Exception e) {    
-	    	 log.error(Constant.JAVAOSC_EXCEPTION, e); 
+	    	 log.error(Constant.RATEL_EXCEPTION, e); 
 	     } 
 	     return result;
 	} 
