@@ -80,6 +80,43 @@ public class StringUtil {
 		 }
 		 return value;
 	 }
+	 
+	 public static String camelToUnderline(String param){  
+	       if (StringUtil.isBlank(param)){  
+	           return Constant.EMPTY;  
+	       }  
+	       int len=param.length();  
+	       StringBuilder sb=new StringBuilder(len);  
+	       for (int i = 0; i < len; i++) {  
+	           char c=param.charAt(i);  
+	           if (Character.isUpperCase(c)){  
+	               sb.append('_');  
+	               sb.append(Character.toLowerCase(c));  
+	           }else{  
+	               sb.append(c);  
+	           }  
+	       }  
+	       return sb.toString();  
+	 }  
+	 
+	 public static String underlineToCamel(String param){  
+		   if (StringUtil.isBlank(param)){  
+	           return Constant.EMPTY;  
+	       }  
+	       int len=param.length();  
+	       StringBuilder sb=new StringBuilder(len);  
+	       for (int i = 0; i < len; i++) {  
+	           char c=param.charAt(i);  
+	           if (c=='_'){  
+	              if (++i<len){  
+	                  sb.append(Character.toUpperCase(param.charAt(i)));  
+	              }  
+	           }else{  
+	               sb.append(c);  
+	           }  
+	       }  
+	       return sb.toString();  
+	}  
 	
 	//位置枚举
 	public enum PatternValue {

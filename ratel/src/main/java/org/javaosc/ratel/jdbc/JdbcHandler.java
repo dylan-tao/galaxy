@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.javaosc.ratel.annotation.Bean;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.constant.Page;
 import org.javaosc.ratel.jdbc.core.JdbcTemplate;
@@ -24,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-@Bean
 public class JdbcHandler{
 	
 	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);

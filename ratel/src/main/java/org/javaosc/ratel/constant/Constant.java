@@ -22,6 +22,7 @@ public interface Constant {
 	String EMPTY = "";
 	String SPACE = " ";
 	String HR = "-";
+	String UNDER_LINE = "_";
 	String QM = "?";
 	String EM = "=";
 	String AM = "&";

@@ -4,12 +4,14 @@ import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.convert.ConvertFactory;
+import org.javaosc.ratel.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -26,6 +28,43 @@ public class PropertyConvert {
 	private static Map<String, Map<String,Method>> fieldSetPropertyMap = new HashMap<String, Map<String,Method>>();
 	
 	public static <T> T convertMapToEntity(Map<String, Object> map, Class<T> entityClass) {  
+		T entity = null;
+		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
+    	
+        if(propertyMap == null){  
+        	propertyMap = parseEntry(entityClass);  
+        }  
+        if(propertyMap.size()>0){
+        	try {
+				entity = entityClass.newInstance();
+			} catch (Exception e) {
+				log.error(Constant.RATEL_EXCEPTION, e);
+			} 
+            for(Entry<String, Object> entry:map.entrySet()){
+            	String name = entry.getKey(); //key
+        		Method m = propertyMap.get(name);
+        		if(m!=null){
+        			Object targetValue;
+            		Class<?> targetType = m.getParameterTypes()[0];
+            		Object value = map.get(name);
+            		if(targetType.isAssignableFrom(value.getClass())){
+            			targetValue = value;
+            		}else{
+            			targetValue = ConvertFactory.convert(targetType,value);
+            		}
+            		if(entity==null || targetValue==null){ continue; }
+            		try {
+    					m.invoke(entity, new Object[]{targetValue});
+    				} catch (Exception e) {
+    					log.error(Constant.RATEL_EXCEPTION, e);
+    				} 	
+        		}
+            }  
+        }
+        return entity;
+	}
+	
+	public static <T> T convertResultSetToEntity(ResultSet rs, Class<T> entityClass) {  
 		T entity = null;
 		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
     	
@@ -80,7 +119,13 @@ public class PropertyConvert {
 	                if(paramTypes.length != 1) continue;
 	                
 	                String name = property.getName();  
-	                propertyMap.put(name, m);  
+	                propertyMap.put(name, m);
+	                
+	                String underlineName = StringUtil.camelToUnderline(name);
+	                //has upper has
+	                if(!name.equals(underlineName)){
+	                	propertyMap.put(underlineName, m);
+	                }
 	            }
 	        }
 	        if(propertyMap.size()>0){
