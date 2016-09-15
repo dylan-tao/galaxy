@@ -14,7 +14,7 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>> {
+public class KeyHandler<K> extends AbstractKeyHandler<K, Map<String, Object>> {
 
     
     protected final RowConvert convert;
@@ -26,27 +26,27 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     protected final String columnName;
 
     
-    public KeyedHandler() {
+    public KeyHandler() {
         this(ArrayHandler.ROW_PROCESSOR, 1, null);
     }
 
     
-    public KeyedHandler(RowConvert convert) {
+    public KeyHandler(RowConvert convert) {
         this(convert, 1, null);
     }
 
     
-    public KeyedHandler(int columnIndex) {
+    public KeyHandler(int columnIndex) {
         this(ArrayHandler.ROW_PROCESSOR, columnIndex, null);
     }
 
     
-    public KeyedHandler(String columnName) {
+    public KeyHandler(String columnName) {
         this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
     }
 
     
-    private KeyedHandler(RowConvert convert, int columnIndex,
+    private KeyHandler(RowConvert convert, int columnIndex,
             String columnName) {
         super();
         this.convert = convert;

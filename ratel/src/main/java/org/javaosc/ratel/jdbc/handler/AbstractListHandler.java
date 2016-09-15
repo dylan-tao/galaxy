@@ -25,7 +25,6 @@ public abstract class AbstractListHandler<T> implements ResultType<List<T>> {
         }
         return rows;
     }
-
     
     protected abstract T handleRow(ResultSet rs) throws SQLException;
 }

@@ -13,7 +13,7 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
+public class BeanMapHandler<K, V> extends AbstractKeyHandler<K, V> {
 
     
     private final Class<V> type;

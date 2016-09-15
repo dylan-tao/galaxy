@@ -15,10 +15,8 @@ import org.javaosc.ratel.jdbc.core.ResultType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class AbstractKeyedHandler<K, V> implements ResultType<Map<K, V>> {
+public abstract class AbstractKeyHandler<K, V> implements ResultType<Map<K, V>> {
 
-
-    
     @Override
     public Map<K, V> handle(ResultSet rs) throws SQLException {
         Map<K, V> result = createMap();
@@ -28,14 +26,11 @@ public abstract class AbstractKeyedHandler<K, V> implements ResultType<Map<K, V>
         return result;
     }
 
-    
     protected Map<K, V> createMap() {
         return new HashMap<K, V>();
     }
-
     
     protected abstract K createKey(ResultSet rs) throws SQLException;
-
     
     protected abstract V createRow(ResultSet rs) throws SQLException;
 
