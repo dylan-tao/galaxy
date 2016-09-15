@@ -13,7 +13,7 @@ import org.javaosc.ratel.jdbc.core.ResultType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ScalarHandler<T> implements ResultType<T> {
+public class ColumnHandler<T> implements ResultType<T> {
 
     
     private final int columnIndex;
@@ -22,22 +22,22 @@ public class ScalarHandler<T> implements ResultType<T> {
     private final String columnName;
 
     
-    public ScalarHandler() {
+    public ColumnHandler() {
         this(1, null);
     }
 
     
-    public ScalarHandler(int columnIndex) {
+    public ColumnHandler(int columnIndex) {
         this(columnIndex, null);
     }
 
     
-    public ScalarHandler(String columnName) {
+    public ColumnHandler(String columnName) {
         this(1, columnName);
     }
 
     
-    private ScalarHandler(int columnIndex, String columnName) {
+    private ColumnHandler(int columnIndex, String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }

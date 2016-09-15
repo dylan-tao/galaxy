@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanAssist {
+public class BeanConvert {
 
     
     protected static final int PROPERTY_NOT_FOUND = -1;
@@ -48,12 +48,12 @@ public class BeanAssist {
     }
 
     
-    public BeanAssist() {
+    public BeanConvert() {
         this(new HashMap<String, String>());
     }
 
     
-    public BeanAssist(Map<String, String> columnToPropertyOverrides) {
+    public BeanConvert(Map<String, String> columnToPropertyOverrides) {
         super();
         if (columnToPropertyOverrides == null) {
             throw new IllegalArgumentException("columnToPropertyOverrides map cannot be null");

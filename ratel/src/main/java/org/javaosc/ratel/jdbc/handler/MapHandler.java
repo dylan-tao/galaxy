@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import org.javaosc.ratel.jdbc.core.ResultType;
-import org.javaosc.ratel.jdbc.core.RowAssist;
+import org.javaosc.ratel.jdbc.core.RowConvert;
 
 /**
  * 
@@ -18,7 +18,7 @@ import org.javaosc.ratel.jdbc.core.RowAssist;
 public class MapHandler implements ResultType<Map<String, Object>> {
 
     
-    private final RowAssist convert;
+    private final RowConvert convert;
 
     
     public MapHandler() {
@@ -26,7 +26,7 @@ public class MapHandler implements ResultType<Map<String, Object>> {
     }
 
     
-    public MapHandler(RowAssist convert) {
+    public MapHandler(RowConvert convert) {
         super();
         this.convert = convert;
     }

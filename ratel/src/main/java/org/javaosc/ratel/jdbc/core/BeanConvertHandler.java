@@ -14,10 +14,10 @@ import java.util.Arrays;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanAssistImpl extends BeanAssist {
+public class BeanConvertHandler extends BeanConvert {
 
     
-    public BeanAssistImpl() {
+    public BeanConvertHandler() {
         super();
     }
 

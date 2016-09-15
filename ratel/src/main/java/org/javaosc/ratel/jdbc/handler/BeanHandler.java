@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.javaosc.ratel.jdbc.core.ResultType;
-import org.javaosc.ratel.jdbc.core.RowAssist;
+import org.javaosc.ratel.jdbc.core.RowConvert;
 
 /**
  * 
@@ -20,7 +20,7 @@ public class BeanHandler<T> implements ResultType<T> {
     private final Class<T> type;
 
     
-    private final RowAssist convert;
+    private final RowConvert convert;
 
     
     public BeanHandler(Class<T> type) {
@@ -28,7 +28,7 @@ public class BeanHandler<T> implements ResultType<T> {
     }
 
     
-    public BeanHandler(Class<T> type, RowAssist convert) {
+    public BeanHandler(Class<T> type, RowConvert convert) {
         this.type = type;
         this.convert = convert;
     }

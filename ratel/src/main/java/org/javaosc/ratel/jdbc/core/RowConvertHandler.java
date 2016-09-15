@@ -17,20 +17,20 @@ import java.util.Map;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class RowAssistImpl implements RowAssist {
+public class RowConvertHandler implements RowConvert {
 
     
-    private static final BeanAssist defaultConvert = new BeanAssist();
+    private static final BeanConvert defaultConvert = new BeanConvert();
 
-    private final BeanAssist convert;
+    private final BeanConvert convert;
 
     
-    public RowAssistImpl() {
+    public RowConvertHandler() {
         this(defaultConvert);
     }
 
     
-    public RowAssistImpl(BeanAssist convert) {
+    public RowConvertHandler(BeanConvert convert) {
         super();
         this.convert = convert;
     }

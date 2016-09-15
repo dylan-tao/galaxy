@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.javaosc.ratel.jdbc.core.ResultType;
-import org.javaosc.ratel.jdbc.core.RowAssist;
-import org.javaosc.ratel.jdbc.core.RowAssistImpl;
+import org.javaosc.ratel.jdbc.core.RowConvert;
+import org.javaosc.ratel.jdbc.core.RowConvertHandler;
 
 /**
  * 
@@ -18,13 +18,13 @@ import org.javaosc.ratel.jdbc.core.RowAssistImpl;
 public class ArrayHandler implements ResultType<Object[]> {
 
     
-    static final RowAssist ROW_PROCESSOR = new RowAssistImpl();
+    static final RowConvert ROW_PROCESSOR = new RowConvertHandler();
 
     
     private static final Object[] EMPTY_ARRAY = new Object[0];
 
     
-    private final RowAssist convert;
+    private final RowConvert convert;
 
     
     public ArrayHandler() {
@@ -32,7 +32,7 @@ public class ArrayHandler implements ResultType<Object[]> {
     }
 
     
-    public ArrayHandler(RowAssist convert) {
+    public ArrayHandler(RowConvert convert) {
         super();
         this.convert = convert;
     }

@@ -12,7 +12,7 @@ import org.javaosc.ratel.jdbc.handler.BeanListHandler;
 import org.javaosc.ratel.jdbc.handler.ColumnListHandler;
 import org.javaosc.ratel.jdbc.handler.MapHandler;
 import org.javaosc.ratel.jdbc.handler.MapListHandler;
-import org.javaosc.ratel.jdbc.handler.ScalarHandler;
+import org.javaosc.ratel.jdbc.handler.ColumnHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,9 +39,9 @@ public class JdbcTemplate{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(columnName), param);
 			}else{
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -149,9 +149,9 @@ public class JdbcTemplate{
 		T count = cls.cast(0);
 		try {
 			if(param != null && param.length > 0){
-				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1), param);
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(1), param);
 			}else{
-				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(1));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);

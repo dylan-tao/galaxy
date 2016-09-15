@@ -4,7 +4,7 @@ package org.javaosc.ratel.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.ratel.jdbc.core.RowAssist;
+import org.javaosc.ratel.jdbc.core.RowConvert;
 
 /**
  * 
@@ -19,7 +19,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     private final Class<V> type;
 
     
-    private final RowAssist convert;
+    private final RowConvert convert;
 
     
     private final int columnIndex;
@@ -33,7 +33,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     
-    public BeanMapHandler(Class<V> type, RowAssist convert) {
+    public BeanMapHandler(Class<V> type, RowConvert convert) {
         this(type, convert, 1, null);
     }
 
@@ -48,7 +48,7 @@ public class BeanMapHandler<K, V> extends AbstractKeyedHandler<K, V> {
     }
 
     
-    private BeanMapHandler(Class<V> type, RowAssist convert,
+    private BeanMapHandler(Class<V> type, RowConvert convert,
             int columnIndex, String columnName) {
         super();
         this.type = type;

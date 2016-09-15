@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.javaosc.ratel.jdbc.core.RowAssist;
+import org.javaosc.ratel.jdbc.core.RowConvert;
 
 /**
  * 
@@ -17,7 +17,7 @@ import org.javaosc.ratel.jdbc.core.RowAssist;
 public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>> {
 
     
-    protected final RowAssist convert;
+    protected final RowConvert convert;
 
     
     protected final int columnIndex;
@@ -31,7 +31,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     
-    public KeyedHandler(RowAssist convert) {
+    public KeyedHandler(RowConvert convert) {
         this(convert, 1, null);
     }
 
@@ -46,7 +46,7 @@ public class KeyedHandler<K> extends AbstractKeyedHandler<K, Map<String, Object>
     }
 
     
-    private KeyedHandler(RowAssist convert, int columnIndex,
+    private KeyedHandler(RowConvert convert, int columnIndex,
             String columnName) {
         super();
         this.convert = convert;
