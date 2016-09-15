@@ -16,11 +16,11 @@ import org.javaosc.ratel.util.StringUtil;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class JdbcTemplate extends SuperJdbcTemplate {
+public class JdbcHandler extends JdbcSuperHandler {
 	
-	public JdbcTemplate(){}
+	public JdbcHandler(){}
     
-    public JdbcTemplate(boolean sqlPrepareCheck) {
+    public JdbcHandler(boolean sqlPrepareCheck) {
         super(sqlPrepareCheck);
     }
 
@@ -96,7 +96,7 @@ public class JdbcTemplate extends SuperJdbcTemplate {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("DataSet cannot be null");
+            throw new SQLException("ResultType cannot be null");
         }
 
         PreparedStatement stmt = null;
@@ -201,7 +201,7 @@ public class JdbcTemplate extends SuperJdbcTemplate {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("DataSet cannot be null");
+            throw new SQLException("ResultType cannot be null");
         }
 
         PreparedStatement stmt = null;

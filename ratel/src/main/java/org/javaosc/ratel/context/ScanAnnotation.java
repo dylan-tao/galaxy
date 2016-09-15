@@ -14,7 +14,7 @@ import org.javaosc.ratel.annotation.Service;
 import org.javaosc.ratel.annotation.Value;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.convert.ConvertFactory;
-import org.javaosc.ratel.jdbc.JdbcHandler;
+import org.javaosc.ratel.jdbc.JdbcTemplate;
 import org.javaosc.ratel.util.StringUtil;
 import org.javaosc.ratel.web.RouteNodeRegistry;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class ScanAnnotation {
 	protected static void putAnnotation(Class<?> loadClass){
 		if(annotationMap==null){
 			annotationMap = new HashMap<String, Class<?>>();
-			annotationMap.put("jdbcHandler", JdbcHandler.class);
+			annotationMap.put("jdbcTemplate", JdbcTemplate.class);
 		}
 		String custKey = null;
 		boolean flag = false;

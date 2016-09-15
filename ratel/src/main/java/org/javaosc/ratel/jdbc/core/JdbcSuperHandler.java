@@ -23,13 +23,13 @@ import java.util.Arrays;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public abstract class SuperJdbcTemplate {
-    
+public abstract class JdbcSuperHandler {
+	
     private volatile boolean sqlPrepareCheck = true;
     
-    public SuperJdbcTemplate() { }
+    public JdbcSuperHandler() { }
     
-    public SuperJdbcTemplate(boolean sqlPrepareCheck) {
+    public JdbcSuperHandler(boolean sqlPrepareCheck) {
         this.sqlPrepareCheck = sqlPrepareCheck;
     }
 
@@ -80,7 +80,6 @@ public abstract class SuperJdbcTemplate {
             }
         }
     }
-
     
     public void fillStatementWithBean(PreparedStatement stmt, Object bean, PropertyDescriptor[] properties) throws SQLException {
         Object[] params = new Object[properties.length];

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.constant.Page;
-import org.javaosc.ratel.jdbc.core.JdbcTemplate;
+import org.javaosc.ratel.jdbc.core.JdbcHandler;
 import org.javaosc.ratel.jdbc.handler.BeanHandler;
 import org.javaosc.ratel.jdbc.handler.BeanListHandler;
 import org.javaosc.ratel.jdbc.handler.ColumnListHandler;
@@ -23,25 +23,25 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class JdbcHandler{
+public class JdbcTemplate{
 	
-	private static final Logger log = LoggerFactory.getLogger(JdbcHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(JdbcTemplate.class);
 	
-	private static JdbcTemplate jdbcTemplate;
+	private static JdbcHandler jdbcHandler;
 	
 	/*=================== 查询单列操作 =====================*/
 	
 	static{
-		jdbcTemplate = new JdbcTemplate();
+		jdbcHandler = new JdbcHandler();
 	}
 
 	public <T> T getForColumn(String sql,String columnName, Class<T> cls, Object... param){
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName), param);
 			}else{
-				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -53,9 +53,9 @@ public class JdbcHandler{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName), param);
 			}else{
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -69,9 +69,9 @@ public class JdbcHandler{
 		 Map<String, Object> map = null;
 		 try {
 			if(param != null && param.length > 0){
-				map = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapHandler(), param);
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler(), param);
 			}else{
-				map = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapHandler());
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.RATEL_EXCEPTION, e);
@@ -83,9 +83,9 @@ public class JdbcHandler{
 		 List<Map<String, Object>> list = null;
 		 try {
 			if(param != null && param.length > 0){
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapListHandler(), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler(), param);
 			}else{
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.RATEL_EXCEPTION, e);
@@ -99,9 +99,9 @@ public class JdbcHandler{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls), param);
 			}else{
-				obj = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -113,9 +113,9 @@ public class JdbcHandler{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls), param);
 			}else{
-				list = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -149,9 +149,9 @@ public class JdbcHandler{
 		T count = cls.cast(0);
 		try {
 			if(param != null && param.length > 0){
-				count = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1), param);
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1), param);
 			}else{
-				count = jdbcTemplate.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ScalarHandler<T>(1));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -192,9 +192,9 @@ public class JdbcHandler{
 		int index = 0;
 		try {
 			if(param != null && param.length > 0){
-				index = jdbcTemplate.update(ConnectionHandler.getConnection(), sql, param);
+				index = jdbcHandler.update(ConnectionHandler.getConnection(), sql, param);
 			}else{
-				index = jdbcTemplate.update(ConnectionHandler.getConnection(), sql);
+				index = jdbcHandler.update(ConnectionHandler.getConnection(), sql);
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -204,7 +204,7 @@ public class JdbcHandler{
 	
 	private boolean batchHandler(String sql, Object[][] params){
 		try {
-			int[] index = jdbcTemplate.batch(ConnectionHandler.getConnection(), sql, params);
+			int[] index = jdbcHandler.batch(ConnectionHandler.getConnection(), sql, params);
 			return index.length == params.length;	
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);

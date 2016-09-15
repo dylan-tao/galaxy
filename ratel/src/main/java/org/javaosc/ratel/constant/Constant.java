@@ -11,7 +11,7 @@ package org.javaosc.ratel.constant;
 public interface Constant {
 	
 	String RATEL_EXCEPTION = " === ratel execution exception, please see the following Caused by: " + System.getProperty("line.separator");
-
+	
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
 	String LINE = "/";
