@@ -4,7 +4,7 @@ package org.javaosc.ratel.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 import org.javaosc.ratel.jdbc.core.RowAssist;
 
 /**
@@ -14,7 +14,7 @@ import org.javaosc.ratel.jdbc.core.RowAssist;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanHandler<T> implements ResultSetAssist<T> {
+public class BeanHandler<T> implements ResultType<T> {
 
     
     private final Class<T> type;

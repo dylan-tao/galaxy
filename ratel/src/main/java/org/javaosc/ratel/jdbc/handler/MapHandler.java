@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 import org.javaosc.ratel.jdbc.core.RowAssist;
 
 /**
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.RowAssist;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class MapHandler implements ResultSetAssist<Map<String, Object>> {
+public class MapHandler implements ResultType<Map<String, Object>> {
 
     
     private final RowAssist convert;

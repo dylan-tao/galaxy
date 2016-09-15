@@ -30,11 +30,10 @@ import java.util.Map;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class ResultSetAssistImpl<T> implements ResultSetAssist<T> {
+public abstract class ResultTypeHandler<T> implements ResultType<T> {
 
     
     private ResultSet rs;
-
     
     @Override
     public final T handle(ResultSet rs) throws SQLException {

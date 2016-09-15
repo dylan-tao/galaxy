@@ -64,42 +64,42 @@ public class PropertyConvert {
         return entity;
 	}
 	
-	public static <T> T convertResultSetToEntity(ResultSet rs, Class<T> entityClass) {  
-		T entity = null;
-		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
-    	
-        if(propertyMap == null){  
-        	propertyMap = parseEntry(entityClass);  
-        }  
-        if(propertyMap.size()>0){
-        	try {
-				entity = entityClass.newInstance();
-			} catch (Exception e) {
-				log.error(Constant.RATEL_EXCEPTION, e);
-			} 
-            for(Entry<String, Method> entry:propertyMap.entrySet()){
-            	String name = entry.getKey();
-            	if (map.containsKey(name)) {
-            		Object targetValue;
-            		Method m = entry.getValue();
-            		Class<?> targetType = m.getParameterTypes()[0];
-            		Object value = map.get(name);
-            		if(targetType.isAssignableFrom(value.getClass())){
-            			targetValue = value;
-            		}else{
-            			targetValue = ConvertFactory.convert(targetType,value);
-            		}
-            		if(entity==null || targetValue==null){ continue; }
-            		try {
-						m.invoke(entity, new Object[]{targetValue});
-					} catch (Exception e) {
-						log.error(Constant.RATEL_EXCEPTION, e);
-					} 
-            	}
-            }  
-        }
-        return entity;
-	}
+//	public static <T> T convertResultSetToEntity(ResultSet rs, Class<T> entityClass) {  
+//		T entity = null;
+//		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
+//    	
+//        if(propertyMap == null){  
+//        	propertyMap = parseEntry(entityClass);  
+//        }  
+//        if(propertyMap.size()>0){
+//        	try {
+//				entity = entityClass.newInstance();
+//			} catch (Exception e) {
+//				log.error(Constant.RATEL_EXCEPTION, e);
+//			} 
+//            for(Entry<String, Method> entry:propertyMap.entrySet()){
+//            	String name = entry.getKey();
+//            	if (map.containsKey(name)) {
+//            		Object targetValue;
+//            		Method m = entry.getValue();
+//            		Class<?> targetType = m.getParameterTypes()[0];
+//            		Object value = map.get(name);
+//            		if(targetType.isAssignableFrom(value.getClass())){
+//            			targetValue = value;
+//            		}else{
+//            			targetValue = ConvertFactory.convert(targetType,value);
+//            		}
+//            		if(entity==null || targetValue==null){ continue; }
+//            		try {
+//						m.invoke(entity, new Object[]{targetValue});
+//					} catch (Exception e) {
+//						log.error(Constant.RATEL_EXCEPTION, e);
+//					} 
+//            	}
+//            }  
+//        }
+//        return entity;
+//	}
   
     private static Map<String, Method> parseEntry(Class<?> clsType){  
 		BeanInfo beanInfo = null;

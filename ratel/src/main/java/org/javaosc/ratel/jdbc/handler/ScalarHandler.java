@@ -4,7 +4,7 @@ package org.javaosc.ratel.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 
 /**
  * 
@@ -13,7 +13,7 @@ import org.javaosc.ratel.jdbc.core.ResultSetAssist;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ScalarHandler<T> implements ResultSetAssist<T> {
+public class ScalarHandler<T> implements ResultType<T> {
 
     
     private final int columnIndex;

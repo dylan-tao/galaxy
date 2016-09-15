@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.javaosc.ratel.util.StringUtil;
+
 /**
  * 
  * @description
@@ -14,12 +16,12 @@ import java.sql.Statement;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class JdbcTemplate extends AbstractJdbcTemplate {
+public class JdbcTemplate extends SuperJdbcTemplate {
 	
-	public JdbcTemplate() { }
+	public JdbcTemplate(){}
     
-    public JdbcTemplate(boolean pmdKnownBroken) {
-        super(pmdKnownBroken);
+    public JdbcTemplate(boolean sqlPrepareCheck) {
+        super(sqlPrepareCheck);
     }
 
 	public int[] batch(Connection conn, String sql, Object[][] params) throws SQLException {
@@ -28,34 +30,32 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
 
     private int[] batch(Connection conn, boolean closeConn, String sql, Object[][] params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException("Data connection cannot be null");
         }
-
-        if (sql == null) {
+        
+        if (StringUtil.isBlank(sql)) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null SQL statement");
+            throw new SQLException("Sql cannot be null");
         }
 
         if (params == null) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+            throw new SQLException("Parameters can not be empty, if you need to affect the  data rows, please pass an empty array");
         }
 
         PreparedStatement stmt = null;
         int[] rows = null;
         try {
             stmt = this.prepareStatement(conn, sql);
-
             for (int i = 0; i < params.length; i++) {
                 this.fillStatement(stmt, params[i]);
                 stmt.addBatch();
             }
             rows = stmt.executeBatch();
-
         } catch (SQLException e) {
             this.rethrow(e, sql, (Object[])params);
         } finally {
@@ -69,34 +69,34 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
     }
 
     
-    public <T> T query(Connection conn, String sql, ResultSetAssist<T> rsh, Object... params) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, params);
+    public <T> T query(Connection conn, String sql, ResultType<T> rt, Object... params) throws SQLException {
+        return this.<T>query(conn, false, sql, rt, params);
     }
 
     
-    public <T> T query(Connection conn, String sql, ResultSetAssist<T> rsh) throws SQLException {
-        return this.<T>query(conn, false, sql, rsh, (Object[]) null);
+    public <T> T query(Connection conn, String sql, ResultType<T> rt) throws SQLException {
+        return this.<T>query(conn, false, sql, rt, (Object[]) null);
     }
 
     
-    private <T> T query(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object... params)
+    private <T> T query(Connection conn, boolean closeConn, String sql, ResultType<T> rt, Object... params)
             throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException("Data connection cannot be null");
         }
 
-        if (sql == null) {
+        if (StringUtil.isBlank(sql)) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null SQL statement");
+            throw new SQLException("Sql cannot be null");
         }
 
-        if (rsh == null) {
+        if (rt == null) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null ResultSetHandler");
+            throw new SQLException("DataSet cannot be null");
         }
 
         PreparedStatement stmt = null;
@@ -107,7 +107,7 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
             stmt = this.prepareStatement(conn, sql);
             this.fillStatement(stmt, params);
             rs = this.wrap(stmt.executeQuery());
-            result = rsh.handle(rs);
+            result = rt.handle(rs);
 
         } catch (SQLException e) {
             this.rethrow(e, sql, params);
@@ -143,14 +143,14 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
 
     private int update(Connection conn, boolean closeConn, String sql, Object... params) throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException("Data connection cannot be null");
         }
 
-        if (sql == null) {
+        if (StringUtil.isBlank(sql)) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null SQL statement");
+            throw new SQLException("Sql cannot be null");
         }
 
         PreparedStatement stmt = null;
@@ -174,34 +174,34 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
         return rows;
     }
 
-    public <T> T insert(Connection conn, String sql, ResultSetAssist<T> rsh) throws SQLException {
-        return insert(conn, false, sql, rsh, (Object[]) null);
+    public <T> T insert(Connection conn, String sql, ResultType<T> rt) throws SQLException {
+        return insert(conn, false, sql, rt, (Object[]) null);
     }
 
     
-    public <T> T insert(Connection conn, String sql, ResultSetAssist<T> rsh, Object... params) throws SQLException {
-        return insert(conn, false, sql, rsh, params);
+    public <T> T insert(Connection conn, String sql, ResultType<T> rt, Object... params) throws SQLException {
+        return insert(conn, false, sql, rt, params);
     }
 
     
-    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object... params)
+    private <T> T insert(Connection conn, boolean closeConn, String sql, ResultType<T> rt, Object... params)
             throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException("Data connection cannot be null");
         }
 
-        if (sql == null) {
+        if (StringUtil.isBlank(sql)) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null SQL statement");
+            throw new SQLException("Sql cannot be null");
         }
 
-        if (rsh == null) {
+        if (rt == null) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null ResultSetHandler");
+            throw new SQLException("DataSet cannot be null");
         }
 
         PreparedStatement stmt = null;
@@ -212,7 +212,7 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
             this.fillStatement(stmt, params);
             stmt.executeUpdate();
             ResultSet resultSet = stmt.getGeneratedKeys();
-            generatedKeys = rsh.handle(resultSet);
+            generatedKeys = rt.handle(resultSet);
         } catch (SQLException e) {
             this.rethrow(e, sql, params);
         } finally {
@@ -225,28 +225,28 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
         return generatedKeys;
     }
 
-    public <T> T insertBatch(Connection conn, String sql, ResultSetAssist<T> rsh, Object[][] params) throws SQLException {
-        return insertBatch(conn, false, sql, rsh, params);
+    public <T> T insertBatch(Connection conn, String sql, ResultType<T> rt, Object[][] params) throws SQLException {
+        return insertBatch(conn, false, sql, rt, params);
     }
     
-    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultSetAssist<T> rsh, Object[][] params)
+    private <T> T insertBatch(Connection conn, boolean closeConn, String sql, ResultType<T> rt, Object[][] params)
             throws SQLException {
         if (conn == null) {
-            throw new SQLException("Null connection");
+            throw new SQLException("Data connection cannot be null");
         }
 
-        if (sql == null) {
+        if (StringUtil.isBlank(sql)) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null SQL statement");
+            throw new SQLException("Sql cannot be null");
         }
 
         if (params == null) {
             if (closeConn) {
                 close(conn);
             }
-            throw new SQLException("Null parameters. If parameters aren't need, pass an empty array.");
+            throw new SQLException("Parameters can not be empty, if you need to affect the  data rows, please pass an empty array");
         }
 
         PreparedStatement stmt = null;
@@ -260,7 +260,7 @@ public class JdbcTemplate extends AbstractJdbcTemplate {
             }
             stmt.executeBatch();
             ResultSet rs = stmt.getGeneratedKeys();
-            generatedKeys = rsh.handle(rs);
+            generatedKeys = rt.handle(rs);
 
         } catch (SQLException e) {
             this.rethrow(e, sql, (Object[])params);

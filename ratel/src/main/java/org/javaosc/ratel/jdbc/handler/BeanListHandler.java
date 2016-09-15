@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 import org.javaosc.ratel.jdbc.core.RowAssist;
 
 /**
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.RowAssist;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanListHandler<T> implements ResultSetAssist<List<T>> {
+public class BeanListHandler<T> implements ResultType<List<T>> {
 
     
     private final Class<T> type;

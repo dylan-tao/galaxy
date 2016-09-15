@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 
 /**
  * 
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.ResultSetAssist;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class AbstractListHandler<T> implements ResultSetAssist<List<T>> {
+public abstract class AbstractListHandler<T> implements ResultType<List<T>> {
     
     @Override
     public List<T> handle(ResultSet rs) throws SQLException {

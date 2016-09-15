@@ -62,9 +62,7 @@ public final class DataSourceManage {
     }
 
     
-    public static void closeQuietly(Connection conn, Statement stmt,
-            ResultSet rs) {
-
+    public static void closeQuietly(Connection conn, Statement stmt, ResultSet rs) {
         try {
             closeQuietly(rs);
         } finally {
@@ -77,7 +75,6 @@ public final class DataSourceManage {
 
     }
 
-    
     public static void closeQuietly(ResultSet rs) {
         try {
             close(rs);
@@ -85,7 +82,6 @@ public final class DataSourceManage {
             // quiet
         }
     }
-
     
     public static void closeQuietly(Statement stmt) {
         try {
@@ -119,7 +115,6 @@ public final class DataSourceManage {
     public static boolean loadDriver(String driverClassName) {
         return loadDriver(DataSourceManage.class.getClassLoader(), driverClassName);
     }
-
     
     public static boolean loadDriver(ClassLoader classLoader, String driverClassName) {
         try {

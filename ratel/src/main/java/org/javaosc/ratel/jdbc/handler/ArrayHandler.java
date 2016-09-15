@@ -4,7 +4,7 @@ package org.javaosc.ratel.jdbc.handler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.ratel.jdbc.core.ResultSetAssist;
+import org.javaosc.ratel.jdbc.core.ResultType;
 import org.javaosc.ratel.jdbc.core.RowAssist;
 import org.javaosc.ratel.jdbc.core.RowAssistImpl;
 
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.RowAssistImpl;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ArrayHandler implements ResultSetAssist<Object[]> {
+public class ArrayHandler implements ResultType<Object[]> {
 
     
     static final RowAssist ROW_PROCESSOR = new RowAssistImpl();

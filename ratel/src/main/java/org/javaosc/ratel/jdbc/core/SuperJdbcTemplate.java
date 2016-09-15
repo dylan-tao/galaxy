@@ -23,46 +23,39 @@ import java.util.Arrays;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 
-public abstract class AbstractJdbcTemplate {
+public abstract class SuperJdbcTemplate {
     
-    private volatile boolean pmdKnownBroken = false;
+    private volatile boolean sqlPrepareCheck = true;
     
-    public AbstractJdbcTemplate() { }
+    public SuperJdbcTemplate() { }
     
-    public AbstractJdbcTemplate(boolean pmdKnownBroken) {
-        this.pmdKnownBroken = pmdKnownBroken;
+    public SuperJdbcTemplate(boolean sqlPrepareCheck) {
+        this.sqlPrepareCheck = sqlPrepareCheck;
     }
 
     public boolean isPmdKnownBroken() {
-        return pmdKnownBroken;
+        return sqlPrepareCheck;
     }
     
-    protected PreparedStatement prepareStatement(Connection conn, String sql)
-            throws SQLException {
-
+    protected PreparedStatement prepareStatement(Connection conn, String sql)throws SQLException {
         return conn.prepareStatement(sql);
     }
 
     
-    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)
-            throws SQLException {
-
+    protected PreparedStatement prepareStatement(Connection conn, String sql, int returnedKeys)throws SQLException {
         return conn.prepareStatement(sql, returnedKeys);
     }
 
-    public void fillStatement(PreparedStatement stmt, Object... params)
-            throws SQLException {
-
-        // check the parameter count, if we can
+    public void fillStatement(PreparedStatement stmt, Object... params) throws SQLException {
+        // check the parameter count
         ParameterMetaData pmd = null;
-        if (!pmdKnownBroken) {
+        if (sqlPrepareCheck) {
             pmd = stmt.getParameterMetaData();
             int stmtCount = pmd.getParameterCount();
             int paramsCount = params == null ? 0 : params.length;
 
             if (stmtCount != paramsCount) {
-                throw new SQLException("Wrong number of parameters: expected "
-                        + stmtCount + ", was given " + paramsCount);
+                throw new SQLException("Invalid argument value: sql placeholder count " + stmtCount + ", incoming parame count " + paramsCount);
             }
         }
 
@@ -75,16 +68,12 @@ public abstract class AbstractJdbcTemplate {
             if (params[i] != null) {
                 stmt.setObject(i + 1, params[i]);
             } else {
-                // VARCHAR works with many drivers regardless
-                // of the actual column type. Oddly, NULL and
-                // OTHER don't work with Oracle's drivers.
                 int sqlType = Types.VARCHAR;
-                if (!pmdKnownBroken) {
+                if (sqlPrepareCheck) {
                     try {
-                        
                         sqlType = pmd.getParameterType(i + 1);
                     } catch (SQLException e) {
-                        pmdKnownBroken = true;
+                        sqlPrepareCheck = false;
                     }
                 }
                 stmt.setNull(i + 1, sqlType);
@@ -93,8 +82,7 @@ public abstract class AbstractJdbcTemplate {
     }
 
     
-    public void fillStatementWithBean(PreparedStatement stmt, Object bean,
-            PropertyDescriptor[] properties) throws SQLException {
+    public void fillStatementWithBean(PreparedStatement stmt, Object bean, PropertyDescriptor[] properties) throws SQLException {
         Object[] params = new Object[properties.length];
         for (int i = 0; i < properties.length; i++) {
             PropertyDescriptor property = properties[i];

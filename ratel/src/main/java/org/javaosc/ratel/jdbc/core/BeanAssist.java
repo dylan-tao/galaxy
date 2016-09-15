@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.javaosc.ratel.assist.PropertyConvert;
-
 /**
  * 
  * @description
@@ -64,28 +62,21 @@ public class BeanAssist {
     }
 
     
-//    public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
-//
-//        PropertyDescriptor[] props = this.propertyDescriptors(type);
-//
-//        ResultSetMetaData rsmd = rs.getMetaData();
-//        int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
-//
-//        return this.createBean(rs, type, props, columnToProperty);
-//    }
-    
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
+    	
+    	long startTime = System.currentTimeMillis();
 
         PropertyDescriptor[] props = this.propertyDescriptors(type);
 
         ResultSetMetaData rsmd = rs.getMetaData();
         int[] columnToProperty = this.mapColumnsToProperties(rsmd, props);
 
-        return this.createBean(rs, type, props, columnToProperty);
+        T t = this.createBean(rs, type, props, columnToProperty);
         
-//        return PropertyConvert.convertResultSetToEntity(rs, type);
+        System.out.println(System.currentTimeMillis() - startTime);
+        return t;
     }
-
+    
     
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
         List<T> results = new ArrayList<T>();
