@@ -35,11 +35,9 @@ public class PropertyConvert {
 		T entity = null;
 		Map<String, Method> propertyMap = getPropertyMap(entityClass);
         if(propertyMap.size()>0){
-        	try {
-				entity = entityClass.newInstance();
-			} catch (Exception e) {
-				log.error(Constant.RATEL_EXCEPTION, e);
-			} 
+        	
+			entity = ClassHandler.newInstanceObj(entityClass);
+			
             for(Entry<String, Object> entry:map.entrySet()){
             	String name = entry.getKey(); //key
         		Method m = propertyMap.get(name);
@@ -72,7 +70,7 @@ public class PropertyConvert {
 		Map<String, Method> propertyMap = getPropertyMap(entityClass);
         if(propertyMap.size()>0){
         	try {
-				entity = entityClass.newInstance();
+				entity = ClassHandler.newInstanceObj(entityClass);
 			} catch (Exception e) {
 				log.error(Constant.RATEL_EXCEPTION, e);
 			} 

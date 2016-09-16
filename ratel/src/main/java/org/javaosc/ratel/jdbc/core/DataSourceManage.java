@@ -135,7 +135,7 @@ public final class DataSourceManage {
             }
 
             try {
-                Driver driver = driverConstructor.newInstance();
+                Driver driver =  driverConstructor.newInstance();
                 registerDriver(new DriverProxy(driver));
             } finally {
                 driverConstructor.setAccessible(isConstructorAccessible);

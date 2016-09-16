@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.javaosc.ratel.assist.ClassHandler;
 import org.javaosc.ratel.assist.MethodParamHandler;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.context.ConfigHandler;
+import org.javaosc.ratel.context.ScanAnnotation;
 import org.javaosc.ratel.convert.ConvertFactory;
 import org.javaosc.ratel.util.PathUtil;
 import org.javaosc.ratel.util.StringUtil;
@@ -90,9 +92,11 @@ public class ContextServlet extends HttpServlet {
 			Object method = routeMap.get(RouteNodeRegistry.METHOD);
 			
 			if(action!=null && method!=null){
-//				if(action.){
-//					
-//				}
+				
+				if(action instanceof Class<?>){
+					Class<?> cls  = (Class<?>)action;
+					action = ScanAnnotation.setServiceField(cls, ClassHandler.newInstance(cls));	
+				}
 				
 				Method m = (Method)method;
 				String[] param = ConvertFactory.convert(String[].class, routeMap.get(RouteNodeRegistry.METHOD_PRM));

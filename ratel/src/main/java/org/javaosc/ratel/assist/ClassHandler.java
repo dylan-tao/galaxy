@@ -24,6 +24,24 @@ public class ClassHandler {
 		}
 	}
 	
+	public static Object newInstance(Class<?> cls){
+		try {
+			return cls.newInstance();
+		} catch (Exception e) {
+			log.error(Constant.RATEL_EXCEPTION, e);
+			return null;
+		}
+	}
+	
+	public static <T> T newInstanceObj(Class<T> cls){
+		try {
+			return cls.newInstance();
+		} catch (Exception e) {
+			log.error(Constant.RATEL_EXCEPTION, e);
+			return null;
+		}
+	}
+	
 	public static boolean isJavaClass(Class<?> cls){
 		return cls != null && cls.getClassLoader() == null;  
 	}

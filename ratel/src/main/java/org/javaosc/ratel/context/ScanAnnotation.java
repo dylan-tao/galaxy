@@ -13,6 +13,7 @@ import org.javaosc.ratel.annotation.Mapping;
 import org.javaosc.ratel.annotation.Prototype;
 import org.javaosc.ratel.annotation.Service;
 import org.javaosc.ratel.annotation.Value;
+import org.javaosc.ratel.assist.ClassHandler;
 import org.javaosc.ratel.assist.PropertyConvert;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.convert.ConvertFactory;
@@ -83,7 +84,7 @@ public class ScanAnnotation {
 						action = cls;
 					}else{
 						try {
-							action = setServiceField(cls, cls.newInstance());
+							action = setServiceField(cls, ClassHandler.newInstanceObj(cls));
 						}catch (Exception e) {
 							e.printStackTrace();
 						}

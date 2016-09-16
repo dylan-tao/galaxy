@@ -74,7 +74,7 @@ public class ConvertFactory {
 		String key = PREFIX + implCls.getName();
 		if(ClassHandler.isImplClass(implCls, Convert.class) && !typeConvert.containsKey(key)){
 			try {
-				typeConvert.put(key, (Convert)implCls.newInstance());
+				typeConvert.put(key, (Convert)ClassHandler.newInstanceObj(implCls));
 			} catch (Exception e) {
 				log.warn("{} convert put failed: {}", implCls.getName(), e); 
 			}
