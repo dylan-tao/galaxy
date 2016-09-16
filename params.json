@@ -1,6 +1,6 @@
 {
   "name": "Ratel Framework",
   "tagline": "Ratel是个Java Web微型框架，旨在提供更加轻巧和高性能的Web开发方案，是Javaosc社区的核心框架，期待它能提供更多可能。如果阁下有更好的建议和改进，欢迎加入我们~     当前版本：ratel-0.9.2.RELEASE",
-  "body": "# 资源\r\n* 源码：[https://github.com/javaosc-projects/ratel](https://github.com/javaosc-projects/ratel)\r\n* 社区：[http://www.javaosc.com](http://www.javaosc.com)\r\n* 微博：[http://weibo.com/javaosc](http://weibo.com/javaosc)\r\n* QQ群：[85999131](http://jq.qq.com/?_wv=1027&k=2FRJhgw)\r\n\r\n# 文档\r\n* 快速上手\r\n* 使用手册\r\n* 技术讨论\r\n* 常见问题\r\n\r\n> ###快速上手\r\n待补充\r\n> ### 遗留问题\r\n1. ~~sql映射实体反射预缓存优化提速；~~\r\n2. ~~sql属性字段包含下划线(_)的属性转换；~~\r\n3. 集成httl模版引擎；\r\n4. http请求模版封装；\r\n5. 异步线程池设计；\r\n6. 定时任务池设计；\r\n7. 请求属性自定义类型转换；\r\n8. action转发器多例模式的单元测试；\r\n9. 支持响应xml返回；\r\n\r\n",
+  "body": "# 资源\r\n* 源码：[https://github.com/javaosc-projects/ratel](https://github.com/javaosc-projects/ratel)\r\n* 社区：[http://www.javaosc.com](http://www.javaosc.com)\r\n* 微博：[http://weibo.com/javaosc](http://weibo.com/javaosc)\r\n* QQ群：[85999131](http://jq.qq.com/?_wv=1027&k=2FRJhgw)\r\n\r\n# 文档\r\n* 快速上手\r\n* 使用手册\r\n* 技术讨论\r\n* 常见问题\r\n\r\n> ###快速上手\r\n待补充\r\n> ### 遗留问题\r\n1. ~~sql映射实体反射预缓存优化提速；~~\r\n2. ~~sql属性字段包含下划线(_)的属性转换；~~\r\n3. 集成httl模版引擎；\r\n4. http请求模版封装；\r\n5. 异步线程池设计；\r\n6. 定时任务池设计；\r\n7. 请求属性自定义类型转换；\r\n8. ~~action转发器多例模式的单元测试~~；\r\n9. 支持响应xml返回；\r\n\r\n",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
