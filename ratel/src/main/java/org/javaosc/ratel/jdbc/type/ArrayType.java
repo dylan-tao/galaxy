@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.RowConvertHandler;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ArrayHandler implements ResultType<Object[]> {
+public class ArrayType implements ResultType<Object[]> {
 
     
     static final RowConvert ROW_PROCESSOR = new RowConvertHandler();
@@ -27,12 +27,12 @@ public class ArrayHandler implements ResultType<Object[]> {
     private final RowConvert convert;
 
     
-    public ArrayHandler() {
+    public ArrayType() {
         this(ROW_PROCESSOR);
     }
 
     
-    public ArrayHandler(RowConvert convert) {
+    public ArrayType(RowConvert convert) {
         super();
         this.convert = convert;
     }

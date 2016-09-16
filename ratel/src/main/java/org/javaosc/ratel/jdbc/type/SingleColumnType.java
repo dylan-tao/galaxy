@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import org.javaosc.ratel.jdbc.core.ResultType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ColumnHandler<T> implements ResultType<T> {
+public class SingleColumnType<T> implements ResultType<T> {
 
     
     private final int columnIndex;
@@ -22,22 +22,22 @@ public class ColumnHandler<T> implements ResultType<T> {
     private final String columnName;
 
     
-    public ColumnHandler() {
+    public SingleColumnType() {
         this(1, null);
     }
 
     
-    public ColumnHandler(int columnIndex) {
+    public SingleColumnType(int columnIndex) {
         this(columnIndex, null);
     }
 
     
-    public ColumnHandler(String columnName) {
+    public SingleColumnType(String columnName) {
         this(1, columnName);
     }
 
     
-    private ColumnHandler(int columnIndex, String columnName) {
+    private SingleColumnType(int columnIndex, String columnName) {
         this.columnIndex = columnIndex;
         this.columnName = columnName;
     }

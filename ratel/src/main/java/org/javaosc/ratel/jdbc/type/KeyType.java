@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class KeyHandler<K> extends AbstractKeyHandler<K, Map<String, Object>> {
+public class KeyType<K> extends AbstractKeyType<K, Map<String, Object>> {
 
     
     protected final RowConvert convert;
@@ -26,27 +26,27 @@ public class KeyHandler<K> extends AbstractKeyHandler<K, Map<String, Object>> {
     protected final String columnName;
 
     
-    public KeyHandler() {
-        this(ArrayHandler.ROW_PROCESSOR, 1, null);
+    public KeyType() {
+        this(ArrayType.ROW_PROCESSOR, 1, null);
     }
 
     
-    public KeyHandler(RowConvert convert) {
+    public KeyType(RowConvert convert) {
         this(convert, 1, null);
     }
 
     
-    public KeyHandler(int columnIndex) {
-        this(ArrayHandler.ROW_PROCESSOR, columnIndex, null);
+    public KeyType(int columnIndex) {
+        this(ArrayType.ROW_PROCESSOR, columnIndex, null);
     }
 
     
-    public KeyHandler(String columnName) {
-        this(ArrayHandler.ROW_PROCESSOR, 1, columnName);
+    public KeyType(String columnName) {
+        this(ArrayType.ROW_PROCESSOR, 1, columnName);
     }
 
     
-    private KeyHandler(RowConvert convert, int columnIndex,
+    private KeyType(RowConvert convert, int columnIndex,
             String columnName) {
         super();
         this.convert = convert;

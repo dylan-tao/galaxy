@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanMapHandler<K, V> extends AbstractKeyHandler<K, V> {
+public class BeanMapType<K, V> extends AbstractKeyType<K, V> {
 
     
     private final Class<V> type;
@@ -28,27 +28,27 @@ public class BeanMapHandler<K, V> extends AbstractKeyHandler<K, V> {
     private final String columnName;
 
     
-    public BeanMapHandler(Class<V> type) {
-        this(type, ArrayHandler.ROW_PROCESSOR, 1, null);
+    public BeanMapType(Class<V> type) {
+        this(type, ArrayType.ROW_PROCESSOR, 1, null);
     }
 
     
-    public BeanMapHandler(Class<V> type, RowConvert convert) {
+    public BeanMapType(Class<V> type, RowConvert convert) {
         this(type, convert, 1, null);
     }
 
     
-    public BeanMapHandler(Class<V> type, int columnIndex) {
-        this(type, ArrayHandler.ROW_PROCESSOR, columnIndex, null);
+    public BeanMapType(Class<V> type, int columnIndex) {
+        this(type, ArrayType.ROW_PROCESSOR, columnIndex, null);
     }
 
     
-    public BeanMapHandler(Class<V> type, String columnName) {
-        this(type, ArrayHandler.ROW_PROCESSOR, 1, columnName);
+    public BeanMapType(Class<V> type, String columnName) {
+        this(type, ArrayType.ROW_PROCESSOR, 1, columnName);
     }
 
     
-    private BeanMapHandler(Class<V> type, RowConvert convert,
+    private BeanMapType(Class<V> type, RowConvert convert,
             int columnIndex, String columnName) {
         super();
         this.type = type;

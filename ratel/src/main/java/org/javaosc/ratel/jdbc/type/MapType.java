@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,18 +15,18 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class MapHandler implements ResultType<Map<String, Object>> {
+public class MapType implements ResultType<Map<String, Object>> {
 
     
     private final RowConvert convert;
 
     
-    public MapHandler() {
-        this(ArrayHandler.ROW_PROCESSOR);
+    public MapType() {
+        this(ArrayType.ROW_PROCESSOR);
     }
 
     
-    public MapHandler(RowConvert convert) {
+    public MapType(RowConvert convert) {
         super();
         this.convert = convert;
     }

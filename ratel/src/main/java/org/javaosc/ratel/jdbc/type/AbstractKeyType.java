@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.ResultType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class AbstractKeyHandler<K, V> implements ResultType<Map<K, V>> {
+public abstract class AbstractKeyType<K, V> implements ResultType<Map<K, V>> {
 
     @Override
     public Map<K, V> handle(ResultSet rs) throws SQLException {

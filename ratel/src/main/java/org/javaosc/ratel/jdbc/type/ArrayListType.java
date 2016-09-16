@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,18 +13,18 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ArrayListHandler extends AbstractListHandler<Object[]> {
+public class ArrayListType extends AbstractListType<Object[]> {
 
     
     private final RowConvert convert;
 
     
-    public ArrayListHandler() {
-        this(ArrayHandler.ROW_PROCESSOR);
+    public ArrayListType() {
+        this(ArrayType.ROW_PROCESSOR);
     }
 
     
-    public ArrayListHandler(RowConvert convert) {
+    public ArrayListType(RowConvert convert) {
         super();
         this.convert = convert;
     }

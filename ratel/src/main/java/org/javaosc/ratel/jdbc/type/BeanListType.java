@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.RowConvert;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class BeanListHandler<T> implements ResultType<List<T>> {
+public class BeanListType<T> implements ResultType<List<T>> {
 
     
     private final Class<T> type;
@@ -24,12 +24,12 @@ public class BeanListHandler<T> implements ResultType<List<T>> {
     private final RowConvert convert;
 
     
-    public BeanListHandler(Class<T> type) {
-        this(type, ArrayHandler.ROW_PROCESSOR);
+    public BeanListType(Class<T> type) {
+        this(type, ArrayType.ROW_PROCESSOR);
     }
 
     
-    public BeanListHandler(Class<T> type, RowConvert convert) {
+    public BeanListType(Class<T> type, RowConvert convert) {
         this.type = type;
         this.convert = convert;
     }

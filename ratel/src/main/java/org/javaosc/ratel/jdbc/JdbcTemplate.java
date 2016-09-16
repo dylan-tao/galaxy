@@ -7,12 +7,12 @@ import java.util.Map;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.constant.Page;
 import org.javaosc.ratel.jdbc.core.JdbcHandler;
-import org.javaosc.ratel.jdbc.handler.BeanHandler;
-import org.javaosc.ratel.jdbc.handler.BeanListHandler;
-import org.javaosc.ratel.jdbc.handler.ColumnListHandler;
-import org.javaosc.ratel.jdbc.handler.MapHandler;
-import org.javaosc.ratel.jdbc.handler.MapListHandler;
-import org.javaosc.ratel.jdbc.handler.ColumnHandler;
+import org.javaosc.ratel.jdbc.type.BeanListType;
+import org.javaosc.ratel.jdbc.type.BeanType;
+import org.javaosc.ratel.jdbc.type.SingleColumnListType;
+import org.javaosc.ratel.jdbc.type.SingleColumnType;
+import org.javaosc.ratel.jdbc.type.MapListType;
+import org.javaosc.ratel.jdbc.type.MapType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,9 +39,9 @@ public class JdbcTemplate{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(columnName), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnType<T>(columnName), param);
 			}else{
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(columnName));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnType<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -53,9 +53,9 @@ public class JdbcTemplate{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnListType<T>(columnName), param);
 			}else{
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnListHandler<T>(columnName));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnListType<T>(columnName));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -69,9 +69,9 @@ public class JdbcTemplate{
 		 Map<String, Object> map = null;
 		 try {
 			if(param != null && param.length > 0){
-				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler(), param);
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapType(), param);
 			}else{
-				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapHandler());
+				map = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapType());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.RATEL_EXCEPTION, e);
@@ -83,9 +83,9 @@ public class JdbcTemplate{
 		 List<Map<String, Object>> list = null;
 		 try {
 			if(param != null && param.length > 0){
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler(), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListType(), param);
 			}else{
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListHandler());
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new MapListType());
 			}
 		 } catch (SQLException e) {
 			 log.error(Constant.RATEL_EXCEPTION, e);
@@ -99,9 +99,9 @@ public class JdbcTemplate{
 		T obj = null;
 		try {
 			if(param != null && param.length > 0){
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls), param);
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanType<T>(cls), param);
 			}else{
-				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanHandler<T>(cls));
+				obj = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanType<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -113,9 +113,9 @@ public class JdbcTemplate{
 		List<T> list = null;
 		try {
 			if(param != null && param.length > 0){
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls), param);
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListType<T>(cls), param);
 			}else{
-				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListHandler<T>(cls));
+				list = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new BeanListType<T>(cls));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
@@ -149,9 +149,9 @@ public class JdbcTemplate{
 		T count = cls.cast(0);
 		try {
 			if(param != null && param.length > 0){
-				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(1), param);
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnType<T>(1), param);
 			}else{
-				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new ColumnHandler<T>(1));
+				count = jdbcHandler.query(ConnectionHandler.getConnection(), sql, new SingleColumnType<T>(1));
 			}
 		} catch (SQLException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);

@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import org.javaosc.ratel.jdbc.core.ResultType;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public abstract class AbstractListHandler<T> implements ResultType<List<T>> {
+public abstract class AbstractListType<T> implements ResultType<List<T>> {
     
     @Override
     public List<T> handle(ResultSet rs) throws SQLException {

@@ -1,5 +1,5 @@
 
-package org.javaosc.ratel.jdbc.handler;
+package org.javaosc.ratel.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ColumnListHandler<T> extends AbstractListHandler<T> {
+public class SingleColumnListType<T> extends AbstractListType<T> {
 
     
     private final int columnIndex;
@@ -20,22 +20,22 @@ public class ColumnListHandler<T> extends AbstractListHandler<T> {
     private final String columnName;
 
     
-    public ColumnListHandler() {
+    public SingleColumnListType() {
         this(1, null);
     }
 
     
-    public ColumnListHandler(int columnIndex) {
+    public SingleColumnListType(int columnIndex) {
         this(columnIndex, null);
     }
 
     
-    public ColumnListHandler(String columnName) {
+    public SingleColumnListType(String columnName) {
         this(1, columnName);
     }
 
     
-    private ColumnListHandler(int columnIndex, String columnName) {
+    private SingleColumnListType(int columnIndex, String columnName) {
         super();
         this.columnIndex = columnIndex;
         this.columnName = columnName;

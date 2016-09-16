@@ -4,11 +4,14 @@ package org.javaosc.ratel.jdbc.core;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import org.javaosc.ratel.assist.PropertyConvert;
 
 /**
  * 
@@ -18,22 +21,6 @@ import java.util.Map;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class RowConvertHandler implements RowConvert {
-
-    
-    private static final BeanConvert defaultConvert = new BeanConvert();
-
-    private final BeanConvert convert;
-
-    
-    public RowConvertHandler() {
-        this(defaultConvert);
-    }
-
-    
-    public RowConvertHandler(BeanConvert convert) {
-        super();
-        this.convert = convert;
-    }
 
     
     @Override
@@ -52,15 +39,21 @@ public class RowConvertHandler implements RowConvert {
     
     @Override
     public <T> T toBean(ResultSet rs, Class<T> type) throws SQLException {
-        return this.convert.toBean(rs, type);
+        return PropertyConvert.convertResultSetToEntity(rs, type);
     }
 
-    
     @Override
     public <T> List<T> toBeanList(ResultSet rs, Class<T> type) throws SQLException {
-        return this.convert.toBeanList(rs, type);
+    	List<T> results = new ArrayList<T>();
+        if (!rs.next()) {
+            return results;
+        }
+        do {
+        	T t = PropertyConvert.convertResultSetToEntity(rs, type);
+            results.add(t);
+        } while (rs.next());
+        return results;
     }
-
     
     @Override
     public Map<String, Object> toMap(ResultSet rs) throws SQLException {
