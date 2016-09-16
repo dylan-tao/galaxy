@@ -135,7 +135,7 @@ public class PropertyConvert {
         return entity;
 	}
 	
-	private static Map<String, Method> getPropertyMap(Class<?> entityClass){
+	public static Map<String, Method> getPropertyMap(Class<?> entityClass){
 		Map<String, Method> propertyMap = fieldSetPropertyMap.get(entityClass.getName());  
         if(propertyMap == null){  
         	propertyMap = parseEntry(entityClass);  

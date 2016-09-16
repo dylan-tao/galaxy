@@ -7,11 +7,13 @@ import java.util.Map.Entry;
 
 import org.javaosc.ratel.annotation.Autowired;
 import org.javaosc.ratel.annotation.Bean;
+import org.javaosc.ratel.annotation.Component;
 import org.javaosc.ratel.annotation.Dao;
 import org.javaosc.ratel.annotation.Mapping;
 import org.javaosc.ratel.annotation.Prototype;
 import org.javaosc.ratel.annotation.Service;
 import org.javaosc.ratel.annotation.Value;
+import org.javaosc.ratel.assist.PropertyConvert;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.convert.ConvertFactory;
 import org.javaosc.ratel.jdbc.JdbcTemplate;
@@ -40,11 +42,7 @@ public class ScanAnnotation {
 		}
 		String custKey = null;
 		boolean flag = false;
-		if(loadClass.isAnnotationPresent(Bean.class)){
-			Bean bean = loadClass.getAnnotation(Bean.class);
-			custKey = bean.value();
-			flag = true;
-		}else if(loadClass.isAnnotationPresent(Dao.class)){
+		if(loadClass.isAnnotationPresent(Dao.class)){
 			Dao dao = loadClass.getAnnotation(Dao.class);
 			custKey = dao.value();
 			flag = true;
@@ -55,6 +53,12 @@ public class ScanAnnotation {
 		}else if(loadClass.isAnnotationPresent(Mapping.class)){
 			custKey = null;
 			flag = true;
+		}else if(loadClass.isAnnotationPresent(Component.class)){
+			Component bean = loadClass.getAnnotation(Component.class);
+			custKey = bean.value();
+			flag = true;
+		}else if(loadClass.isAnnotationPresent(Bean.class)){
+			PropertyConvert.getPropertyMap(loadClass);
 		}
 		if(flag){
 			custKey = getKey(custKey, loadClass);
@@ -67,7 +71,7 @@ public class ScanAnnotation {
 			for(Entry<String, Class<?>> entry:annotationMap.entrySet()){
 				String key = entry.getKey();
 				Class<?> cls = entry.getValue();
-				if(cls.isAnnotationPresent(Bean.class) || cls.isAnnotationPresent(Dao.class)){
+				if(cls.isAnnotationPresent(Component.class) || cls.isAnnotationPresent(Dao.class)){
 					BeanFactory.get(key, cls, false);
 				}else if(cls.isAnnotationPresent(Service.class)){
 					BeanFactory.get(key, cls, true);

@@ -1,5 +1,8 @@
 package com.javaosc.user.action;
 
+import org.javaosc.ratel.annotation.Bean;
+
+@Bean
 public class User {
 	
 	private Integer userId;

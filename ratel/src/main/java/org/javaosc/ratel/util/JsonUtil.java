@@ -39,10 +39,10 @@ public class JsonUtil {
 			try {
 				json = gson.toJson(obj);
 			} catch (Exception e) {
-				log.error("to json error ~ {}", obj.getClass().getName());
+				log.error("To json error ~ {}", obj.getClass().getName());
 			}
 		}
-		log.debug("=== JSON Content: {}", json);
+		log.debug(" Json Content: {}{}", System.getProperty("line.separator"), json);
 		return json;
 	}
 	
@@ -100,7 +100,7 @@ public class JsonUtil {
 			     new JsonParser().parse(json);  
 			     return true;    
 			 } catch (JsonParseException e) {    
-				 log.error("json format error ：{}", json);
+				 log.error("Json format error ：{}", json);
 			}       
 		 }    
 		 return false; 
