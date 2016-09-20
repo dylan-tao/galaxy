@@ -32,6 +32,11 @@
 			<artifactId>gson</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.amebastack.template</groupId>
+			<artifactId>httl</artifactId>
+		</dependency>
+		
 		<!-- realize -->
 	<!-- 	<dependency>
 			<groupId>org.slf4j</groupId>

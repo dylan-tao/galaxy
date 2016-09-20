@@ -37,6 +37,7 @@ public class ContextServlet extends HttpServlet {
 	
 	private static String prefix;
 	private static String suffix;
+	private static boolean enableTemplate;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -46,6 +47,14 @@ public class ContextServlet extends HttpServlet {
 	public void init(){
 		prefix = ConfigHandler.getViewPrefix();
 		suffix = ConfigHandler.getViewSuffix();
+		try {
+			Class.forName("httl.web.WebEngine");
+			enableTemplate = true;
+			log.info("Enable httl template rendering page");
+		} catch (ClassNotFoundException e) {
+			log.info("Enable default jsp rendering page");
+			enableTemplate = false;
+		}
 	}
 	
 	@Override
@@ -85,7 +94,7 @@ public class ContextServlet extends HttpServlet {
 		String requestView = ConfigHandler.getViewMap(requestPath);
 
 		if (StringUtil.isNotBlank(requestView)) {
-			new ActionHandler(requestView).redirectOrForward(prefix, suffix);
+			new ActionHandler(requestView).rendering(prefix, suffix, enableTemplate);
 		} else { 
 			Map<String, Object> routeMap = RouteNodeRegistry.getRouteNode(requestPath);		
 			Object action = routeMap.get(RouteNodeRegistry.ACTION);
@@ -111,7 +120,7 @@ public class ContextServlet extends HttpServlet {
 				if(returnType.equals(String.class)){
 					String returnPath = String.valueOf(result);
 					if(StringUtil.isNotBlank(returnPath)){
-						new ActionHandler(returnPath).redirectOrForward(prefix, suffix);
+						new ActionHandler(returnPath).rendering(prefix, suffix, enableTemplate);
 					}
 					return;
 				}else if(returnType.equals(void.class)){

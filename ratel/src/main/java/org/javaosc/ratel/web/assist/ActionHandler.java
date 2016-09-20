@@ -1,9 +1,13 @@
 package org.javaosc.ratel.web.assist;
 
+import httl.web.WebEngine;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.web.ActionContext;
@@ -26,11 +30,16 @@ public class ActionHandler {
 		this.path = path;
 	}
 	
-	public void redirectOrForward(String prefix, String suffix){
+	public void rendering(String prefix, String suffix, boolean enableTemplate){
 		if(path.startsWith(Constant.COLON) || path.startsWith(Constant.COLON_EXTEND)){
 			this.redirect(path.substring(1));
 		}else{
-			this.forward(new StringBuffer(prefix).append(Constant.LINE).append(path).append(suffix).toString());
+			String viewPath = prefix + Constant.LINE + path + suffix;
+			if(enableTemplate){ //httl
+				this.httlView(viewPath);
+			}else{
+				this.forward(viewPath);
+			}
 		}	
 	}
 	
@@ -51,6 +60,17 @@ public class ActionHandler {
 		} catch (IOException e) {
 			log.error(Constant.RATEL_EXCEPTION, e);
 		}
+	}
+	
+	protected void httlView(String viewPath) {
+		HttpServletRequest request = ActionContext.getContext().getRequest();
+		HttpServletResponse response = ActionContext.getContext().getResponse();
+		try {
+			WebEngine.setRequestAndResponse(request, response);
+			WebEngine.getEngine().getTemplate(viewPath, request.getLocale()).render(response);
+		} catch (Exception e) {
+			log.error(Constant.RATEL_EXCEPTION, e);
+		}	 
 	}
 	
 }

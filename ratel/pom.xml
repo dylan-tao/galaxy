@@ -43,6 +43,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.amebastack.template</groupId>
+			<artifactId>httl</artifactId>
+			<scope>provided</scope>    
+		</dependency>
+		
 		<!-- realize -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

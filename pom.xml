@@ -25,6 +25,7 @@
 		<google.gson.version>2.7</google.gson.version>
 		<cglib.nodep.version>3.2.4</cglib.nodep.version>
 		<ormilly.cos.version>05Nov2002</ormilly.cos.version>
+		<amebastack.httl.version>1.0.12</amebastack.httl.version>
 		
 		<!-- realize -->
 		<slf4j.logback.version>1.1.7</slf4j.logback.version>
@@ -71,6 +72,12 @@
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>${cglib.nodep.version}</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.amebastack.template</groupId>
+			    <artifactId>httl</artifactId>
+			    <version>${amebastack.httl.version}</version>
 			</dependency>
 
 			<!-- realize -->
