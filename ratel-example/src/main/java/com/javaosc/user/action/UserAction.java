@@ -14,7 +14,7 @@ public class UserAction {
 	@Autowired
 	private UserService userService;
 	
-	@Mapping("/{userId}")
+	@Mapping("/2")
 	public void getUserList(User user){
 		user = userService.getUserList(user);
 		ContextHandler.putJson(user);
