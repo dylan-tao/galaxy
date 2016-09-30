@@ -1,5 +1,8 @@
 package org.javaosc.ratel.util;
 
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,12 +37,17 @@ public class JsonUtil {
 	}
 
 	public static String toJson(Object obj) {
-		String json = null;
+		String json = "";
 		if(obj!=null){
 			try {
 				json = gson.toJson(obj);
 			} catch (Exception e) {
 				log.error("To json error ~ {}", obj.getClass().getName());
+				if (obj instanceof Collection || obj instanceof Iterator || obj instanceof Enumeration || obj.getClass().isArray()) {
+					json = "[]";
+				} else{
+					json = "{}";
+				}	
 			}
 		}
 		log.debug(" Json Content: {}{}", System.getProperty("line.separator"), json);

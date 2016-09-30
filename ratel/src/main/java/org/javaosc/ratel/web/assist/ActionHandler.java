@@ -26,6 +26,8 @@ public class ActionHandler {
 	
 	private String path;
 	
+	public ActionHandler() {}
+	
 	public ActionHandler(String path) {
 		this.path = path;
 	}
@@ -41,6 +43,14 @@ public class ActionHandler {
 				this.forward(viewPath);
 			}
 		}	
+	}
+	
+	public void sendError(int code, String message){
+		try {
+			ActionContext.getContext().getResponse().sendError(code, message);
+		} catch (IOException e) {
+			log.error(Constant.RATEL_EXCEPTION, e);
+		}
 	}
 	
 	protected void forward(String viewPath) {

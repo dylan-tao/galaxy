@@ -52,8 +52,8 @@ public class ContextServlet extends HttpServlet {
 			enableTemplate = true;
 			log.info("Enable httl template rendering page");
 		} catch (ClassNotFoundException e) {
-			log.info("Enable default jsp rendering page");
 			enableTemplate = false;
+			log.info("Enable default jsp rendering page");
 		}
 	}
 	
@@ -131,11 +131,7 @@ public class ContextServlet extends HttpServlet {
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){
 					log.debug("the request path [{}] can not be found !",requestPath);
-					try {
-						ActionContext.getContext().getResponse().sendError(404);
-					} catch (IOException e) {
-						log.error(Constant.RATEL_EXCEPTION, e);
-					}
+					new ActionHandler().sendError(404, "Power by Ratel.");
 				}
 			}
 		}
