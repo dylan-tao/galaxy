@@ -63,7 +63,7 @@
 		<welcome-file>/WEB-INF/back/index.jsp</welcome-file>
 	</welcome-file-list>
 	
-	<error-page>
+	<!-- <error-page>
 		<error-code>403</error-code>
 		<location>/common/403.jsp</location>
 	</error-page>
@@ -78,6 +78,6 @@
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/common/500.jsp</location>
-	</error-page>
+	</error-page> -->
 	
 </web-app>
