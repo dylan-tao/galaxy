@@ -43,6 +43,11 @@
 <li>常见问题</li>
 </ul>
 
+<h1>
+<a id="核心思想" class="anchor" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>核心思想</h1>
+
+<p>对Servlet进行半包围模式，允许在Action的method里暴漏HttpServletRequest以适应特殊场景的需求(PS:上传或Body传参)，使开发者应用更灵活和获得更高的性能。</p>
+
 <blockquote>
 <h3>
 <a id="快速上手" class="anchor" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>快速上手</h3>
@@ -53,12 +58,10 @@
 <a id="遗留问题" class="anchor" href="#%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>遗留问题</h3>
 
 <ol>
-<li><del>sql映射实体反射预缓存优化提速；</del></li>
-<li><del>sql属性字段包含下划线(_)的属性转换；</del></li>
 <li>
-<del>aop切面设计优化</del>[为追求性能，放弃过滤链模式，回归简单，后期产品有需求再加强]；</li>
+<del>aop切面设计优化</del>[放弃过滤链模式，获得更高的性能，后期产品有需求再加强]；</li>
 <li>
-<del>上传控件解耦支持</del> [内置cos的默认实现，上传时参数用内置JSON进行自由转换，不做强制封装]；</li>
+<del>上传控件解耦支持</del> [内置cos的上传实现，上传时参数用内置JSON进行自由转换，不做强制封装]；</li>
 <li>
 <del>集成httl模版引擎[待回归测试]</del>；</li>
 <li>http请求模版封装；</li>
@@ -66,8 +69,6 @@
 <li>
 <del>定时任务设计</del>[待回归测试]；</li>
 <li>请求属性自定义类型转换；</li>
-<li>
-<del>action转发器多例模式的单元测试</del>；</li>
 <li>框架模块及oo映射自动生成；</li>
 </ol>
 </blockquote>
