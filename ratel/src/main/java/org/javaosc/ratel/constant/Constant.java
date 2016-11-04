@@ -14,7 +14,7 @@ public interface Constant {
 	
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
-	String LINE = "/";
+//	String LINE = "/";
 	String COLON = ":";
 	String COLON_EXTEND = "：";
 	String COMMA = ",";
@@ -27,6 +27,7 @@ public interface Constant {
 	String EM = "=";
 	String AM = "&";
 	String JZ = "#";
+	String LINE = System.getProperty("line.separator");
 	
 	// http协议
 	public enum HttpType {
@@ -63,48 +64,6 @@ public interface Constant {
 		public String getValue() {
 			return value;
 		}
-	}
-	
-	public enum ProxyMode {
-
-		DEFAULT("default"),CGLIB("cglib"),JAVASSIST("javassist");
-
-		private final String value;
-
-		ProxyMode(String value) {
-			this.value = value;
-		}
-
-		public String getValue() {
-			return value;
-		}
-	}
-	
-	// 存储方式
-	public enum StorageRule {
-
-		YEAR {
-			public int getValue() {
-				return 0;
-			}
-		},
-		MONTH {
-			public int getValue() {
-				return 1;
-			}
-		},
-		DAY {
-			public int getValue() {
-				return 2;
-			}
-		},
-		HOUR {
-			public int getValue() {
-				return 3;
-			}
-		};
-
-		public abstract int getValue();
 	}
 
 }

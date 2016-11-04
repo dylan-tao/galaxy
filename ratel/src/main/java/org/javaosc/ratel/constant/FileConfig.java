@@ -1,5 +1,6 @@
 package org.javaosc.ratel.constant;
 
+
 /**
  * 
  * @description
@@ -11,13 +12,11 @@ public class FileConfig {
 	
 	private String fileName; //文件名称
 	private String originalFilename; //文件原名
-	private String newFileName; //文件新名
 	private String filePath; //存储路径
 	private String contentType; //文件类型
 	private long fileSize; //文件大小
 	private long createTime; //创建时间
-	private int code; //错误码
-	
+	private int code;
 	
 	public String getFileName() {
 		return fileName;
@@ -30,12 +29,6 @@ public class FileConfig {
 	}
 	public void setOriginalFilename(String originalFilename) {
 		this.originalFilename = originalFilename;
-	}
-	public String getNewFileName() {
-		return newFileName;
-	}
-	public void setNewFileName(String newFileName) {
-		this.newFileName = newFileName;
 	}
 	public String getFilePath() {
 		return filePath;
@@ -67,4 +60,5 @@ public class FileConfig {
 	public void setCode(int code) {
 		this.code = code;
 	}
+	
 }

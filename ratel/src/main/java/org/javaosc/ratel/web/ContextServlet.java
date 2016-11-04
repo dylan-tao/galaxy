@@ -18,7 +18,6 @@ import org.javaosc.ratel.context.ScanAnnotation;
 import org.javaosc.ratel.convert.ConvertFactory;
 import org.javaosc.ratel.util.PathUtil;
 import org.javaosc.ratel.util.StringUtil;
-import org.javaosc.ratel.web.assist.ActionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

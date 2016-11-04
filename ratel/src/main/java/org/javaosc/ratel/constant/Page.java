@@ -19,7 +19,7 @@ public class Page<T> {
 	protected int pageSize; //suggest this set value in action
 	protected long totalCount = 0;
 	
-	protected boolean autoCount = true;
+	protected boolean autoCount = false;
 	protected long lastQueryTime;
 	
 	protected List<T> result =  new ArrayList<T>();
@@ -27,11 +27,7 @@ public class Page<T> {
 	public Page() {}
 
 	public Page(int pageSize, int pageNo) {
-		if (pageNo > 0) {
-			this.pageNo = pageNo;
-		} else {
-			this.pageNo = defaultPageNo;
-		}
+		this.pageNo = pageNo < 1 ? defaultPageNo : pageNo;
 		this.pageSize = pageSize;
 	}
 
@@ -44,11 +40,7 @@ public class Page<T> {
 	}
 
 	public void setPageNo(int pageNo) {
-		if (pageNo < 1) {
-			this.pageNo = defaultPageNo;
-		}else if(pageNo > this.getTotalPage()){
-			this.pageNo = this.getTotalPage();
-		} 
+		this.pageNo = pageNo < 1 ? defaultPageNo : pageNo;
 	}
 	
 	public int getPageNo() {
