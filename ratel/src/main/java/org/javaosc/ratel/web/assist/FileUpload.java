@@ -47,6 +47,59 @@ public class FileUpload {
 		this.headerCode = headerCode;
 	}
 	
+	public UploadConfig getInputStream(HttpServletRequest request) {
+		
+		UploadConfig config = new UploadConfig();
+		
+		if(StringUtil.isNotBlank(this.getFileDir())){
+			try {
+				MultipartParser mp = new MultipartParser(request, this.getMaxSize());
+				mp.setEncoding(request.getCharacterEncoding());
+				Part part;
+				int p = 0;
+				
+				while ((part = mp.readNextPart()) != null) {
+					if (part.isFile()) {
+						FileConfig fileConfig = new FileConfig();
+						fileConfig.setOriginalFilename(part.getName());
+						FilePart filePart = (FilePart)part;
+						InputStream is = filePart.getInputStream();
+						fileConfig.setContentType(filePart.getContentType());
+						fileConfig.setStream(is);
+						
+						String fileName = filePart.getFileName();
+						if(HeaderHexUtil.check(is, headerCode)){
+							String realFileName = null;
+							int pos = fileName.lastIndexOf(Constant.DOT);  
+						    String ext = fileName.substring(pos);
+						    
+							if(this.getFileName()!=null && this.getFileName().length>0){
+								realFileName = this.getFileName()[p] + ext;
+								p++;
+							}else{
+								realFileName = CodeUtil.encodeMD5(fileName, false, CodeType.UTF8) + ext;
+							}
+							fileConfig.setFileName(realFileName);
+							fileConfig.setCode(0);
+							fileConfig.setCreateTime(System.currentTimeMillis());
+						}else{	//不符合标准的文件
+							fileConfig.setCode(-1);
+						}
+						config.putFile(fileConfig);
+					}else if(part.isParam()){
+						ParamPart paramPart = (ParamPart) part;
+				        config.putParam(paramPart.getName(), paramPart.getStringValue());
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			//存储路径不能为空
+		}
+		return config;
+	}
+	
 	public UploadConfig upload(HttpServletRequest request) {
 		
 		UploadConfig config = new UploadConfig();
@@ -78,7 +131,7 @@ public class FileUpload {
 							}else{
 								realFileName = CodeUtil.encodeMD5(fileName, false, CodeType.UTF8) + ext;
 							}
-							fileConfig.setFileName(fileName);
+							fileConfig.setFileName(realFileName);
 						
 							File saveFile = new File(fileDir + Constant.LINE + realFileName);
 							if(!saveFile.exists()){

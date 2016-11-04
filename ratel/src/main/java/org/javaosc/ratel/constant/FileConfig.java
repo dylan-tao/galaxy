@@ -1,5 +1,7 @@
 package org.javaosc.ratel.constant;
 
+import java.io.InputStream;
+
 
 /**
  * 
@@ -16,6 +18,9 @@ public class FileConfig {
 	private String contentType; //文件类型
 	private long fileSize; //文件大小
 	private long createTime; //创建时间
+	
+	private InputStream stream;
+	
 	private int code;
 	
 	public String getFileName() {
@@ -59,6 +64,12 @@ public class FileConfig {
 	}
 	public void setCode(int code) {
 		this.code = code;
+	}
+	public InputStream getStream() {
+		return stream;
+	}
+	public void setStream(InputStream stream) {
+		this.stream = stream;
 	}
 	
 }
