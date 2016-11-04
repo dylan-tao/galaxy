@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import org.javaosc.ratel.assist.MethodParamHandler;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
@@ -53,10 +54,16 @@ public class ProxyJdkHandler implements InvocationHandler {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
+					MethodParamHandler.getMethodParam(method, args);
 					log.error(Constant.RATEL_EXCEPTION, e);;
 				}
 			}else{
-				returnObj = method.invoke(target, args);
+				try {
+					returnObj = method.invoke(target, args);
+				} catch (Exception e) {
+					MethodParamHandler.getMethodParam(method, args);
+					log.error(Constant.RATEL_EXCEPTION, e);
+				}
 			}
 			ConnectionHandler.close();
 		}else{

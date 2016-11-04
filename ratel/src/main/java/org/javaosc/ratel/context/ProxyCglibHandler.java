@@ -6,6 +6,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
+import org.javaosc.ratel.assist.MethodParamHandler;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
@@ -58,10 +59,16 @@ public class ProxyCglibHandler implements MethodInterceptor {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
+					MethodParamHandler.getMethodParam(method, args);
 					log.error(Constant.RATEL_EXCEPTION, e);
 				}
 			}else{
-				returnObj = proxy.invokeSuper(obj, args);
+				try {
+					returnObj = proxy.invokeSuper(obj, args);
+				} catch (Exception e) {
+					MethodParamHandler.getMethodParam(method, args);
+					log.error(Constant.RATEL_EXCEPTION, e);
+				}
 			}
 			ConnectionHandler.close();
 		}else{

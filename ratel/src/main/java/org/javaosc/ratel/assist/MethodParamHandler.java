@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.javaosc.ratel.constant.Configuration;
 import org.javaosc.ratel.constant.Constant;
 import org.javaosc.ratel.convert.ConvertFactory;
+import org.javaosc.ratel.util.JsonUtil;
 import org.javaosc.ratel.web.ActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,18 @@ import org.slf4j.LoggerFactory;
 public class MethodParamHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodParamHandler.class);
+	
+	public static void getMethodParam(Method method, Object[] args){
+		log.error("Error method: {}",method.toString());
+		for(int i=0;i<args.length;i++){
+			Object value = args[i];
+			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
+				log.error("第{}个参数的值：{}",i+1,String.valueOf(args[i]));
+			}else{
+				log.error("第{}个参数的值：{}",i+1,JsonUtil.toJson(args[i]));
+			}
+		}
+	}
 
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {
 		Object[] obj = new Object[prmTypes.length];
