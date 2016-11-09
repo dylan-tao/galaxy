@@ -23,7 +23,7 @@ public interface Configuration {
 	static final String RESPONSE_ENCODE_KEY = "ratel.response.character.encode";
 	
 	static final String SCANER_PACKAGE_KEY = "ratel.scaner.annotation.package";
-	static final String METHOD_KEYWORD_KEY = "ratel.read.transaction.method.keyword";
+	static final String METHOD_KEYWORD_KEY = "ratel.transaction.read.method.keyword";
 	
 	static final String VIEW_KEY = "ratel.url.";
 	
