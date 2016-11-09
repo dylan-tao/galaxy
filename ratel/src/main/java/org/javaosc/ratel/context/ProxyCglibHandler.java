@@ -27,11 +27,11 @@ public class ProxyCglibHandler implements MethodInterceptor {
 	
 	private Object target;
 	
-	private boolean isTransaction;
+	private boolean openConnection;
 	
-	protected ProxyCglibHandler(Object target, boolean isTransaction) {
+	protected ProxyCglibHandler(Object target, boolean openConnection) {
 		this.target = target;
-		this.isTransaction = isTransaction;
+		this.openConnection = openConnection;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -43,9 +43,9 @@ public class ProxyCglibHandler implements MethodInterceptor {
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 		Object returnObj = null;
-		if(isTransaction){
+		if(openConnection){
 			ConnectionHandler.getConnection();
-			if(TransactionCache.get(method)){
+			if(CacheMark.getTran(method)){
 				try {
 					ConnectionHandler.beginTransaction();
 					returnObj = proxy.invokeSuper(obj, args);

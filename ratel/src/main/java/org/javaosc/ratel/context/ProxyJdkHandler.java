@@ -23,11 +23,11 @@ public class ProxyJdkHandler implements InvocationHandler {
 	
 	private Object target;
 	
-	private boolean isTransaction;
+	private boolean openConnection;
 
-	protected ProxyJdkHandler(Object target, boolean isTransaction) {
+	protected ProxyJdkHandler(Object target, boolean openConnection) {
 		this.target = target;
-		this.isTransaction = isTransaction;
+		this.openConnection = openConnection;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -38,9 +38,9 @@ public class ProxyJdkHandler implements InvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		Object returnObj = null;
-		if(isTransaction){
+		if(openConnection){
 			ConnectionHandler.getConnection();
-			if(TransactionCache.get(method)){
+			if(CacheMark.getTran(method)){
 				try {
 					ConnectionHandler.beginTransaction();
 					returnObj = method.invoke(target, args);
