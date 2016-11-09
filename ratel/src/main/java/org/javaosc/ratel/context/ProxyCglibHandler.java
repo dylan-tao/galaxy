@@ -42,17 +42,10 @@ public class ProxyCglibHandler implements MethodInterceptor {
 	}
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-		boolean isHasTx = false;
 		Object returnObj = null;
-		if(isTransaction && ConfigHandler.getMethodKeyword() != null){
-			for(String keyword:ConfigHandler.getMethodKeyword()){
-				if(method.getName().startsWith(keyword)){
-					isHasTx = true;
-					break;
-				}
-			}
+		if(isTransaction){
 			ConnectionHandler.getConnection();
-			if(isHasTx){
+			if(TransactionCache.get(method)){
 				try {
 					ConnectionHandler.beginTransaction();
 					returnObj = proxy.invokeSuper(obj, args);
