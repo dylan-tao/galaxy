@@ -44,7 +44,7 @@ public class ConfigExtHandler {
 			try {
 				properties = new Properties();
 				for(int i=0;i<configs.length;i++){
-					String configPath = PathUtil.getClassPath() + configs[i];
+					String configPath = PathUtil.getClassPath() + Constant.LINE + configs[i];
 					inputStream = new FileInputStream(configPath);
 					properties.load(inputStream);
 				}

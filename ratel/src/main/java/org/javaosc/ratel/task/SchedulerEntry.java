@@ -426,13 +426,13 @@ public class SchedulerEntry implements Comparable<Object>, java.io.Serializable 
     }
     
     public boolean equals(Object obj) {
-        SchedulerEntry entry = null;
         
-        if( obj == null || !(obj instanceof SchedulerEntry) )
-            return false;
+    	if(obj == null || !(obj instanceof SchedulerEntry)){
+    		return false;
+    	}
         
-        entry = (SchedulerEntry)obj;
-        return (   name.equals(entry.name)
+        SchedulerEntry entry = (SchedulerEntry)obj;
+        return (name.equals(entry.name)
                 && alarmTime == entry.alarmTime
                 && isRelative == entry.isRelative
                 && isRepeating == entry.isRepeating

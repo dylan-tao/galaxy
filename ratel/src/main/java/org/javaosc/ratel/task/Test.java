@@ -12,11 +12,11 @@ public class Test {
     long current = System.currentTimeMillis();
     System.out.println("Current date is " + new Date(current));
 
-    SchedulerListener listener = new SchedulerListener() {
-      public void execute(SchedulerEntry entry) {
-        System.out.println("\u0007fixed date alarm : " + entry);
-      }
-    };
+//    SchedulerListener listener = new SchedulerListener() {
+//      public void execute(SchedulerEntry entry) {
+//        System.out.println("\u0007fixed date alarm : " + entry);
+//      }
+//    };
 
     /*
     // Date alarm

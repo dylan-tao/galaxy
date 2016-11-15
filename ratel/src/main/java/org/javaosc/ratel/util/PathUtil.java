@@ -1,5 +1,7 @@
 package org.javaosc.ratel.util;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.javaosc.ratel.constant.Constant;
@@ -52,19 +54,40 @@ public class PathUtil {
 	}
 	
 	/**
-	 * 获取class编译根目录
-	 * @return String .../WEB-INF/classes/
-	 */
-	public static String getClassPath() {
-		return PathUtil.class.getResource(Constant.LINE).toString().replace("file:/", Constant.EMPTY);
-	}
-	
-	/**
 	 * 获取get请求的参数
 	 * @return String pageNo=1
 	 */
 	public static String getQueryString(HttpServletRequest request) {
 		return request.getQueryString();
+	}
+	
+	/**
+	 * 获取class编译根目录
+	 * @return String ...\webapps\ratel-example\WEB-INF\classes
+	 */
+	public static String getClassPath() {
+		String clsPath = null;
+		try {
+			clsPath = PathUtil.class.getClassLoader().getResource(Constant.LINE).toURI().getPath();
+			clsPath = new File(clsPath).getCanonicalPath();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return clsPath;
+	}
+	/**
+	 * 获取项目的根目录的绝对路径
+	 * @return String ...\webapps\ratel-example
+	 */
+	public static String getWebRoot() {
+		String webRoot = null;
+		try {
+			String clsPath = PathUtil.class.getClassLoader().getResource(Constant.LINE).toURI().getPath();
+			webRoot = new File(clsPath).getParentFile().getParentFile().getCanonicalPath();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return webRoot;
 	}
 	
 }

@@ -34,13 +34,12 @@ public class ScanAnnotation {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScanAnnotation.class);
 	
-	private static HashMap<String, Class<?>> annotationMap;
+	private static HashMap<String, Class<?>> annotationMap = new HashMap<String, Class<?>>();
 	
 	protected static void putAnnotation(Class<?> loadClass){
-		if(annotationMap==null){
-			annotationMap = new HashMap<String, Class<?>>();
-			annotationMap.put("jdbcTemplate", JdbcTemplate.class);
-		}
+		
+		annotationMap.put("jdbcTemplate", JdbcTemplate.class);
+		
 		String custKey = null;
 		boolean flag = false;
 		if(loadClass.isAnnotationPresent(Dao.class)){

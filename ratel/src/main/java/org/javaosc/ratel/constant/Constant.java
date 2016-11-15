@@ -14,7 +14,7 @@ public interface Constant {
 	
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
-//	String LINE = "/";
+	String URL_LINE = "/";
 	String COLON = ":";
 	String COLON_EXTEND = "：";
 	String COMMA = ",";
@@ -27,7 +27,7 @@ public interface Constant {
 	String EM = "=";
 	String AM = "&";
 	String JZ = "#";
-	String LINE = System.getProperty("line.separator");
+	String LINE = System.getProperty("file.separator");
 	
 	// http协议
 	public enum HttpType {

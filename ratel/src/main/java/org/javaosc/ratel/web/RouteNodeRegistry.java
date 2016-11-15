@@ -40,7 +40,7 @@ public abstract class RouteNodeRegistry {
 	public static void registerRouteNode(String uriPattern, Object action, Method method){
 		if(StringUtil.isNotBlank(uriPattern)){
 			uriPattern = StringUtil.clearSpace(uriPattern, PatternValue.ALL);
-			String[] routePath = uriPattern.split(Constant.LINE);
+			String[] routePath = uriPattern.split(Constant.URL_LINE);
 			RouteNode current = root;
 			RouteNode child = null;
 			int uriLength = routePath.length;
@@ -83,7 +83,7 @@ public abstract class RouteNodeRegistry {
 	
 	protected static Map<String, Object> getRouteNode(String uri){
 		Map<String, Object> params = new HashMap<String, Object>();
-		String[] routePath = uri.split(Constant.LINE);
+		String[] routePath = uri.split(Constant.URL_LINE);
 		RouteNode current = root;
 		RouteNode child = null;
 		int uriLength = routePath.length;

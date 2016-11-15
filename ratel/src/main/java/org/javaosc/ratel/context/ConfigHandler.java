@@ -61,7 +61,7 @@ public class ConfigHandler {
 		InputStream inputStream = null;
 		try {
 			properties = new Properties();
-			inputStream = new FileInputStream(PathUtil.getClassPath() + ratelConfig);
+			inputStream = new FileInputStream(PathUtil.getClassPath() + Constant.LINE + ratelConfig);
 			properties.load(inputStream);
 			initConfiguration();
 			log.info("ratel configuration is initialized. filename: {}.", ratelConfig);
@@ -161,7 +161,7 @@ public class ConfigHandler {
 		if(properties != null){
 			OutputStream outputStream = null;
 			try {
-				outputStream = new FileOutputStream(PathUtil.getClassPath() + ratelConfig);
+				outputStream = new FileOutputStream(PathUtil.getClassPath() + Constant.LINE + ratelConfig);
 				properties.store(outputStream, Configuration.CONFIG_HEAD_COMMENT);
 				outputStream.flush();
 				log.info("exporting configuration file: {}", ratelConfig);

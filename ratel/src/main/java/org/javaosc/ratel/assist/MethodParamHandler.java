@@ -127,7 +127,7 @@ public class MethodParamHandler {
 	}
 
 	private static Map<String, List<String>> getParamNames(Class<?> klass) throws IOException {
-		InputStream in = klass.getResourceAsStream(Constant.LINE + klass.getName().replace(Constant.DOT, Constant.LINE) + Constant.SUFFIX_CLASS);
+		InputStream in = klass.getResourceAsStream(Constant.URL_LINE + klass.getName().replace(Constant.DOT, Constant.URL_LINE) + Constant.SUFFIX_CLASS);
 		return getParamNames(in);
 	}
 
