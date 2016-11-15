@@ -16,7 +16,7 @@ public class BeanFactory {
 	
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	public static synchronized Object get(String key, Class<?> cls , boolean isTransaction){
+	public static synchronized Object get(String key, Class<?> cls , boolean openConnection){
 		 Object result = null;
 		 if (beanMap.containsKey(key)) { 
 			 result = beanMap.get(key);
@@ -25,12 +25,12 @@ public class BeanFactory {
 		 Object format = null;
 		 format = ClassHandler.newInstance(cls);
 		 if(key.equalsIgnoreCase(cls.getSimpleName())){//cglib
-			 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(format, isTransaction);    
+			 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(format, openConnection);    
 			 result = proxyHandler.proxyInstance(); 
 			 result = ScanAnnotation.setServiceField(cls, result);
 		 }else{  //jdk
 			 format = ScanAnnotation.setServiceField(cls, format);
-			 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(format, isTransaction);    
+			 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(format, openConnection);    
 			 result = proxyHandler.proxyInstance();
 		 }
 		

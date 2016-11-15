@@ -71,10 +71,13 @@ public class ScanAnnotation {
 			for(Entry<String, Class<?>> entry:annotationMap.entrySet()){
 				String key = entry.getKey();
 				Class<?> cls = entry.getValue();
-				if(cls.isAnnotationPresent(Component.class) || cls.isAnnotationPresent(Dao.class)){
+				if(cls.isAnnotationPresent(Component.class)){
 					BeanFactory.get(key, cls, false);
+				}else if(cls.isAnnotationPresent(Dao.class)){
+					BeanFactory.get(key, cls, true);
 				}else if(cls.isAnnotationPresent(Service.class)){
 					BeanFactory.get(key, cls, true);
+					CacheMark.putServiceAnno(cls);
 				}else if(cls.isAnnotationPresent(Mapping.class)){
 					Object action = null;
 					String parentPath = "";
