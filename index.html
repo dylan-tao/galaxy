@@ -8,8 +8,8 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
-  <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
-  <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+  <link rel="alternate icon" type="image/png" href="image/favicon.png">
+  <link rel="stylesheet" href="css/amazeui.min.css"/>
   <style>
     .get {
       background: #1E5B94;
@@ -159,26 +159,29 @@
             整体类包不超过365KB，通过最佳项目实践，在保证性能和稳定的前提下，引入最优秀的第三插件。在相对复杂的业务场景范围内，保证整体Jar依赖和最终项目发布体积在6MB内，使JVM初始化的单例/静态类相对减少。
           </p>
         </div>
+
+		<div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+          <h3 class="detail-h3">
+            <i class="am-icon-check-square-o am-icon-sm"></i>
+            国情，友好
+          </h3>
+          <p class="detail-p">
+            项目启动时，会自动将实体类的反射属性以及数据表字段关系装载到内存，并自动初始化数据库连接池，避免第一次类型转换实时扫描和获取连接等待；采用和Spring同样的英文注解，使学习无陡峭；Action的方法返回处理无花样，单一约定。
+          </p>
+        </div>
+
+
         <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
           <h3 class="detail-h3">
             <i class="am-icon-cogs am-icon-sm"></i>
-            组件丰富，模块化
+            半包围模式
           </h3>
 
           <p class="detail-p">
-            Amaze UI 含近 20 个 CSS 组件、10 个 JS 组件，更有 17 款包含近 60 个主题的 Widgets，可快速构建界面出色、体验优秀的跨屏页面，大幅度提升你的开发效率。
+            不强制包围Servlet，保证在相对灵活的前提下，使开发者无框架使用感；过滤器使用Serlvet原生api，静态资源放行要求在Web.xml里并不做中转到DefaultServlet，Filter和Aop放弃责任执行链，Action暴露原生Request，预置上传基础封装，开发者可以在相对约定下自由定制。
           </p>
         </div>
-        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
-          <h3 class="detail-h3">
-            <i class="am-icon-check-square-o am-icon-sm"></i>
-            本地化支持
-          </h3>
-
-          <p class="detail-p">
-            相比国外的前端框架，Amaze UI 专注解决中文排版优化问题，根据操作系统调整字体，实现最佳中文排版效果；针对国内主流浏览器及 App 内置浏览器提供更好的兼容性支持，为你节省大量兼容性调试时间。
-          </p>
-        </div>
+      
      
       </div>
     </div>
@@ -188,7 +191,7 @@
 <div class="hope">
   <div class="am-g am-container">
     <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
-      <img src="assets/i/examples/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+      <img src="image/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
       <hr class="am-article-divider am-show-sm-only hope-hr">
     </div>
     <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
@@ -206,15 +209,11 @@
     <div class="am-u-lg-12">
       <h2 class="about-title about-color">Ratel Framework 崇尚开放、自由，非常欢迎大家的参与</h2>
 
-  
-
         <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
           <h4 class="about-color">关于我们</h4>
-
           <p>Ratel Framework
             由Javaosc Team开发，旨在提供更加轻巧和高性能的Web开发方案，是Javaosc社区的核心框架，期待它能提供更多可能。如果阁下有更好的建议和改进，欢迎加入我们~。</p>
           <h4 class="about-color">团队介绍</h4>
-
           <p>。。。</p>
         </div>
       </div>
@@ -230,12 +229,12 @@
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="assets/js/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!--<![endif]-->
-<script src="assets/js/amazeui.min.js"></script>
+<script src="js/amazeui.min.js"></script>
 </body>
 </html>
