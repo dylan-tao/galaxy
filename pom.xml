@@ -2,22 +2,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.javaosc</groupId>
-	<artifactId>ratel-parent</artifactId>
-	<version>${ratel.parent.version}</version>
+	<artifactId>galaxy-parent</artifactId>
+	<version>${galaxy.parent.version}</version>
 	<packaging>pom</packaging>
-	<name>ratel</name>
+	<name>galaxy</name>
 
 	<modules>
-		<module>ratel</module>
-		<module>ratel-example</module>
+		<module>galaxy</module>
+		<module>galaxy-example</module>
 		<module>spring-example</module>
 	</modules>
 
 	<properties>
 
-		<ratel.parent.version>1.0</ratel.parent.version>
-		<ratel.version>0.9.2.RELEASE</ratel.version>
-		<ratel.example.version>1.0</ratel.example.version>
+		<galaxy.parent.version>1.0</galaxy.parent.version>
+		<galaxy.version>0.9.2.RELEASE</galaxy.version>
+		<galaxy.example.version>1.0</galaxy.example.version>
 		<spring.example.version>1.0</spring.example.version>
 		
 		<!-- core -->
@@ -52,14 +52,14 @@
 			<!-- mode -->
 			<dependency>
 				<groupId>org.javaosc</groupId>
-				<artifactId>ratel</artifactId>
-				<version>${ratel.version}</version>
+				<artifactId>galaxy</artifactId>
+				<version>${galaxy.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.javaosc</groupId>
-				<artifactId>ratel-example</artifactId>
-				<version>${ratel.example.version}</version>	
+				<artifactId>galaxy-example</artifactId>
+				<version>${galaxy.example.version}</version>	
 			</dependency>
 			
 			<dependency>

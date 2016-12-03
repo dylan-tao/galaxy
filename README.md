@@ -1,22 +1,22 @@
-![ratel framework](https://github.com/javaosc-projects/ratel/blob/master/logo.png)[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
+![galaxy framework](https://github.com/javaosc-projects/galaxy/blob/master/logo.png)[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ================================================
 
 Documentation (文档)
 ---------------------
 
-- 官方网站 :  [查看文档](http://javaosc-projects.github.io/ratel/)
-- Homepage :  [view document](http://javaosc-projects.github.io/ratel/)
+- 官方网站 :  [查看文档](http://javaosc-projects.github.io/galaxy/)
+- Homepage :  [view document](http://javaosc-projects.github.io/galaxy/)
 
 Download (下载)
 -------------------
 
-- 标签列表 :  [查看列表](https://github.com/javaosc-projects/ratel/tags/)
-- Tag List :  [view list](https://github.com/javaosc-projects/ratel/tags/)
+- 标签列表 :  [查看列表](https://github.com/javaosc-projects/galaxy/tags/)
+- Tag List :  [view list](https://github.com/javaosc-projects/galaxy/tags/)
 
 
 
 or clone project repository:
 
 ```bash
-git clone https://github.com/javaosc-projects/ratel.git
+git clone https://github.com/javaosc-projects/galaxy.git
 ```

@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.javaosc</groupId>
-    <artifactId>ratel-parent</artifactId>
-    <version>${ratel.parent.version}</version>
+    <artifactId>galaxy-parent</artifactId>
+    <version>${galaxy.parent.version}</version>
   </parent>
   <groupId>io.spring</groupId>
   <artifactId>spring-example</artifactId>
