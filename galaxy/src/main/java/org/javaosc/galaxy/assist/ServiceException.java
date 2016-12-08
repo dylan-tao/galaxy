@@ -25,7 +25,7 @@ public class ServiceException extends RuntimeException {
         this.code = code;
     }
     
-    public Long getErrorCode() {
+    public long getErrorCode() {
         return this.code;
     }
 }
