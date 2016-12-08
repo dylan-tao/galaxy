@@ -14,6 +14,4 @@ import java.lang.annotation.Target;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public @interface Bean {
-	String value() default "";
-}
+public @interface Bean {}

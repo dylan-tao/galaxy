@@ -15,5 +15,5 @@ import java.lang.annotation.Target;
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public @interface Mapping {
-	String value();
+	String value() default "";
 }
