@@ -1,5 +1,5 @@
 
-package org.javaosc.galaxy.type;
+package org.javaosc.galaxy.jdbc.type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

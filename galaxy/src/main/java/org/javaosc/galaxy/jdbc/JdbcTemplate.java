@@ -7,12 +7,12 @@ import java.util.Map;
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.constant.Page;
 import org.javaosc.galaxy.jdbc.core.JdbcHandler;
-import org.javaosc.galaxy.type.BeanListType;
-import org.javaosc.galaxy.type.BeanType;
-import org.javaosc.galaxy.type.MapListType;
-import org.javaosc.galaxy.type.MapType;
-import org.javaosc.galaxy.type.SingleColumnListType;
-import org.javaosc.galaxy.type.SingleColumnType;
+import org.javaosc.galaxy.jdbc.type.BeanListType;
+import org.javaosc.galaxy.jdbc.type.BeanType;
+import org.javaosc.galaxy.jdbc.type.MapListType;
+import org.javaosc.galaxy.jdbc.type.MapType;
+import org.javaosc.galaxy.jdbc.type.SingleColumnListType;
+import org.javaosc.galaxy.jdbc.type.SingleColumnType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
