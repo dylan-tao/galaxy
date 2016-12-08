@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.javaosc.galaxy.core.ResultType;
-import org.javaosc.galaxy.core.RowConvert;
+import org.javaosc.galaxy.jdbc.core.ResultType;
+import org.javaosc.galaxy.jdbc.core.RowConvert;
 
 /**
  * 

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.constant.Page;
-import org.javaosc.galaxy.core.JdbcHandler;
+import org.javaosc.galaxy.jdbc.core.JdbcHandler;
 import org.javaosc.galaxy.type.BeanListType;
 import org.javaosc.galaxy.type.BeanType;
 import org.javaosc.galaxy.type.MapListType;

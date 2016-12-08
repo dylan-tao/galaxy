@@ -1,5 +1,5 @@
 
-package org.javaosc.galaxy.core;
+package org.javaosc.galaxy.jdbc.core;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

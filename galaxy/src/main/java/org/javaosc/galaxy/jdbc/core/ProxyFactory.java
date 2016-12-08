@@ -1,5 +1,5 @@
 
-package org.javaosc.galaxy.core;
+package org.javaosc.galaxy.jdbc.core;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

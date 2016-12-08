@@ -4,8 +4,8 @@ package org.javaosc.galaxy.type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.javaosc.galaxy.core.ResultType;
-import org.javaosc.galaxy.core.RowConvert;
+import org.javaosc.galaxy.jdbc.core.ResultType;
+import org.javaosc.galaxy.jdbc.core.RowConvert;
 
 /**
  * 

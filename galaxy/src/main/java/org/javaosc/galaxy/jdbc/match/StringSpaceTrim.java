@@ -1,11 +1,11 @@
 
-package org.javaosc.galaxy.match;
+package org.javaosc.galaxy.jdbc.match;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 
-import org.javaosc.galaxy.core.ProxyFactory;
+import org.javaosc.galaxy.jdbc.core.ProxyFactory;
 
 /**
  * 

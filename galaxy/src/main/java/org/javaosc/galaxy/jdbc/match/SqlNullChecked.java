@@ -1,5 +1,5 @@
 
-package org.javaosc.galaxy.match;
+package org.javaosc.galaxy.jdbc.match;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.javaosc.galaxy.core.ProxyFactory;
+import org.javaosc.galaxy.jdbc.core.ProxyFactory;
 
 /**
  * 
