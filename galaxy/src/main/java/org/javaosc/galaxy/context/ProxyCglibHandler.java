@@ -7,7 +7,6 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.javaosc.galaxy.assist.MethodParamHandler;
-import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.jdbc.ConnectionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,15 +51,13 @@ public class ProxyCglibHandler implements MethodInterceptor {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					MethodParamHandler.getMethodParam(method, args);
-					log.error(Constant.GALAXY_EXCEPTION, e);
+					MethodParamHandler.getMethodParam(e, method, args);
 				}
 			}else{
 				try {
 					returnObj = proxy.invokeSuper(obj, args);
 				} catch (Exception e) {
-					MethodParamHandler.getMethodParam(method, args);
-					log.error(Constant.GALAXY_EXCEPTION, e);
+					MethodParamHandler.getMethodParam(e, method, args);
 				}
 			}
 			ConnectionHandler.close();

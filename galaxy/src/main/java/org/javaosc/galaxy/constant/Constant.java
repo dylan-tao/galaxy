@@ -10,7 +10,7 @@ package org.javaosc.galaxy.constant;
  */
 public interface Constant {
 	
-	String GALAXY_EXCEPTION = " === galaxy execution exception, please see the following Caused by: " + System.getProperty("line.separator");
+	String GALAXY_EXCEPTION = " === Please see the following detailed error info: " + System.getProperty("line.separator");
 	
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";

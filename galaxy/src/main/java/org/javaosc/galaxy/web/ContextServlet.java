@@ -129,7 +129,7 @@ public class ContextServlet extends HttpServlet {
 				}	
 			}else{
 				if(routeMap.get(RouteNodeRegistry.ERROR_CODE)!=null){
-					log.debug("the request path [{}] can not be found !",requestPath);
+					log.warn("the request path [{}] can not be found !",requestPath);
 					new ActionHandler().sendError(404, null);
 				}
 			}

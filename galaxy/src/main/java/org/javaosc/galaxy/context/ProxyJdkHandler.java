@@ -47,15 +47,13 @@ public class ProxyJdkHandler implements InvocationHandler {
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					MethodParamHandler.getMethodParam(method, args);
-					log.error(Constant.GALAXY_EXCEPTION, e);;
+					MethodParamHandler.getMethodParam(e, method, args);
 				}
 			}else{
 				try {
 					returnObj = method.invoke(target, args);
 				} catch (Exception e) {
-					MethodParamHandler.getMethodParam(method, args);
-					log.error(Constant.GALAXY_EXCEPTION, e);
+					MethodParamHandler.getMethodParam(e, method, args);
 				}
 			}
 			ConnectionHandler.close();

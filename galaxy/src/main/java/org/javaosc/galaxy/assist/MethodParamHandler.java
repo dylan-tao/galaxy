@@ -32,8 +32,11 @@ public class MethodParamHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodParamHandler.class);
 	
-	public static void getMethodParam(Method method, Object[] args){
-		log.error("Error method: {}",method.toString());
+	public static void getMethodParam(Exception e,Method method, Object[] args){
+		StackTraceElement ste = e.getCause().getStackTrace()[0];
+		
+		log.error("{}:{} in {}", e.getCause().getClass(), e.getCause().getMessage(), ste.toString());
+		
 		for(int i=0;i<args.length;i++){
 			Object value = args[i];
 			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
@@ -42,6 +45,7 @@ public class MethodParamHandler {
 				log.error("第{}个参数的值：{}",i+1,JsonUtil.toJson(args[i]));
 			}
 		}
+		log.error(Constant.GALAXY_EXCEPTION, e);
 	}
 
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {
