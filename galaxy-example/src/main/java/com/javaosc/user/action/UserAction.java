@@ -15,7 +15,7 @@ public class UserAction {
 	@Autowired
 	private UserService userService;
 	
-	@Mapping("/2")
+	@Mapping("/{userId}")
 	public void getUserList(User user){
 		System.out.println(PathUtil.getClassPath());
 		System.out.println(PathUtil.getWebRoot());
