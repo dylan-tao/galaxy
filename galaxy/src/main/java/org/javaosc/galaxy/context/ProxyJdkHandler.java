@@ -5,10 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import org.javaosc.galaxy.assist.MethodParamHandler;
-import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.jdbc.ConnectionHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * 
  * @description
@@ -19,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class ProxyJdkHandler implements InvocationHandler {
 	
-	private static final Logger log = LoggerFactory.getLogger(ProxyJdkHandler.class);
+//	private static final Logger log = LoggerFactory.getLogger(ProxyJdkHandler.class);
 	
 	private Object target;
 	
