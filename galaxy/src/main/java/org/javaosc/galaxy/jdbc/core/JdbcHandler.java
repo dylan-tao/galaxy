@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 
 /**
  * 
@@ -33,7 +33,7 @@ public class JdbcHandler extends JdbcSuperHandler {
             throw new SQLException("Data connection cannot be null");
         }
         
-        if (StringUtil.isBlank(sql)) {
+        if (GalaxyUtil.isEmpty(sql)) {
             if (closeConn) {
                 close(conn);
             }
@@ -85,7 +85,7 @@ public class JdbcHandler extends JdbcSuperHandler {
             throw new SQLException("Data connection cannot be null");
         }
 
-        if (StringUtil.isBlank(sql)) {
+        if (GalaxyUtil.isEmpty(sql)) {
             if (closeConn) {
                 close(conn);
             }
@@ -146,7 +146,7 @@ public class JdbcHandler extends JdbcSuperHandler {
             throw new SQLException("Data connection cannot be null");
         }
 
-        if (StringUtil.isBlank(sql)) {
+        if (GalaxyUtil.isEmpty(sql)) {
             if (closeConn) {
                 close(conn);
             }
@@ -190,7 +190,7 @@ public class JdbcHandler extends JdbcSuperHandler {
             throw new SQLException("Data connection cannot be null");
         }
 
-        if (StringUtil.isBlank(sql)) {
+        if (GalaxyUtil.isEmpty(sql)) {
             if (closeConn) {
                 close(conn);
             }
@@ -235,7 +235,7 @@ public class JdbcHandler extends JdbcSuperHandler {
             throw new SQLException("Data connection cannot be null");
         }
 
-        if (StringUtil.isBlank(sql)) {
+        if (GalaxyUtil.isEmpty(sql)) {
             if (closeConn) {
                 close(conn);
             }

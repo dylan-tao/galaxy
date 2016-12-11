@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.javaosc.galaxy.assist.ClassHandler;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 /**
  * 
  * @description
@@ -34,7 +34,7 @@ public class BeanFactory {
 			 result = proxyHandler.proxyInstance();
 		 }
 		
-         if(StringUtil.isNotBlank(key) && result!=null){
+         if(!GalaxyUtil.isEmpty(key) && result!=null){
         	 beanMap.put(key, result);
          }  	 	  
 	     return result;

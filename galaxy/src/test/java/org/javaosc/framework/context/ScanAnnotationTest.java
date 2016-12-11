@@ -2,7 +2,7 @@ package org.javaosc.framework.context;
 
 import org.javaosc.galaxy.annotation.Mapping;
 import org.javaosc.galaxy.annotation.Service;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 
 public class ScanAnnotationTest {
 	
@@ -13,7 +13,7 @@ public class ScanAnnotationTest {
 		boolean isAction = UserAction.class.isAnnotationPresent(Mapping.class);
 		System.out.println(isAction);
 		
-		System.out.println(StringUtil.formatFirstChar("Dylan",true));
+		System.out.println(GalaxyUtil.formatFirstChar("Dylan",true));
 		
 //		UserService userService = BeanFactory.getService(UserServiceImpl.class);
 //		System.out.println(userService.getUserName());

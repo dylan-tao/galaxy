@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 import org.javaosc.galaxy.assist.MethodParamHandler;
 import org.javaosc.galaxy.assist.RequestParamHandler;
 import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.constant.Constant.PatternValue;
 import org.javaosc.galaxy.constant.RouteNode;
-import org.javaosc.galaxy.util.StringUtil;
-import org.javaosc.galaxy.util.StringUtil.PatternValue;
+import org.javaosc.galaxy.util.GalaxyUtil;
 /**
  * 
  * @description
@@ -38,8 +38,8 @@ public abstract class RouteNodeRegistry {
 	
 	
 	public static void registerRouteNode(String uriPattern, Object action, Method method){
-		if(StringUtil.isNotBlank(uriPattern)){
-			uriPattern = StringUtil.clearSpace(uriPattern, PatternValue.ALL);
+		if(!GalaxyUtil.isEmpty(uriPattern)){
+			uriPattern = GalaxyUtil.clearSpace(uriPattern, PatternValue.ALL);
 			String[] routePath = uriPattern.split(Constant.URL_LINE);
 			RouteNode current = root;
 			RouteNode child = null;

@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import org.javaosc.galaxy.assist.PropertyConvert;
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.context.ConfigHandler;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class DataSourceMatch {
 	public static DataSource get(){
 		DataSource ds = null; 
 		String dataSourceName = ConfigHandler.getDataSourceName();
-		if(StringUtil.isBlank(dataSourceName)){
+		if(GalaxyUtil.isEmpty(dataSourceName)){
 			log.error("pool.dataSource must be not null!");
 		}
 		if(dataSourceName.indexOf(".hikari.")>0){

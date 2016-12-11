@@ -2,10 +2,10 @@
 package org.javaosc.galaxy.web.assist;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,12 +25,11 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.servlet.http.HttpServletRequest;
 
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.constant.Constant.CodeType;
 import org.javaosc.galaxy.constant.Constant.HttpType;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -43,51 +42,15 @@ public class HttpTemplate {
 	
 	private static final Logger log = LoggerFactory.getLogger(HttpTemplate.class);
 	
-	private HttpTemplate() {}
+	public static int buffer_size = 4096;
+	public static int conn_timeout = 6000;
+	public static int read_timeout = 12000;
+	public static String charset = CodeType.UTF8.getValue();
 	
-	/**
-	 * https 域名校验
-	 */
-	private class TrustAnyHostnameVerifier implements HostnameVerifier {
-		public boolean verify(String hostname, SSLSession session) {
-			return true;
-		}
-	}
 	
-	/**
-	 * https 证书管理
-	 */
-	private class TrustAnyTrustManager implements X509TrustManager {
-		public X509Certificate[] getAcceptedIssuers(){
-			return null;  
-		}
-		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
-		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
-	}
-	
-	private static String CHARSET = CodeType.UTF8.name();
-	private static final SSLSocketFactory sslSocketFactory = initSSLSocketFactory();
-	private static final TrustAnyHostnameVerifier trustAnyHostnameVerifier = new HttpTemplate().new TrustAnyHostnameVerifier();
-	
-	private static SSLSocketFactory initSSLSocketFactory() {
-		try {
-			TrustManager[] tm = {new HttpTemplate().new TrustAnyTrustManager() };
-			SSLContext sslContext = SSLContext.getInstance("TLS");	// ("TLS", "SunJSSE");
-			sslContext.init(null, tm, new java.security.SecureRandom());
-			return sslContext.getSocketFactory();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	public static void setCharSet(String charSet) {
-		if (StringUtil.isBlank(charSet)) {
-			throw new IllegalArgumentException("charSet can not be blank.");
-		}
-		HttpTemplate.CHARSET = charSet;
-	}
-	
+	static final SSLSocketFactory sslSocketFactory = initSSLSocketFactory();
+	static final TrustAnyHostnameVerifier trustAnyHostnameVerifier = new HttpTemplate().new TrustAnyHostnameVerifier();
+
 	public static String get(String url) {
 		return get(url, null, null);
 	}
@@ -99,18 +62,19 @@ public class HttpTemplate {
 	public static String get(String url, Map<String, String> params, Map<String, String> headers) {
 		HttpURLConnection conn = null;
 		try {
-			conn = buildConnection(appendParam(url, params), HttpType.GET.name(), headers);
+			conn = buildConnection(buildParam(url, params), HttpType.GET.name(), headers);
 			conn.connect();
-			return responseDataFormat(conn);
+			return buildResult(conn);
 		}
 		catch (Exception e) {
-			throw new RuntimeException(e);
+			log.error(Constant.GALAXY_EXCEPTION, e);
 		}
 		finally {
 			if (conn != null) {
 				conn.disconnect();
 			}
 		}
+		return null;
 	}
 	
 	public static String post(String url, Map<String, String> params) {
@@ -129,51 +93,30 @@ public class HttpTemplate {
 		return post(url, null, data, headers);
 	}
 	
-	public static String requestDataFormat(HttpServletRequest request) {
-		BufferedReader br = null;
-		try {
-			StringBuilder result = new StringBuilder();
-			br = request.getReader();
-			for (String line=null; (line=br.readLine())!=null;) {
-				result.append(line).append("\n");
-			}
-			return result.toString();
-		}catch (IOException e) {
-			throw new RuntimeException(e);
-		}finally {
-			if (br != null){
-				try {
-					br.close();
-				} catch (IOException e) {
-					log.error(Constant.GALAXY_EXCEPTION, e);
-				}
-			}
-		}
-	}
-	
-	private static String post(String url, Map<String, String> queryParas, String data, Map<String, String> headers) {
+	private static String post(String url, Map<String, String> params, String data, Map<String, String> headers) {
 		HttpURLConnection conn = null;
 		try {
-			conn = buildConnection(appendParam(url, queryParas), HttpType.POST.name(), headers);
+			conn = buildConnection(buildParam(url, params), HttpType.POST.name(), headers);
 			conn.connect();
 			
-			OutputStream out = conn.getOutputStream();
-			if(data==null){
-				data = "";
+			if(!GalaxyUtil.isEmpty(data)){
+				DataOutputStream out = new DataOutputStream(conn.getOutputStream());
+				out.write(data.getBytes(charset));
+				out.flush();
+				out.close();
 			}
-			out.write(data.getBytes(CHARSET));
-			out.flush();
-			out.close();
-			return responseDataFormat(conn);
+			
+			return buildResult(conn);
 		}
 		catch (Exception e) {
-			throw new RuntimeException(e);
+			log.error(Constant.GALAXY_EXCEPTION, e);
 		}
 		finally {
 			if (conn != null) {
 				conn.disconnect();
 			}
 		}
+		return null;
 	}
 	
 	private static HttpURLConnection buildConnection(String url, String method, Map<String, String> headers) throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
@@ -188,8 +131,8 @@ public class HttpTemplate {
 		conn.setDoOutput(true);
 		conn.setDoInput(true);
 		
-		conn.setConnectTimeout(19000);
-		conn.setReadTimeout(19000);
+		conn.setConnectTimeout(conn_timeout);
+		conn.setReadTimeout(read_timeout);
 		
 		conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 		conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36");
@@ -202,20 +145,33 @@ public class HttpTemplate {
 		return conn;
 	}
 	
-	private static String responseDataFormat(HttpURLConnection conn) {
+	private static String buildResult(HttpURLConnection conn) {
 		StringBuilder sb = new StringBuilder();
 		InputStream inputStream = null;
 		try {
-			inputStream = conn.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, CHARSET));
-			String line = null;
-			while ((line = reader.readLine()) != null){
-				sb.append(line).append("\n");
-			}
-			return sb.toString();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
+			int code = conn.getResponseCode();
+	        String message = conn.getResponseMessage();
+	        
+	        inputStream = conn.getErrorStream();
+            if (inputStream == null) {
+            	inputStream = conn.getInputStream();
+            }
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, charset));
+			char[] cbuf = new char[buffer_size];
+            while (true) {
+                int len = reader.read(cbuf);
+                if (len < 0) {
+                    break;
+                }
+                sb.append(cbuf, 0, len);
+            }
+            if(code==200){
+            	return sb.toString();
+            }else{
+            	log.error("code: {}, message: {} ,result: {}", code, message, sb.toString());
+            }
+		}catch (Exception e) {
+			log.error(Constant.GALAXY_EXCEPTION, e);
 		}finally {
 			if (inputStream != null) {
 				try {
@@ -225,17 +181,18 @@ public class HttpTemplate {
 				}
 			}
 		}
+		return null;
 	}
 	
-	private static String appendParam(String url, Map<String, String> params) {
-		if (params == null || params.isEmpty()){
+	private static String buildParam(String url, Map<String, String> params) {
+		if (GalaxyUtil.isEmpty(params)){
 			return url;
 		}
 		StringBuilder sb = new StringBuilder(url);
 		boolean isFirst;
-		if (url.indexOf("?") == -1) {
+		if (url.indexOf(Constant.QM) == -1) {
 			isFirst = true;
-			sb.append("?");
+			sb.append(Constant.QM);
 		}else {
 			isFirst = false;
 		}
@@ -244,20 +201,47 @@ public class HttpTemplate {
 			if (isFirst){
 				isFirst = false;
 			}else{
-				sb.append("&");
+				sb.append(Constant.AM);
 			} 
 			String key = entry.getKey();
 			String value = entry.getValue();
-			if (StringUtil.isNotBlank(value)){
+			if (!GalaxyUtil.isEmpty(value)){
 				try {
-					value = URLEncoder.encode(value, CHARSET);
+					value = URLEncoder.encode(value, charset);
 				} catch (UnsupportedEncodingException e) {
-					throw new RuntimeException(e);
+					log.error(Constant.GALAXY_EXCEPTION, e);
 				}
 			}
-			sb.append(key).append("=").append(value);
+			sb.append(key).append(Constant.EM).append(value);
 		}
 		return sb.toString();
+	}
+	
+	private static SSLSocketFactory initSSLSocketFactory() {
+		try {
+			TrustManager[] tm = {new HttpTemplate().new TrustAnyTrustManager() };
+			SSLContext sslContext = SSLContext.getInstance("TLS");	// ("TLS", "SunJSSE");
+			sslContext.init(null, tm, new java.security.SecureRandom());
+			return sslContext.getSocketFactory();
+		}
+		catch (Exception e) {
+			log.error(Constant.GALAXY_EXCEPTION, e);
+		}
+		return null;
+	}
+	
+	private class TrustAnyHostnameVerifier implements HostnameVerifier {
+		public boolean verify(String hostname, SSLSession session) {
+			return true;
+		}
+	}
+	
+	private class TrustAnyTrustManager implements X509TrustManager {
+		public X509Certificate[] getAcceptedIssuers(){
+			return null;  
+		}
+		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
+		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {}
 	}
 	
 }

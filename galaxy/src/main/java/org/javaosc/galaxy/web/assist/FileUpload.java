@@ -12,7 +12,7 @@ import org.javaosc.galaxy.constant.UploadConfig;
 import org.javaosc.galaxy.constant.Constant.CodeType;
 import org.javaosc.galaxy.util.CodeUtil;
 import org.javaosc.galaxy.util.HeaderHexUtil;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 
 import com.oreilly.servlet.multipart.FilePart;
 import com.oreilly.servlet.multipart.MultipartParser;
@@ -51,7 +51,7 @@ public class FileUpload {
 		
 		UploadConfig config = new UploadConfig();
 		
-		if(StringUtil.isNotBlank(this.getFileDir())){
+		if(!GalaxyUtil.isEmpty(this.getFileDir())){
 			try {
 				MultipartParser mp = new MultipartParser(request, this.getMaxSize());
 				mp.setEncoding(request.getCharacterEncoding());
@@ -104,7 +104,7 @@ public class FileUpload {
 		
 		UploadConfig config = new UploadConfig();
 		
-		if(StringUtil.isNotBlank(this.getFileDir())){
+		if(!GalaxyUtil.isEmpty(this.getFileDir())){
 			try {
 				MultipartParser mp = new MultipartParser(request, this.getMaxSize());
 				mp.setEncoding(request.getCharacterEncoding());

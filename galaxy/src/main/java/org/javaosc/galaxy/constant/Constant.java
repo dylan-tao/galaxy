@@ -65,5 +65,32 @@ public interface Constant {
 			return value;
 		}
 	}
+	
+	//位置枚举
+	public enum PatternValue {
+
+		LEFT {
+			public String getValue() {
+				return "^\\s*";
+			}
+		},
+		RIGHT {
+			public String getValue() {
+				return "\\s*$";
+			}
+		},
+		LANDR {
+			public String getValue() {
+				return "(^\\s*)|(\\s*$)";
+			}
+		},
+		ALL {
+			public String getValue() {
+				return "\\s+";
+			}
+		};
+
+		public abstract String getValue();
+	}
 
 }

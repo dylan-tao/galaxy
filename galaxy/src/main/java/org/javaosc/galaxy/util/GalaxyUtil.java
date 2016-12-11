@@ -1,6 +1,10 @@
 package org.javaosc.galaxy.util;
 
+import java.util.List;
+import java.util.Map;
+
 import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.constant.Constant.PatternValue;
 
 /**
  * 
@@ -9,46 +13,31 @@ import org.javaosc.galaxy.constant.Constant;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class StringUtil {
-
-	/**
-	 * 非空判断
-	 * @param str 要判断的字符串
-	 * @return boolean true/false
-	 */
-	public static boolean isNotBlank(String str) {
-		return !isBlank(str);
-	}
-
-	/**
-	 * 空判断
-	 * @param str 要判断的字符串
-	 * @return boolean true/false
-	 */
-	public static boolean isBlank(String str) {
-		if(str == null || str.length() <= 0){
-			return true;
-		}else{
-			return false;
-		}
-	}
+public class GalaxyUtil {
 	
-	/**
-	 * 清除空格
-	 * @param str 要处理的字符串
-	 * @param index ALL所有/LANDR左右/LEFT左边/RIGHT右边
-	 * @return String 处理后的字符串
-	 */
+	 public static boolean isEmpty(Map<?, ?> map) {
+		 if (map == null || map.size() == 0) {
+	         return true;
+	     }
+	     return false;  
+	 }
+	 
+	 public static boolean isEmpty(List<?> list) {
+	     if (list == null || list.size() == 0) {
+	         return true;
+	     }
+	     return false;
+	 }
+	 
+	 public static boolean isEmpty(String s) {
+		 if (s == null || s.length() == 0) {
+	          return true;
+	      }
+	     return false;   
+	 }
+	
 	public static String clearSpace(String str, PatternValue index) {
 		return str.replaceAll(index.getValue(), Constant.EMPTY);
-	}
-	
-	public static String join(String[] stringArray) {
-		StringBuilder sb = new StringBuilder();
-		for (String s : stringArray){
-			sb.append(s);
-		}
-		return sb.toString();
 	}
 	
 	public static String join(String[] stringArray, String separator) {
@@ -69,7 +58,7 @@ public class StringUtil {
 	 * @return
 	 */
 	 public static String formatFirstChar(String value, boolean flag){
-		 if(StringUtil.isNotBlank(value)){
+		 if(!GalaxyUtil.isEmpty(value)){
 			 char[] cs = value.toCharArray();
 			 if(!flag && Character.isLowerCase(cs[0])){
 				 cs[0]-=32;
@@ -82,7 +71,7 @@ public class StringUtil {
 	 }
 	 
 	 public static String camelToUnderline(String param){  
-	       if (StringUtil.isBlank(param)){  
+	       if (GalaxyUtil.isEmpty(param)){  
 	           return Constant.EMPTY;  
 	       }  
 	       int len=param.length();  
@@ -100,7 +89,7 @@ public class StringUtil {
 	 }  
 	 
 	 public static String underlineToCamel(String param){  
-		   if (StringUtil.isBlank(param)){  
+		   if (GalaxyUtil.isEmpty(param)){  
 	           return Constant.EMPTY;  
 	       }  
 	       int len=param.length();  
@@ -117,32 +106,5 @@ public class StringUtil {
 	       }  
 	       return sb.toString();  
 	}  
-	
-	//位置枚举
-	public enum PatternValue {
-
-		LEFT {
-			public String getValue() {
-				return "^\\s*";
-			}
-		},
-		RIGHT {
-			public String getValue() {
-				return "\\s*$";
-			}
-		},
-		LANDR {
-			public String getValue() {
-				return "(^\\s*)|(\\s*$)";
-			}
-		},
-		ALL {
-			public String getValue() {
-				return "\\s+";
-			}
-		};
-
-		public abstract String getValue();
-	}
 	
 }

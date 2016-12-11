@@ -17,7 +17,7 @@ import org.javaosc.galaxy.context.ConfigHandler;
 import org.javaosc.galaxy.context.ScanAnnotation;
 import org.javaosc.galaxy.convert.ConvertFactory;
 import org.javaosc.galaxy.util.PathUtil;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,7 +92,7 @@ public class ContextServlet extends HttpServlet {
 		String requestPath = PathUtil.getContextPath(request);
 		String requestView = ConfigHandler.getViewMap(requestPath);
 
-		if (StringUtil.isNotBlank(requestView)) {
+		if (!GalaxyUtil.isEmpty(requestView)) {
 			new ActionHandler(requestView).rendering(prefix, suffix, enableTemplate);
 		} else { 
 			Map<String, Object> routeMap = RouteNodeRegistry.getRouteNode(requestPath);		
@@ -118,7 +118,7 @@ public class ContextServlet extends HttpServlet {
 				Class<?> returnType = m.getReturnType();
 				if(returnType.equals(String.class)){
 					String returnPath = String.valueOf(result);
-					if(StringUtil.isNotBlank(returnPath)){
+					if(!GalaxyUtil.isEmpty(returnPath)){
 						new ActionHandler(returnPath).rendering(prefix, suffix, enableTemplate);
 					}
 					return;

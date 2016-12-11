@@ -13,9 +13,9 @@ import java.util.Properties;
 
 import org.javaosc.galaxy.constant.Configuration;
 import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.constant.Constant.PatternValue;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.javaosc.galaxy.util.PathUtil;
-import org.javaosc.galaxy.util.StringUtil;
-import org.javaosc.galaxy.util.StringUtil.PatternValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,8 +52,8 @@ public class ConfigHandler {
 	
 	public static void load(String galaxyCustConfig){
 		
-		if(StringUtil.isNotBlank(galaxyCustConfig)){
-			galaxyConfig = StringUtil.clearSpace(galaxyCustConfig, PatternValue.ALL);
+		if(!GalaxyUtil.isEmpty(galaxyCustConfig)){
+			galaxyConfig = GalaxyUtil.clearSpace(galaxyCustConfig, PatternValue.ALL);
 		}else{
 			log.warn("context-param: galaxyConfig is missing in the web.xml. Enable default galaxyConfig: {}.", galaxyConfig);
 		}
@@ -81,21 +81,21 @@ public class ConfigHandler {
 	}
 	
 	public static String getViewPrefix(){
-		if(StringUtil.isBlank(prefix)){
+		if(GalaxyUtil.isEmpty(prefix)){
 			prefix = getValue(Configuration.PREFIX_KEY,Configuration.DEFAULT_PREFIX_VALUE);
 		}
 		return prefix;
 	}
 	
 	public static String getViewSuffix(){
-		if(StringUtil.isBlank(suffix)){
+		if(GalaxyUtil.isEmpty(suffix)){
 			suffix = getValue(Configuration.SUFFIX_KEY,Configuration.DEFAULT_SUFFIX_VALUE);
 		}
 		return suffix;
 	}
 	
 	public static String getContextEncode(){
-		if(StringUtil.isBlank(encoding)){
+		if(GalaxyUtil.isEmpty(encoding)){
 			encoding = getValue(Configuration.CONTEXT_ENCODE_KEY,Configuration.DEFAULT_ENCODING_VALUE);
 		}
 		return encoding;
@@ -118,8 +118,8 @@ public class ConfigHandler {
 	public static String[] getMethodKeyword(){
 		if(methodKeyword==null){
 			String keyword = ConfigHandler.getValue(Configuration.METHOD_KEYWORD_KEY, null);
-			if(StringUtil.isNotBlank(keyword)){
-				keyword = StringUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
+			if(!GalaxyUtil.isEmpty(keyword)){
+				keyword = GalaxyUtil.clearSpace(keyword, PatternValue.ALL).toLowerCase();
 				if(keyword.indexOf(Constant.COMMA)!=-1){
 					methodKeyword = keyword.split(Constant.COMMA);
 				}else{
@@ -134,7 +134,7 @@ public class ConfigHandler {
 	
 	public static String getViewMap(String url){
 		String viewUrl = null;
-		if(StringUtil.isNotBlank(url)){
+		if(!GalaxyUtil.isEmpty(url)){
 			viewUrl = viewMap.get(url);
 		}
 		return viewUrl==null?"":viewUrl;
@@ -150,7 +150,7 @@ public class ConfigHandler {
 	
 	protected static String getValue(String key,String defaultValue){
 		String value = properties.getProperty(key);
-		return StringUtil.isNotBlank(value)?StringUtil.clearSpace(value, PatternValue.ALL):defaultValue;
+		return !GalaxyUtil.isEmpty(value)?GalaxyUtil.clearSpace(value, PatternValue.ALL):defaultValue;
 	}
 	
 	public static Map<String, Object> getPoolParam(){
@@ -196,10 +196,10 @@ public class ConfigHandler {
 		while(it.hasNext()){
 			Entry<Object, Object> entry = it.next();
 			String key = String.valueOf(entry.getKey());
-			if(StringUtil.isNotBlank(key)){
+			if(!GalaxyUtil.isEmpty(key)){
 				String value = String.valueOf(entry.getValue());
-				if(StringUtil.isNotBlank(value)){
-					value = StringUtil.clearSpace(value, PatternValue.ALL);
+				if(!GalaxyUtil.isEmpty(value)){
+					value = GalaxyUtil.clearSpace(value, PatternValue.ALL);
 					if(key.startsWith(Configuration.STARTWITH_DB)){
 						poolMap.put(key.replace(Configuration.STARTWITH_DB, Constant.EMPTY), value);
 					}else if(key.startsWith(Configuration.STARTWITH_POOL)){

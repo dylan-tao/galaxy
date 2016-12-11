@@ -18,7 +18,7 @@ import org.javaosc.galaxy.assist.PropertyConvert;
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.convert.ConvertFactory;
 import org.javaosc.galaxy.jdbc.JdbcTemplate;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.javaosc.galaxy.web.RouteNodeRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,9 +133,9 @@ public class ScanAnnotation {
 		    	 Class<?> valueType = field.getType();
 		    	 String refValue = value.value();
 		    	 try {
-		    		 if(StringUtil.isNotBlank(refValue)){
+		    		 if(!GalaxyUtil.isEmpty(refValue)){
 		    			refValue = ConfigExtHandler.getValue(refValue);
-		    			if(StringUtil.isNotBlank(refValue)){
+		    			if(!GalaxyUtil.isEmpty(refValue)){
 		    				field.set(proxyInst, ConvertFactory.convert(valueType, refValue));
 		    			}
 		    		 }
@@ -148,15 +148,15 @@ public class ScanAnnotation {
 	}
 	
 	private static String getKey(String custKey, Class<?> cls){
-		if(StringUtil.isBlank(custKey)){
+		if(GalaxyUtil.isEmpty(custKey)){
 			if(cls.isInterface()){
-				custKey = StringUtil.formatFirstChar(cls.getSimpleName(), true);
+				custKey = GalaxyUtil.formatFirstChar(cls.getSimpleName(), true);
 			}else{
 				Class<?>[] interCls = cls.getInterfaces();
 				if(interCls!=null && interCls.length==1){ //jdk proxy key
-					custKey = StringUtil.formatFirstChar(interCls[0].getSimpleName(), true);
+					custKey = GalaxyUtil.formatFirstChar(interCls[0].getSimpleName(), true);
 				}else{ //cglib proxy key
-					custKey = StringUtil.formatFirstChar(cls.getSimpleName(), true);
+					custKey = GalaxyUtil.formatFirstChar(cls.getSimpleName(), true);
 				}
 			}
 		}

@@ -2,7 +2,7 @@ package org.javaosc.galaxy.pool;
 
 import javax.sql.DataSource;
 
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 /**
@@ -32,7 +32,7 @@ public class C3p0Handler implements PoolHandler{
 	
 	@Override
 	public DataSource getDataSource() throws Exception {
-		if(StringUtil.isBlank(driverClass) || StringUtil.isBlank(jdbcUrl) || StringUtil.isBlank(user)){
+		if(GalaxyUtil.isEmpty(driverClass) || GalaxyUtil.isEmpty(jdbcUrl) || GalaxyUtil.isEmpty(user)){
 			throw new Exception("db.driverClass,db.jdbcUrl,db.user can not be null! ");
 		}
 		ComboPooledDataSource ds = new ComboPooledDataSource(false);

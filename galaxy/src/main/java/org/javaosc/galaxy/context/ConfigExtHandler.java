@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.constant.Constant.PatternValue;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.javaosc.galaxy.util.PathUtil;
-import org.javaosc.galaxy.util.StringUtil;
-import org.javaosc.galaxy.util.StringUtil.PatternValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,9 +25,9 @@ public class ConfigExtHandler {
 	private static Properties properties;
 	
 	public static void load(String configFileName) {
-		if(StringUtil.isNotBlank(configFileName)){
+		if(!GalaxyUtil.isEmpty(configFileName)){
 			String [] extConfig = null;
-			configFileName = StringUtil.clearSpace(configFileName, PatternValue.ALL);
+			configFileName = GalaxyUtil.clearSpace(configFileName, PatternValue.ALL);
 			if(configFileName.indexOf(Constant.COMMA)>0){
 				extConfig = configFileName.split(Constant.COMMA);
 			}else{
@@ -48,7 +48,7 @@ public class ConfigExtHandler {
 					inputStream = new FileInputStream(configPath);
 					properties.load(inputStream);
 				}
-				log.info("Initializing " + StringUtil.join(configs, Constant.COMMA));
+				log.info("Initializing " + GalaxyUtil.join(configs, Constant.COMMA));
 			} catch (Exception e) {
 				log.error(Constant.GALAXY_EXCEPTION, e);
 			}finally{

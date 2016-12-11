@@ -56,7 +56,7 @@ public class JsonUtil {
 	
 	public static <T> T fromBean(String json, Class<T> cls) {
 		T t = null;
-		if(StringUtil.isNotBlank(json)){
+		if(!GalaxyUtil.isEmpty(json)){
 			try {
 				t = gson.fromJson(json, cls);
 			} catch (Exception e) {
@@ -68,7 +68,7 @@ public class JsonUtil {
 	
 	public static <T> List<T> fromArray(String json, Class<T> cls) {
 		List<T> list = null;
-		if(StringUtil.isNotBlank(json)){
+		if(!GalaxyUtil.isEmpty(json)){
 			try {
 				list = gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
 			} catch (Exception ex) {
@@ -80,7 +80,7 @@ public class JsonUtil {
 	
 	public static <T> Map<String, T> fromMap(String json) {
 		Map<String, T> map = null;
-		if (StringUtil.isNotBlank(json)) {
+		if (!GalaxyUtil.isEmpty(json)) {
 			try {
 				map = gson.fromJson(json, new TypeToken<Map<String, T>>(){}.getType());
 			} catch (JsonSyntaxException e) {
@@ -92,7 +92,7 @@ public class JsonUtil {
 	
 	public static <T> List<Map<String, T>> fromMapArray(String json) {
 		List<Map<String, T>> list = null;
-		if (StringUtil.isNotBlank(json)) {
+		if (!GalaxyUtil.isEmpty(json)) {
 			try {
 				list = gson.fromJson(json, new TypeToken<List<Map<String, T>>>(){}.getType());
 			} catch (JsonSyntaxException e) {
@@ -103,7 +103,7 @@ public class JsonUtil {
 	}
 	
 	public static boolean check(String json) {
-		 if(StringUtil.isNotBlank(json)) {    
+		 if(!GalaxyUtil.isEmpty(json)) {    
 			 try {    
 			     new JsonParser().parse(json);  
 			     return true;    

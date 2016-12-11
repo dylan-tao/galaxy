@@ -15,7 +15,7 @@ import java.util.Map.Entry;
 
 import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.convert.ConvertFactory;
-import org.javaosc.galaxy.util.StringUtil;
+import org.javaosc.galaxy.util.GalaxyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -80,7 +80,7 @@ public class PropertyConvert {
             for(int col = 1; col <= cols; col++){
             	
             	String columnName = rsmd.getColumnLabel(col);
-                if (StringUtil.isBlank(columnName)) {
+                if (GalaxyUtil.isEmpty(columnName)) {
                     columnName = rsmd.getColumnName(col);
                 }
             	
@@ -161,7 +161,7 @@ public class PropertyConvert {
 	                String name = property.getName();  
 	                propertyMap.put(name, m);
 	                
-	                String underlineName = StringUtil.camelToUnderline(name);
+	                String underlineName = GalaxyUtil.camelToUnderline(name);
 	                //has upper has
 	                if(!name.equals(underlineName)){
 	                	propertyMap.put(underlineName, m);
