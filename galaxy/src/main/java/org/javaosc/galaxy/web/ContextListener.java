@@ -44,7 +44,7 @@ public class ContextListener implements ServletContextListener {
 		Introspector.flushCaches();
 		System.gc();
 		
-		log.info("====== Galaxy Framework startup failed ======");
+		System.out.println("====== Galaxy Framework startup failed ======");
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
@@ -70,16 +70,19 @@ public class ContextListener implements ServletContextListener {
 		initTime = System.currentTimeMillis() - initTime;
 		
 		if(ConfigHandler.getStartedStatus()){
-			log.info("    ______          __                         ");
-			log.info("  .' ___  |        [  |            {}", "v1.0.0.RELEASE");
-			log.info(" / .'   \\_|  ,--.   | |  ,--.   _   __   _   __ ");
-			log.info(" | |   ____ `'_\\ :  | | `'_\\ : [ \\ [  ] [ \\ [  ]");
-			log.info(" \\ `.___]  |// | |, | | // | |, > '  <   \\ '/ /    Startup in {} ms", initTime);
-			log.info("  `._____.' \\'-;__/[___]\\'-;__/[__]`\\_] [ \\_:/  ");
-			log.info("                                         \\_.'  ");
-			log.info(" Thanks ~ Good Luck! | Community: www.javaosc.com  ");
+			String clsPath = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
+			int index = clsPath.lastIndexOf('-');
+			clsPath = clsPath.substring(index+1,clsPath.length()-4);
+			System.out.println("    ______          __                         ");
+			System.out.println("  .' ___  |        [  |            " + clsPath);
+			System.out.println(" / .'   \\_|  ,--.   | |  ,--.   _   __   _   __ ");
+			System.out.println(" | |   ____ `'_\\ :  | | `'_\\ : [ \\ [  ] [ \\ [  ]");
+			System.out.println(" \\ `.___]  |// | |, | | // | |, > '  <   \\ '/ /    Startup in "+ initTime+ " ms");
+			System.out.println("  `._____.' \\'-;__/[___]\\'-;__/[__]`\\_] [ \\_:/  ");
+			System.out.println("                                         \\_.'  ");
+			System.out.println(" Thanks ~ Good Luck! | Community: www.javaosc.com  ");
 		}else{
-			log.info("====== Galaxy framework startup in {} ms ======", initTime);
+			System.out.println("====== Galaxy framework startup in "+ initTime +" ms ======");
 		}
 		
 		ConfigHandler.clear();
