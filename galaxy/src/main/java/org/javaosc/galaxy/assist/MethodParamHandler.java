@@ -32,7 +32,7 @@ public class MethodParamHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodParamHandler.class);
 	
-	public static void getMethodParam(Exception e,Method method, Object[] args){
+	public static void getExceptionMethod(Exception e,Method method, Object[] args, Object result){
 		StackTraceElement ste = e.getCause().getStackTrace()[0];
 		
 		log.error("{}:{} in {}", e.getCause().getClass(), e.getCause().getMessage(), ste.toString());
@@ -40,12 +40,38 @@ public class MethodParamHandler {
 		for(int i=0;i<args.length;i++){
 			Object value = args[i];
 			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
-				log.error("第{}个参数的值：{}",i+1,String.valueOf(args[i]));
+				log.error("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
 			}else{
-				log.error("第{}个参数的值：{}",i+1,JsonUtil.toJson(args[i]));
+				log.error("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
 			}
 		}
+		
+		if (result == null || (result.getClass() != null) && (result.getClass().getClassLoader() == null)) {
+			log.error("{}的返回结果：{}", method.getName(), String.valueOf(result));
+		}else{
+			log.error("{}的返回结果：{}", method.getName(), JsonUtil.toJson(result));
+		}
+		
 		log.error(Constant.GALAXY_EXCEPTION, e);
+	}
+	
+	public static void getNormalMethod(Method method, Object[] args, Object result){
+		
+		for(int i=0;i<args.length;i++){
+			Object value = args[i];
+			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
+				log.info("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
+			}else{
+				log.info("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+			}
+		}
+		
+		if (result == null || (result.getClass() != null) && (result.getClass().getClassLoader() == null)) {
+			log.info("{}的返回结果：{}", method.getName(), String.valueOf(result));
+		}else{
+			log.info("{}的返回结果：{}", method.getName(), JsonUtil.toJson(result));
+		}
+		
 	}
 
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {

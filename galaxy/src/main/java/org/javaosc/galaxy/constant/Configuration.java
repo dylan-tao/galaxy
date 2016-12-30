@@ -16,6 +16,8 @@ public interface Configuration {
 	static final String CONFIG_HEAD_COMMENT = "galaxy configuration setting";
 	
 	static final String CONSOLE_STARTED_STATUS = "galaxy.console.started.status";
+	static final String CONSOLE_METHOD_MONITOR = "galaxy.console.method.monitor";
+	
 
 	static final String PREFIX_KEY = "galaxy.view.prefix";
 	static final String SUFFIX_KEY = "galaxy.view.suffix";

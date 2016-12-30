@@ -18,8 +18,6 @@ import org.javaosc.galaxy.jdbc.ConnectionHandler;
 
 public class ProxyCglibHandler implements MethodInterceptor {
 	
-//	private static final Logger log = LoggerFactory.getLogger(ProxyCglibHandler.class);
-	
 	private Enhancer enhancer = new Enhancer();
 	
 	private Object target;
@@ -39,29 +37,35 @@ public class ProxyCglibHandler implements MethodInterceptor {
 	}
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-		Object returnObj = null;
+		Object result = null;
 		if(openConnection){
 			ConnectionHandler.getConnection();
 			if(CacheMark.getTran(method)){
 				try {
 					ConnectionHandler.beginTransaction();
-					returnObj = proxy.invokeSuper(obj, args);
+					result = proxy.invokeSuper(obj, args);
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					MethodParamHandler.getMethodParam(e, method, args);
+					MethodParamHandler.getExceptionMethod(e, method, args, result);
+				}finally{
+					ConnectionHandler.close();
 				}
 			}else{
 				try {
-					returnObj = proxy.invokeSuper(obj, args);
+					result = proxy.invokeSuper(obj, args);
 				} catch (Exception e) {
-					MethodParamHandler.getMethodParam(e, method, args);
+					MethodParamHandler.getExceptionMethod(e, method, args, result);
+				}finally{
+					ConnectionHandler.close();
 				}
 			}
-			ConnectionHandler.close();
+			if(ConfigHandler.getMethodMonitor()){
+				MethodParamHandler.getNormalMethod(method, args, result);
+			}
 		}else{
-			returnObj = proxy.invokeSuper(obj, args);
+			result = proxy.invokeSuper(obj, args);
 		}	
-		return returnObj;
+		return result;
 	}
 }

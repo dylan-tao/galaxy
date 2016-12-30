@@ -36,6 +36,8 @@ public class ConfigHandler {
 	
 	private static Boolean startedStatus;
 	
+	private static Boolean methodMonitor;
+	
 	private static String prefix;
 	
 	private static String suffix;
@@ -87,6 +89,13 @@ public class ConfigHandler {
 			startedStatus = Boolean.valueOf(getValue(Configuration.CONSOLE_STARTED_STATUS,"true"));
 		}
 		return startedStatus;
+	}
+	
+	public static Boolean getMethodMonitor(){
+		if(methodMonitor==null){
+			methodMonitor = Boolean.valueOf(getValue(Configuration.CONSOLE_METHOD_MONITOR,"false"));
+		}
+		return methodMonitor;
 	}
 	
 	public static String getViewPrefix(){

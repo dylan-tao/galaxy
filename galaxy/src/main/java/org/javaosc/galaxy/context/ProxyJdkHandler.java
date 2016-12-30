@@ -34,29 +34,37 @@ public class ProxyJdkHandler implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		Object returnObj = null;
+		Object result = null;
 		if(openConnection){
 			ConnectionHandler.getConnection();
 			if(CacheMark.getTran(method)){
 				try {
 					ConnectionHandler.beginTransaction();
-					returnObj = method.invoke(target, args);
+					result = method.invoke(target, args);
 					ConnectionHandler.commit();
 				} catch (Exception e) {
 					ConnectionHandler.rollback();
-					MethodParamHandler.getMethodParam(e, method, args);
+					MethodParamHandler.getExceptionMethod(e, method, args, result);
+				}finally{
+					ConnectionHandler.close();
 				}
 			}else{
 				try {
-					returnObj = method.invoke(target, args);
+					result = method.invoke(target, args);
 				} catch (Exception e) {
-					MethodParamHandler.getMethodParam(e, method, args);
+					MethodParamHandler.getExceptionMethod(e, method, args, result);
+				}finally{
+					ConnectionHandler.close();
 				}
 			}
-			ConnectionHandler.close();
+			
+			if(ConfigHandler.getMethodMonitor()){
+				MethodParamHandler.getNormalMethod(method, args, result);
+			}
+			
 		}else{
-			returnObj = method.invoke(target, args);
+			result = method.invoke(target, args);
 		}	
-		return returnObj;
+		return result;
 	}
 }
