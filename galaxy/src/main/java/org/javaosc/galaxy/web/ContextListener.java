@@ -68,11 +68,19 @@ public class ContextListener implements ServletContextListener {
 		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		
 		initTime = System.currentTimeMillis() - initTime;
-		log.info("================== support site ==================");
-		log.info(" ");
-		log.info("     Galaxy framework startup in {} ms", initTime);
-		log.info(" ");
-		log.info("================= www.javaosc.com ================");
+		
+		if(ConfigHandler.getStartedStatus()){
+			log.info("    ______          __                         ");
+			log.info("  .' ___  |        [  |             {}", "v1.0.0.RELEASE");
+			log.info(" / .'   \\_|  ,--.   | |  ,--.   _   __   _   __ ");
+			log.info(" | |   ____ `'_\\ :  | | `'_\\ : [ \\ [  ] [ \\ [  ]");
+			log.info(" \\ `.___]  |// | |, | | // | |, > '  <   \\ '/ /    Startup in {} ms", initTime);
+			log.info("  `._____.' \\'-;__/[___]\\'-;__/[__]`\\_] [ \\_:/  ");
+			log.info("                                         \\_.'  ");
+			log.info(" Thanks ~ Good Luck! | Community: www.javaosc.com  ");
+		}else{
+			log.info("====== Galaxy framework startup in {} ms ======", initTime);
+		}
 		
 		ConfigHandler.clear();
 		

@@ -34,6 +34,8 @@ public class ConfigHandler {
 	
 	private static Properties properties;
 	
+	private static Boolean startedStatus;
+	
 	private static String prefix;
 	
 	private static String suffix;
@@ -78,6 +80,13 @@ public class ConfigHandler {
 				log.error(Constant.GALAXY_EXCEPTION, e);
 			}	
 		}		
+	}
+	
+	public static Boolean getStartedStatus(){
+		if(startedStatus==null){
+			startedStatus = Boolean.valueOf(getValue(Configuration.CONSOLE_STARTED_STATUS,"true"));
+		}
+		return startedStatus;
 	}
 	
 	public static String getViewPrefix(){
