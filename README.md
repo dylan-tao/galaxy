@@ -1,11 +1,3 @@
-   ______          __                          
- .' ___  |        [  |           v1.0.0.RELEASE
-/ .'   \_|  ,--.   | |  ,--.   _   __   _   __ 
-| |   ____ `'_\ :  | | `'_\ : [ \ [  ] [ \ [  ]
-\ `.___]  |// | |, | | // | |, > '  <   \ '/ / 
- `._____.' \'-;__/[___]\'-;__/[__]`\_][\_:  /  
-                                       \__.'   
- ~Galaxy       | Community: www.javaosc.com      
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ================================================
