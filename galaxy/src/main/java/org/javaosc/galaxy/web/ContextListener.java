@@ -71,7 +71,7 @@ public class ContextListener implements ServletContextListener {
 		
 		if(ConfigHandler.getStartedStatus()){
 			log.info("    ______          __                         ");
-			log.info("  .' ___  |        [  |             {}", "v1.0.0.RELEASE");
+			log.info("  .' ___  |        [  |            {}", "v1.0.0.RELEASE");
 			log.info(" / .'   \\_|  ,--.   | |  ,--.   _   __   _   __ ");
 			log.info(" | |   ____ `'_\\ :  | | `'_\\ : [ \\ [  ] [ \\ [  ]");
 			log.info(" \\ `.___]  |// | |, | | // | |, > '  <   \\ '/ /    Startup in {} ms", initTime);
