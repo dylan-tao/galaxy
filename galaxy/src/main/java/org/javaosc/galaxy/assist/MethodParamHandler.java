@@ -36,13 +36,14 @@ public class MethodParamHandler {
 		StackTraceElement ste = e.getCause().getStackTrace()[0];
 		
 		log.error("{}:{} in {}", e.getCause().getClass(), e.getCause().getMessage(), ste.toString());
-		
-		for(int i=0;i<args.length;i++){
-			Object value = args[i];
-			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
-				log.error("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
-			}else{
-				log.error("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+		if(args!=null){
+			for(int i=0;i<args.length;i++){
+				Object value = args[i];
+				if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
+					log.error("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
+				}else{
+					log.error("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+				}
 			}
 		}
 		
@@ -57,12 +58,14 @@ public class MethodParamHandler {
 	
 	public static void getNormalMethod(Method method, Object[] args, Object result){
 		
-		for(int i=0;i<args.length;i++){
-			Object value = args[i];
-			if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
-				log.info("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
-			}else{
-				log.info("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+		if(args!=null){
+			for(int i=0;i<args.length;i++){
+				Object value = args[i];
+				if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
+					log.info("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
+				}else{
+					log.info("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+				}
 			}
 		}
 		
