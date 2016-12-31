@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Ratel帮助文档_Ratel在线文档_Ratel使用说明</title>
+  <META NAME="Author" CONTENT="Javaosc开源社区团队">
+  <meta name="keywords" content="Ratel帮助文档,Ratel在线文档,Ratel使用说明,Ratel框架,Ratel开源框架,Java Web开源框架,J2EE框架" />
+  <meta name="description" content="Ratel在线文档，介绍基本使用和注意事项，使更多开发者认识和了解Ratel框架." />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="image/favicon.png">
+  <link rel="stylesheet" href="css/amazeui.min.css"/>
+  <style>
+    @media only screen and (min-width: 641px) {
+      .am-offcanvas {
+        display: block;
+        position: static;
+        background: none;
+      }
+      .am-offcanvas-bar {
+        position: static;
+        width: auto;
+        background: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      .am-offcanvas-bar:after {
+        content: none;
+      }
+    }
+    @media only screen and (max-width: 640px) {
+      .am-offcanvas-bar .am-nav>li>a {
+        color:#ccc;
+        border-radius: 0;
+        border-top: 1px solid rgba(0,0,0,.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05)
+      }
+      .am-offcanvas-bar .am-nav>li>a:hover {
+        background: #404040;
+        color: #fff
+      }
+      .am-offcanvas-bar .am-nav>li.am-nav-header {
+        color: #777;
+        background: #404040;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+        text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        border-top: 1px solid rgba(0,0,0,.3);
+        font-weight: 400;
+        font-size: 75%
+      }
+      .am-offcanvas-bar .am-nav>li.am-active>a {
+        background: #1a1a1a;
+        color: #fff;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+      }
+      .am-offcanvas-bar .am-nav>li+li {
+        margin-top: 0;
+      }
+    }
+    .my-head {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .my-button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+    .my-sidebar {
+      padding-right: 0;
+      border-right: 1px solid #eeeeee;
+    }
+    .my-footer {
+      border-top: 1px solid #eeeeee;
+      padding: 10px 0;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header class="am-g my-head">
+  <div class="am-u-sm-12 am-article">
+    <h1 class="am-article-title">Ratel-在线帮助文档</h1>
+    <p class="am-article-meta">唐丶少（帝州）</p>
+  </div>
+</header>
+<hr class="am-article-divider"/>
+<div class="am-g am-g-fixed">
+  <div class="am-u-md-9 am-u-md-push-3">
+    <div class="am-g">
+      <div class="am-u-sm-11 am-u-sm-centered">
+        <div class="am-cf am-article">
+          <div>
+		   <p class="am-article-lead">
+            大约二年前，我曾想开发一套开源博客产品，但是面对当前J2EE框架如此臃肿不堪的局面，再从使用者角度出发，很担心发布后没有人应用。原因有以下几点：
+			1. 项目发布体积庞大；
+			2. 相对其他Web语言应用更耗内存；
+			3. 很难做到一键化安装，
+			为了使产品能够尽可能的规避以上几点，于是Ratel框架在经过多次重构后发布了。
+			</p>
+          </div>
+          <p>在刚开始编写此框架时，我几乎没有任何思路，只能在不断的看书学习中提升自我对技术的认知，并借助搜索引擎攻克难点，有的时候一个功能的实现甚至要经历n周的难产，中途也曾经中断过3次，但是我终究还是没有放弃他。</p>
+          <p>我想作为技术出身，不应该向大家吹嘘Ratel拥有多好的技术实现和性能，更多的是想带给大家更好的开发体验和认可。如果您在使用Ratel中有任何疑问欢迎及时反馈，我会竭尽所能帮助大家更好的使用Ratel。同时也希望广大开发者能够参与到Ratel的开发中，在提升自身内功的同时使更多开发者能够喜欢上Ratel框架。</p>
+          <blockquote>框架的目标：轻量级、高性能、国情友好、适度封装。</blockquote>
+		  <div class="am-align-center"><img src="image/lifetime.png" alt="Ratel框架演进历程" width="100%"></div>
+          <hr class="am-article-divider">
+          <h2>结构预览</h2>
+		  <div class="am-align-left"><img src="image/tree.png" alt="Ratel框架结构" width="400"></div>
+          <div class="am-cf">注：浅绿色为框架内置依赖；粉红色为在应用场景时依赖(ps: cos为上传时应用；gson为页面需要返回json时应用)；浅灰色为默认容器依赖。
+		  </div>
+		  
+		  <hr class="am-article-divider">
+          <h2>依赖包说明</h2>
+
+		  <table class="am-table am-table-bordered am-table-centered">
+		  <tr><th>类包名称</th><th>版本编号</th><th>文件大小</th><th>内核大小</th></tr>
+		 
+		  <tr class="am-success"><td>ratel</td><td>0.9.5.RELEASE</td><td>169k</td><td rowspan="3" class="am-text-middle">551.1k</td></tr>	 
+		  <tr class="am-success"><td>slf4j-api</td><td>1.7.21</td><td>40.1k</td></tr>
+		  <tr class="am-success"><td>cglib-nodep</td><td>3.2.4</td><td>342k</td></tr>
+		  
+		  <tr class="am-danger"><td>gson</td><td>2.7.0</td><td>226k</td><td rowspan="2" class="am-text-middle">281k</td></tr>
+		  <tr class="am-danger"><td>cos</td><td>05Nov2002</td><td>55.0k</td></tr>
+		  <tr class="am-disabled"><td>javax.servlet-api</td><td>3.0.1</td><td>83.3k</td><td></td></tr>
+	
+		  </table>
+          <p>  框架内核及依赖只有<b>551.1kb</b>大小；在基础业务开发应用时，大小为551.1k + 281k = <b>832.1kb</b></p>
+        </div>
+		<br>
+      </div>
+    </div>
+  </div>
+  <div class="am-u-md-3 am-u-md-pull-9 my-sidebar">
+    <div class="am-offcanvas" id="sidebar">
+      <div class="am-offcanvas-bar">
+        <ul class="am-nav">
+          <li class="am-nav-header">目录</li>
+          <li><a href="#">简介及初衷</a></li>
+          <li><a href="#">快速上手</a></li>
+          <li><a href="#">规范和约定</a></li>
+          <li><a href="#">最佳实践</a></li>
+		  <li><a href="#">建议回档</a></li>
+		  <li><a href="#">关于我们</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <a href="#sidebar" class="am-btn am-btn-sm am-btn-success am-icon-bars am-show-sm-only my-button" data-am-offcanvas><span class="am-sr-only">侧栏导航</span></a>
+</div>
+
+<footer class="my-footer">
+  <p>Licensed under <a href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License</a>.
+  <br><small>© 2014 <a href="http://www.javaosc.com" target="_blank">www.javaosc.com</a>. by the Javaosc Team.</small></p>
+</footer>
+
+<!--[if lt IE 9]>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="js/amazeui.min.js"></script>
+</body>
+</html>
