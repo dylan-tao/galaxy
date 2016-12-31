@@ -10,7 +10,9 @@ package org.javaosc.galaxy.constant;
  */
 public interface Constant {
 	
-	String GALAXY_EXCEPTION = " === Please see the following detailed error info: " + System.getProperty("line.separator");
+	String BR = System.getProperty("line.separator");
+	
+	String GALAXY_EXCEPTION = " === Please see the following detailed error info: " + BR;
 	
 	String SUFFIX_CLASS = ".class";
 	String DOT = ".";
@@ -28,6 +30,7 @@ public interface Constant {
 	String AM = "&";
 	String JZ = "#";
 	String LINE = System.getProperty("file.separator");
+	
 	
 	// http协议
 	public enum HttpType {

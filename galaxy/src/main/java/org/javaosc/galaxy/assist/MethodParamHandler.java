@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 public class MethodParamHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodParamHandler.class);
+
 	
 	public static void getExceptionMethod(Exception e,Method method, Object[] args, Object result){
 		StackTraceElement ste = e.getCause().getStackTrace()[0];
@@ -40,17 +41,17 @@ public class MethodParamHandler {
 			for(int i=0;i<args.length;i++){
 				Object value = args[i];
 				if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
-					log.error("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
+					log.error("{}{}(...)的第{}个参数：{}",Constant.BR , method.getName() ,i+1,String.valueOf(args[i]));
 				}else{
-					log.error("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+					log.error("{}{}(...)的第{}个参数：{}",Constant.BR, method.getName(), i+1,JsonUtil.toJson(args[i]));
 				}
 			}
 		}
 		
 		if (result == null || (result.getClass() != null) && (result.getClass().getClassLoader() == null)) {
-			log.error("{}的返回结果：{}", method.getName(), String.valueOf(result));
+			log.error("{}{}(...)的返回结果：{}", Constant.BR, method.getName(), String.valueOf(result));
 		}else{
-			log.error("{}的返回结果：{}", method.getName(), JsonUtil.toJson(result));
+			log.error("{}{}(...)的返回结果：{}", Constant.BR, method.getName(), JsonUtil.toJson(result));
 		}
 		
 		log.error(Constant.GALAXY_EXCEPTION, e);
@@ -62,17 +63,17 @@ public class MethodParamHandler {
 			for(int i=0;i<args.length;i++){
 				Object value = args[i];
 				if (value == null || (value.getClass() != null) && (value.getClass().getClassLoader() == null)) {
-					log.info("{}的第{}个参数的值：{}",method.getName() ,i+1,String.valueOf(args[i]));
+					log.info("{}{}(...)的第{}个参数：{}",Constant.BR ,method.getName() ,i+1,String.valueOf(args[i]));
 				}else{
-					log.info("{}的第{}个参数的值：{}",method.getName(), i+1,JsonUtil.toJson(args[i]));
+					log.info("{}{}(...)的第{}个参数：{}",Constant.BR ,method.getName(), i+1,JsonUtil.toJson(args[i]));
 				}
 			}
 		}
 		
 		if (result == null || (result.getClass() != null) && (result.getClass().getClassLoader() == null)) {
-			log.info("{}的返回结果：{}", method.getName(), String.valueOf(result));
+			log.info("{}{}(...)的返回结果：{}", Constant.BR, method.getName(), String.valueOf(result));
 		}else{
-			log.info("{}的返回结果：{}", method.getName(), JsonUtil.toJson(result));
+			log.info("{}{}(...)的返回结果：{}", Constant.BR, method.getName(), JsonUtil.toJson(result));
 		}
 		
 	}
