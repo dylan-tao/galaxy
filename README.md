@@ -1,11 +1,14 @@
-  Galaxy - 轻量级、高性能的Java Web框架  [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
+
+  
+  
+Galaxy - 轻量级、高性能的Java Web框架  [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 ================================================
 
 Documentation (文档)
 ---------------------
 
-- 官方网站 :  [查看文档](http://javaosc-projects.github.io/galaxy/)
-- Homepage :  [view document](http://javaosc-projects.github.io/galaxy/)
+- 官方网站 :  [查看文档](http://galaxy.javaosc.com/)
+- Homepage :  [view document](http://galaxy.javaosc.com/)
 
 Download (下载)
 -------------------
