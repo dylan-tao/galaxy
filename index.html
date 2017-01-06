@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Galaxy框架-轻量级、高性能的Java Web开发框架</title>
+  <META NAME="Author" CONTENT="Javaosc开源社区团队">
+  <meta name="keywords" content="Galaxy,Galaxy框架,Galaxy开源框架,Java Web开源框架,Java开源框架,J2EE框架,JAVA框架,开源框架" />
+  <meta name="description" content="Galaxy框架是轻量级、高性能的Java Web开发框架，让J2EE体系拥有更多可能。" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="image/favicon.png">
+  <link rel="stylesheet" href="css/amazeui.min.css"/>
+  <style>
+	.am-topbar-nav>li.am-active>a, .am-topbar-nav>li.am-active>a:focus, .am-topbar-nav>li.am-active>a:hover {
+	    color: #4CAD84!important;
+	    background-color: #0e90d2;
+    	cursor: default;
+	}
+	.am-nav>li.am-active>a, .am-nav>li.am-active>a:focus, .am-nav>li.am-active>a:hover {
+    	color: #fff;
+     	background-color: #f8f8f8;
+    	cursor: default;
+	}
+	.am-topbar-nav>li.am-active>a:after {
+	    border-bottom-color: #4CAD84!important;
+	}
+	.am-btn-secondary {
+	    color: #fff;
+	    background-color: #4CAD84;
+	    border-color: #4CAD84;
+	}
+	.am-btn-secondary:focus, .am-btn-secondary:hover {
+    	background-color: #4CAD84;
+    	color: #fff;
+	}
+    .get {
+      background: #4CAD84;
+      color: #fff;
+      text-align: center;
+      padding: 100px 0;
+    }
+    .get-title {
+      font-size: 200%;
+      padding: 10px;
+      display: inline-block;
+    }
+    .get-btn {
+      color: #fff;
+      background: 0 0;
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+    .get-btn:hover,.get-btn:focus,.get-btn:visited { 
+      background-color: #409343!important;
+      color: #fff!important;
+      background: 0 0;
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+    .detail {
+      background: #fff;
+    }
+    .detail-h2 {
+      text-align: center;
+      font-size: 150%;
+      margin: 40px 0;
+    }
+    .detail-h3 {
+      color: #34495e;
+    }
+    .detail-p {
+      color: #7f8c8d;
+    }
+    .detail-mb {
+      margin-bottom: 30px;
+    }
+    .hope {
+      background: #4CAE94;
+      padding: 50px 0;
+    }
+    .hope-img {
+      text-align: center;
+    }
+    .hope-hr {
+      border-color: #149C88;
+    }
+    .hope-title {
+      font-size: 140%;
+    }
+    .about {
+      background: #fff;
+      padding: 40px 0;
+      color: #7f8c8d;
+    }
+    .about-color {
+      color: #34495e;
+    }
+    .about-title {
+      font-size: 180%;
+      padding: 30px 0 50px 0;
+      text-align: center;
+    }
+    .footer p {
+      color: #7f8c8d;
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+  </style>
+</head>
+<body>
+<header class="am-topbar am-topbar-fixed-top">
+  <div class="am-container">
+    <h1 class="am-topbar-brand">
+      <a href="index.html">Galaxy 开源框架 </a>
+    </h1>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-default am-btn-secondary am-show-sm-only"
+            data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
+        class="am-icon-bars"></span></button>
+    <div class="am-collapse am-topbar-collapse" id="collapse-head">
+      <ul class="am-nav am-nav-pills am-topbar-nav">
+        <li class="am-active"><a href="index.html">首页</a></li>
+        <li><a href="document.html">在线文档</a></li>
+        <li><a data-am-modal="{target: '#community-modal', closeViaDimmer: 0, width: 400, height: 125}">社区讨论</a></li>
+        <li><a href="contribute.html">贡献列表</a></li>
+        <li><a href="update.html">更新日志</a></li>
+		<li class="am-dropdown" data-am-dropdown>
+	        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+	          捐赠<span class="am-icon-caret-down"></span>
+	        </a>
+	        <ul class="am-dropdown-content">
+	          <li><img src="image/wechatpay.png" style="width: 180px;height: 180px;" /></li>
+	          <li class="am-dropdown-header" style="text-align: center;">微信扫一扫</li>
+	          <hr style="margin: 0;">
+	          <li><img src="image/alipay.png" style="width: 180px;height: 180px;" /></li>
+	          <li class="am-dropdown-header" style="text-align: center;">支付宝扫一扫</li>
+	          <hr style="margin: 0;">
+	          <li class="am-dropdown-header" style="text-align: center;color: #888;">您的捐赠信息将更新到“贡献列表”，感谢支持！</li>          
+	        </ul>
+	      </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="get">
+  <div class="am-g">
+    <div class="am-u-lg-12">
+      <h1 class="get-title">Galaxy - 轻量级、高性能的Java Web开发框架</h1>
+      <p style="margin: 0 0 45px 0;">
+         期待您的参与，共同打造一个 <strong style="color: ">“简单易用”</strong> 的<strong> J2EE</strong> 开源框架
+      </p>
+      <p>	
+		<a href="#" target="_blank" class="am-btn am-btn-default get-btn"><i class="am-icon-download"></i> 立即下载</a>&nbsp;
+		<a href="document.html" target="_blank" class="am-btn am-btn-default get-btn"><i class="am-icon-book"></i> 快速上手</a>	
+      </p>
+      <p><small>最新版本: <span>0.9.2</span> &nbsp; <a style="color: #f1f1f1" href="https://github.com/javaosc-projects/galaxy/archive/master.zip" target="_blank">下载源码</a></small></p>
+      <p><small><a href="http://jq.qq.com/?_wv=1027&k=2FRJhgw" style="color: #f1f1f1" target="_blank"><i class="am-icon-comments-o"></i> QQ群组</a> &nbsp; <a href="http://weibo.com/javaosc" style="color: #f1f1f1" target="_blank"><i class="am-icon-weibo"></i> 官方微博</a> &nbsp; <a href="https://github.com/javaosc-projects/galaxy" style="color: #f1f1f1" target="_blank"><i class="am-icon-github"></i> Github</a></small></p>
+    </div>
+  </div>
+</div>
+<div class="detail">
+  <div class="am-g am-container">
+    <div class="am-u-lg-12">
+      <h2 class="detail-h2">轻量级、高性能、国情友好、创新设计</h2>
+	  <hr>
+      <div class="am-g">
+		 <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+          <h3 class="detail-h3">
+            <i class="am-icon-send-o am-icon-sm"></i>
+             高性能
+          </h3>
+          <p class="detail-p">
+            内置Bean convert类型转换是spring内置和cglib的2倍，apache beanutils的10倍；预缓存机制使初次请求和频繁访问缓存的性能达到一致；启动demo演示实例耗时在500ms左右；内置模板引擎httl，性能是freemarker的9倍；velocity的5倍。让您的 Web 应用可以高速载入。
+          </p>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+          <h3 class="detail-h3">
+            <i class="am-icon-hourglass-start am-icon-sm"></i>
+             轻量级
+          </h3>
+          <p class="detail-p">
+            目前Jar为172KB，只依赖slf4j日志接口和cglib代理插件，共554Kb。通过最佳项目实践，在保证性能和稳定的前提下，引入最优秀的第三插件。在相对复杂的业务场景范围内，尽可能保证最终项目发布体积在6MB之内甚至更小，使JVM初始化的单例/静态类相对减少。
+          </p>
+        </div>
+		<div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+          <h3 class="detail-h3">
+            <i class="am-icon-check-square-o am-icon-sm"></i>
+            国情，友好
+          </h3>
+          <p class="detail-p">
+            预缓存实体类的属性和数据表字段关系到内存，并初始化数据库连接池，避免第一次的类型转换和创建连接等待；采用和Spring同样的英文注解，使学习无陡峭；Action的同一方法返回处理，支持json数据和oo对象共用，并且支持请求参数回显；dao层无需实现接口。
+          </p>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb">
+          <h3 class="detail-h3">
+            <i class="am-icon-cogs am-icon-sm"></i>
+            创新设计
+          </h3>
+          <p class="detail-p">
+            不过度封装Servlet，保证在相对灵活的前提下，减少框架的侵入性；过滤器使用Serlvet原生api，静态资源放行要求在Web.xml里并不做中转到DefaultServlet，Filter和Aop放弃责任执行链，Action暴露原生Request，预置上传基础封装，开发者可以在相对约定下自由定制。
+          </p>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hope">
+  <div class="am-g am-container">
+    <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
+      <img src="image/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+      <hr class="am-article-divider am-show-sm-only hope-hr">
+    </div>
+    <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
+      <h2 class="hope-title">同我们一起打造属于你的Java Web框架</h2>
+      <p>
+          希望更多志同道合的朋友参与到Galaxy Framework开源项目的开发中，在获得更多自我提升的同时，拥抱开源文化，发挥社区的力量。为广大Java开发和爱好者提供更好的选择和服务支持。
+      </p>
+    </div>
+  </div>
+</div>
+<div class="about">
+  <div class="am-g am-container">
+    <div class="am-u-lg-12">
+      <h2 class="about-title about-color">Galaxy Framework 崇尚开放、自由，非常欢迎大家的参与</h2>
+        <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+          <h4 class="about-color">测试指标</h4>
+          <p><img src="image/ms.png" class="am-img-responsive" /></p>
+          <p><img src="image/request-ms.png" class="am-img-responsive" /></p>
+          <h4 class="about-color">关于我们</h4>
+          <p>Galaxy Framework
+            由Javaosc Team开发，旨在提供更加轻巧和高性能的Web开发方案，设计更加符合国内程序员的习惯，赋予了它更多精巧、创新的可能。是Javaosc社区的核心框架，期待它能为广大Java开发和爱好者提供更好的选择和服务支持，如果阁下有更好的设计和建议，欢迎通过<a href="https://github.com/javaosc-projects/galaxy">Github</a> 给我们pull request一些代码，在这里提前先感谢下无私的您们。</p>
+          <h4 class="about-color">团队介绍</h4>
+          <p>待补充</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="community-modal">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">官方社区
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+       www.javaosc.com<br>
+      正在开发中，敬请期待~ 谢谢！
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <p>© 2014 <a href="http://www.javaosc.com" target="_blank">www.javaosc.com</a> Licensed under <a
+      href="https://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">Apache License</a>. by the Javaosc Team.</p>
+</footer>
+<!--[if lt IE 9]>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/modernizr.js"></script>
+<script src="js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="js/amazeui.min.js"></script>
+<script type="text/javascript">
+	console.log("    ______          __                          ");
+  		console.log("  .' ___  |        [  |             ");
+  		console.log(" / .'   \_|  ,--.   | |  ,--.   _   __   _   __ ");
+  		console.log(" | |   ____ `'_\ :  | | `'_\ : [ \ [  ] [ \ [  ]");
+  		console.log(" \ `.___]  |// | |, | | // | |, > '  <   \ '/ /  ");
+  		console.log("  `._____.' \'-;__/[___]\'-;__/[__]`\_] [ \_:/  ");
+  		console.log("                                         \__.' ");
+  		console.log(" Thanks! Good Luck~ | Community: www.javaosc.com "); 		  
+</script>
+</body>
+</html>

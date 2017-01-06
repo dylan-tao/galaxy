@@ -223,7 +223,7 @@ public class ConfigHandler {
 					}else if(key.startsWith(Configuration.STARTWITH_POOL)){
 						poolMap.put(key.replace(Configuration.STARTWITH_POOL, Constant.EMPTY), value);
 					}else if(key.startsWith(Configuration.VIEW_KEY)){
-						String[] urlView = value.split(Constant.JZ);
+						String[] urlView = value.split(Constant.EM);
 						if(urlView.length==2){
 							viewMap.put(urlView[0], urlView[1]);
 						}else{
