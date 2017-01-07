@@ -63,7 +63,9 @@ public class ContextListener implements ServletContextListener {
 		
 		ScanAnnotation.registryAnnotation();
 		
-		ConnectionHandler.init();
+		if(ConfigHandler.getDatasouceStatus()){
+			ConnectionHandler.init();
+		}
 		
 		log.debug("Bean factory: {}", BeanFactory.beanMap);
 		

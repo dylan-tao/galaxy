@@ -38,6 +38,8 @@ public class ConfigHandler {
 	
 	private static Boolean methodMonitor;
 	
+	private static Boolean datasourceStatus;
+	
 	private static String prefix;
 	
 	private static String suffix;
@@ -89,6 +91,13 @@ public class ConfigHandler {
 			startedStatus = Boolean.valueOf(getValue(Configuration.CONSOLE_STARTED_STATUS,"true"));
 		}
 		return startedStatus;
+	}
+	
+	public static Boolean getDatasouceStatus(){
+		if(datasourceStatus==null){
+			datasourceStatus = Boolean.valueOf(getValue(Configuration.DATESOUCE_OPEN_STATUS,"true"));
+		}
+		return datasourceStatus;
 	}
 	
 	public static Boolean getMethodMonitor(){

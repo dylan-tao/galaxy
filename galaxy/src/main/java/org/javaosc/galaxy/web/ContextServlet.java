@@ -109,17 +109,16 @@ public class ContextServlet extends HttpServlet {
 				Method m = (Method)method;
 				String[] param = ConvertFactory.convert(String[].class, routeMap.get(RouteNodeRegistry.METHOD_PRM));
 				
-				Object result = null;
+				Object returnPath = null;
 				try {
-					result = m.invoke(action, MethodParamHandler.getParamValue(m,m.getParameterTypes(), param));
+					returnPath = m.invoke(action, MethodParamHandler.getParamValue(m,m.getParameterTypes(), param));
 				} catch (Exception e) {
 					log.error(Constant.GALAXY_EXCEPTION, e);
 				} 
 				Class<?> returnType = m.getReturnType();
 				if(returnType.equals(String.class)){
-					String returnPath = String.valueOf(result);
-					if(!GalaxyUtil.isEmpty(returnPath)){
-						new ActionHandler(returnPath).rendering(prefix, suffix, enableTemplate);
+					if(returnPath!=null){
+						new ActionHandler(String.valueOf(returnPath)).rendering(prefix, suffix, enableTemplate);
 					}
 					return;
 				}else if(returnType.equals(void.class)){

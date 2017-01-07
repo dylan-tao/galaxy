@@ -15,6 +15,8 @@ public interface Configuration {
 	static final String EXPEND_FILE_NAME = "expandConfig";
 	static final String CONFIG_HEAD_COMMENT = "galaxy configuration setting";
 	
+	static final String DATESOUCE_OPEN_STATUS = "galaxy.datasource.open.status";
+	
 	static final String CONSOLE_STARTED_STATUS = "galaxy.console.started.status";
 	static final String CONSOLE_METHOD_MONITOR = "galaxy.console.method.monitor";
 	
@@ -38,7 +40,5 @@ public interface Configuration {
 	static final String DEFAULT_PREFIX_VALUE = "/";
 	static final String DEFAULT_SUFFIX_VALUE = ".jsp";
 	static final String DEFAULT_ENCODING_VALUE = CodeType.UTF8.getValue();
-	static final String DEFAULT_ENCODING_FLAG = "true";
-	static final String CLASS_KEYWORD_VALUE = "action,controller";
-	
+	static final String DEFAULT_ENCODING_FLAG = "true";	
 }

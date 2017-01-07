@@ -74,9 +74,9 @@ public class ScanAnnotation {
 				if(cls.isAnnotationPresent(Component.class)){
 					BeanFactory.get(key, cls, false);
 				}else if(cls.isAnnotationPresent(Dao.class)){
-					BeanFactory.get(key, cls, true);
+					BeanFactory.get(key, cls, ConfigHandler.getDatasouceStatus());
 				}else if(cls.isAnnotationPresent(Service.class)){
-					BeanFactory.get(key, cls, true);
+					BeanFactory.get(key, cls, ConfigHandler.getDatasouceStatus());
 					CacheMark.putServiceAnno(cls);
 				}else if(cls.isAnnotationPresent(Mapping.class)){
 					Object action = null;

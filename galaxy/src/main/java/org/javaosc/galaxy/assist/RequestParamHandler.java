@@ -40,20 +40,24 @@ public class RequestParamHandler {
 					String[] values = entry.getValue();
 					if (values == null) {
 						dataMap.put(key, null);
+					}else if(values.length==1){
+						dataMap.put(key, encodingParam(values[0]));
 					} else {
 						String[] encodeValues = new String[values.length];
-						for (String value : values) {
-							value = encodingParam(value);
+						for (int i=0;i<values.length;i++) {
+							encodeValues[i] = encodingParam(values[i]);
 						}
 						dataMap.put(key, encodeValues);
 					}
 				}
-			} else { // post\put\get not open encode support
+			} else { // post\put not open encode support
 				for(Entry<String, String[]> entry:paramMap.entrySet()){
 					String key = entry.getKey();
 					String[] values = entry.getValue();
 					if (values == null) {
 						dataMap.put(key, null);
+					}else if(values.length==1){
+						dataMap.put(key, values[0]);
 					} else {
 						dataMap.put(key, values);
 					}

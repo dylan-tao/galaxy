@@ -28,30 +28,32 @@ public class ScanPackage {
 	
 	public void load() {
 		String packageName = ConfigHandler.getScanPackage();
-		try {
-			ClassLoader loader = Thread.currentThread().getContextClassLoader();
-			URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
-			if(url == null){
-				log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigHandler.galaxyConfig);
-			}else{
-				String protocol = url.getProtocol();
-				if ("file".equals(protocol)) {
-					File[] files = new File(url.toURI()).listFiles();
-					files = files ==null? new File[0]:files;
-					for (File f : files) {
-						scanFile(packageName, f);
+		if(packageName!=null){
+			try {
+				ClassLoader loader = Thread.currentThread().getContextClassLoader();
+				URL url = loader.getResource(packageName.replace(Constant.DOT, Constant.LINE));
+				if(url == null){
+					log.error("class package scan directory [{}] not found! please check setting: {}=? in the {}" , packageName, Configuration.SCANER_PACKAGE_KEY, ConfigHandler.galaxyConfig);
+				}else{
+					String protocol = url.getProtocol();
+					if ("file".equals(protocol)) {
+						File[] files = new File(url.toURI()).listFiles();
+						files = files ==null? new File[0]:files;
+						for (File f : files) {
+							scanFile(packageName, f);
+						}
+					} else if ("jar".equals(protocol)) {
+						JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
+						scanJar(jar, packageName);
 					}
-				} else if ("jar".equals(protocol)) {
-					JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
-					scanJar(jar, packageName);
+					log.info("class package and annotation scan is completed.");
 				}
-				log.info("class package and annotation scan is completed.");
-			}
-		} catch (URISyntaxException e) {
-			log.error(Constant.GALAXY_EXCEPTION, e);
-		} catch (IOException e) {
-			log.error(Constant.GALAXY_EXCEPTION, e);
-		}	
+			} catch (URISyntaxException e) {
+				log.error(Constant.GALAXY_EXCEPTION, e);
+			} catch (IOException e) {
+				log.error(Constant.GALAXY_EXCEPTION, e);
+			}	
+		}
 	}
 
 	private void scanFile(String packageName, File file) {
