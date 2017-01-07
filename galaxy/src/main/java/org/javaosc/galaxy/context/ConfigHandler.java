@@ -30,7 +30,7 @@ public class ConfigHandler {
 	
 	private static final Logger log = LoggerFactory.getLogger(ConfigHandler.class);
 	
-	protected static String galaxyConfig = "configuration.properties";
+	protected static String galaxyConfig = "galaxy.properties";
 	
 	private static Properties properties;
 	
