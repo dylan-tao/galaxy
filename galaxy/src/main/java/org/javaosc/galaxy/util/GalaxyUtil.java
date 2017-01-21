@@ -118,8 +118,10 @@ public class GalaxyUtil {
 		}
 		if(params!=null){
 			for(String param:params){
-				String[] paramArray = param.split(Constant.EM);
-				queryMap.put(paramArray[0], paramArray[1]);  
+				if(queryString.indexOf(Constant.EM)>0){
+					String[] paramArray = param.split(Constant.EM);
+					queryMap.put(paramArray[0], paramArray[1]);  
+				}
 			}
 			
 		}
