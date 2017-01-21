@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.javaosc.galaxy.constant.Constant;
-import org.javaosc.galaxy.constant.Constant.ContentType;
+import org.javaosc.galaxy.constant.Constant.ResContentType;
 import org.javaosc.galaxy.util.JsonUtil;
 import org.javaosc.galaxy.web.ActionContext;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class ContextHandler {
 	
 	public static void putJson(Object... param) {
 		String content = "";
-		ActionContext.getContext().getResponse().setContentType(ContentType.JSON.getValue());
+		ActionContext.getContext().getResponse().setContentType(ResContentType.JSON.getValue());
 		try {
 			PrintWriter out = ActionContext.getContext().getResponse().getWriter();
 			int length = param!=null?param.length : 0;

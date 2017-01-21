@@ -1,6 +1,8 @@
 package org.javaosc.galaxy.util;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -11,6 +13,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
 import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.constant.Constant.CodeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +28,27 @@ public class CodeUtil {
 	
 	private static final Logger log = LoggerFactory.getLogger(CodeUtil.class);
 	
-	public static String encodeBase64(String str, Constant.CodeType encode) {
+	public static String encodeURL(String str, CodeType encode) {
+		try {
+			str = URLEncoder.encode(str, encode.getValue());
+			log.debug("====== URL Encode Content: {}" ,str);
+		} catch (UnsupportedEncodingException e) {
+			log.error(Constant.GALAXY_EXCEPTION, e);
+		}
+		return str;
+	}
+	
+	public static String decodeURL(String str, CodeType encode) {
+		try {
+			str = URLDecoder.decode(str, encode.getValue());
+			log.debug("====== URL Decode Content: {}" ,str);
+		} catch (UnsupportedEncodingException e) {
+			log.error(Constant.GALAXY_EXCEPTION, e);
+		}
+		return str;
+	}
+	
+	public static String encodeBase64(String str, CodeType encode) {
 		try {
 			str = new String(Base64.encode(str.getBytes(encode.getValue())));
 			log.debug("====== BASE64 Encode Content: {}" ,str);
@@ -35,7 +58,7 @@ public class CodeUtil {
 		return str;
 	}
 
-	public static String decodeBase64(String str, Constant.CodeType decode) {
+	public static String decodeBase64(String str, CodeType decode) {
 		try {
 			str = new String(Base64.decode(str.toCharArray()),
 					decode.getValue());
@@ -46,12 +69,11 @@ public class CodeUtil {
 		return str;
 	}
 
-	public static String encodeMD5(String str, Constant.CodeType encode) {
+	public static String encodeMD5(String str, CodeType encode) {
 		return encodeMD5(str, true, encode);
 	}
 
-	public static String encodeMD5(String str, boolean default32,
-			Constant.CodeType encode) {
+	public static String encodeMD5(String str, boolean default32, CodeType encode) {
 		try {
 			byte[] strByte = str.getBytes(encode.getValue());
 			MessageDigest md5 = MessageDigest.getInstance(CoverType.MD5.getValue());
@@ -83,8 +105,7 @@ public class CodeUtil {
 		return str;
 	}
 
-	public static String encodeDES(String str, String key,
-			Constant.CodeType encode) {
+	public static String encodeDES(String str, String key, CodeType encode) {
 		try {
 			byte[] bt = encrypt(str.getBytes(encode.getValue()),
 					key.getBytes(encode.getValue()));
@@ -97,8 +118,7 @@ public class CodeUtil {
 		return null;
 	}
 
-	public static String decodeDES(String data, String key,
-			Constant.CodeType encode) {
+	public static String decodeDES(String data, String key, CodeType encode) {
 		if (data == null)
 			return null;
 		try {

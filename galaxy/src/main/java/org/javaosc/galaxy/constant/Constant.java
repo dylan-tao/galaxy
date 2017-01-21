@@ -30,6 +30,7 @@ public interface Constant {
 	String AM = "&";
 	String JZ = "#";
 	String LINE = System.getProperty("file.separator");
+	String JSON_PARAM = "_JSON_PARAM_";
 	
 	
 	// http协议
@@ -37,14 +38,29 @@ public interface Constant {
 		GET, POST, PUT, DELETE;
 	}
 	
+	public enum ReqContentType {
+		
+		WWW_FORM_URLENCODED("application/x-www-form-urlencoded"), MULTIPART_FORM_DATA("multipart/form-data"),APPLICATION_JSON("application/json"),TEXT_XML("text/xml");
+
+		private final String value;
+
+		ReqContentType(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
+	
 	// 响应类型
-	public enum ContentType {
+	public enum ResContentType {
 		
 		TEXT("text/plain"), JSON("application/json"), XML("text/xml"), HTML("text/html"), JAVASCRIPT("text/javascript");
 
 		private final String value;
 
-		ContentType(String value) {
+		ResContentType(String value) {
 			this.value = value;
 		}
 
@@ -67,6 +83,16 @@ public interface Constant {
 		public String getValue() {
 			return value;
 		}
+		
+		 public static CodeType getCodeType(String value) {
+			 for (CodeType codeType : CodeType.values()) {
+		         if (value == codeType.getValue()) {
+		            return codeType;
+		         }    
+			 }
+			 return null;   
+		 }
+		
 	}
 	
 	//位置枚举

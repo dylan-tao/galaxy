@@ -1,5 +1,6 @@
 package org.javaosc.galaxy.util;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,5 +107,23 @@ public class GalaxyUtil {
 	       }  
 	       return sb.toString();  
 	}  
+	 
+	public static HashMap<String, String> getQueryArray(String queryString){
+		HashMap<String, String> queryMap = new HashMap<String, String>();
+		String[] params = null;
+		if(queryString.indexOf(Constant.AM)>0){
+			params = queryString.split(Constant.AM);
+		}else{
+			params = new String[]{queryString};
+		}
+		if(params!=null){
+			for(String param:params){
+				String[] paramArray = param.split(Constant.EM);
+				queryMap.put(paramArray[0], paramArray[1]);  
+			}
+			
+		}
+		return queryMap;
+	}
 	
 }
