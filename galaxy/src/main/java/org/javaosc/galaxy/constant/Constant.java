@@ -86,7 +86,7 @@ public interface Constant {
 		
 		 public static CodeType getCodeType(String value) {
 			 for (CodeType codeType : CodeType.values()) {
-		         if (value == codeType.getValue()) {
+		         if (codeType.getValue().equals(value)) {
 		            return codeType;
 		         }    
 			 }

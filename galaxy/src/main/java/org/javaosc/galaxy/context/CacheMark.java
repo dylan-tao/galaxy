@@ -27,7 +27,7 @@ public class CacheMark {
 		if(flag!=null){
 			return flag;
 		}else{
-			if(!annoServiceCache.contains(method.getClass().getPackage())){
+			if(!annoServiceCache.contains(method.getClass().getPackage().toString())){
 				return false;
 			}
 			flag = true;
