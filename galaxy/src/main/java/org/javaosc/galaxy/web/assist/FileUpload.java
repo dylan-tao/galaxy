@@ -13,11 +13,10 @@ import org.javaosc.galaxy.constant.Constant.CodeType;
 import org.javaosc.galaxy.util.CodeUtil;
 import org.javaosc.galaxy.util.HeaderHexUtil;
 import org.javaosc.galaxy.util.GalaxyUtil;
-
-import com.oreilly.servlet.multipart.FilePart;
-import com.oreilly.servlet.multipart.MultipartParser;
-import com.oreilly.servlet.multipart.ParamPart;
-import com.oreilly.servlet.multipart.Part;
+import org.javaosc.galaxy.web.multipart.FilePart;
+import org.javaosc.galaxy.web.multipart.MultipartParser;
+import org.javaosc.galaxy.web.multipart.ParamPart;
+import org.javaosc.galaxy.web.multipart.Part;
 /**
  * @description
  * @author Dylan Tao
