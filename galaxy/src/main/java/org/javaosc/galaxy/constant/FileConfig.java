@@ -1,6 +1,5 @@
 package org.javaosc.galaxy.constant;
 
-import java.io.InputStream;
 
 
 /**
@@ -12,28 +11,24 @@ import java.io.InputStream;
  */
 public class FileConfig {
 	
-	private String fileName; //文件名称
-	private String originalFilename; //文件原名
+	private String finalName; //文件名称
+	private String originalName; //文件原名
 	private String filePath; //存储路径
 	private String contentType; //文件类型
 	private long fileSize; //文件大小
 	private long createTime; //创建时间
 	
-	private InputStream stream;
-	
-	private int code;
-	
-	public String getFileName() {
-		return fileName;
+	public String getFinalName() {
+		return finalName;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFinalName(String finalName) {
+		this.finalName = finalName;
 	}
-	public String getOriginalFilename() {
-		return originalFilename;
+	public String getOriginalName() {
+		return originalName;
 	}
-	public void setOriginalFilename(String originalFilename) {
-		this.originalFilename = originalFilename;
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
 	}
 	public String getFilePath() {
 		return filePath;
@@ -58,18 +53,6 @@ public class FileConfig {
 	}
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
-	}
-	public int getCode() {
-		return code;
-	}
-	public void setCode(int code) {
-		this.code = code;
-	}
-	public InputStream getStream() {
-		return stream;
-	}
-	public void setStream(InputStream stream) {
-		this.stream = stream;
 	}
 	
 }

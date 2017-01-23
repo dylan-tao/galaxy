@@ -20,6 +20,7 @@ public interface Configuration {
 	static final String CONSOLE_STARTED_STATUS = "galaxy.console.started.status";
 	static final String CONSOLE_METHOD_MONITOR = "galaxy.console.method.monitor";
 	
+	static final String UPLOAD_FILE_MAX_SIZE = "galaxy.upload.file.limit.size";
 
 	static final String PREFIX_KEY = "galaxy.view.prefix";
 	static final String SUFFIX_KEY = "galaxy.view.suffix";

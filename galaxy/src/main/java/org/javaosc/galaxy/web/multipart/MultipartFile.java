@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
  * @description refactor cos,url: http://www.servlets.com/cos/index.html
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class MultipartParser {
+public class MultipartFile {
 	
-  private static final Logger log = LoggerFactory.getLogger(MultipartParser.class);
+  private static final Logger log = LoggerFactory.getLogger(MultipartFile.class);
   
   private ServletInputStream in;
   
@@ -39,16 +39,16 @@ public class MultipartParser {
 
   private String encoding = DEFAULT_ENCODING;
 
-  public MultipartParser(HttpServletRequest req, int maxSize) {
+  public MultipartFile(HttpServletRequest req, int maxSize) {
 	  this(req, maxSize, true, true);
   }
   
-  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer,  boolean limitLength){
+  public MultipartFile(HttpServletRequest req, int maxSize, boolean buffer,  boolean limitLength){
 	  this(req, maxSize, buffer, limitLength, null);
   }
 
 
-  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer, boolean limitLength, String encoding) {
+  public MultipartFile(HttpServletRequest req, int maxSize, boolean buffer, boolean limitLength, String encoding) {
 	if (encoding != null) {
        setEncoding(encoding);
     }

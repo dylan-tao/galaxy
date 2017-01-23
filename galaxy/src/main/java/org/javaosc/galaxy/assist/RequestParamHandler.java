@@ -3,7 +3,9 @@ package org.javaosc.galaxy.assist;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -19,6 +21,10 @@ import org.javaosc.galaxy.util.CodeUtil;
 import org.javaosc.galaxy.util.GalaxyUtil;
 import org.javaosc.galaxy.util.JsonUtil;
 import org.javaosc.galaxy.web.ActionContext;
+import org.javaosc.galaxy.web.multipart.FilePart;
+import org.javaosc.galaxy.web.multipart.MultipartFile;
+import org.javaosc.galaxy.web.multipart.ParamPart;
+import org.javaosc.galaxy.web.multipart.Part;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -75,8 +81,23 @@ public class RequestParamHandler {
 				}
 			}else if(contentType.startsWith(ReqContentType.MULTIPART_FORM_DATA.getValue())){ //multipart or form data
 				request.setAttribute(Constant.CONTENT_TYPE, contentType);
-				
-				
+				try {
+					MultipartFile mp = new MultipartFile(request, ConfigHandler.getUploadMaxSize()*1024);
+					mp.setEncoding(ConfigHandler.getContextEncode());
+					Part part;
+					List<FilePart> fileArray = new ArrayList<FilePart>();
+					while ((part = mp.readNextPart()) != null) {
+						if (part.isFile()) {
+							fileArray.add((FilePart)part);
+						}else if(part.isParam()){
+							ParamPart paramPart = (ParamPart) part;
+							dataMap.put(paramPart.getName(), paramPart.getStringValue());
+						}
+					}
+					dataMap.put(Constant.FILE_ARRAY, fileArray);
+				} catch (IOException e) {
+					log.error(Constant.GALAXY_EXCEPTION, e);
+				}	
 			}else{ //try format input stream or json data from body
 				String bodyData = getBodyString(request);
 				if(!GalaxyUtil.isEmpty(bodyData)){

@@ -9,7 +9,7 @@ import java.io.IOException;
 /** 
  * Thrown to indicate an upload exceeded the maximum size.
  *
- * @see org.javaosc.galaxy.web.multipart.MultipartParser
+ * @see org.javaosc.galaxy.web.multipart.MultipartFile
  *
  * @author <b>Jason Hunter</b>, Copyright &#169; 2007
  * @version 1.0, 2007/04/11

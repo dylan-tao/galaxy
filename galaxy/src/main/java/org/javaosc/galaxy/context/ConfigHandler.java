@@ -38,6 +38,8 @@ public class ConfigHandler {
 	
 	private static Boolean methodMonitor;
 	
+	private static Integer uploadMaxSize;
+	
 	private static Boolean datasourceStatus;
 	
 	private static String prefix;
@@ -106,6 +108,14 @@ public class ConfigHandler {
 		}
 		return methodMonitor;
 	}
+	
+	public static Integer getUploadMaxSize(){
+		if(uploadMaxSize==null){
+			uploadMaxSize = Integer.valueOf(getValue(Configuration.UPLOAD_FILE_MAX_SIZE,"1"));
+		}
+		return uploadMaxSize;
+	}
+	
 	
 	public static String getViewPrefix(){
 		if(GalaxyUtil.isEmpty(prefix)){

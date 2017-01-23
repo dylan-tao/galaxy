@@ -32,6 +32,7 @@ public interface Constant {
 	String LINE = System.getProperty("file.separator");
 	String JSON_PARAM = "_JSON_PARAM_";
 	String CONTENT_TYPE = "_CONTENT_PARAM_";
+	String FILE_ARRAY = "_FILE_ARRAY_";
 	
 	
 	// http协议
