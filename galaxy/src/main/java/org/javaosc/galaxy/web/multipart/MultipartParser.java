@@ -1,188 +1,87 @@
-// Copyright (C) 1998-2001 by Jason Hunter <jhunter_AT_acm_DOT_org>.
+// Copyright (C) 2007 by Jason Hunter <jhunter_AT_acm_DOT_org>.
 // All rights reserved.  Use of this class is limited.
 // Please see the LICENSE for more information.
-
 package org.javaosc.galaxy.web.multipart;
 
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
 
-/** 
- * A utility class to handle <code>multipart/form-data</code> requests,
- * the kind of requests that support file uploads.  This class uses a 
- * "pull" model where the reading of incoming files and parameters is 
- * controlled by the client code, which allows incoming files to be stored 
- * into any <code>OutputStream</code>.  If you wish to use an API which 
- * resembles <code>HttpServletRequest</code>, use the "push" model 
- * <code>MultipartRequest</code> instead.  It's an easy-to-use wrapper 
- * around this class.
- * <p>
- * This class can receive arbitrarily large files (up to an artificial limit 
- * you can set), and fairly efficiently too.  
- * It cannot handle nested data (multipart content within multipart content).
- * It <b>can</b> now with the latest release handle internationalized content
- * (such as non Latin-1 filenames).
- * <p>
- * It also optionally includes enhanced buffering and Content-Length
- * limitation.  Buffering is only required if your servlet container is 
- * poorly implemented (many are, including Tomcat 3.2),
- * but it is generally recommended because it will make a slow servlet 
- * container a lot faster, and will only make a fast servlet container a 
- * little slower.  Content-Length limiting is usually only required if you find 
- * that your servlet is hanging trying to read the input stram from the POST, 
- * and it is similarly recommended because it only has a minimal impact on 
- * performance.
- * <p>
- * See the included upload.war for an example of how to use this class.
- * <p>
- * The full file upload specification is contained in experimental RFC 1867,
- * available at <a href="http://www.ietf.org/rfc/rfc1867.txt">
- * http://www.ietf.org/rfc/rfc1867.txt</a>.
+import org.javaosc.galaxy.constant.Constant;
+import org.javaosc.galaxy.util.GalaxyUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
  * 
- * @see com.oreilly.servlet.MultipartRequest
- * 
- * @author Jason Hunter
- * @author Geoff Soutter
- * @version 1.13, 2004/09/01, added workaround if content-length is -1
- * @version 1.12, 2004/05/17, added trim on disposition
- * @version 1.11, 2002/11/01, added constructor that takes an encoding, to
- *                            make sure chars are always read correctly
- * @version 1.10, 2002/11/01, added support for a preamble before the first
- *                            boundary marker
- * @version 1.9, 2002/11/01, added support to parse odd Opera Content-Type
- * @version 1.8, 2002/11/01, added support for lynx with unquoted param vals
- * @version 1.7, 2002/04/30, fixed bug if a line was '\n' alone
- * @version 1.6, 2002/04/30, added better internationalization support, thanks
- *                           to Changshin Lee
- * @version 1.5, 2002/04/30, added Opera header fix, thanks to Nic Ferrier
- * @version 1.4, 2001/03/23, added IE5 bug workaround supporting \n as line
- *                           ending, thanks to Michael Alyn Miller
- * @version 1.3, 2001/01/22, added support for boundaries surrounded by quotes
- *                           and content-disposition after content-type,
- *                           thanks to Scott Stark
- * @version 1.2, 2001/01/22, getFilePath() support thanks to Stefan Eissing
- * @version 1.1, 2000/10/29, integrating old WebSphere fix
- * @version 1.0, 2000/10/27, initial revision
+ * @original_author Jason Hunter
+ * @author Dylan Tao
+ * @date 2014-09-09
+ * @description refactor cos,url: http://www.servlets.com/cos/index.html
+ * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
 public class MultipartParser {
+	
+  private static final Logger log = LoggerFactory.getLogger(MultipartParser.class);
   
-  /** input stream to read parts from */
   private ServletInputStream in;
   
-  /** MIME boundary that delimits parts */
   private String boundary;
   
-  /** reference to the last file part we returned */
   private FilePart lastFilePart;
 
-  /** buffer for readLine method */
   private byte[] buf = new byte[8 * 1024];
   
-  /** default encoding */
   private static String DEFAULT_ENCODING = "ISO-8859-1";
 
-  /** preferred encoding */
   private String encoding = DEFAULT_ENCODING;
 
-  /**
-   * Creates a <code>MultipartParser</code> from the specified request,
-   * which limits the upload size to the specified length, buffers for 
-   * performance and prevent attempts to read past the amount specified 
-   * by the Content-Length.
-   * 
-   * @param req   the servlet request.
-   * @param maxSize the maximum size of the POST content.
-   */
-  public MultipartParser(HttpServletRequest req, 
-                         int maxSize) throws IOException {
-    this(req, maxSize, true, true);
+  public MultipartParser(HttpServletRequest req, int maxSize) {
+	  this(req, maxSize, true, true);
   }
   
-  /**
-   * Creates a <code>MultipartParser</code> from the specified request,
-   * which limits the upload size to the specified length, and optionally 
-   * buffers for performance and prevents attempts to read past the amount 
-   * specified by the Content-Length. 
-   * 
-   * @param req   the servlet request.
-   * @param maxSize the maximum size of the POST content.
-   * @param buffer whether to do internal buffering or let the server buffer,
-   *               useful for servers that don't buffer
-   * @param limitLength boolean flag to indicate if we need to filter 
-   *                    the request's input stream to prevent trying to 
-   *                    read past the end of the stream.
-   */
-  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer, 
-                         boolean limitLength) throws IOException {
-    this(req, maxSize, buffer, limitLength, null);
+  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer,  boolean limitLength){
+	  this(req, maxSize, buffer, limitLength, null);
   }
 
-  /**
-   * Creates a <code>MultipartParser</code> from the specified request,
-   * which limits the upload size to the specified length, and optionally 
-   * buffers for performance and prevents attempts to read past the amount 
-   * specified by the Content-Length, and with a specified encoding. 
-   * 
-   * @param req   the servlet request.
-   * @param maxSize the maximum size of the POST content.
-   * @param buffer whether to do internal buffering or let the server buffer,
-   *               useful for servers that don't buffer
-   * @param limitLength boolean flag to indicate if we need to filter 
-   *                    the request's input stream to prevent trying to 
-   *                    read past the end of the stream.
-   * @param encoding the encoding to use for parsing, default is ISO-8859-1.
-   */
-  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer, 
-                         boolean limitLength, String encoding)
-                                                throws IOException {
-    // First make sure we know the encoding to handle chars correctly.
-    // Thanks to Andreas Granzer, andreas.granzer@wave-solutions.com,
-    // for pointing out the need to have this in the constructor.
-    if (encoding != null) {
-      setEncoding(encoding);
-    }
 
-    // Check the content type to make sure it's "multipart/form-data"
-    // Access header two ways to work around WebSphere oddities
-    String type = null;
-    String type1 = req.getHeader("Content-Type");
-    String type2 = req.getContentType();
-    // If one value is null, choose the other value
-    if (type1 == null && type2 != null) {
-      type = type2;
+  public MultipartParser(HttpServletRequest req, int maxSize, boolean buffer, boolean limitLength, String encoding) {
+	if (encoding != null) {
+       setEncoding(encoding);
     }
-    else if (type2 == null && type1 != null) {
-      type = type1;
-    }
-    // If neither value is null, choose the longer value
-    else if (type1 != null && type2 != null) {
-      type = (type1.length() > type2.length() ? type1 : type2);
-    }
-
-    if (type == null || 
-        !type.toLowerCase().startsWith("multipart/form-data")) {
-      throw new IOException("Posted content type isn't multipart/form-data");
-    }
-
     // Check the content length to prevent denial of service attacks
     int length = req.getContentLength();
     if (length > maxSize) {
-      throw new IOException("Posted content length of " + length + 
-                            " exceeds limit of " + maxSize);
+    	log.error(Constant.GALAXY_EXCEPTION, "posted content length of {} exceeds limit of {}",length,maxSize);
+    	return;
+    }
+    String contentType = String.valueOf(req.getAttribute(Constant.CONTENT_TYPE));
+    
+    if(GalaxyUtil.isEmpty(contentType)){
+    	log.error(Constant.GALAXY_EXCEPTION, "posted content length of {} exceeds limit of {}",length,maxSize);
+    	return;
+    }else{
+    	req.removeAttribute(Constant.CONTENT_TYPE);
     }
 
     // Get the boundary string; it's included in the content type.
     // Should look something like "------------------------12012133613061"
-    String boundary = extractBoundary(type);
+    String boundary = extractBoundary(contentType);
     if (boundary == null) {
-      throw new IOException("Separation boundary was not specified");
+    	log.error(Constant.GALAXY_EXCEPTION, "Separation boundary was not specified");
+    	return;
     }
 
-    ServletInputStream in = req.getInputStream();
+    ServletInputStream in = null;
+	try {
+		in = req.getInputStream();
+	} catch (IOException e) {
+		log.error(Constant.GALAXY_EXCEPTION, e);
+    	return;
+	}
     
     // If required, wrap the real input stream with classes that 
     // "enhance" its behaviour for performance and stability
@@ -202,14 +101,21 @@ public class MultipartParser {
     // Thanks to Ben Johnson, ben.johnson@merrillcorp.com, for pointing out
     // the need for preamble support.
     do {
-      String line = readLine();
-      if (line == null) {
-        throw new IOException("Corrupt form data: premature ending");
-      }
-      // See if this line is the boundary, and if so break
-      if (line.startsWith(boundary)) {
-        break;  // success
-      }
+	    String line = null;
+		try {
+			line = readLine();
+		} catch (IOException e) {
+			log.error(Constant.GALAXY_EXCEPTION, e);
+			break;
+		}
+	      if (line == null) {
+	    	  log.error(Constant.GALAXY_EXCEPTION, "Corrupt form data: premature ending");
+	    	  break;
+	      }
+	      // See if this line is the boundary, and if so break
+	      if (line.startsWith(boundary)) {
+	         break;  // success
+	      }
     } while (true);
   }
 
@@ -248,7 +154,7 @@ public class MultipartParser {
     // Content-Disposition: form-data; name="field1"; filename="file1.txt"
     // Content-Type: type/subtype
     // Content-Transfer-Encoding: binary
-    Vector headers = new Vector();
+    Vector<String> headers = new Vector<String>();
 
     String line = readLine();
     if (line == null) {
@@ -294,7 +200,7 @@ public class MultipartParser {
     String origname = null;
     String contentType = "text/plain";  // rfc1867 says this is the default
 
-    Enumeration enu = headers.elements();
+    Enumeration<String> enu = headers.elements();
     while (enu.hasMoreElements()) {
       String headerline = (String) enu.nextElement();
       if (headerline.toLowerCase().startsWith("content-disposition:")) {
@@ -460,8 +366,7 @@ public class MultipartParser {
   private String readLine() throws IOException {
     StringBuffer sbuf = new StringBuffer();
     int result;
-    String line;
-
+    
     do {
       result = in.readLine(buf, 0, buf.length);  // does +=
       if (result != -1) {

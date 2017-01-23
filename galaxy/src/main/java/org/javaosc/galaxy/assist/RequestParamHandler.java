@@ -58,21 +58,23 @@ public class RequestParamHandler {
 				}
 			}
 		} else { // post\put not open encode support
-			String contentType = request.getContentType();
-			System.out.println(contentType);
+			String contentType = getContentType(request);
 			if(contentType.startsWith(ReqContentType.WWW_FORM_URLENCODED.getValue())){//www-form-urlencoded
-				for(Entry<String, String[]> entry:paramMap.entrySet()){
-					String key = entry.getKey();
-					String[] values = entry.getValue();
-					if (values == null) {
-						dataMap.put(key, null);
-					}else if(values.length==1){
-						dataMap.put(key, values[0]);
-					} else {
-						dataMap.put(key, values);
+				if(paramMap!=null && paramMap.size()>0){
+					for(Entry<String, String[]> entry:paramMap.entrySet()){
+						String key = entry.getKey();
+						String[] values = entry.getValue();
+						if (values == null) {
+							dataMap.put(key, null);
+						}else if(values.length==1){
+							dataMap.put(key, values[0]);
+						} else {
+							dataMap.put(key, values);
+						}
 					}
 				}
 			}else if(contentType.startsWith(ReqContentType.MULTIPART_FORM_DATA.getValue())){ //multipart or form data
+				request.setAttribute(Constant.CONTENT_TYPE, contentType);
 				
 				
 			}else{ //try format input stream or json data from body
@@ -95,6 +97,20 @@ public class RequestParamHandler {
 			value = encodingParam(value);
 		}
 		ActionContext.getContext().put(key, value);
+	}
+	
+	private static String getContentType(HttpServletRequest request){
+		 String type = null;
+	     String headerType = request.getHeader("Content-Type");
+	     String contentType = request.getContentType();
+	     if (headerType == null && contentType != null) {
+	    	 type = contentType;
+	     }else if (contentType == null && headerType != null) {
+	    	 type = headerType;
+	     }else if (headerType != null && contentType != null) {
+	    	 type = (headerType.length() > contentType.length() ? headerType : contentType);
+	     }
+	     return type!=null?type.toLowerCase():null;
 	}
 	
 	private static String getBodyString(HttpServletRequest request){

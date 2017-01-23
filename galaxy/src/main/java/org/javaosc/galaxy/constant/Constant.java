@@ -31,6 +31,7 @@ public interface Constant {
 	String JZ = "#";
 	String LINE = System.getProperty("file.separator");
 	String JSON_PARAM = "_JSON_PARAM_";
+	String CONTENT_TYPE = "_CONTENT_PARAM_";
 	
 	
 	// http协议
