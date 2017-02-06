@@ -26,8 +26,7 @@ public class FileUpload {
 	
 	private String fileName;
 
-	public void setLimit(FilePart filePart, String fileDir,String fileName) {
-		this.filePart = filePart;
+	public void setLimit(String fileDir,String fileName) {
 		this.fileDir = fileDir;
 		this.fileName = fileName;
 	}
@@ -123,7 +122,15 @@ public class FileUpload {
 		return realFileName;
 	}
 	
-	private String getFileDir() {
+	public FilePart getFilePart() {
+		return filePart;
+	}
+
+	public void setFilePart(FilePart filePart) {
+		this.filePart = filePart;
+	}
+
+	public String getFileDir() {
 		return fileDir;
 	}
 

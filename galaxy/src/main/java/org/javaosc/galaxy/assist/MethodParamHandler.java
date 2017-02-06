@@ -19,6 +19,8 @@ import org.javaosc.galaxy.constant.Constant;
 import org.javaosc.galaxy.convert.ConvertFactory;
 import org.javaosc.galaxy.util.JsonUtil;
 import org.javaosc.galaxy.web.ActionContext;
+import org.javaosc.galaxy.web.assist.FileUpload;
+import org.javaosc.galaxy.web.multipart.FilePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,6 +80,7 @@ public class MethodParamHandler {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Object[] getParamValue(Method m, Class<?>[] prmTypes, String[] paramNames) {
 		Object[] obj = new Object[prmTypes.length];
 		Map<String, Object> dataMap = ActionContext.getContext().getDataMap();
@@ -102,15 +105,41 @@ public class MethodParamHandler {
 					log.error("the data type({}) of the parameter is not supported ! you can impl convert interface(org.javaosc.framework.convert.Convert),custom your convert~", prmType.getName());
 				}
 			} else {
-				try {
-					if (dataMap.size() > 0) {
-						obj[j] = PropertyConvert.convertMapToEntity(dataMap, prmType);
-					} else {
-						obj[j] = null;
+				if(prmType == FileUpload.class){
+					Object objValue = dataMap.get(Constant.FILE_ARRAY);
+					if(objValue!=null){
+						List<FilePart> fileArray = (List<FilePart>)objValue;
+						if(fileArray!=null && fileArray.size()>0){
+							FileUpload f = new FileUpload();
+							f.setFilePart(fileArray.get(0));
+							obj[j] = f;
+						}
 					}
-				} catch (Exception e) {
-					log.error(Constant.GALAXY_EXCEPTION, e);
-				} 
+				}else if(prmType == FileUpload[].class){
+					Object objValue = dataMap.get(Constant.FILE_ARRAY);
+					if(objValue!=null){
+						List<FilePart> fileArray = (List<FilePart>)objValue;
+						if(fileArray!=null && fileArray.size()>0){
+							FileUpload[] fs = new FileUpload[fileArray.size()];
+							for(int q=0;q<fileArray.size();q++){
+								FileUpload f = new FileUpload();
+								f.setFilePart(fileArray.get(q));
+								fs[q] = f;
+							}
+							obj[j] = fs;
+						}
+					}
+				}else{
+					try {
+						if (dataMap.size() > 0) {
+							obj[j] = PropertyConvert.convertMapToEntity(dataMap, prmType);
+						} else {
+							obj[j] = null;
+						}
+					} catch (Exception e) {
+						log.error(Constant.GALAXY_EXCEPTION, e);
+					} 
+				}
 			}
 		}
 		return obj;
