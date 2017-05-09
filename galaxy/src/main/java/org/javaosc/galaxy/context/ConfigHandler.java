@@ -255,8 +255,10 @@ public class ConfigHandler {
 	}
 	
 	public static void clear(){
-		properties.clear();
-		properties = null;
+		if(properties!=null){
+			properties.clear();
+			properties = null;
+		}
 	}
 		
 }

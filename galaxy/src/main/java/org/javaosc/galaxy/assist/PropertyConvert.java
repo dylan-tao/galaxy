@@ -64,7 +64,6 @@ public class PropertyConvert {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public static <T> T convertResultSetToEntity(ResultSet rs, Class<T> entityClass) throws SQLException {  
 		T entity = null;
 		Map<String, Method> propertyMap = getPropertyMap(entityClass);

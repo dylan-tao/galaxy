@@ -24,11 +24,9 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		
-		<!-- weak ref -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
@@ -96,7 +94,7 @@
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 					<fork>true</fork>
-					<compilerVersion>1.7</compilerVersion>
+					<compilerVersion>1.8</compilerVersion>
 				</configuration>
 			</plugin>
 		</plugins>

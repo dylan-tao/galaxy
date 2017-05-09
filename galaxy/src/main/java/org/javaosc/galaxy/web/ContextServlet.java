@@ -46,11 +46,10 @@ public class ContextServlet extends HttpServlet {
 	public void init(){
 		prefix = ConfigHandler.getViewPrefix();
 		suffix = ConfigHandler.getViewSuffix();
-		try {
-			Class.forName("httl.web.WebEngine");
+		if(suffix.endsWith(".httl")){
 			enableTemplate = true;
 			log.info("Enable httl template rendering page");
-		} catch (ClassNotFoundException e) {
+		}else{
 			enableTemplate = false;
 			log.info("Enable default jsp rendering page");
 		}
