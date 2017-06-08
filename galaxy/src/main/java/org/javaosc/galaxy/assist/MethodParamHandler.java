@@ -1,7 +1,11 @@
 package org.javaosc.galaxy.assist;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +20,13 @@ import org.javaosc.galaxy.web.assist.FileUpload;
 import org.javaosc.galaxy.web.multipart.FilePart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.cglib.asm.$ClassReader;
+import net.sf.cglib.asm.$ClassVisitor;
+import net.sf.cglib.asm.$Label;
+import net.sf.cglib.asm.$MethodVisitor;
+import net.sf.cglib.asm.$Opcodes;
+import net.sf.cglib.asm.$Type;
 
 /**
  * 
@@ -138,7 +149,7 @@ public class MethodParamHandler {
 		return obj;
 	}
 
-	public static String[] getParamName(Method method) {
+	public static String[] getParamNameByJdk8(Method method) {
 		try {
 			int size = method.getParameterTypes().length;
 			if (size == 0) {
@@ -157,5 +168,59 @@ public class MethodParamHandler {
 			return null;
 		}
 	}
+	
+	public static String[] getParamNameByAsm(Class<?> clazz, final Method method) {  
+        final Class<?>[] parameterTypes = method.getParameterTypes();  
+        if (parameterTypes == null || parameterTypes.length == 0) {  
+            return null;  
+        }  
+        final $Type[] types = new $Type[parameterTypes.length];  
+        for (int i = 0; i < parameterTypes.length; i++) {  
+            types[i] = $Type.getType(parameterTypes[i]);  
+        }  
+        final String[] parameterNames = new String[parameterTypes.length];  
+  
+        String className = clazz.getName();  
+        int lastDotIndex = className.lastIndexOf(".");  
+        className = className.substring(lastDotIndex + 1) + ".class";  
+        InputStream is = clazz.getResourceAsStream(className);  
+        try {  
+        	$ClassReader classReader = new $ClassReader(is);  
+            classReader.accept(new $ClassVisitor($Opcodes.ASM5) {  
+                @Override  
+                public $MethodVisitor visitMethod(int access, String name,  
+                        String desc, String signature, String[] exceptions) {  
+                    // 只处理指定的方法  
+                    $Type[] argumentTypes = $Type.getArgumentTypes(desc);  
+                    if (!method.getName().equals(name) || !Arrays.equals(argumentTypes, types)) {  
+                        return super.visitMethod(access, name, desc, signature,  
+                                exceptions);  
+                    }  
+                    return new $MethodVisitor($Opcodes.ASM5) {  
+                        @Override  
+                        public void visitLocalVariable(String name, String desc,  
+                                String signature, $Label start,  
+                                $Label end, int index) {  
+                            // 非静态成员方法的第一个参数是this  
+                            if (Modifier.isStatic(method.getModifiers())) {  
+                                parameterNames[index] = name;  
+                            } else if (index > 0) {  
+                                parameterNames[index - 1] = name;  
+                            }  
+                        }  
+                    };  
+                }  
+            }, 0);  
+        } catch (IOException e) {  
+        } finally {  
+            try {  
+                if (is != null) {  
+                    is.close();  
+                }  
+            } catch (Exception e2) {  
+            }  
+        }  
+        return parameterNames;  
+    }  
 
 }

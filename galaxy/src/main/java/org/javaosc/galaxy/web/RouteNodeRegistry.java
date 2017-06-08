@@ -36,6 +36,12 @@ public abstract class RouteNodeRegistry {
 	
 	protected static final String ERROR_CODE = "_ERROR_CODE_";
 	
+	static boolean isJdk8 = false;
+	
+	static{
+		String jdkVersion = System.getProperty("java.version");
+		isJdk8 = GalaxyUtil.isEmpty(jdkVersion)?false:jdkVersion.contains("1.8.")?true:false;
+	}
 	
 	public static void registerRouteNode(String uriPattern, Object action, Method method){
 		if(!GalaxyUtil.isEmpty(uriPattern)){
@@ -58,7 +64,7 @@ public abstract class RouteNodeRegistry {
 								if(uriLength-i == 1){ 
 									child.setAction(action);
 									child.setMethod(method);
-									String[] methodPrm = MethodParamHandler.getParamName(method);
+									String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamNameByAsm(action.getClass(), method);
 									child.setParam(methodPrm);	
 								}
 								current.addChild(URI_PARAM, child);
@@ -69,7 +75,7 @@ public abstract class RouteNodeRegistry {
 						if(uriLength-i == 1){ 
 							child.setAction(action);
 							child.setMethod(method);
-							String[] methodPrm = MethodParamHandler.getParamName(method);
+							String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamNameByAsm(action.getClass(), method);
 							child.setParam(methodPrm);	
 						}
 						current.addChild(urlSplitStr, child);
