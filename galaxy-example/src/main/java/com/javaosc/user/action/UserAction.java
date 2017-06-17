@@ -2,7 +2,7 @@ package com.javaosc.user.action;
 
 import org.javaosc.galaxy.annotation.Autowired;
 import org.javaosc.galaxy.annotation.Mapping;
-import org.javaosc.galaxy.web.assist.ContextHandler;
+import org.javaosc.galaxy.web.assist.Context;
 
 import com.javaosc.user.service.UserService;
 
@@ -14,13 +14,13 @@ public class UserAction {
 	
 	@Mapping("/hello")
 	public String getUserList(User user){
-		ContextHandler.putJson(user);
+		Context.putJson(user);
 		return null;
 	}
 	
 	@Mapping("/{userId}")
 	public String getUserById(User user){
-		ContextHandler.putJson(userService.getUserList(user));
+		Context.putJson(userService.getUserList(user));
 		return null;
 	}
 }

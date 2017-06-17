@@ -25,11 +25,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<scope>provided</scope>
@@ -42,11 +37,19 @@
 		</dependency>
 		
 		<!-- realize -->
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<scope>provided</scope>
 		</dependency> 
+		
+		<!-- unused -->
+		
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+		</dependency>
 		
 		<!-- pool choose -->
 		

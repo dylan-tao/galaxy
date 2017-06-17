@@ -16,23 +16,17 @@ public class BeanFactory {
 	
 	public static Map<String, Object> beanMap = new HashMap<String, Object>();
 	
-	public static synchronized Object get(String key, Class<?> cls , boolean openConnection){
+	public static Object get(String key, Class<?> cls , boolean openConnection){
 		 Object result = null;
 		 if (beanMap.containsKey(key)) { 
 			 result = beanMap.get(key);
 			 return result;
 	     }
-		 Object format = null;
-		 format = ClassHandler.newInstance(cls);
-		 if(key.equalsIgnoreCase(cls.getSimpleName())){//cglib
-			 ProxyCglibHandler proxyHandler = new ProxyCglibHandler(format, openConnection);    
-			 result = proxyHandler.proxyInstance(); 
-			 result = ScanAnnotation.setServiceField(cls, result);
-		 }else{  //jdk
-			 format = ScanAnnotation.setServiceField(cls, format);
-			 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(format, openConnection);    
-			 result = proxyHandler.proxyInstance();
-		 }
+		 Object instance = ClassHandler.newInstance(cls);
+		 
+		 instance = ScanAnnotation.setServiceField(cls, instance);
+		 ProxyJdkHandler proxyHandler = new ProxyJdkHandler(instance, openConnection);    
+		 result = proxyHandler.proxyInstance();
 		
          if(!GalaxyUtil.isEmpty(key) && result!=null){
         	 beanMap.put(key, result);

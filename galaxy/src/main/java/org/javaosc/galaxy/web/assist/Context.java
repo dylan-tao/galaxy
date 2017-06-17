@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
  * @date 2014-09-09
  * Copyright 2014 Javaosc Team. All Rights Reserved.
  */
-public class ContextHandler {
+public class Context {
 	
-	private static final Logger log = LoggerFactory.getLogger(ContextHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(Context.class);
 	
 	/* ========== attribute ========== */
 	

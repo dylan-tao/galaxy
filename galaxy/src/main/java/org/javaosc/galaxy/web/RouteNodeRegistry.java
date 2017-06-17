@@ -64,7 +64,7 @@ public abstract class RouteNodeRegistry {
 								if(uriLength-i == 1){ 
 									child.setAction(action);
 									child.setMethod(method);
-									String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamNameByAsm(action.getClass(), method);
+									String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamName(method);
 									child.setParam(methodPrm);	
 								}
 								current.addChild(URI_PARAM, child);
@@ -75,7 +75,7 @@ public abstract class RouteNodeRegistry {
 						if(uriLength-i == 1){ 
 							child.setAction(action);
 							child.setMethod(method);
-							String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamNameByAsm(action.getClass(), method);
+							String[] methodPrm = isJdk8 ? MethodParamHandler.getParamNameByJdk8(method) : MethodParamHandler.getParamName(method);
 							child.setParam(methodPrm);	
 						}
 						current.addChild(urlSplitStr, child);

@@ -114,7 +114,7 @@ public class PropertyConvert {
                              ((Timestamp) targetValue).setNanos(nanos);
                          }
                     }else if (value instanceof String && targetType.isEnum()) {
-                    	targetValue = Enum.valueOf(targetType.asSubclass(Enum.class), (String)value);
+//                    	targetValue = Enum.valueOf(targetType, (String)value);
                     }else if(targetType.isAssignableFrom(value.getClass())){
             			targetValue = value;
             		}else{
