@@ -30,11 +30,11 @@ public class CacheMark {
 			if(!annoServiceCache.contains(method.getClass().getPackage().toString())){
 				return false;
 			}
-			flag = true;
+			flag = false;
 			if(ConfigHandler.getMethodKeyword()!=null){
 				for(String keyword:ConfigHandler.getMethodKeyword()){
 					if(method.getName().startsWith(keyword)){
-						flag = false;
+						flag = true;
 						break;
 					}
 				}

@@ -82,7 +82,7 @@ public class RequestParamHandler {
 			}else if(contentType.startsWith(ReqContentType.MULTIPART_FORM_DATA.getValue())){ //multipart or form data
 				request.setAttribute(Constant.CONTENT_TYPE, contentType);
 				try {
-					MultipartFile mp = new MultipartFile(request, ConfigHandler.getUploadMaxSize()*1024);
+					MultipartFile mp = new MultipartFile(request, ConfigHandler.getUploadMaxSize());
 					mp.setEncoding(ConfigHandler.getContextEncode());
 					Part part;
 					List<FilePart> fileArray = new ArrayList<FilePart>();

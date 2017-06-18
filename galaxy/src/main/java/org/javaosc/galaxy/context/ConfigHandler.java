@@ -111,7 +111,7 @@ public class ConfigHandler {
 	
 	public static Integer getUploadMaxSize(){
 		if(uploadMaxSize==null){
-			uploadMaxSize = Integer.valueOf(getValue(Configuration.UPLOAD_FILE_MAX_SIZE,"1"));
+			uploadMaxSize = Integer.valueOf(getValue(Configuration.UPLOAD_FILE_MAX_SIZE,"1024"));
 		}
 		return uploadMaxSize;
 	}
