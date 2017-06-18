@@ -49,6 +49,7 @@
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- pool choose -->
