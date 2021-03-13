@@ -40,7 +40,7 @@
 		
 		<!-- provided or test ref -->
 		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<common.beanutils.version>1.9.3</common.beanutils.version>
+		<common.beanutils.version>1.9.4</common.beanutils.version>
 		<junit.version>4.13.1</junit.version>
 		
 	</properties>
