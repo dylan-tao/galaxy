@@ -36,7 +36,7 @@
 		<mysql.connector.version>5.1.38</mysql.connector.version>
 		
 		<hikaricp.pool.version>2.6.1</hikaricp.pool.version>
-		<com.mchange.c3p0.version>0.9.5.2</com.mchange.c3p0.version>
+		<com.mchange.c3p0.version>0.9.5.4</com.mchange.c3p0.version>
 		
 		<!-- provided or test ref -->
 		<javax.servlet.version>3.1.0</javax.servlet.version>
