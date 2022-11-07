@@ -33,7 +33,7 @@
 		
 		<!-- db pool choose -->
 		<!-- <mariadb.connector.version>1.5.9</mariadb.connector.version> -->
-		<mysql.connector.version>8.0.16</mysql.connector.version>
+		<mysql.connector.version>8.0.28</mysql.connector.version>
 		
 		<hikaricp.pool.version>2.6.1</hikaricp.pool.version>
 		<com.mchange.c3p0.version>0.9.5.4</com.mchange.c3p0.version>
